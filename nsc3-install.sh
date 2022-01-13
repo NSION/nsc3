@@ -99,11 +99,12 @@ cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$NSC3REL"'/,/'"$NSC3REL"'/p';
 . temp.yml 2> /dev/null
 cat docker-compose-temp.yml > docker-compose.yml;
 rm -f temp.yml docker-compose-temp.yml 2> /dev/null
-echo "++++++++++++++++++++++++++++++++++++++++"
-echo "                                        "
 echo "docker-compose.yml file is created..."
-echo "Start the nsc3 service: sudo docker-compose up -d"
+echo "Downloading docker images ..."
+sudo docker-compose up -d
+echo "++++++++++++++++++++++++++++++++++++++++"
 echo ""                                        
-echo "Login to your NSC3 web app by URL address https://$PUBLICIP"
+echo "Login to your NSC3 web app by URL address"
+echo "https://$PUBLICIP"
 echo ""
 echo "++++++++++++++++++++++++++++++++++++++++"
