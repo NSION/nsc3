@@ -60,12 +60,12 @@ As example Ubuntu:
 #### Gather installation scripts from NSION github:
 
     cd $HOME
-    git clone https://github.com/NSION/nsc3.git
+    sudo git clone https://github.com/NSION/nsc3.git
     
 #### Grant execute rights for the installation script:
 
     cd $HOME/nsc3
-    chmod u+x nsc3-install.sh
+    sudo chmod u+x nsc3-install.sh
     
 #### Login to NSION docker registry:
 
@@ -142,7 +142,7 @@ Downlaod the latest scripts from github:
     
 Grant execute rights for the upgrade script:
 
-    chmod u+x nsc3-upgrade.sh
+    sudo chmod u+x nsc3-upgrade.sh
     
 Start upgrade process:
 
