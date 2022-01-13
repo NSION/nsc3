@@ -67,8 +67,7 @@ As example Ubuntu:
         
 #### Install Docker-compose:
 
-Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/
-Note that python3 is required. Debian based linux will install it automatically if missing.
+Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/. Note that python3 is required. Ubuntu based linux apt will install it automatically if missing.
 As example Ubuntu:
 
     sudo apt-get update
