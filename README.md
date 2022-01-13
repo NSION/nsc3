@@ -50,18 +50,18 @@ As example Ubuntu:
 
 #### Gather installation scripts from NSION github
 
-    $ cd $HOME
-    $ git clone https://github.com/NSION/nsc3.git
+    cd $HOME
+    git clone https://github.com/NSION/nsc3.git
     
 #### Grant execute rights for the installation script
 
-    $ cd $HOME/nsc3
-    $ chmod u+x nsc3-install.sh
+    cd $HOME/nsc3
+    chmod u+x nsc3-install.sh
     
 #### Login to NSION docker registry
 
-    $ cd $HOME/nsc3
-    $ sudo docker login registrynsion.azurecr.io
+    cd $HOME/nsc3
+    sudo docker login registrynsion.azurecr.io
     
     <Registry crentials will be delivered separately>
         
