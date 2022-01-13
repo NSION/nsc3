@@ -1,4 +1,4 @@
-# NSC3 Installation Guides
+# NSC3 Installation guidance
 ## Project description:
 NSC3 backend installation guides and scripts for single node server configuration
 
