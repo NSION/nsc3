@@ -13,8 +13,7 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - nsc3-upgrade.sh -> Script for upgrade
 - nsc3-docker-compose-ext-reg.tmpl -> Docker Compose template 
 
-## NSC3 backend installation guide for single node via public NSION repository:
-### Prerequisites:
+## Prerequisites for NSC3 installation:
 - Minimux HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk
 - Linux operating system
 - The computer or virtual machine is dedicated only for the NSC3 usage
@@ -25,10 +24,11 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - The server IP and domain name is bound together by DNS operator. 
 - NSION registry account and secrets are available
 - Linux account with sudo privileges for the operating system
-- git installed 
+- Following 3rd party apps are needed: git, wget, curl. Most of them are by default included as part of default to a linux basic setup. However please check beforehand availability. 
 
 NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
+## NSC3 backend installation guide for single node via public NSION repository:
 ### Default installation locations:
 
 - Following instructions are using folder $HOME/nsc3 as default location for installation, but the location can be something else. The folder nsc3 will be created automatically while installation process
@@ -151,3 +151,36 @@ Start upgrade process:
 Note that release tag format is 
     
     release-<release number>, eg release-3.4    
+    
+#### NSC3 Maintenance
+
+Stop NSC3 services:
+
+    cd $HOME/nsc3
+    sudo docker-compose down
+
+Start NSC3 services:
+
+    cd $HOME/nsc3
+    sudo docker-compose up -d  
+
+Monitor container logs via docker logs:
+
+    sudo docker logs <container name>
+    
+Storage location of NSC3 log files in the file system:
+
+    cd $HOME/nsc3/logs
+    
+Check disk storage usage level:
+
+    df -hT | grep /$ | awk '{ print $6}'
+    
+Check compure free RAM memory:
+
+    echo $(free -g | grep Mem: | awk '{ print $7}') "GB"
+    
+Container status:
+
+    sudo docker stats
+    
