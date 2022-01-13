@@ -1,1 +1,46 @@
-# nsc3
+# NSC3 Installation Guides
+## Project description
+NSC3 backend installation guides and scripts for single node server configuration
+
+## Project structure
+
+- README.md -> Instructions
+- nnn.sh
+- nsc3-ops-tools-node-status.sh
+
+## NSC3 backend installation guide for single node via public NSION repository
+### Prerequisites
+- Minimux HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk
+- Linux operating system
+- Docker and docker-compose installed
+- Following TCP/IP4 ports open: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific client ports (25204, 25205, 25206)
+- SSL certifications for the service domain. Human readable formated private key named as privkey.pem and full chained certification named as fullchain.pem
+- The server IP and domain name is bound together by DNS operator. 
+- NSION registry account and secrets are available
+- Linux account with sudo granted rights for the operating system
+
+### Default installation locations
+
+- Following instructions are using folder $HOME/nsc3 as default location for installation, but the location can be something else. The folder nsc3 will be created automatically while installation process
+- Default docker content folder is /var/lib/docker
+- Default Relation Database (Postgresql) content folder is /var/lib/docker/volumes/main-postgres-volume
+- Default Object Storage (min.io) content folder is /var/lib/docker/volumes/minio-volume
+- Default NSC3 logs files folder is $HOME/nsc3/logs
+- Default NSC3 maptiles files folder is $HOME/nsc3/mapdata
+- Default SSL cert files folder is $HOME/nsc3/nsc-gateway-cert
+
+### NSC3 installation
+#### Install Docker
+
+- Please follow the latest installation instructions by Docker community https://docs.docker.com/engine/install/ 
+
+#### Install Docker-compose
+
+- Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/
+- Note that python3 is required. Debian based linux will install it automatically if missing.
+
+    
+#### Setup installation folder
+
+    
+#### Set execute permissions for the file
