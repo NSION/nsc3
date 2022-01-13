@@ -2,7 +2,7 @@
 ## Project description:
 NSC3 backend installation guides and scripts for single node server configuration
 
-13rd of January: Release 3.3 is supported
+13rd of January 2022: Release 3.3 is supported
 
 ## Project structure:
 
