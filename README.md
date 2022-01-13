@@ -11,6 +11,7 @@ NSC3 backend installation guides and scripts for single node server configuratio
 ### Prerequisites:
 - Minimux HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk
 - Linux operating system
+- The computer or virtual machine is dedicated only for the NSC3 usage
 - Docker and docker-compose installed
 - Access to internet
 - Following TCP/IP4 ports open: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific client ports (25204, 25205, 25206)
