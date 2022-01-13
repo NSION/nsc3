@@ -86,6 +86,7 @@ echo "$MAPNAME map files is downloaded"
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
 # Create env file
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
+echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 # Create dictories
 mkdir $NSCHOME/logs 2> /dev/null
 mkdir $NSCHOME/mapdata 2> /dev/null
