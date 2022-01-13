@@ -5,19 +5,20 @@ NSC3 backend installation guides and scripts for single node server configuratio
 ## Project structure
 
 - README.md -> Instructions
-- nnn.sh
-- nsc3-ops-tools-node-status.sh
+- nsc3-install.sh -> Script for installation
 
 ## NSC3 backend installation guide for single node via public NSION repository
 ### Prerequisites
 - Minimux HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk
 - Linux operating system
 - Docker and docker-compose installed
+- Access to internet
 - Following TCP/IP4 ports open: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific client ports (25204, 25205, 25206)
 - SSL certifications for the service domain. Human readable formated private key named as privkey.pem and full chained certification named as fullchain.pem
 - The server IP and domain name is bound together by DNS operator. 
 - NSION registry account and secrets are available
-- Linux account with sudo granted rights for the operating system
+- Linux account with sudo privileges for the operating system
+- git installed 
 
 ### Default installation locations
 
@@ -39,8 +40,18 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/
 - Note that python3 is required. Debian based linux will install it automatically if missing.
 
-    
+#### Install git
+
+- Please follow the latest installation instructions by Git community https://git-scm.com/download/linux
+
+
 #### Setup installation folder
 
+- copy the SSL cert files privkey.pem and fullchain.pem to your installation folder. As this example $HOME
+- Clone git project from NSION repository
+
+    $ cd $HOME
+    $ git clone 
     
-#### Set execute permissions for the file
+    
+#### 
