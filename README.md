@@ -130,3 +130,22 @@ Login to the NSC3 web app as admin
 - Send the challenge file to your nsion counterpart
 - NSION will return the license key file back. No need to left UI open while waiting
 - Insert license key via NSC3 admin/license UI. Licenses Tab / Server license / Set new NSC3 license / Insert license key (download from local computer via Web app)
+
+#### Upgrade NSC3
+
+Downlaod the latest scripts from github:
+
+    cd $HOME/nsc3
+    sudo git pull -f
+    
+Grant execute rights for the upgrade script:
+
+    chmod u+x nsc3-install.sh
+    
+Start upgrade process:
+
+    sudo ./nsc-upgrade.sh
+    
+Note that release tag format is 
+    
+    release-<release number>, eg release-3.4    
