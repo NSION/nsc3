@@ -35,10 +35,6 @@ NSC3 backend installation guides and scripts for single node server configuratio
 
 - Please follow the latest installation instructions by Docker community https://docs.docker.com/engine/install/ 
 
-#### Install Docker-compose
-
-- Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/
-- Note that python3 is required. Debian based linux will install it automatically if missing.
 
 #### Install git
 
@@ -47,13 +43,15 @@ NSC3 backend installation guides and scripts for single node server configuratio
 
 #### Setup installation folder
 
-- copy the SSL cert files privkey.pem and fullchain.pem to your home folder. As this example $HOME 
+- Copy the SSL cert files privkey.pem and fullchain.pem to your home folder. As this example $HOME 
 - Clone git project from NSION repository
+
+#### Gather installation scripts from NSION github
 
     $ cd $HOME
     $ git clone https://github.com/NSION/nsc3.git
     
-- Grant execute rights for the installation script
+#### Grant execute rights for the installation script
 
     $ cd $HOME/nsc3
     $ chmod u+x nsc3-install.sh
@@ -63,4 +61,9 @@ NSC3 backend installation guides and scripts for single node server configuratio
     $ cd $HOME/nsc3
     $ sudo docker login <url>
         
-#### 
+#### Install Docker-compose
+
+- Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/
+- Note that python3 is required. Debian based linux will install it automatically if missing.
+
+
