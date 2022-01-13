@@ -74,6 +74,29 @@ As example Ubuntu:
     sudo apt-get update
     sudo apt-get install docker-compose
 
+#### Install NSC3
 
-
+    cd $HOME/nsc3
+    sudo ./nsc3-install.sh  
+    
+    NSC3 installation folder, e.g /home/nscuser/nsc3: 
+    /home/ubuntu/nsc3  <<< "your NSC3 installation folder"     
+    NSC3 public hostname, e.g videoservice.nsiontec.com: 
+    test3.nsion.io <<< "your hostname"  
+    NSC3 Release tag, e.g release-3.3: 
+    release-3.3 <<< "NSC3 release tag"  
+    Map files options : 
+    1. North America map
+    2. Europa map
+    3. Australia map
+    4. GCC states map
+    Select your option as number: 
+    1 <<< "NA map selected"  
+    ++++++++++++++++++++++++++++++++++++++++
+    NSC3 backend is installed!
+    Login to your NSC3 web app by URL address
+    https://test3.nsion.io
+    ++++++++++++++++++++++++++++++++++++++++
+    
+#### Verify installation
 
