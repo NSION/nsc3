@@ -5,13 +5,8 @@ echo "  NSC3 upgrade:        "
 echo "  This script is upgrading NSC3 system  "
 echo "                                        "
 echo "++++++++++++++++++++++++++++++++++++++++"
-echo "NSC3 installation folder, e.g /home/nscuser/nsc3: "
-read  NSC3HOMEFOLDER
-export NSCHOME=$NSC3HOMEFOLDER
-echo "NSC3 public hostname, e.g videoservice.nsiontec.com: "
-read  NSC3URL
-export PUBLICIP=$NSC3URL
-echo "NSC3 Release tag, e.g release-3.4: " 
+source $NSCHOME/nsc-host.env
+echo "New NSC3 Release tag for upgrading, e.g release-3.4: " 
 read REL
 export NSC3REL=$REL
 export NSC3REG="registrynsion.azurecr.io"
