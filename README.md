@@ -9,7 +9,6 @@ NSC3 backend installation guides and scripts for single node server configuratio
 
 ## NSC3 backend installation guide for single node via public NSION repository:
 ### Prerequisites:
-- NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 - Minimux HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk
 - Linux operating system
 - The computer or virtual machine is dedicated only for the NSC3 usage
@@ -21,6 +20,8 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - NSION registry account and secrets are available
 - Linux account with sudo privileges for the operating system
 - git installed 
+
+NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
 ### Default installation locations:
 
