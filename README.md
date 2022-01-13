@@ -59,7 +59,9 @@ NSC3 backend installation guides and scripts for single node server configuratio
 #### Login to NSION docker registry
 
     $ cd $HOME/nsc3
-    $ sudo docker login <url>
+    $ sudo docker login registrynsion.azurecr.io
+    
+    <Registry crentials will be delivered separately>
         
 #### Install Docker-compose
 
