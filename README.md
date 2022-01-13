@@ -79,6 +79,8 @@ As example Ubuntu:
     cd $HOME/nsc3
     sudo ./nsc3-install.sh  
     
+##### queries dialog while installation process    
+    
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
     /home/ubuntu/nsc3  <<< "your NSC3 installation folder"     
     NSC3 public hostname, e.g videoservice.nsiontec.com: 
@@ -95,8 +97,28 @@ As example Ubuntu:
     ++++++++++++++++++++++++++++++++++++++++
     NSC3 backend is installed!
     Login to your NSC3 web app by URL address
-    https://test3.nsion.io
+    https://foo.nsion.io
     ++++++++++++++++++++++++++++++++++++++++
     
 #### Verify installation
+Check docker containers, Totally 15 containers are running. Right after installation phase extra container "db-updater" is running for a while.
 
+    sudo docker ps
+
+Check Web services, Expected result when ok, "HTTP/2 200"
+
+    export NSC3DNS=<your NSC3 hostname>
+    curl -I --http2 -s https://$NSC3DNS
+    
+Check SSL Certification status, Expected result when ok, "SSL certificate verify ok"
+
+    curl --cert-status -v https://$NSC3DNS 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
+    
+#### Post installation steps
+
+Login to the NSC3 web app as admin
+- Change the default password rightaway. Right-Top corner on UI / Change password
+- Download a instance key via NSC3 admin/license UI. Licenses Tab / Server license / Set new NSC3 license / Download Instance key
+- Send the challenge file to your nsion counterpart
+- NSION will return the license key file back. No need to left UI open while waiting
+- Insert license key via NSC3 admin/license UI. Licenses Tab / Server license / Set new NSC3 license / Insert license key (download from local computer via Web app)
