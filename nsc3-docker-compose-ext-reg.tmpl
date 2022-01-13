@@ -4,7 +4,7 @@ version: "2.2"
 services:
   main-postgres:
     container_name: main-postgres
-    image:  $NSC3REG/main-postgres:$NSC3REL
+    image: $NSC3REG/main-postgres:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -13,12 +13,12 @@ services:
         ipv4_address: "172.18.0.2"
     restart: unless-stopped
     volumes:
-      - ./logs/main-postgres:/var/log/postgresql:rw
+      - $NSCHOME/logs/main-postgres:/var/log/postgresql:rw
       - main-postgres-volume:/var/lib/postgresql/data:rw
     working_dir: /root
   user-postgres:
     container_name: user-postgres
-    image:  $NSC3REG/user-postgres:$NSC3REL
+    image: $NSC3REG/user-postgres:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -27,12 +27,12 @@ services:
         ipv4_address: "172.18.0.4"
     restart: unless-stopped
     volumes:
-      - ./logs/user-postgres:/var/log/postgresql:rw
+      - $NSCHOME/logs/user-postgres:/var/log/postgresql:rw
       - user-postgres-volume:/var/lib/postgresql/data:rw
     working_dir: /root
   bus-redis:
     container_name: bus-redis
-    image:  $NSC3REG/bus-redis:$NSC3REL
+    image: $NSC3REG/bus-redis:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -45,7 +45,7 @@ services:
     working_dir: /root
   utilities-dbupdater:
     container_name: utilities-dbupdater
-    image:  $NSC3REG/utilities-dbupdater:$NSC3REL
+    image: $NSC3REG/utilities-dbupdater:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -54,7 +54,7 @@ services:
         ipv4_address: "172.18.0.14"
   nsc-auth-service:
     container_name: nsc-auth-service
-    image:  $NSC3REG/nsc-auth-service:$NSC3REL
+    image: $NSC3REG/nsc-auth-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -63,12 +63,12 @@ services:
         ipv4_address: "172.18.0.5"
     restart: unless-stopped
     volumes:
-      - ./logs/nsc-auth-service:/usr/local/tomcat/logs:rw
+      - $NSCHOME/logs/nsc-auth-service:/usr/local/tomcat/logs:rw
       - /dev/urandom:/dev/random:rw
     working_dir: /root
   nsc-stream-in-service:
     container_name: nsc-stream-in-service
-    image:  $NSC3REG/nsc-stream-in-service:$NSC3REL
+    image: $NSC3REG/nsc-stream-in-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -77,11 +77,11 @@ services:
         ipv4_address: "172.18.0.6"
     restart: unless-stopped
     volumes:
-      - ./logs/nsc-stream-in-service:/usr/local/tomcat/logs:rw
+      - $NSCHOME/logs/nsc-stream-in-service:/usr/local/tomcat/logs:rw
     working_dir: /root
   nsc-live-service:
     container_name: nsc-live-service
-    image:  $NSC3REG/nsc-live-service:$NSC3REL
+    image: $NSC3REG/nsc-live-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -90,11 +90,11 @@ services:
         ipv4_address: "172.18.0.7"
     restart: unless-stopped
     volumes:
-      - ./logs/nsc-live-service:/usr/local/tomcat/logs:rw
+      - $NSCHOME/logs/nsc-live-service:/usr/local/tomcat/logs:rw
     working_dir: /root
   nsc-comms-service:
     container_name: nsc-comms-service
-    image:  $NSC3REG/nsc-comms-service:$NSC3REL
+    image: $NSC3REG/nsc-comms-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -103,12 +103,12 @@ services:
         ipv4_address: "172.18.0.9"
     restart: unless-stopped
     volumes:
-      - ./logs/nsc-comms-service:/usr/local/tomcat/logs:rw
+      - $NSCHOME/logs/nsc-comms-service:/usr/local/tomcat/logs:rw
       - /dev/urandom:/dev/random:rw
     working_dir: /root
   nsc-playback-service:
     container_name: nsc-playback-service
-    image:  $NSC3REG/nsc-playback-service:$NSC3REL
+    image: $NSC3REG/nsc-playback-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -117,7 +117,7 @@ services:
         ipv4_address: "172.18.0.10"
     restart: unless-stopped
     volumes:
-      - ./logs/nsc-playback-service:/usr/local/tomcat/logs:rw
+      - $NSCHOME/logs/nsc-playback-service:/usr/local/tomcat/logs:rw
     working_dir: /root
   nsc-network-stream-service:
     container_name: nsc-network-stream-service
@@ -133,11 +133,11 @@ services:
         ipv4_address: "172.18.0.17"
     restart: unless-stopped
     volumes:
-      - ./logs/nsc-network-stream-service:/usr/local/tomcat/logs:rw
+      - $NSCHOME/logs/nsc-network-stream-service:/usr/local/tomcat/logs:rw
     working_dir: /root
   nsc-aar-worker:
     container_name: nsc-aar-worker
-    image:  $NSC3REG/nsc-aar-worker:$NSC3REL
+    image: $NSC3REG/nsc-aar-worker:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -146,10 +146,10 @@ services:
         ipv4_address: "172.18.0.11"
     restart: unless-stopped
     volumes:
-      - ./logs/nsc-aar-worker:/usr/local/tomcat/logs:rw
+      - $NSCHOME/logs/nsc-aar-worker:/usr/local/tomcat/logs:rw
   web-nginx:
     container_name: web-nginx
-    image:  $NSC3REG/web-nginx:$NSC3REL
+    image: $NSC3REG/web-nginx:$NSC3REL
     logging:
       driver: "json-file"
       options:
@@ -162,7 +162,7 @@ services:
     working_dir: /root
   map-service:
     container_name: map-service
-    image:  $NSC3REG/map-service:$NSC3REL
+    image: $NSC3REG/map-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -171,12 +171,12 @@ services:
         ipv4_address: "172.18.0.12"
     restart: unless-stopped
     volumes:
-      - ./mapdata:/data
+      - $NSCHOME/mapdata:/data
     command: ['--public_url', 'https://$PUBLICIP/mapserver/']
     working_dir: /data
   nsc-gateway:
     container_name: nsc-gateway
-    image:  $NSC3REG/nsc-gateway:$NSC3REL
+    image: $NSC3REG/nsc-gateway:$NSC3REL
     logging:
       driver: "json-file"
       options:
@@ -195,10 +195,10 @@ services:
       - "443:443/tcp"
     restart: unless-stopped
     volumes:
-      - ./nsc-gateway-cert:/mnt/cert 
+      - $NSCHOME/nsc-gateway-cert:/mnt/cert 
   nsc-minio:
     container_name: nsc-minio
-    image:  $NSC3REG/nsc-minio:$NSC3REL
+    image: $NSC3REG/nsc-minio:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
@@ -213,7 +213,7 @@ services:
     container_name: rtmp-server
     environment:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-    image:  $NSC3REG/rtmp-server:$NSC3REL
+    image: $NSC3REG/rtmp-server:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
