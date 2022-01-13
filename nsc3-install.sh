@@ -1,5 +1,4 @@
 #!/bin/bash
-# Setup variables for installation
 echo "++++++++++++++++++++++++++++++++++++++++"
 echo "                                        "
 echo "  NSC3 docker-compose installer:        "
