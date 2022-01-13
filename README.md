@@ -32,9 +32,11 @@ NSC3 backend installation guides and scripts for single node server configuratio
 
 ### NSC3 installation
 #### Install Docker
+Please follow the latest installation instructions by Docker community https://docs.docker.com/engine/install/ 
+As example Ubuntu:
 
-- Please follow the latest installation instructions by Docker community https://docs.docker.com/engine/install/ 
-
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 #### Install git
 
