@@ -24,7 +24,7 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - The server IP and domain name is bound together by DNS operator. 
 - NSION registry account and secrets are available
 - Linux account with sudo privileges for the operating system
-- Following 3rd party apps are needed: git, wget, curl. Most of them are by default included as part of default to a linux basic setup. However please check beforehand availability. 
+- Following 3rd party apps are needed: git, wget, curl. Most of them are by default included as part of a linux basic setup. However please check beforehand availability of your local linux setup. 
 
 NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
