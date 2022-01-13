@@ -132,7 +132,7 @@ Login to the NSC3 web app as admin
 - NSION will return the license key file back. No need to left UI open while waiting
 - Insert license key via NSC3 admin/license UI. Licenses Tab / Server license / Set new NSC3 license / Insert license key (download from local computer via Web app)
 
-#### Upgrade NSC3
+### Upgrade NSC3
 
 Downlaod the latest scripts from github:
 
@@ -153,7 +153,7 @@ Note that release tag format is
     
     release-<release number>, e.g: release-3.4    
     
-#### NSC3 Maintenance
+### NSC3 Maintenance
 
 Stop NSC3 services:
 
@@ -185,9 +185,9 @@ Container status:
 
     sudo docker stats
     
-#### NSC3 system troubleshooting
+### NSC3 system troubleshooting
 
-##### No access to NSC3 services:
+#### No access to NSC3 services:
 
 Try to restart NSC3 services:
 
@@ -206,7 +206,7 @@ If still no access please then check ...
 - Disk space usage level
 - Docker status
 
-##### NSC3 Web service is not working properly:
+#### NSC3 Web service is not working properly:
 
 Check that SSL cert is valid:
 Expected result when ok, "SSL certificate verify ok"
