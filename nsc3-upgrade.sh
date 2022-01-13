@@ -5,7 +5,7 @@ echo "  NSC3 upgrade:        "
 echo "  This script is upgrading NSC3 system  "
 echo "                                        "
 echo "++++++++++++++++++++++++++++++++++++++++"
-source $NSCHOME/nsc-host.env
+source ./nsc-host.env
 echo "New NSC3 Release tag for upgrading, e.g release-3.4: " 
 read REL
 export NSC3REL=$REL
