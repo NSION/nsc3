@@ -104,6 +104,8 @@ echo "Downloading docker images ..."
 sudo docker-compose up -d
 echo "++++++++++++++++++++++++++++++++++++++++"
 echo ""                                        
+echo "NSC3 backend is installed!"  
+echo ""  
 echo "Login to your NSC3 web app by URL address"
 echo "https://$PUBLICIP"
 echo ""
