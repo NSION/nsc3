@@ -136,11 +136,13 @@ Login to the NSC3 web app as admin
 Downlaod the latest scripts from github:
 
     cd $HOME/nsc3
+    sudo rm nsc-install.sh
+    sudo rm nsc-upgrade.sh
     sudo git pull -f
     
 Grant execute rights for the upgrade script:
 
-    chmod u+x nsc3-install.sh
+    chmod u+x nsc3-upgrade.sh
     
 Start upgrade process:
 
