@@ -2,10 +2,13 @@
 ## Project description:
 NSC3 backend installation guides and scripts for single node server configuration
 
+13rd of January: Release 3.3 is supported
+
 ## Project structure:
 
 - README.md -> Instructions
 - nsc3-install.sh -> Script for installation
+- nsc3-docker-compose-ext-reg.tmpl -> Docker Compose template 
 
 ## NSC3 backend installation guide for single node via public NSION repository:
 ### Prerequisites:
