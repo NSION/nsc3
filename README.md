@@ -115,12 +115,13 @@ Check docker containers, Totally 15 containers are running. Right after installa
 
 Check Web services, Expected result when ok, "HTTP/2 200"
 
-    export NSC3DNS=<your NSC3 hostname>
-    curl -I --http2 -s https://$NSC3DNS
+    cd $HOME/nsc3
+    source nsc-host.env
+    curl -I --http2 -s https://$PUBLICIP
     
 Check SSL Certification status, Expected result when ok, "SSL certificate verify ok"
 
-    curl --cert-status -v https://$NSC3DNS 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
+    curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
     
 #### Post installation steps
 
@@ -150,7 +151,7 @@ Start upgrade process:
     
 Note that release tag format is 
     
-    release-<release number>, eg release-3.4    
+    release-<release number>, e.g: release-3.4    
     
 #### NSC3 Maintenance
 
@@ -176,7 +177,7 @@ Check disk storage usage level:
 
     df -hT | grep /$ | awk '{ print $6}'
     
-Check compure free RAM memory:
+Check computer free RAM memory:
 
     echo $(free -g | grep Mem: | awk '{ print $7}') "GB"
     
@@ -184,3 +185,49 @@ Container status:
 
     sudo docker stats
     
+#### NSC3 system troubleshooting
+
+##### No access to NSC3 services:
+
+Try to restart NSC3 services:
+
+    cd $HOME/nsc3
+    sudo docker-compose up -d 
+    
+Check https status: 
+Expected result when ok, "HTTP/2 200"
+
+    cd $HOME/nsc3
+    source nsc-host.env
+    curl -I --http2 -s https://$PUBLICIP
+    
+If still no access please then check ...
+- Network status
+- Disk space usage level
+- Docker status
+
+##### NSC3 Web service is not working properly:
+
+Check that SSL cert is valid:
+Expected result when ok, "SSL certificate verify ok"
+
+    cd $HOME/nsc3
+    source nsc-host.env
+    curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
+
+Check that the HTTPS port is listening:
+
+    ss -lntu | grep ':443'
+    
+Check TCP IP route from external network to NSC3 https port:
+This requires extra tool called nmap:
+As example Ubuntu installation
+
+    sudo apt install nmap
+    
+Test that route to 443 port is open:
+
+    nmap <hostname> | grep 443
+
+    
+
