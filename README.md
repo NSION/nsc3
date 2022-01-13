@@ -10,6 +10,7 @@ NSC3 backend installation guides and scripts for single node server configuratio
 
 - README.md -> Instructions
 - nsc3-install.sh -> Script for installation
+- nsc3-upgrade.sh -> Script for upgrade
 - nsc3-docker-compose-ext-reg.tmpl -> Docker Compose template 
 
 ## NSC3 backend installation guide for single node via public NSION repository:
