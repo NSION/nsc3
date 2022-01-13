@@ -91,7 +91,7 @@ As example Ubuntu:
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
     /home/ubuntu/nsc3  <<< "your NSC3 installation folder"     
     NSC3 public hostname, e.g videoservice.nsiontec.com: 
-    test3.nsion.io <<< "your hostname"  
+    foo.nsion.io <<< "your hostname"  
     NSC3 Release tag, e.g release-3.3: 
     release-3.3 <<< "NSC3 release tag"  
     Map files options : 
@@ -100,7 +100,7 @@ As example Ubuntu:
     3. Australia map
     4. GCC states map
     Select your option as number: 
-    1 <<< "NA map selected"  
+    1 <<< "NA map is selected"  
     ++++++++++++++++++++++++++++++++++++++++
     NSC3 backend is installed!
     Login to your NSC3 web app by URL address
