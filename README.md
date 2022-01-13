@@ -47,11 +47,20 @@ NSC3 backend installation guides and scripts for single node server configuratio
 
 #### Setup installation folder
 
-- copy the SSL cert files privkey.pem and fullchain.pem to your installation folder. As this example $HOME
+- copy the SSL cert files privkey.pem and fullchain.pem to your home folder. As this example $HOME 
 - Clone git project from NSION repository
 
     $ cd $HOME
-    $ git clone 
+    $ git clone https://github.com/NSION/nsc3.git
     
+- Grant execute rights for the installation script
+
+    $ cd $HOME/nsc3
+    $ chmod u+x nsc3-install.sh
     
+#### Login to NSION docker registry
+
+    $ cd $HOME/nsc3
+    $ sudo docker login <url>
+        
 #### 
