@@ -128,7 +128,7 @@ Check SSL Certification status, Expected result when ok, "SSL certificate verify
 Login to the NSC3 web app as admin
 - Change the default password rightaway. Right-Top corner on UI / Change password
 - Download a instance key via NSC3 admin/license UI. Licenses Tab / Server license / Set new NSC3 license / Download Instance key
-- Send the instance key file to your NSION counterpart. 
+- Send the instance key file via NSION Jira Service desk support portal.
 - NSION will prepare and return a corresponding license key file back. No need to left UI open while waiting
 - Insert license key via NSC3 admin/license UI. Licenses Tab / Server license / Set new NSC3 license / Insert license key (download from local computer via Web app)
 
