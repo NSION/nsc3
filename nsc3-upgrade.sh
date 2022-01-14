@@ -21,7 +21,6 @@ cp $HOME/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 # Create docker-compose.yml file
 echo "Pulling updated NSC3 configuration from Github.."
 cd $NSCHOME
-sudo git pull -f
 (echo "cat <<EOF >docker-compose-temp.yml";
 cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$NSC3REL"'/,/'"$NSC3REL"'/p';
 ) >temp.yml
