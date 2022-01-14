@@ -19,7 +19,7 @@ mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null
 cp $HOME/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 cp $HOME/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 # Create docker-compose.yml file
-echo "Pulling from github updated NSC3 configuration ..."
+echo "Pulling updated NSC3 configuration from Github.."
 cd $NSCHOME
 sudo git pull -f
 (echo "cat <<EOF >docker-compose-temp.yml";
