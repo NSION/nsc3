@@ -30,7 +30,7 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ## NSC3 backend installation guidance for single node via public NSION repository:
 ### Default file system locations:
 
-- NSC3 Installation folder $HOME/nsc3, However this location is configurable. Instruction are referring for this folder. The folder "nsc3" will be created automatically while installation process
+- NSC3 Installation folder $HOME/nsc3, However this location is configurable. Instruction are referring for $HOME/nsc3 folder. The folder "nsc3" will be created automatically while installation process
 - Docker content folder is /var/lib/docker
 - Relational Database (Postgresql) content folder is /var/lib/docker/volumes/main-postgres-volume
 - Object Storage (min.io) content folder is /var/lib/docker/volumes/minio-volume
