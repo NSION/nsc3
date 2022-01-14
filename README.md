@@ -2,7 +2,7 @@
 ## Project description:
 NSC3 backend installation guides and scripts for single node server configuration
 
-13rd of January 2022: Release 3.3 is supported
+13rd of January 2022: Release 3.3 support is available
 
     Release Tag: release-3.3
 
@@ -14,30 +14,29 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - nsc3-docker-compose-ext-reg.tmpl -> Docker Compose template 
 
 ## Prerequisites for NSC3 installation:
-- Minimux HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk
-- Linux operating system
+- Minimux HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
+- Linux operating system, Ubuntu 20.04 LTS as reference
 - The computer or virtual machine is dedicated only for the NSC3 usage
-- Docker and docker-compose installed
 - Access to internet
-- Following TCP/IP4 ports open: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific client ports (25204, 25205, 25206)
-- SSL certifications for the service domain. Human readable formated private key named as privkey.pem and full chained certification named as fullchain.pem
-- The server IP and domain name is bound together by DNS operator. 
-- NSION registry account and secrets are available
+- Following TCP/IP4 ports are open from network to server: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific ports (25204, 25205, 25206)
+- SSL certifications for the service domain. Human readable (PEM) format. A private key file named as privkey.pem. A full chained certification file named as fullchain.pem
+- Server domain name is registered to DNS services. 
+- Access account to NSION container registry is available.
 - Linux account with sudo privileges for the operating system
-- Following 3rd party apps are needed: git, wget, curl. Most of them are by default included as part of a linux basic setup. However please check beforehand availability of your local linux setup. 
+- Following 3rd party apps are needed: git, wget and curl. Most of them are by default included as part of a linux basic setup. However please ensure beforehand availability on your local linux setup. 
 
 NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
-## NSC3 backend installation guide for single node via public NSION repository:
-### Default installation locations:
+## NSC3 backend installation guidance for single node via public NSION repository:
+### Default file system locations:
 
-- Following instructions are using folder $HOME/nsc3 as default location for installation, but the location can be something else. The folder nsc3 will be created automatically while installation process
-- Default docker content folder is /var/lib/docker
-- Default Relational Database (Postgresql) content folder is /var/lib/docker/volumes/main-postgres-volume
-- Default Object Storage (min.io) content folder is /var/lib/docker/volumes/minio-volume
-- Default NSC3 logs files folder is $HOME/nsc3/logs
-- Default NSC3 maptiles files folder is $HOME/nsc3/mapdata
-- Default SSL cert files folder is $HOME/nsc3/nsc-gateway-cert
+- NSC3 Installation folder $HOME/nsc3, However this location is configurable. Instruction are referring for this folder. The folder "nsc3" will be created automatically while installation process
+- Docker content folder is /var/lib/docker
+- Relational Database (Postgresql) content folder is /var/lib/docker/volumes/main-postgres-volume
+- Object Storage (min.io) content folder is /var/lib/docker/volumes/minio-volume
+- NSC3 logs files folder is $HOME/nsc3/logs
+- NSC3 maptiles files folder is $HOME/nsc3/mapdata
+- SSL cert files folder is $HOME/nsc3/nsc-gateway-cert
 
 ### NSC3 installation:
 #### Install Docker:
@@ -55,7 +54,7 @@ As example Ubuntu:
 #### Setup installation folder:
 
 - Copy the SSL cert files privkey.pem and fullchain.pem to your home folder. As this example $HOME 
-- Clone git project from NSION repository
+- Clone git project from NSION SW repository
 
 #### Gather installation scripts from NSION github:
 
@@ -76,7 +75,7 @@ As example Ubuntu:
         
 #### Install Docker-compose:
 
-Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/. Note that python3 is required. Ubuntu based linux apt will install it automatically if missing.
+Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/. Note that python3 is required. Ubuntu based linux packaging tool will install it automatically if missing.
 As example Ubuntu:
 
     sudo apt-get update
@@ -109,11 +108,12 @@ As example Ubuntu:
     ++++++++++++++++++++++++++++++++++++++++
     
 #### Verify installation
-Check docker containers, Totally 15 containers are running. Right after installation phase extra container "db-updater" is running for a while.
+Check docker containers, Totally 15 containers are running on background. Right after installation phase, a container "dbupdater" is for an instant up.
 
     sudo docker ps
+    sudo docker stats
 
-Check Web services, Expected result when ok, "HTTP/2 200"
+Check Web services, Expected result if ok, "HTTP/2 200"
 
     cd $HOME/nsc3
     source nsc-host.env
@@ -195,7 +195,7 @@ Try to restart NSC3 services:
     sudo docker-compose up -d 
     
 Check https status: 
-Expected result when ok, "HTTP/2 200"
+Expected result if ok, "HTTP/2 200"
 
     cd $HOME/nsc3
     source nsc-host.env
@@ -209,7 +209,7 @@ If still no access please then check ...
 #### NSC3 Web service is not working properly:
 
 Check that SSL cert is valid:
-Expected result when ok, "SSL certificate verify ok"
+Expected result if ok, "SSL certificate verify ok"
 
     cd $HOME/nsc3
     source nsc-host.env
