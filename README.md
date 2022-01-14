@@ -33,7 +33,7 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
 - Following instructions are using folder $HOME/nsc3 as default location for installation, but the location can be something else. The folder nsc3 will be created automatically while installation process
 - Default docker content folder is /var/lib/docker
-- Default Relation Database (Postgresql) content folder is /var/lib/docker/volumes/main-postgres-volume
+- Default Relational Database (Postgresql) content folder is /var/lib/docker/volumes/main-postgres-volume
 - Default Object Storage (min.io) content folder is /var/lib/docker/volumes/minio-volume
 - Default NSC3 logs files folder is $HOME/nsc3/logs
 - Default NSC3 maptiles files folder is $HOME/nsc3/mapdata
