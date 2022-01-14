@@ -14,7 +14,7 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - nsc3-docker-compose-ext-reg.tmpl -> Docker Compose template 
 
 ## Prerequisites for NSC3 installation:
-- Minimux HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
+- Minimum HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
 - Linux operating system, Ubuntu 20.04 LTS as reference.
 - The computer or virtual machine is allocated for NSC3 use only.
 - Internet access 
