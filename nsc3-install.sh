@@ -30,7 +30,7 @@ then
     echo -n "Do you want to continue downloading the map file? (y/n): "
     read answer
     if [ "$answer" != "${answer#[Yy]}" ] ;then
-        wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=ra&st=2021-04-24T14:05:55Z&se=2023-01-06T23:05:55Z&sv=2020-02-10&sr=b&sig=XGJQgOZWC6fH2zyjUEDfTQeU9e1BG67f3v4p8fVEimc%3D"
+        sudo wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=ra&st=2021-04-24T14:05:55Z&se=2023-01-06T23:05:55Z&sv=2020-02-10&sr=b&sig=XGJQgOZWC6fH2zyjUEDfTQeU9e1BG67f3v4p8fVEimc%3D"
     else
         echo "Continue installation without a maptile"
     fi     
@@ -42,7 +42,7 @@ then
     echo -n "Do you want to continue downloading the map file? (y/n): "
     read answer
     if [ "$answer" != "${answer#[Yy]}" ] ;then
-        wget -k -O $NSCHOME/mapdata/europe.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/europe.mbtiles?sp=ra&st=2021-04-24T12:40:49Z&se=2023-01-07T21:40:49Z&sv=2020-02-10&sr=b&sig=m3ANK5J8%2BqYh80OdON0BRVCIll4ptM0%2F2kSjzGMmGrc%3D"
+        sudo wget -k -O $NSCHOME/mapdata/europe.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/europe.mbtiles?sp=ra&st=2021-04-24T12:40:49Z&se=2023-01-07T21:40:49Z&sv=2020-02-10&sr=b&sig=m3ANK5J8%2BqYh80OdON0BRVCIll4ptM0%2F2kSjzGMmGrc%3D"
     else
         echo "Continue installation without a maptile"
     fi    
@@ -54,7 +54,7 @@ then
     echo -n "Do you want to continue downloading the map file? (y/n): "
     read answer
     if [ "$answer" != "${answer#[Yy]}" ] ;then
-        wget -k -O $NSCHOME/mapdata/australia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/australia-oceania_australia.mbtiles?sp=ra&st=2021-04-24T14:25:30Z&se=2023-01-06T23:25:30Z&sv=2020-02-10&sr=b&sig=yWkB7loHb02SNgCIhWiNZMb8VpfppfISaJW4MnsFHMw%3D";
+        sudo wget -k -O $NSCHOME/mapdata/australia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/australia-oceania_australia.mbtiles?sp=ra&st=2021-04-24T14:25:30Z&se=2023-01-06T23:25:30Z&sv=2020-02-10&sr=b&sig=yWkB7loHb02SNgCIhWiNZMb8VpfppfISaJW4MnsFHMw%3D";
     else
         echo "Continue installation without a maptile"
     fi    
@@ -66,7 +66,7 @@ then
     echo -n "Do you want to continue downloading the map file? (y/n): "
     read answer
     if [ "$answer" != "${answer#[Yy]}" ] ;then
-        wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=ra&st=2021-04-25T15:03:13Z&se=2023-01-07T00:03:13Z&sv=2020-02-10&sr=b&sig=nvfmJOdn4XG2BV2CEncNXQuEnscJ2lfmtJeQZellHwM%3D"
+        sudo wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=ra&st=2021-04-25T15:03:13Z&se=2023-01-07T00:03:13Z&sv=2020-02-10&sr=b&sig=nvfmJOdn4XG2BV2CEncNXQuEnscJ2lfmtJeQZellHwM%3D"
     else
         echo "Continue installation without a maptile"
     fi    
@@ -88,11 +88,11 @@ mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 # Create dictories
-mkdir $NSCHOME/logs 2> /dev/null
-mkdir $NSCHOME/mapdata 2> /dev/null
-mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null
-cp $HOME/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-cp $HOME/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
+sudo mkdir $NSCHOME/logs 2> /dev/null
+sudo mkdir $NSCHOME/mapdata 2> /dev/null
+sudo mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null
+sudo cp $HOME/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
+sudo cp $HOME/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 # Create docker-compose.yml file
 cd $NSCHOME
 (echo "cat <<EOF >docker-compose-temp.yml";
