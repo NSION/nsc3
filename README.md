@@ -86,7 +86,7 @@ As example Ubuntu:
     cd $HOME/nsc3
     sudo ./nsc3-install.sh  
     
-##### queries dialog while installation process with example values
+##### Interactive installation mode: installation dialog with example values
     
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
     /home/ubuntu/nsc3     
