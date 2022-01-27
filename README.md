@@ -59,7 +59,7 @@ As example Ubuntu:
 #### Gather installation scripts from NSION github:
 
     cd $HOME
-    sudo git clone https://github.com/NSION/nsc3.git
+    git clone https://github.com/NSION/nsc3.git
     
 #### Grant execute rights for the installation script:
 
@@ -138,7 +138,7 @@ Downlaod the latest scripts from github:
 
     cd $HOME/nsc3
     chmod u-x *.sh
-    sudo git pull -f
+    git pull -f
     
 Grant execute rights for the upgrade script:
 
