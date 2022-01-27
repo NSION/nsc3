@@ -86,21 +86,23 @@ As example Ubuntu:
     cd $HOME/nsc3
     sudo ./nsc3-install.sh  
     
-##### queries dialog while installation process    
+##### queries dialog while installation process with example values
     
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
-    /home/ubuntu/nsc3  <<< "your NSC3 installation folder"     
+    /home/ubuntu/nsc3     
     NSC3 public hostname, e.g videoservice.nsiontec.com: 
-    foo.nsion.io <<< "your hostname"  
+    foo.nsion.io
+    Location of SSL cert files, e.g /home/nscuser: 
+    /home/ubuntu
     NSC3 Release tag, e.g release-3.3: 
-    release-3.3 <<< "NSC3 release tag"  
+    release-3.3 
     Map files options : 
     1. North America map
     2. Europa map
     3. Australia map
     4. GCC states map
     Select your option as number: 
-    1 <<< "NA map is selected"  
+    1
     ++++++++++++++++++++++++++++++++++++++++
     NSC3 backend is installed!
     Login to your NSC3 web app by URL address
