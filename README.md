@@ -64,7 +64,7 @@ As example Ubuntu:
 #### Grant execute rights for the installation script:
 
     cd $HOME/nsc3
-    chmod u+x *.sh
+    chmod u+x nsc3-install.sh
     
 #### Login to NSION docker registry:
 
@@ -82,27 +82,47 @@ As example Ubuntu:
     sudo apt-get install docker-compose
 
 #### Install NSC3
+##### Silent installation mode: 
+
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    NSC3 installer usage:
+
+    sudo ./nsc3-install.sh --help 	  	'help text'
+    sudo ./nsc3-install.sh --silent     'installation with command line parameters'
+    sudo ./nsc3-install.sh 		  		'interactive installation mode'
+
+    CLI parameters usage:
+    sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag>
+
+    CLI parameters example:
+    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.3
+
+    Regional identifiers of MAP selection:
+    EU=Europe, NA=North America, AUS=Australia, GCC=GCC states
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+##### Interactive installation mode: installation dialog with example values  
 
     cd $HOME/nsc3
     sudo ./nsc3-install.sh  
     
-##### Interactive installation mode: installation dialog with example values
-    
+
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
-    /home/ubuntu/nsc3     
+    /home/ubuntu/nsc3      
     NSC3 public hostname, e.g videoservice.nsiontec.com: 
-    foo.nsion.io
+    foo.nsion.io   
     Location of SSL cert files, e.g /home/nscuser: 
-    /home/ubuntu
+	/home/ubuntu
     NSC3 Release tag, e.g release-3.3: 
-    release-3.3 
+    release-3.3  
     Map files options : 
     1. North America map
     2. Europa map
     3. Australia map
     4. GCC states map
     Select your option as number: 
-    1
+    1 <<< "NA map is selected"  
     ++++++++++++++++++++++++++++++++++++++++
     NSC3 backend is installed!
     Login to your NSC3 web app by URL address
@@ -110,7 +130,7 @@ As example Ubuntu:
     ++++++++++++++++++++++++++++++++++++++++
     
 #### Verify installation
-Check docker containers, Totally 15 containers are running on background. Right after installation phase, a container "dbupdater" is for an instant up.
+Check docker containers, Totally 15 containers
 
     sudo docker ps
     sudo docker stats
@@ -144,7 +164,7 @@ Downlaod the latest scripts from github:
     
 Grant execute rights for the upgrade script:
 
-    chmod u+x *.sh
+    chmod u+x nsc3-upgrade.sh
     
 Start upgrade process:
 
