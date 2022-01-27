@@ -58,18 +58,22 @@ if [ $silentmode != true ]; then
 fi
 
 # Create dictories
-if [ ! -d $NSCHOME/logs ]; then mkdir $NSCHOME/logs 2> /dev/null fi
-if [ ! -d $NSCHOME/mapdata ]; then mkdir $NSCHOME/mapdata 2> /dev/null fi
-if [ ! -d $NSCHOME/nsc-gateway-cert ]; then mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null fi
+if [ ! -d $NSCHOME/logs ]; then 
+   mkdir $NSCHOME/logs 2> /dev/null 
+fi
+if [ ! -d $NSCHOME/mapdata ]; then 
+   mkdir $NSCHOME/mapdata 2> /dev/null 
+fi
+if [ ! -d $NSCHOME/nsc-gateway-cert ]; then 
+   mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null 
+fi
+
 if [ -f "$SSLFOLDER/privkey.pem" ]; then
    cp $SSLFOLDER/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-else
-   echo "File "$SSLFOLDER/privkey.pem ... is missing. Move SSL cert file manaually to the folder $NSCHOME/nsc-gateway-cert/  and restart NSC3"
 fi
+
 if [ -f "$SSLFOLDER/fullchain.pem" ]; then
    cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-else
-   echo "File "$SSLFOLDER/fullchain.pem ... is missing. Move SSL cert file manaually to the folder $NSCHOME/nsc-gateway-cert/  and restart NSC3"
 fi
 if [ $silentmode != true ]; then
    echo "NSC3 Release tag, e.g release-3.3: "
