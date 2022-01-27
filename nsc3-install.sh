@@ -1,6 +1,7 @@
 #!/bin/bash
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
+silentmode=false
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
        silentmode=true
@@ -43,7 +44,7 @@ if [ ${1+"true"} ]; then
        export NSC3REL=$6
    fi   
 fi
-if [ ${1+"false"} ]; then
+if [ silentmode=false ]; then
     clear
     echo "++++++++++++++++++++++++++++++++++++++++"
     echo "                                        "
@@ -83,7 +84,7 @@ fi
 if [ -f "$SSLFOLDER/fullchain.pem" ]; then
    cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 fi
-if [ ${1+"false"} ]; then
+if [ silentmode=false ]; then
    echo "Map files options : "
    echo "1. North America map"
    echo "2. Europa map"
