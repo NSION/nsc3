@@ -1,59 +1,66 @@
 #!/bin/bash
-echo "++++++++++++++++++++++++++++++++++++++++"
-echo "                                        "
-echo "  NSC3 docker-compose installer:        "
-echo "  This script prepares NSC3 config      "
-echo "                                        "
-echo "++++++++++++++++++++++++++++++++++++++++"
-echo "NSC3 installation folder, e.g /home/nscuser/nsc3: "
-read  NSC3HOMEFOLDER
-export NSCHOME=$NSC3HOMEFOLDER
-echo "NSC3 public hostname, e.g videoservice.nsion.io: "
-read  NSC3URL
-export PUBLICIP=$NSC3URL
-echo "Location of SSL cert files, e.g /home/nscuser: "
-read  SSLF
-export SSLFOLDER=$SSLF
+if [ ${1+"true"} && $1 = "--silent" ]; then
+    silent-mode=1
+    echo "silent mode"
+fi
+if [ ${silent-mode+"false"} ]; then
+clear
+    echo "++++++++++++++++++++++++++++++++++++++++"
+    echo "                                        "
+    echo "  NSC3 docker-compose installer:        "
+    echo "  This script prepares NSC3 config      "
+    echo "                                        "
+    echo "++++++++++++++++++++++++++++++++++++++++"
+    echo "NSC3 installation folder, e.g /home/nscuser/nsc3: "
+    read  NSC3HOMEFOLDER
+    export NSCHOME=$NSC3HOMEFOLDER
+    echo "NSC3 public hostname, e.g videoservice.nsion.io: "
+    read  NSC3URL
+    export PUBLICIP=$NSC3URL
+    echo "Location of SSL cert files, e.g /home/nscuser: "
+    read  SSLF
+    export SSLFOLDER=$SSLF
+fi
+
 # Create dictories
 mkdir $NSCHOME/logs 2> /dev/null
 mkdir $NSCHOME/mapdata 2> /dev/null
 mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null
 if [ -f "$SSLFOLDER/privkey.pem" ]; then
-    cp $SSLFOLDER/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
+   cp $SSLFOLDER/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 else
-    echo "File "$SSLFOLDER/privkey.pem ... is missing. Move SSL cert file manaually to the folder $NSCHOME/nsc-gateway-cert/  and restart NSC3"
+   echo "File "$SSLFOLDER/privkey.pem ... is missing. Move SSL cert file manaually to the folder $NSCHOME/nsc-gateway-cert/  and restart NSC3"
 fi
 if [ -f "$SSLFOLDER/fullchain.pem" ]; then
-    cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
+   cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 else
-    echo "File "$SSLFOLDER/fullchain.pem ... is missing. Move SSL cert file manaually to the folder $NSCHOME/nsc-gateway-cert/  and restart NSC3"
+   echo "File "$SSLFOLDER/fullchain.pem ... is missing. Move SSL cert file manaually to the folder $NSCHOME/nsc-gateway-cert/  and restart NSC3"
 fi
-echo "NSC3 Release tag, e.g release-3.3: "
-read REL
-export NSC3REL=$REL
-export NSC3REG="registrynsion.azurecr.io"
-echo "Map files options : "
-echo "1. North America map"
-echo "2. Europa map"
-echo "3. Australia map"
-echo "4. GCC states map"
-echo "Select your option as number: "
-declare -i MAP_OPTION
-read MAP_OPTION
-if [ $MAP_OPTION -eq 1 ]
-then
-    export MAPNAME="North America"
-    echo "Selected map file is $MAPNAME. Size 15.19 GiB"
-    echo -n "Do you want to downloading the map file? (y/n): "
-    read answer
-    if [ "$answer" != "${answer#[Yy]}" ] ;then
-        wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=ra&st=2021-04-24T14:05:55Z&se=2023-01-06T23:05:55Z&sv=2020-02-10&sr=b&sig=XGJQgOZWC6fH2zyjUEDfTQeU9e1BG67f3v4p8fVEimc%3D"
-    else
-        echo "Continue installation without maptiles"
-    fi
-fi
-if [ $MAP_OPTION -eq 2 ]
-then
+if [ ${silent-mode+"false"} ]; then
+   echo "NSC3 Release tag, e.g release-3.3: "
+   read REL
+   export NSC3REL=$REL
+   export NSC3REG="registrynsion.azurecr.io"
+   echo "Map files options : "
+   echo "1. North America map"
+   echo "2. Europa map"
+   echo "3. Australia map"
+   echo "4. GCC states map"
+   echo "Select your option as number: "
+   declare -i MAP_OPTION
+   read MAP_OPTION
+   if [ $MAP_OPTION -eq 1 ]; then
+       export MAPNAME="North America"
+       echo "Selected map file is $MAPNAME. Size 15.19 GiB"
+       echo -n "Do you want to downloading the map file? (y/n): "
+       read answer
+       if [ "$answer" != "${answer#[Yy]}" ] ;then
+           wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=ra&st=2021-04-24T14:05:55Z&se=2023-01-06T23:05:55Z&sv=2020-02-10&sr=b&sig=XGJQgOZWC6fH2zyjUEDfTQeU9e1BG67f3v4p8fVEimc%3D"
+       else
+           echo "Continue installation without maptiles"
+       fi
+   fi
+if [ $MAP_OPTION -eq 2 ];then
     export MAPNAME="Europe"
     echo "Selected map file is $MAPNAME. Size 19.39 GiB"
     echo -n "Do you want to downloading the map file?? (y/n): "
@@ -64,8 +71,7 @@ then
         echo "Continue installation without maptiles"
     fi
 fi
-if [ $MAP_OPTION -eq 3 ]
-then
+if [ $MAP_OPTION -eq 3 ]; then
     export MAPNAME="Australia"
     echo "Selected map file is $MAPNAME. Size 1.21 GiB"
     echo -n "Do you want to downloading the map file? (y/n): "
@@ -76,8 +82,7 @@ then
         echo "Continue installation without maptiles"
     fi
 fi
-if [ $MAP_OPTION -eq 4 ]
-then
+if [ $MAP_OPTION -eq 4 ]; then
     export MAPNAME="GCC states"
     echo "Selected map file is $MAPNAME. Size 390.52 MiB"
     echo -n "Do you want to downloading the map file? (y/n): "
@@ -99,6 +104,8 @@ then
 exit 0
 fi
 echo "$MAPNAME map file is downloaded"
+
+fi
 # Move old files
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
 # Create env file
