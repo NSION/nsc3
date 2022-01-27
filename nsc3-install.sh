@@ -1,4 +1,6 @@
 #!/bin/bash
+## NSC3 registry:
+export NSC3REG="registrynsion.azurecr.io"
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
        silentmode=true
@@ -14,10 +16,10 @@ if [ ${1+"true"} ]; then
        echo "sudo ./nsc3-install.sh 		  'interactive installation mode'"
        echo ""
        echo "CLI parameters usage:"
-       echo "sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region>"
+       echo "sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag>"
        echo ""
        echo "CLI parameters example:"
-       echo "sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA"
+       echo "sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.3"
        echo ""
        echo "Regional identifiers of MAP selection:"
        echo "EU=Europe, NA=North America, AUS=Australia, GCC=GCC states"
@@ -37,6 +39,9 @@ if [ ${1+"true"} ]; then
    if [ ${5+"true"} ]; then
        export REGION=$5
    fi
+   if [ ${6+"true"} ]; then
+       export NSC3REL=$6
+   fi   
 fi
 if [ $silentmode != true ]; then
     clear
@@ -55,6 +60,9 @@ if [ $silentmode != true ]; then
     echo "Location of SSL cert files, e.g /home/nscuser: "
     read  SSLF
     export SSLFOLDER=$SSLF
+    echo "NSC3 Release tag, e.g release-3.3: "
+    read REL
+    export NSC3REL=$REL
 fi
 
 # Create dictories
@@ -76,10 +84,6 @@ if [ -f "$SSLFOLDER/fullchain.pem" ]; then
    cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 fi
 if [ $silentmode != true ]; then
-   echo "NSC3 Release tag, e.g release-3.3: "
-   read REL
-   export NSC3REL=$REL
-   export NSC3REG="registrynsion.azurecr.io"
    echo "Map files options : "
    echo "1. North America map"
    echo "2. Europa map"
