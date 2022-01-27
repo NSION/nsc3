@@ -43,7 +43,7 @@ if [ ${1+"true"} ]; then
        export NSC3REL=$6
    fi   
 fi
-if [ $silentmode != true ]; then
+if [ ${1+"false"} ]; then
     clear
     echo "++++++++++++++++++++++++++++++++++++++++"
     echo "                                        "
@@ -83,7 +83,7 @@ fi
 if [ -f "$SSLFOLDER/fullchain.pem" ]; then
    cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 fi
-if [ $silentmode != true ]; then
+if [ ${1+"false"} ]; then
    echo "Map files options : "
    echo "1. North America map"
    echo "2. Europa map"
