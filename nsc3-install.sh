@@ -166,7 +166,10 @@ fi
 
 # Move old files
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
-# Create env file
+# Remove old and create new env file
+if [ -f "$NSCHOME/nsc-host.env" ]; then
+   rm $NSCHOME/nsc-host.env 2> /dev/null
+fi
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 #  Modify maptiles rights level
