@@ -64,7 +64,7 @@ As example Ubuntu:
 #### Grant execute rights for the installation script:
 
     cd $HOME/nsc3
-    sudo chmod u+x nsc3-install.sh
+    sudo chmod u+x *.sh
     
 #### Login to NSION docker registry:
 
@@ -137,13 +137,12 @@ Login to the NSC3 web app as admin
 Downlaod the latest scripts from github:
 
     cd $HOME/nsc3
-    sudo rm nsc3-install.sh
-    sudo rm nsc3-upgrade.sh
+    chmod u-x *.sh
     sudo git pull -f
     
 Grant execute rights for the upgrade script:
 
-    sudo chmod u+x nsc3-upgrade.sh
+    sudo chmod u+x *.sh
     
 Start upgrade process:
 
