@@ -176,6 +176,9 @@ echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 chmod 644 $NSCHOME/mapdata/*.* 2> /dev/null
 # Create docker-compose.yml file
 cd $NSCHOME
+if [ -f "docker-compose.yml" ]; then
+   mv docker-compose.yml docker-compose.old 2> /dev/null
+fi
 (echo "cat <<EOF >docker-compose-temp.yml";
 cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$NSC3REL"'/,/'"$NSC3REL"'/p';
 ) >temp.yml
