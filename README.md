@@ -64,7 +64,7 @@ As example Ubuntu:
 #### Grant execute rights for the installation script:
 
     cd $HOME/nsc3
-    sudo chmod u+x *.sh
+    chmod u+x *.sh
     
 #### Login to NSION docker registry:
 
@@ -142,7 +142,7 @@ Downlaod the latest scripts from github:
     
 Grant execute rights for the upgrade script:
 
-    sudo chmod u+x *.sh
+    chmod u+x *.sh
     
 Start upgrade process:
 
@@ -227,6 +227,3 @@ As example Ubuntu installation
 Test that route to 443 port is open:
 
     nmap <hostname> | grep 443
-
-    
-
