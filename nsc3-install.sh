@@ -1,10 +1,45 @@
 #!/bin/bash
-if [ ${1+"true"} && $1 = "--silent" ]; then
-    silent-mode=1
-    echo "silent mode"
+if [ ${1+"true"} ]; then
+   if  [ $1 == "--silent" ]; then
+       silentmode=true
+       echo "silent mode"
+   fi
+   if  [ $1 == "--help" ]; then
+       clear
+       echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+       echo "NSC3 installer usage:"
+       echo ""
+       echo "sudo ./nsc3-install.sh --help 	  'help text'"
+       echo "sudo ./nsc3-install.sh --silent      'installation with command line parameters'"
+       echo "sudo ./nsc3-install.sh 		  'interactive installation mode'"
+       echo ""
+       echo "CLI parameters usage:"
+       echo "sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region>"
+       echo ""
+       echo "CLI parameters example:"
+       echo "sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA"
+       echo ""
+       echo "Regional identifiers of MAP selection:"
+       echo "EU=Europe, NA=North America, AUS=Australia, GCC=GCC states"
+       echo ""
+       echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+       exit 0
+   fi
+   if [ ${2+"true"} ]; then
+       export NSCHOME=$2
+   fi
+   if [ ${3+"true"} ]; then
+       export SSLFOLDER=$3
+   fi
+   if [ ${4+"true"} ]; then
+       export PUBLICIP=$4
+   fi
+   if [ ${5+"true"} ]; then
+       export REGION=$5
+   fi
 fi
-if [ ${silent-mode+"false"} ]; then
-clear
+if [ $silentmode != true ]; then
+    clear
     echo "++++++++++++++++++++++++++++++++++++++++"
     echo "                                        "
     echo "  NSC3 docker-compose installer:        "
@@ -23,9 +58,9 @@ clear
 fi
 
 # Create dictories
-mkdir $NSCHOME/logs 2> /dev/null
-mkdir $NSCHOME/mapdata 2> /dev/null
-mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null
+if [ ! -d $NSCHOME/logs ]; then mkdir $NSCHOME/logs 2> /dev/null fi
+if [ ! -d $NSCHOME/mapdata ]; then mkdir $NSCHOME/mapdata 2> /dev/null fi
+if [ ! -d $NSCHOME/nsc-gateway-cert ]; then mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null fi
 if [ -f "$SSLFOLDER/privkey.pem" ]; then
    cp $SSLFOLDER/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
 else
@@ -36,7 +71,7 @@ if [ -f "$SSLFOLDER/fullchain.pem" ]; then
 else
    echo "File "$SSLFOLDER/fullchain.pem ... is missing. Move SSL cert file manaually to the folder $NSCHOME/nsc-gateway-cert/  and restart NSC3"
 fi
-if [ ${silent-mode+"false"} ]; then
+if [ $silentmode != true ]; then
    echo "NSC3 Release tag, e.g release-3.3: "
    read REL
    export NSC3REL=$REL
@@ -55,57 +90,71 @@ if [ ${silent-mode+"false"} ]; then
        echo -n "Do you want to downloading the map file? (y/n): "
        read answer
        if [ "$answer" != "${answer#[Yy]}" ] ;then
-           wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=ra&st=2021-04-24T14:05:55Z&se=2023-01-06T23:05:55Z&sv=2020-02-10&sr=b&sig=XGJQgOZWC6fH2zyjUEDfTQeU9e1BG67f3v4p8fVEimc%3D"
+           REGION="NA"
        else
            echo "Continue installation without maptiles"
        fi
    fi
-if [ $MAP_OPTION -eq 2 ];then
-    export MAPNAME="Europe"
-    echo "Selected map file is $MAPNAME. Size 19.39 GiB"
-    echo -n "Do you want to downloading the map file?? (y/n): "
-    read answer
-    if [ "$answer" != "${answer#[Yy]}" ] ;then
-        wget -k -O $NSCHOME/mapdata/europe.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/europe.mbtiles?sp=ra&st=2021-04-24T12:40:49Z&se=2023-01-07T21:40:49Z&sv=2020-02-10&sr=b&sig=m3ANK5J8%2BqYh80OdON0BRVCIll4ptM0%2F2kSjzGMmGrc%3D"
-    else
-        echo "Continue installation without maptiles"
+    if [ $MAP_OPTION -eq 2 ];then
+        export MAPNAME="Europe"
+        echo "Selected map file is $MAPNAME. Size 19.39 GiB"
+        echo -n "Do you want to downloading the map file?? (y/n): "
+        read answer
+        if [ "$answer" != "${answer#[Yy]}" ] ;then
+            REGION="EU"
+        else
+            echo "Continue installation without maptiles"
+        fi
     fi
-fi
-if [ $MAP_OPTION -eq 3 ]; then
-    export MAPNAME="Australia"
-    echo "Selected map file is $MAPNAME. Size 1.21 GiB"
-    echo -n "Do you want to downloading the map file? (y/n): "
-    read answer
-    if [ "$answer" != "${answer#[Yy]}" ] ;then
-        wget -k -O $NSCHOME/mapdata/australia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/australia-oceania_australia.mbtiles?sp=ra&st=2021-04-24T14:25:30Z&se=2023-01-06T23:25:30Z&sv=2020-02-10&sr=b&sig=yWkB7loHb02SNgCIhWiNZMb8VpfppfISaJW4MnsFHMw%3D";
-    else
-        echo "Continue installation without maptiles"
+    if [ $MAP_OPTION -eq 3 ]; then
+        export MAPNAME="Australia"
+        echo "Selected map file is $MAPNAME. Size 1.21 GiB"
+        echo -n "Do you want to downloading the map file? (y/n): "
+        read answer
+        if [ "$answer" != "${answer#[Yy]}" ] ;then
+            REGION="AUS"
+        else
+            echo "Continue installation without maptiles"
+        fi
     fi
-fi
-if [ $MAP_OPTION -eq 4 ]; then
-    export MAPNAME="GCC states"
-    echo "Selected map file is $MAPNAME. Size 390.52 MiB"
-    echo -n "Do you want to downloading the map file? (y/n): "
-    read answer
-    if [ "$answer" != "${answer#[Yy]}" ] ;then
-        wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=ra&st=2021-04-25T15:03:13Z&se=2023-01-07T00:03:13Z&sv=2020-02-10&sr=b&sig=nvfmJOdn4XG2BV2CEncNXQuEnscJ2lfmtJeQZellHwM%3D"
-    else
-        echo "Continue installation without maptiles"
+    if [ $MAP_OPTION -eq 4 ]; then
+        export MAPNAME="GCC states"
+        echo "Selected map file is $MAPNAME. Size 390.52 MiB"
+        echo -n "Do you want to downloading the map file? (y/n): "
+        read answer
+        if [ "$answer" != "${answer#[Yy]}" ] ;then
+            REGION="GCC"
+        else
+            echo "Continue installation without maptiles"
+        fi
     fi
-fi
-if [ $MAP_OPTION -gt 4 ]
-then
-    echo "Selected value $MAP_OPTION is out of range 1-4!"
-exit 0
-fi
-if [ $MAP_OPTION -lt 1 ]
-then
-    echo "Selected value $MAP_OPTION  is out of range 1-4!"
-exit 0
-fi
-echo "$MAPNAME map file is downloaded"
+    if [ $MAP_OPTION -gt 4 ]
+    then
+        echo "Selected value $MAP_OPTION is out of range 1-4!"
+    exit 0
+    fi
+    if [ $MAP_OPTION -lt 1 ]
+    then
+        echo "Selected value $MAP_OPTION  is out of range 1-4!"
+    exit 0
+    fi
+    echo "$MAPNAME map file is downloaded"
 
 fi
+# Download Map file:
+if [ $REGION == "EU" ]: then 
+     wget -k -O $NSCHOME/mapdata/europe.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/europe.mbtiles?sp=ra&st=2021-04-24T12:40:49Z&se=2023-01-07T21:40:49Z&sv=2020-02-10&sr=b&sig=m3ANK5J8%2BqYh80OdON0BRVCIll4ptM0%2F2kSjzGMmGrc%3D"
+fi     
+if [ $REGION == "NA" ]: then 
+     wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=ra&st=2021-04-24T14:05:55Z&se=2023-01-06T23:05:55Z&sv=2020-02-10&sr=b&sig=XGJQgOZWC6fH2zyjUEDfTQeU9e1BG67f3v4p8fVEimc%3D"
+fi     
+if [ $REGION == "AUS" ]: then 
+     wget -k -O $NSCHOME/mapdata/australia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/australia-oceania_australia.mbtiles?sp=ra&st=2021-04-24T14:25:30Z&se=2023-01-06T23:25:30Z&sv=2020-02-10&sr=b&sig=yWkB7loHb02SNgCIhWiNZMb8VpfppfISaJW4MnsFHMw%3D"
+fi     
+if [ $REGION == "GCC" ]: then 
+     wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=ra&st=2021-04-25T15:03:13Z&se=2023-01-07T00:03:13Z&sv=2020-02-10&sr=b&sig=nvfmJOdn4XG2BV2CEncNXQuEnscJ2lfmtJeQZellHwM%3D"
+fi     
+
 # Move old files
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
 # Create env file
