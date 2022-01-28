@@ -62,6 +62,7 @@ services:
         - MODELRUNNER_DEVICE=${REDISAI_DEVICE}
 volumes:
   analytics-postgres-volume:
+    name: analytics-postgres-volume
 networks:
   nsc-network:
     external: true
