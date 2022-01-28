@@ -58,3 +58,14 @@ if test -f docker-compose-valor_$PUBLICIP.yml; then
     mv docker-compose-valor_$PUBLICIP.yml docker-compose-valor_$PUBLICIP.old  2> /dev/null
 fi
 cp docker-compose-valor.yml docker-compose-valor_$PUBLICIP.yml
+echo "Upgrading docker images ..."
+sudo docker-compose -f docker-compose-valor.yml pull
+sudo docker-compose -f docker-compose-valor.yml up -d
+echo "++++++++++++++++++++++++++++++++++++++++"
+echo ""                                        
+echo "Valor is upgraded to release $NSC3REL!"
+echo ""
+echo "Login to your NSC3 web app by URL address"
+echo "https://$PUBLICIP"
+echo ""
+echo "++++++++++++++++++++++++++++++++++++++++"
