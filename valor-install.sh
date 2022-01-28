@@ -50,7 +50,7 @@ if [ "$silentmode" = false ]; then
     read HW    
     read HWMODE=$HW
 fi
-
+echo "export HWMODE=$HWMODE" >> $NSCHOME/nsc-host.env
 # Move old files
 if [ -f "docker-compose-valor.yml" ]; then
    mv docker-compose-valor.yml docker-compose-valor-$NSC3REL.old 2> /dev/null
