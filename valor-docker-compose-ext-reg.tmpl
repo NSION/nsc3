@@ -1,6 +1,6 @@
 ### ReleaseTagStart latest 
 # This is for nsc3 version 3.4 and later
-version: "3"
+version: "2.2"
 services:
   nsc-analytics-db:
     container_name: nsc-analytics-db
@@ -13,7 +13,7 @@ services:
         - analytics-postgres-volume:/var/lib/postgresql/data:rw
   nsc-analytics-bus:
     container_name: nsc-analytics-bus
-    runtime: nvidia
+    #runtime: nvidia
     image: ${NSC3REG}/nsc-analytics-bus-${REDISAI_DEVICE}:${NSC3REL}
     environment:
         - PYTHONUNBUFFERED=1
