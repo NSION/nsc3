@@ -1,4 +1,4 @@
-### ReleaseTagStart latest GPU
+### ReleaseTagStart latest 
 # This is for nsc3 version 3.4 and later
 version: "3"
 services:
@@ -11,20 +11,32 @@ services:
     restart: unless-stopped
     volumes:
         - analytics-postgres-volume:/var/lib/postgresql/data:rw
-  nsc-analytics-bus-gpu:
-    container_name: nsc-analytics-bus-gpu
-    runtime: nvidia
-    image: $NSC3REG/nsc-analytics-bus-gpu:$NSC3REL
+  nsc-analytics-bus:
+    container_name: nsc-analytics-bus
+    image: $NSC3REG/nsc-analytics-bus-${REDISAI_DEVICE}:$NSC3REL
     environment:
-        - PYTHONUNBUFFERED=1
-        - NVIDIA_VISIBLE_DEVICES=all
-        - NVIDIA_DRIVER_CAPABILITIES=all
+        - AZ_OCR_SUBSCRPTION_KEY=${AZ_OCR_SUBSCRPTION_KEY}
+        - AZ_OCR_ENDPOINT=${AZ_OCR_ENDPOINT}
+        - AZ_COGNITIVE_SERVICES_KEY=${AZ_COGNITIVE_SERVICES_KEY}
+        - AZ_COGNITIVE_SERVICES_REGION=${AZ_COGNITIVE_SERVICES_REGION}
+        - AZ_COGNITIVE_SERVICES_ENDPOINT=${AZ_COGNITIVE_SERVICES_ENDPOINT}
     networks:
         nsc-network:
             ipv4_address: "172.18.0.21"
     depends_on:
-        - "analytics-db"
+        - "nsc-analytics-db"
     restart: unless-stopped
+  nsc-cookbook-installer:
+    container_name: nsc-cookbook-installer
+    image:  $NSC3REG/nsc-analytics-cookbook:$NSC3REL
+    networks:
+        nsc-network:
+    depends_on:
+        - "nsc-analytics-bus"
+        - "nsc-analytics-db"
+    environment:
+        - MODELRUINNER_DEVICE=${REDISAI_DEVICE}
+        - RECIPE_NAMES=ocr,yolo,droneyolo
   nsc-analytics-tasker-service:
     container_name: nsc-analytics-tasker-service
     image: $NSC3REG/nsc-analytics-tasker-service:$NSC3REL
@@ -32,83 +44,26 @@ services:
         nsc-network:
             ipv4_address: "172.18.0.22" 
     depends_on:
-        - "analytics-bus"
-        - "analytics-db"
+        - "nsc-analytics-bus"
+        - "nsc-analytics-db"
+        - "nsc-cookbook-installer"
     restart: unless-stopped
   nsc-analytics-cookbook:
     container_name: nsc-analytics-cookbook
     image: $NSC3REG/nsc-analytics-cookbook:$NSC3REL
     networks:
-        - nsc-network
+        nsc-network:
     depends_on:
-        - "analytics-bus"
-        - "tasker"
-        - "analytics-db"
+        - "nsc-analytics-bus"
+        - "nsc-analytics-tasker-service"
+        - "nsc-analytics-db"
     environment:
         - RECIPE_NAMES=yolo,droneyolo,ocr
-        - MODELRUNNER_DEVICE=GPU
+        - MODELRUNNER_DEVICE=${REDISAI_DEVICE}
 volumes:
   analytics-postgres-volume:
 networks:
   nsc-network:
-    external:
-      name: "nsc-network"
+    external: true
  
-### ReleaseTagEnd latest GPU
-### ReleaseTagStart latest CPU
-# This is for nsc3 version 3.4 and later
-version: "3"
-services:
-  nsc-analytics-db:
-    container_name: nsc-analytics-db
-    image: $NSC3REG/nsc-analytics-db:$NSC3REL
-    networks:
-        nsc-network:
-            ipv4_address: "172.18.0.23"
-    restart: unless-stopped
-    volumes:
-        - analytics-postgres-volume:/var/lib/postgresql/data:rw
-  nsc-analytics-bus-cpu:
-    container_name: nsc-analytics-bus-cpu
-    runtime: nvidia
-    image: $NSC3REG/nsc-analytics-bus-cpu:$NSC3REL
-    environment:
-        - PYTHONUNBUFFERED=1
-        - NVIDIA_VISIBLE_DEVICES=all
-        - NVIDIA_DRIVER_CAPABILITIES=all
-    networks:
-        nsc-network:
-            ipv4_address: "172.18.0.21"
-    depends_on:
-        - "analytics-db"
-    restart: unless-stopped
-  nsc-analytics-tasker-service:
-    container_name: nsc-analytics-tasker-service
-    image: $NSC3REG/nsc-analytics-tasker-service:$NSC3REL
-    networks:
-        nsc-network:
-            ipv4_address: "172.18.0.22" 
-    depends_on:
-        - "analytics-bus"
-        - "analytics-db"
-    restart: unless-stopped
-  nsc-analytics-cookbook:
-    container_name: nsc-analytics-cookbook
-    image: $NSC3REG/nsc-analytics-cookbook:$NSC3REL
-    networks:
-        - nsc-network
-    depends_on:
-        - "analytics-bus"
-        - "tasker"
-        - "analytics-db"
-    environment:
-        - RECIPE_NAMES=yolo,droneyolo,ocr
-        - MODELRUNNER_DEVICE=CPU
-volumes:
-  analytics-postgres-volume:
-networks:
-  nsc-network:
-    external:
-      name: "nsc-network"
- 
- ### ReleaseTagEnd latest CPU
+### ReleaseTagEnd latest
