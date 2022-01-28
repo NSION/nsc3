@@ -32,7 +32,7 @@ if [ ${1+"true"} ]; then
        export NSC3REL=$2
    fi
    if [ ${2+"true"} ]; then
-       export HWMODE=$3
+       export REDISAI_DEVICE=$3
    fi
 fi
 if [ "$silentmode" = false ]; then
@@ -48,9 +48,9 @@ if [ "$silentmode" = false ]; then
     export NSC3REL=$REL
     echo "Select HW layout, Options cpu or gpu: "
     read HW    
-    read HWMODE=$HW
+    read REDISAI_DEVICE=$HW
 fi
-echo "export HWMODE=$HWMODE" >> $NSCHOME/nsc-host.env
+echo "export REDISAI_DEVICE=$REDISAI_DEVICE" >> $NSCHOME/nsc-host.env
 # Move old files
 if [ -f "docker-compose-valor.yml" ]; then
    mv docker-compose-valor.yml docker-compose-valor-$NSC3REL.old 2> /dev/null
