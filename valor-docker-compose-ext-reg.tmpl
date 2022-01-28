@@ -23,8 +23,8 @@ services:
     depends_on:
         - "analytics-db"
     restart: unless-stopped
-  tasker:
-    container_name: tasker
+  nsc-analytics-tasker-service:
+    container_name: nsc-analytics-tasker-service
     image: nsc3-registry.nsiontec.com:443/nsc-analytics-tasker-service:hot-valor
     networks:
         nsc-network:
@@ -45,10 +45,8 @@ services:
     environment:
         - RECIPE_NAMES=yolo,droneyolo,ocr
         - MODELRUNNER_DEVICE=GPU
-
 volumes:
   analytics-postgres-volume:
-
 networks:
   nsc-network:
     external:
