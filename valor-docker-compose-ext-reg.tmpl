@@ -19,12 +19,6 @@ services:
         - PYTHONUNBUFFERED=1
         - NVIDIA_VISIBLE_DEVICES=all
         - NVIDIA_DRIVER_CAPABILITIES=all
-        # Optional parameters
-        #- AZ_OCR_SUBSCRPTION_KEY=${AZ_OCR_SUBSCRPTION_KEY}
-        #- AZ_OCR_ENDPOINT=${AZ_OCR_ENDPOINT}
-        #- AZ_COGNITIVE_SERVICES_KEY=${AZ_COGNITIVE_SERVICES_KEY}
-        #- AZ_COGNITIVE_SERVICES_REGION=${AZ_COGNITIVE_SERVICES_REGION}
-        #- AZ_COGNITIVE_SERVICES_ENDPOINT=${AZ_COGNITIVE_SERVICES_ENDPOINT}
     networks:
         nsc-network:
             ipv4_address: "172.18.0.21"
@@ -51,20 +45,6 @@ services:
     depends_on:
         - "nsc-analytics-bus"
         - "nsc-analytics-db"
-        - "nsc-cookbook-installer"
-    restart: unless-stopped
-  nsc-analytics-cookbook:
-    container_name: nsc-analytics-cookbook
-    image: ${NSC3REG}/nsc-analytics-cookbook:${NSC3REL}
-    networks:
-        nsc-network:
-    depends_on:
-        - "nsc-analytics-bus"
-        - "nsc-analytics-tasker-service"
-        - "nsc-analytics-db"
-    environment:
-        - RECIPE_NAMES=yolo,droneyolo,ocr
-        - MODELRUNNER_DEVICE=${REDISAI_DEVICE}
 volumes:
   analytics-postgres-volume:
     name: analytics-postgres-volume
