@@ -1,6 +1,7 @@
 #!/bin/bash
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
+export REDISAI_DEVICE="gpu"
 source ./nsc-host.env
 silentmode=false
 if [ ${1+"true"} ]; then
@@ -46,9 +47,6 @@ if [ "$silentmode" = false ]; then
     echo "Valor Release tag, e.g release-3.3: "
     read REL
     export NSC3REL=$REL
-    echo "Select HW layout, Options cpu or gpu: "
-    read HW    
-    read REDISAI_DEVICE=$HW
 fi
 echo "export REDISAI_DEVICE=$REDISAI_DEVICE" >> $NSCHOME/nsc-host.env
 # Move old files
