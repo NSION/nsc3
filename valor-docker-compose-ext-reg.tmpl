@@ -1,1 +1,55 @@
+version: "3"
+services:
+  analytics-db:
+    container_name: analytics-db
+    image: nsc3-registry.nsiontec.com:443/nsc-analytics-db:hot-valor
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.23"
+    restart: unless-stopped
+    volumes:
+        - analytics-postgres-volume:/var/lib/postgresql/data:rw
+  analytics-bus:
+    container_name: analytics-bus
+    runtime: nvidia
+    image: nsc3-registry.nsiontec.com:443/nsc-analytics-bus-gpu:hot-valor
+    environment:
+        - PYTHONUNBUFFERED=1
+        - NVIDIA_VISIBLE_DEVICES=all
+        - NVIDIA_DRIVER_CAPABILITIES=all
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.21"
+    depends_on:
+        - "analytics-db"
+    restart: unless-stopped
+  tasker:
+    container_name: tasker
+    image: nsc3-registry.nsiontec.com:443/nsc-analytics-tasker-service:hot-valor
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.22" 
+    depends_on:
+        - "analytics-bus"
+        - "analytics-db"
+    restart: unless-stopped
+  cookbook-install:
+    container_name: cookbook-installer
+    image: nsc3-registry.nsiontec.com:443/nsc-analytics-cookbook:hot-valor
+    networks:
+        - nsc-network
+    depends_on:
+        - "analytics-bus"
+        - "tasker"
+        - "analytics-db"
+    environment:
+        - RECIPE_NAMES=yolo,droneyolo,ocr
+        - MODELRUNNER_DEVICE=GPU
 
+volumes:
+  analytics-postgres-volume:
+
+networks:
+  nsc-network:
+    external:
+      name: "nsc-network"
