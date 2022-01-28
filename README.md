@@ -122,7 +122,7 @@ As example Ubuntu:
     3. Australia map
     4. GCC states map
     Select your option as number: 
-    1 <<< "NA map is selected"  
+    1   
     ++++++++++++++++++++++++++++++++++++++++
     NSC3 backend is installed!
     Login to your NSC3 web app by URL address
