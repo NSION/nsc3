@@ -21,7 +21,7 @@ if [ ${1+"true"} ]; then
        echo "sudo ./valor-install.sh --silent <Valor release tag> <HW layout>"
        echo ""
        echo "CLI parameters example:"
-       echo "sudo ./valor-install.sh --silent release-3.3 CPU"
+       echo "sudo ./valor-install.sh --silent release-3.3 cpu"
        echo ""
        echo "sudo ./valor-install.sh --silent release-3.3"
        echo ""
@@ -46,7 +46,7 @@ if [ "$silentmode" = false ]; then
     echo "Valor Release tag, e.g release-3.3: "
     read REL
     export NSC3REL=$REL
-    echo "Select HW layout, Options CPU or GPU: "
+    echo "Select HW layout, Options cpu or gpu: "
     read HW    
     read HWMODE=$HW
 fi
@@ -56,7 +56,7 @@ if [ -f "docker-compose-valor.yml" ]; then
    mv docker-compose-valor.yml docker-compose-valor-$NSC3REL.old 2> /dev/null
 fi
 (echo "cat <<EOF >docker-compose-valor-temp.yml";
-cat valor-docker-compose-ext-reg.tmpl | sed -n '/'"$NSC3REL" "$HWMODE"'/,/'"$NSC3REL" "$HWMODE"'/p';
+cat valor-docker-compose-ext-reg.tmpl | sed -n '/'"$NSC3REL"'/,/'"$NSC3REL"'/p';
 ) >temp.yml
 . temp.yml 2> /dev/null
 cat docker-compose-valor-temp.yml > docker-compose-valor.yml;
