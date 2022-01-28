@@ -4,7 +4,7 @@ version: "3"
 services:
   analytics-db:
     container_name: analytics-db
-    image: nsc3-registry.nsiontec.com:443/nsc-analytics-db:hot-valor
+    image: nsc3-registry.nsiontec.com:443/nsc-analytics-db:$NSC3REL
     networks:
         nsc-network:
             ipv4_address: "172.18.0.23"
@@ -14,7 +14,7 @@ services:
   analytics-bus:
     container_name: analytics-bus
     runtime: nvidia
-    image: nsc3-registry.nsiontec.com:443/nsc-analytics-bus-gpu:hot-valor
+    image: nsc3-registry.nsiontec.com:443/nsc-analytics-bus-gpu:$NSC3REL
     environment:
         - PYTHONUNBUFFERED=1
         - NVIDIA_VISIBLE_DEVICES=all
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
   nsc-analytics-tasker-service:
     container_name: nsc-analytics-tasker-service
-    image: nsc3-registry.nsiontec.com:443/nsc-analytics-tasker-service:hot-valor
+    image: nsc3-registry.nsiontec.com:443/nsc-analytics-tasker-service:$NSC3REL
     networks:
         nsc-network:
             ipv4_address: "172.18.0.22" 
@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
   cookbook-install:
     container_name: cookbook-installer
-    image: nsc3-registry.nsiontec.com:443/nsc-analytics-cookbook:hot-valor
+    image: nsc3-registry.nsiontec.com:443/nsc-analytics-cookbook:$NSC3REL
     networks:
         - nsc-network
     depends_on:
