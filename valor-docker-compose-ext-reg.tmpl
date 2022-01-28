@@ -2,8 +2,8 @@
 # This is for nsc3 version 3.4 and later
 version: "3"
 services:
-  analytics-db:
-    container_name: analytics-db
+  nsc-analytics-db:
+    container_name: nsc-analytics-db
     image: nsc3-registry.nsiontec.com:443/nsc-analytics-db:$NSC3REL
     networks:
         nsc-network:
@@ -11,8 +11,8 @@ services:
     restart: unless-stopped
     volumes:
         - analytics-postgres-volume:/var/lib/postgresql/data:rw
-  analytics-bus:
-    container_name: analytics-bus
+  nsc-analytics-bus-gpu:
+    container_name: nsc-analytics-bus-gpu
     runtime: nvidia
     image: nsc3-registry.nsiontec.com:443/nsc-analytics-bus-gpu:$NSC3REL
     environment:
@@ -35,8 +35,8 @@ services:
         - "analytics-bus"
         - "analytics-db"
     restart: unless-stopped
-  cookbook-install:
-    container_name: cookbook-installer
+  nsc-analytics-cookbook:
+    container_name: nsc-analytics-cookbook
     image: nsc3-registry.nsiontec.com:443/nsc-analytics-cookbook:$NSC3REL
     networks:
         - nsc-network
