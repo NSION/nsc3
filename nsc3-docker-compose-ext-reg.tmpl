@@ -205,6 +205,7 @@ services:
     restart: unless-stopped
 networks:
   nsc-network:
+    name: nsc-network
     driver: bridge
     ipam:
       driver: default
@@ -445,6 +446,7 @@ services:
     restart: unless-stopped
 networks:
   nsc-network:
+    name: nsc-network
     driver: bridge
     ipam:
       driver: default
