@@ -37,6 +37,13 @@ if [ ${1+"true"} ]; then
    fi
    if [ ${4+"true"} ]; then
        export NSC3REL=$4
+       if grep -q $NSC3REL nsc3-docker-compose-ext-reg.tmpl; then     
+         echo "$NSC3REL tag found from docker-compose template" 
+         RELEASETAG=$NSC3REL
+         else    
+         echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime setup template" 
+         RELEASETAG="latest"
+       fi
    fi   
 fi
 if  [ $flag == "false" ]; then
@@ -84,7 +91,7 @@ if  [ $1 == "--valor" ]; then
      mv docker-compose-valor.yml docker-compose-valor-$NSC3REL.old 2> /dev/null
   fi  
   (echo "cat <<EOF >docker-compose-valor-temp.yml";
-  cat valor-docker-compose-ext-reg.tmpl | sed -n '/'"$NSC3REL"'/,/'"$NSC3REL"'/p';
+  cat valor-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
   ) >temp.yml
   . temp.yml 2> /dev/null
   cat docker-compose-valor-temp.yml > docker-compose-valor.yml;
