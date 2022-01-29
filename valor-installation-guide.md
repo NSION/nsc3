@@ -1,4 +1,4 @@
-# NSC3 Installation guidance
+# Valor Installation guidance
 ## Project description:
 Valor installation guides and scripts for single node server configuration
 
