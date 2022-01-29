@@ -170,7 +170,14 @@ fi
 if [ $REGION == "GCC" ]; then 
      wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=ra&st=2021-04-25T15:03:13Z&se=2023-01-07T00:03:13Z&sv=2020-02-10&sr=b&sig=nvfmJOdn4XG2BV2CEncNXQuEnscJ2lfmtJeQZellHwM%3D"
 fi     
-
+# Check values
+if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
+   echo "$NSC3REL tag found from docker-compose template" 
+   RELEASETAG=$NSC3REL
+   else    
+   echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime parameters configuration" 
+   RELEASETAG="latest"
+fi
 # Move old files
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
 # Remove old and create new env file
