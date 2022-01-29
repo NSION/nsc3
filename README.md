@@ -109,7 +109,7 @@ As example Ubuntu:
 ##### Interactive installation mode: installation dialog with example values  
 
     cd $HOME/nsc3
-    sudo ./nsc3-install.sh  
+    ./nsc3-install.sh  
     
 
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
