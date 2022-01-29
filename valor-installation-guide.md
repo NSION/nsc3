@@ -13,7 +13,7 @@ Valor installation guides and scripts for single node server configuration
 - valor-upgrade.sh -> Script for Valor upgrade
 - valor-docker-compose-ext-reg.tmpl -> Docker Compose template for Valor
 
-## Prerequisites for NSC3 installation:
+## Prerequisites for Valor installation:
 - Minimum HW configuration: 8 CPU cores with GPU, 32 GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
 - Linux operating system, Ubuntu 20.04 LTS as reference.
 - The computer or virtual machine is allocated for NSC3 use only.
@@ -26,22 +26,63 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ## NSC3 backend installation guidance for single node via public NSION repository:
 ### Default file system locations:
 
-- NSC3 Installation folder $HOME/nsc3, However this location is configurable. Instruction are referring for $HOME/nsc3 folder. 
+- NSC3-Valor Installation folder $HOME/nsc3, However this location is configurable. Instruction are referring for $HOME/nsc3 folder. 
 - Docker content folder is /var/lib/docker
 - Valor RDB content folder is /var/lib/docker/volumes/analytics-postgres-volume
 - NSC3 logs files folder is $HOME/nsc3/logs
 
 
-### NSC3 installation:
-#### Install Docker:
-Please follow the latest installation instructions by Docker community https://docs.docker.com/engine/install/ 
+## Valor installation:
+### Install Nvidia container runtime:
+Please follow the latest installation instructions by Nvidia community https://github.com/NVIDIA/nvidia-container-runtime
 As example Ubuntu:
 
-    sudo apt-get update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io
+1. Install the repository for your distribution by following the instructions [here](http://nvidia.github.io/nvidia-container-runtime/).
+2. Install the `nvidia-container-runtime` package:
+```
+sudo apt-get install nvidia-container-runtime
+```
 
+### Docker Engine setup
+
+**Do not follow this section if you installed the `nvidia-docker2` package, it already registers the runtime.**
+
+To register the `nvidia` runtime, use the method below that is best suited to your environment.
+You might need to merge the new argument with your existing configuration.
+
+#### Systemd drop-in file
+```bash
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo tee /etc/systemd/system/docker.service.d/override.conf <<EOF
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd --host=fd:// --add-runtime=nvidia=/usr/bin/nvidia-container-runtime
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+#### Daemon configuration file
+```bash
+sudo tee /etc/docker/daemon.json <<EOF
+{
+    "runtimes": {
+        "nvidia": {
+            "path": "/usr/bin/nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    }
+}
+EOF
+sudo pkill -SIGHUP dockerd
+```
+
+You can optionally reconfigure the default runtime by adding the following to `/etc/docker/daemon.json`:
+```
+"default-runtime": "nvidia"
+```
     
-#### Download latest version of Valor installation scripts:
+### Download latest version of Valor installation scripts:
 
     cd $HOME/nsc3
     chmod u-x *.sh
@@ -49,9 +90,8 @@ As example Ubuntu:
     chmod u+x *.sh
     
 
-
-#### Install NSC3
-##### Silent installation mode: 
+### Install Valor
+#### Silent installation mode: 
 
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     NSC3 installer usage:
@@ -68,7 +108,7 @@ As example Ubuntu:
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-##### Interactive installation mode: installation dialog with example values  
+#### Interactive installation mode: installation dialog with example values  
 
     cd $HOME/nsc3
     sudo ./nsc3-install.sh  
@@ -89,7 +129,7 @@ As example Ubuntu:
     ++++++++++++++++++++++++++++++++++++++++
     
 #### Verify installation
-Check docker containers. NSC3 + Valor conteiner both are up and running
+Check docker containers. NSC3 + Valor container both are up and running
 
     sudo docker ps
     sudo docker stats
@@ -159,7 +199,7 @@ Container status:
 
 #### Valor services are not working properly:
 
-Try to restart NSC3 services:
+Try to restart Valor services:
 
     cd $HOME/nsc3
     sudo docker-compose -f docker-compose-valor.yml up -d 
