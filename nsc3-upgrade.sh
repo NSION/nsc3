@@ -28,13 +28,6 @@ if [ ${1+"true"} ]; then
    fi
    if [ ${2+"true"} ]; then
        export NSC3REL=$2
-       if grep -q $NSC3REL nsc3-docker-compose-ext-reg.tmpl; then     
-         echo "$NSC3REL tag found from docker-compose template" 
-         RELEASETAG=$NSC3REL
-         else    
-         echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime parameters configuration" 
-         RELEASETAG="latest"
-       fi
    fi
 fi
 if [ "$silentmode" = false ]; then
