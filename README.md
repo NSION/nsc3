@@ -91,15 +91,15 @@ As example Ubuntu:
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     NSC3 installer usage:
 
-    sudo ./nsc3-install.sh --help 	  	'help text'
-    sudo ./nsc3-install.sh --silent     'installation with command line parameters'
-    sudo ./nsc3-install.sh 		  		'interactive installation mode'
+    ./nsc3-install.sh --help 	  	'help text'
+    ./nsc3-install.sh --silent     'installation with command line parameters'
+    ./nsc3-install.sh 		  		'interactive installation mode'
 
     CLI parameters usage:
-    sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag>
+    ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag>
 
     CLI parameters example:
-    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.3
+    ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.3
 
     Regional identifiers of MAP selection:
     EU=Europe, NA=North America, AUS=Australia, GCC=GCC states
