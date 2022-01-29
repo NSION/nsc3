@@ -22,7 +22,7 @@ services:
         nsc-network:
             ipv4_address: "172.18.0.21"
     depends_on:
-        - "analytics-db"
+        - "nsc-analytics-db"
     restart: unless-stopped
   nsc-analytics-tasker-service:
     container_name: nsc-analytics-tasker-service
