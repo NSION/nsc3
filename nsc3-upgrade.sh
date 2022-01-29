@@ -50,6 +50,14 @@ if [ "$silentmode" = false ]; then
     export NSC3REL=$REL
 fi
 cd $NSCHOME
+# Check values
+if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
+   echo "$NSC3REL tag found from docker-compose template" 
+   RELEASETAG=$NSC3REL
+   else    
+   echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime parameters configuration" 
+   RELEASETAG="latest"
+fi
 # Move old files
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
 (echo "cat <<EOF >docker-compose-temp.yml";
