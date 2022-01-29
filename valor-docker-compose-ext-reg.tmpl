@@ -1,20 +1,19 @@
-### ReleaseTagStart latest 
+### ReleaseTagStart latest
 # This is for nsc3 version 3.4 and later
 version: "2.2"
 services:
   nsc-analytics-db:
     container_name: nsc-analytics-db
-    image: ${NSC3REG}/nsc-analytics-db:${NSC3REL}
+    image: $NSC3REG/nsc-analytics-db:$NSC3REL
     networks:
         nsc-network:
             ipv4_address: "172.18.0.23"
     restart: unless-stopped
     volumes:
         - analytics-postgres-volume:/var/lib/postgresql/data:rw
-  nsc-analytics-bus:
-    container_name: nsc-analytics-bus
-    #runtime: nvidia
-    image: ${NSC3REG}/nsc-analytics-bus-${REDISAI_DEVICE}:${NSC3REL}
+  nsc-analytics-bus-gpu:
+    container_name: nsc-analytics-bus-gpu
+    image: $NSC3REG/nsc-analytics-bus-gpu:$NSC3REL
     environment:
         - PYTHONUNBUFFERED=1
         - NVIDIA_VISIBLE_DEVICES=all
@@ -23,33 +22,19 @@ services:
         nsc-network:
             ipv4_address: "172.18.0.21"
     depends_on:
-        - "nsc-analytics-db"
+        - "analytics-db"
     restart: unless-stopped
-  nsc-cookbook-installer:
-    container_name: nsc-cookbook-installer
-    image:  ${NSC3REG}/nsc-analytics-cookbook:${NSC3REL}
-    networks:
-        nsc-network:
-    depends_on:
-        - "nsc-analytics-bus"
-        - "nsc-analytics-db"
-    environment:
-        - MODELRUINNER_DEVICE=${REDISAI_DEVICE}
-        - RECIPE_NAMES=ocr,yolo,droneyolo
   nsc-analytics-tasker-service:
     container_name: nsc-analytics-tasker-service
-    image: ${NSC3REG}/nsc-analytics-tasker-service:${NSC3REL}
+    image: $NSC3REG/nsc-analytics-tasker-service:$NSC3REL
     networks:
         nsc-network:
             ipv4_address: "172.18.0.22" 
-    depends_on:
-        - "nsc-analytics-bus"
-        - "nsc-analytics-db"
 volumes:
   analytics-postgres-volume:
     name: analytics-postgres-volume
 networks:
   nsc-network:
-    external: true
- 
-### ReleaseTagEnd latest
+    external:
+      name: "nsc-network"
+ ### ReleaseTagEnd latest
