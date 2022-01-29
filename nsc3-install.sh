@@ -187,7 +187,7 @@ if [ -f "docker-compose.yml" ]; then
    mv docker-compose.yml docker-compose.old 2> /dev/null
 fi
 (echo "cat <<EOF >docker-compose-temp.yml";
-cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$NSC3REL"'/,/'"$NSC3REL"'/p';
+cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
 ) >temp.yml
 . temp.yml 2> /dev/null
 cat docker-compose-temp.yml > docker-compose.yml;
