@@ -39,8 +39,9 @@ if [ ${1+"true"} ]; then
        export NSC3REL=$4
    fi   
 fi
-if  [ $flag == false ]; then
+if  [ $flag == "false" ]; then
    echo "usage ./nsc3-conf-tool.sh --help"
+   exit 0
 fi
 
 if  [ $1 == "--nsc3" ]; then
