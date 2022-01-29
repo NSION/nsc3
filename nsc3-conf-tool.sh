@@ -37,19 +37,20 @@ if [ ${1+"true"} ]; then
    fi
    if [ ${4+"true"} ]; then
        export NSC3REL=$4
-         # Check values
-         if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
-            echo "$NSC3REL tag found from docker-compose template" 
-            RELEASETAG=$NSC3REL
-            else    
-            echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime parameters configuration" 
-            RELEASETAG="latest"
-         fi
    fi   
 fi
 if  [ $flag == "false" ]; then
    echo "usage ./nsc3-conf-tool.sh --help"
    exit 0
+fi
+
+# Check values
+if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
+   echo "$NSC3REL tag found from docker-compose template" 
+   RELEASETAG=$NSC3REL
+   else    
+   echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime parameters configuration" 
+   RELEASETAG="latest"
 fi
 
 if  [ $1 == "--nsc3" ]; then
@@ -64,7 +65,7 @@ if  [ $1 == "--nsc3" ]; then
      mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
   fi
   (echo "cat <<EOF >docker-compose-temp.yml";
-  cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$NSC3REL"'/,/'"$NSC3REL"'/p';
+  cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
   ) >temp.yml
   . temp.yml 2> /dev/null
   cat docker-compose-temp.yml > docker-compose.yml;
