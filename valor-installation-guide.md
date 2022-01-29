@@ -34,8 +34,10 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
 ## Valor installation:
 ### Install Nvidia container runtime:
-Please follow the latest installation instructions by Nvidia community https://github.com/NVIDIA/nvidia-container-runtime
+Please follow the latest installation instructions by [Nvidia community](https://github.com/NVIDIA/nvidia-container-runtime).
+
 As example Ubuntu:
+
 
 1. Install the repository for your distribution by following the instructions [here](http://nvidia.github.io/nvidia-container-runtime/).
 2. Install the `nvidia-container-runtime` package:
