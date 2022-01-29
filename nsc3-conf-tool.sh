@@ -47,10 +47,10 @@ fi
 # Check values
 if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
    echo "$NSC3REL tag found from docker-compose template" 
-   RELEASETAG=$NSC3REL
+   export RELEASETAG=$NSC3REL
    else    
    echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime parameters configuration" 
-   RELEASETAG="latest"
+   export RELEASETAG="latest"
 fi
 
 if  [ $1 == "--nsc3" ]; then
