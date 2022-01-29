@@ -172,7 +172,7 @@ Grant execute rights for the upgrade script:
     
 Start upgrade process:
 
-    sudo ./nsc3-upgrade.sh
+    ./nsc3-upgrade.sh
     
 Note that release tag format is 
     
