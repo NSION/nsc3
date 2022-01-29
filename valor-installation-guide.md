@@ -98,22 +98,22 @@ You can optionally reconfigure the default runtime by adding the following to `/
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     NSC3 installer usage:
 
-    sudo ./valor-install.sh --help 	  	'help text'
-    sudo ./valor-install.sh --silent     'installation with command line parameters'
-    sudo ./valor-install.sh 		  		'interactive installation mode'
+    ./valor-install.sh --help 	  	'help text'
+    ./valor-install.sh --silent     'installation with command line parameters'
+    ./valor-install.sh 		  		'interactive installation mode'
 
     CLI parameters usage:
-    sudo ./valor-install.sh --silent <NSC3 release tag>
+    ./valor-install.sh --silent <NSC3 release tag>
 
     CLI parameters example:
-    sudo ./valor-install.sh --silent release-3.4
+    ./valor-install.sh --silent release-3.4
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 #### Interactive installation mode: installation dialog with example values  
 
     cd $HOME/nsc3
-    sudo ./nsc3-install.sh  
+    ./nsc3-install.sh  
     
 
     ++++++++++++++++++++++++++++++++++++++++
@@ -162,7 +162,7 @@ Grant execute rights for the upgrade script:
     
 Start upgrade process:
 
-    sudo ./valor-upgrade.sh
+    ./valor-upgrade.sh
     
 Note that release tag format is 
     
