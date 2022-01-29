@@ -65,7 +65,8 @@ if [ "$silentmode" = false ]; then
     read REL
     export NSC3REL=$REL
 fi
-
+# Check values
+if [ -d $NSCHOME ]; then echo "$NSCHOME Installation folder found"; else echo "$NSCHOME installation folder is missing. Exit"; exit 0; fi
 # Create dictories
 if [ ! -d $NSCHOME/logs ]; then 
    mkdir $NSCHOME/logs 2> /dev/null 
@@ -79,10 +80,12 @@ fi
 
 if [ -f "$SSLFOLDER/privkey.pem" ]; then
    cp $SSLFOLDER/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
+   else echo "SSLFOLDER/privkey.pem is missing"
 fi
 
 if [ -f "$SSLFOLDER/fullchain.pem" ]; then
    cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
+   else echo "SSLFOLDER/fullchain.pem is missing"
 fi
 if [ "$silentmode" = false ]; then
    echo "Map files options : "
