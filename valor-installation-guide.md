@@ -40,7 +40,32 @@ As example Ubuntu:
 
 
 1. Install the repository for your distribution by following the instructions [here](http://nvidia.github.io/nvidia-container-runtime/).
-2. Install the `nvidia-container-runtime` package:
+
+Debian-based distributions:
+
+```
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | \
+  sudo apt-key add -
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+```
+```
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | \
+  sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+```
+```
+sudo apt-get update
+```
+For pre-releases, you need to enable the experimental repos of all dependencies:
+```
+sudo sed -i -e '/experimental/ s/^#//g' /etc/apt/sources.list.d/nvidia-container-runtime.list
+sudo apt-get update
+```
+To later disable the experimental repos of all dependencies, you can run:
+```
+sudo sed -i -e '/experimental/ s/^/#/g' /etc/apt/sources.list.d/nvidia-container-runtime.list
+sudo apt-get update
+```
+3. Install the `nvidia-container-runtime` package:
 ```
 sudo apt-get install nvidia-container-runtime
 ```
