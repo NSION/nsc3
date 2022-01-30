@@ -36,12 +36,12 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ### Install Nvidia container runtime:
 Please follow the latest installation instructions by [Nvidia community](https://github.com/NVIDIA/nvidia-container-runtime).
 
-As example Ubuntu:
+### As example Ubuntu:
 
 
 Install the repository for your distribution by following the instructions [here](http://nvidia.github.io/nvidia-container-runtime/).
 
-Debian-based distributions:
+#### Debian-based distributions:
 
 ```
 curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | \
@@ -63,11 +63,6 @@ sudo apt-get install nvidia-container-runtime
 ```
 
 ### Docker Engine setup
-
-**Do not follow this section if you installed the `nvidia-docker2` package, it already registers the runtime.**
-
-To register the `nvidia` runtime, use the method below that is best suited to your environment.
-You might need to merge the new argument with your existing configuration.
 
 #### Systemd drop-in file
 ```
