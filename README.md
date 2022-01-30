@@ -48,38 +48,43 @@ Please follow the latest installation instructions by Docker community https://d
 As example Ubuntu:
 
 ##### Update the apt package index and install packages to allow apt to use a repository over HTTPS:
+```
+sudo apt-get update
+```
+```bash
+sudo apt-get install \
+ca-certificates \
+curl \
+gnupg \
+lsb-release
+```
 
-    sudo apt-get update
-
-    sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-    
 ##### Add Docker’s official GPG key:
-
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```    
 ##### Use the following command to set up the stable repository
-
-    echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
+```bash
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
 ##### Install Docker Engine
-
-    sudo apt-get update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+sudo apt-get update
+```
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
 
 #### Install git:
 
 - Please follow the latest installation instructions by Git community https://git-scm.com/download/linux
 
 As example Ubuntu:
-
-    sudo apt install git
-
+```
+sudo apt install git
+```
 #### Setup installation folder:
 
 - Copy the SSL cert files privkey.pem and fullchain.pem to your home folder. As this example $HOME 
@@ -132,10 +137,10 @@ As example Ubuntu:
 
 
 ##### Interactive installation mode: installation dialog with example values  
-
-    cd $HOME/nsc3
-    ./nsc3-install.sh  
-    
+```
+cd $HOME/nsc3
+./nsc3-install.sh  
+```    
 
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
     /home/ubuntu/nsc3      
@@ -171,9 +176,9 @@ Check Web services, Expected result if ok, "HTTP/2 200"
     curl -I --http2 -s https://$PUBLICIP
     
 Check SSL Certification status, Expected result when ok, "SSL certificate verify ok"
-
-    curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
-    
+```
+curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
+```    
 #### Post installation steps
 
 Login to the NSC3 web app as admin
@@ -263,8 +268,10 @@ Expected result if ok, "SSL certificate verify ok"
 
     cd $HOME/nsc3
     source nsc-host.env
-    curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
 
+```
+curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
+```
 Check that the HTTPS port is listening:
 
     ss -lntu | grep ':443'
