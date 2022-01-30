@@ -46,6 +46,8 @@ Debian-based distributions:
 ```
 curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | \
   sudo apt-key add -
+```
+```
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 ```
 ```
@@ -58,11 +60,15 @@ sudo apt-get update
 For pre-releases, you need to enable the experimental repos of all dependencies:
 ```
 sudo sed -i -e '/experimental/ s/^#//g' /etc/apt/sources.list.d/nvidia-container-runtime.list
+```
+```
 sudo apt-get update
 ```
 To later disable the experimental repos of all dependencies, you can run:
 ```
 sudo sed -i -e '/experimental/ s/^/#/g' /etc/apt/sources.list.d/nvidia-container-runtime.list
+```
+```
 sudo apt-get update
 ```
 Install the `nvidia-container-runtime` package:
