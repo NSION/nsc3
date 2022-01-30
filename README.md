@@ -7,15 +7,15 @@ NSC3 backend installation guides and scripts for single node server configuratio
     Release Tag: release-3.3
 
 ## Project structure:
-
-- README.md -> Instructions
-- nsc3-install.sh -> Script for NSC3 installation
-- nsc3-upgrade.sh -> Script for NSC3 upgrade
-- nsc3-docker-compose-ext-reg.tmpl -> Docker Compose template for NSC3
-- valor-installation-guide.md -> Valor installation guidance 
-- valor-install.sh -> Script for Valor installation
-- valor-upgrade.sh -> Script for upgradeValor 
-- valor-docker-compose-ext-reg.tmpl -> Docker Compose template for Valor
+- README.md: General guidance for this repository. NSC3 installation, upgrade and maintenance instructions.
+- nsc3-install.sh: Script for NSC3 installation
+- nsc3-upgrade.sh: Script for NSC3 upgrade
+- nsc3-docker-compose-ext-reg.tmpl: Docker Compose template for NSC3
+- valor-installation-guide.md: Valor installation guidance 
+- valor-install.sh: Script for Valor installation
+- valor-upgrade.sh: Script for upgradeValor 
+- valor-docker-compose-ext-reg.tmpl: Docker Compose template for Valor
+- nsc3-conf-tool.sh: Shell Script for NSC3 and Valor runtime configuration. Designed for Development pipe usage where configuration is pre-set outside of targeted server.
 
 ## Prerequisites for NSC3 installation:
 - Minimum HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
