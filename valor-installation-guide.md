@@ -70,14 +70,20 @@ To register the `nvidia` runtime, use the method below that is best suited to yo
 You might need to merge the new argument with your existing configuration.
 
 #### Systemd drop-in file
-```bash
+```
 sudo mkdir -p /etc/systemd/system/docker.service.d
+```
+```bash
 sudo tee /etc/systemd/system/docker.service.d/override.conf <<EOF
 [Service]
 ExecStart=
 ExecStart=/usr/bin/dockerd --host=fd:// --add-runtime=nvidia=/usr/bin/nvidia-container-runtime
 EOF
+```
+```
 sudo systemctl daemon-reload
+```
+```
 sudo systemctl restart docker
 ```
 
@@ -93,13 +99,11 @@ sudo tee /etc/docker/daemon.json <<EOF
     }
 }
 EOF
+```
+```
 sudo pkill -SIGHUP dockerd
 ```
 
-You can optionally reconfigure the default runtime by adding the following to `/etc/docker/daemon.json`:
-```
-"default-runtime": "nvidia"
-```
     
 ### Download latest version of Valor installation scripts:
 
