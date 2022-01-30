@@ -39,7 +39,7 @@ Please follow the latest installation instructions by [Nvidia community](https:/
 As example Ubuntu:
 
 
-1. Install the repository for your distribution by following the instructions [here](http://nvidia.github.io/nvidia-container-runtime/).
+Install the repository for your distribution by following the instructions [here](http://nvidia.github.io/nvidia-container-runtime/).
 
 Debian-based distributions:
 
@@ -65,7 +65,7 @@ To later disable the experimental repos of all dependencies, you can run:
 sudo sed -i -e '/experimental/ s/^/#/g' /etc/apt/sources.list.d/nvidia-container-runtime.list
 sudo apt-get update
 ```
-3. Install the `nvidia-container-runtime` package:
+Install the `nvidia-container-runtime` package:
 ```
 sudo apt-get install nvidia-container-runtime
 ```
