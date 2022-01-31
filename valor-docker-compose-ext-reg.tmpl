@@ -11,15 +11,17 @@ services:
     restart: unless-stopped
     volumes:
         - analytics-postgres-volume:/var/lib/postgresql/data:rw
-  nsc-analytics-cookbook:
-    container_name: nsc-analytics-cookbook
-    image: ${NSC3REG}/nsc-analytics-cookbook:${NSC3REL}
+  nsc-cookbook-installer:
+    container_name: nsc-cookbook-installer
+    image: $NSC3REG/nsc-analytics-cookbook:$NSC3REL
     networks:
-         nsc-network:
-            ipv4_address: "172.18.0.30"
+        nsc-network:
+            ipv4_address: "172.18.0.24"
     environment:
-        - RECIPE_NAMES=yolo,droneyolo,ocr
-        - MODELRUNNER_DEVICE=${REDISAI_DEVICE}
+        - MODELRUINNER_DEVICE=gpu
+        - RECIPE_NAMES=yolo
+    depends_on:
+        - "nsc-analytics-bus-gpu"
   nsc-analytics-bus-gpu:
     container_name: nsc-analytics-bus-gpu
     image: $NSC3REG/nsc-analytics-bus-gpu:$NSC3REL
@@ -32,6 +34,8 @@ services:
             ipv4_address: "172.18.0.21"
     depends_on:
         - "nsc-analytics-db"
+    volumes:
+        - analytics-bus-volume:/data:rw
     restart: unless-stopped
   nsc-analytics-tasker-service:
     container_name: nsc-analytics-tasker-service
@@ -42,6 +46,8 @@ services:
 volumes:
   analytics-postgres-volume:
     name: analytics-postgres-volume
+  analytics-bus-volume:
+    name: analytics-bus-volume
 networks:
   nsc-network:
     external:
