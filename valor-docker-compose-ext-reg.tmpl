@@ -11,6 +11,15 @@ services:
     restart: unless-stopped
     volumes:
         - analytics-postgres-volume:/var/lib/postgresql/data:rw
+  nsc-analytics-cookbook:
+    container_name: nsc-analytics-cookbook
+    image: ${NSC3REG}/nsc-analytics-cookbook:${NSC3REL}
+    networks:
+         nsc-network:
+            ipv4_address: "172.18.0.30"
+    environment:
+        - RECIPE_NAMES=yolo,droneyolo,ocr
+        - MODELRUNNER_DEVICE=${REDISAI_DEVICE}
   nsc-analytics-bus-gpu:
     container_name: nsc-analytics-bus-gpu
     image: $NSC3REG/nsc-analytics-bus-gpu:$NSC3REL
