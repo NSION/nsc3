@@ -61,6 +61,8 @@ services:
         ipv4_address: "172.18.0.5"
     restart: unless-stopped
     working_dir: /root
+    volumes:
+      - /dev/urandom:/dev/random:rw
   nsc-stream-in-service:
     container_name: nsc-stream-in-service
     image: $NSC3REG/nsc-stream-in-service:$NSC3REL
@@ -94,6 +96,8 @@ services:
         ipv4_address: "172.18.0.9"
     restart: unless-stopped
     working_dir: /root
+    volumes:
+      - /dev/urandom:/dev/random:rw
   nsc-playback-service:
     container_name: nsc-playback-service
     image: $NSC3REG/nsc-playback-service:$NSC3REL
