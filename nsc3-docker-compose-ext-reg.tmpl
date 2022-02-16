@@ -158,7 +158,7 @@ services:
     restart: unless-stopped
     volumes:
       - $NSCHOME/mapdata:/data
-    command: ["-p", "80", "-u", "https://$PUBLICIP/mapserver/"]
+    command: ["-u", "https://$PUBLICIP/mapserver/"]
     working_dir: /data
   nsc-gateway:
     container_name: nsc-gateway
