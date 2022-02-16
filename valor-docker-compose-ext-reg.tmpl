@@ -13,7 +13,7 @@ services:
         - analytics-postgres-volume:/var/lib/postgresql/data:rw
   nsc-cookbook-installer:
     container_name: nsc-cookbook-installer
-    image: registrynsion.azurecr.io/nsc-analytics-cookbook:latest
+    image: registrynsion.azurecr.io/nsc-analytics-cookbook:$NSC3REL
     networks:
         nsc-network:
             ipv4_address: "172.18.0.24"
