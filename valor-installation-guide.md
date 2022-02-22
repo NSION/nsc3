@@ -1,6 +1,6 @@
 # Valor Installation guidance
 ## Project description:
-Valor installation guides and scripts for single node server configuration
+Valor installation guidance and scripts for single node server configuration
 
 29th of January 2022: Release tag latest support is available
 
@@ -31,8 +31,50 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 - Valor RDB content folder is /var/lib/docker/volumes/analytics-postgres-volume
 - NSC3 logs files folder is $HOME/nsc3/logs
 
+## Install GPU drivers to host VM
+Ubuntu 20.04 LTS as reference:
 
-## Valor installation:
+To install the NVIDIA Cuda drivers for Ubuntu 20.04 LTS
+
+1. Update your package cache and get the package updates for your instance.
+```
+sudo apt-get update -y
+```    
+2. Install Nvidia Cuda toolkit 
+```
+sudo apt install nvidia-cuda-toolkit
+```
+3. Check your CUDA version:
+```
+nvcc --version
+```    
+Expected output:
+
+	nvcc: NVIDIA (R) Cuda compiler driver
+	Copyright (c) 2005-2019 NVIDIA Corporation
+	Built on Sun_Jul_28_19:07:16_PDT_2019
+	Cuda compilation tools, release 10.1, V10.1.243
+
+
+4. Setup Nvida CUDA repository. Execute the following commands to enable CUDA repository.
+
+```
+sudo wget -O /etc/apt/preferences.d/cuda-repository-pin-600 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
+```
+
+5. Install Nvidia Cuda via apt repository:
+```
+sudo apt update
+sudo apt install cuda
+```
+
+6. Set your path to point to CUDA binaries:
+```
+echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> ~/.bashrc
+```
+
 ### Install Nvidia container runtime:
 Please follow the latest installation instructions by [Nvidia community](https://github.com/NVIDIA/nvidia-container-runtime).
 
@@ -44,15 +86,13 @@ Install the repository for your distribution by following the instructions [here
 #### Debian-based distributions:
 
 ```
-curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | \
-  sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey |   sudo apt-key add -
 ```
 ```
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 ```
 ```
-curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | \
-  sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list |   sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
 ```
 ```
 sudo apt-get update
@@ -99,7 +139,26 @@ EOF
 sudo pkill -SIGHUP dockerd
 ```
 
-    
+### Verify NVIDIA driver installation:
+
+```
+/usr/bin/nvidia-container-cli info
+```
+
+Expected output (as example):
+
+    NVRM version:   510.47.03
+    CUDA version:   11.6
+
+    Device Index:   0
+    Device Minor:   0
+    Model:          Tesla T4
+    Brand:          Unknown
+    GPU UUID:       GPU-d4eb615d-8f1e-4731-6b80-73bc2c391073
+    Bus Location:   00000000:00:1e.0
+    Architecture:   7.5
+
+## Valor installation:    
 ### Download latest version of Valor installation scripts:
 
     cd $HOME/nsc3
