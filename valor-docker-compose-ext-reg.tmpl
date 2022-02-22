@@ -34,7 +34,7 @@ services:
         nsc-network:
             ipv4_address: "172.18.0.24"
     environment:
-        - MODELRUNNER_DEVICE=gpu
+        - MODELRUNNER_DEVICE=GPU
         - RECIPE_NAMES=yolo
     depends_on:
         - "nsc-analytics-bus-gpu"
