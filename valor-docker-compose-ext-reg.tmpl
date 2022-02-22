@@ -14,6 +14,7 @@ services:
   nsc-analytics-bus-gpu:
     container_name: nsc-analytics-bus-gpu
     image: $NSC3REG/nsc-analytics-bus-gpu:$NSC3REL
+    runtime: nvidia
     environment:
         - PYTHONUNBUFFERED=1
         - NVIDIA_VISIBLE_DEVICES=all
@@ -33,7 +34,7 @@ services:
         nsc-network:
             ipv4_address: "172.18.0.24"
     environment:
-        - MODELRUINNER_DEVICE=gpu
+        - MODELRUNNER_DEVICE=gpu
         - RECIPE_NAMES=yolo
     depends_on:
         - "nsc-analytics-bus-gpu"
