@@ -18,16 +18,16 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - nsc3-conf-tool.sh: Shell Script for NSC3 and Valor runtime configuration. Designed for Development pipe usage where configuration is pre-set outside of targeted server.
 
 ## Prerequisites for NSC3 installation:
-- Minimum HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
-- Linux operating system, Ubuntu 20.04 LTS as reference.
-- The computer or virtual machine is allocated for NSC3 use only.
-- Internet access 
-- Following TCP/IP4 ports are open from network to server: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific ports (25204, 25205, 25206)
-- SSL certifications for the service domain. Human readable (PEM) format. A private key file named as privkey.pem. A full chained certification file named as fullchain.pem
-- Server domain name is registered to DNS services. 
-- Access account to NSION container registry is available.
-- Linux account with sudo privileges for operating system.
-- Following 3rd party apps are needed: git, wget and curl. Most of them are by default included as part of a linux basic setup. However please ensure beforehand availability on your local linux setup. 
+- [] Minimum HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
+- [] Linux operating system, Ubuntu 20.04 LTS as reference.
+- [] The computer or virtual machine is allocated for NSC3 use only.
+- [] Internet access is available
+- [] Following TCP/IP4 ports are open from network to server: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific ports (25204, 25205, 25206)
+- [] SSL certifications for the service domain. Human readable (PEM) format. A private key file named as privkey.pem. A full chained certification file named as fullchain.pem
+- [] Server domain name is registered to DNS services. 
+- [] Access account to NSION container registry is available.
+- [] Linux account with sudo privileges for operating system.
+- [] Following 3rd party apps are needed: git, wget and curl. Most of them are by default included as part of a linux basic setup. However please ensure beforehand availability on your local linux setup. 
 
 NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
@@ -163,6 +163,12 @@ cd $HOME/nsc3
     https://foo.nsion.io
     ++++++++++++++++++++++++++++++++++++++++
     
+### Post installation steps
+
+- [] Verify installation
+- [] Insert NSC3 license
+- [] Configure NSC3 organisation
+
 #### Verify installation
 Check docker containers, Totally 15 containers
 
@@ -179,7 +185,7 @@ Check SSL Certification status, Expected result when ok, "SSL certificate verify
 ```
 curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
 ```    
-#### Post installation steps
+#### Insert NSC3 license
 
 Login to the NSC3 web app as admin
 - Change the default password rightaway. Right-Top corner on UI / Change password
@@ -187,6 +193,10 @@ Login to the NSC3 web app as admin
 - Send the instance key file via NSION Jira Service desk support portal.
 - NSION will prepare and return a corresponding license key file back. No need to left UI open while waiting
 - Insert license key via NSC3 admin/license UI. Licenses Tab / Server license / Set new NSC3 license / Insert license key (download from local computer via Web app)
+
+#### Configure NSC organisation
+
+NSC3 Admin documentation: https://www.nsiontec.com/user-guide-webapp-admin/ 
 
 ### Upgrade NSC3
 
