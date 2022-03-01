@@ -109,11 +109,21 @@ sudo apt install git
         
 #### Install Docker-compose:
 
-Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/. Note that python3 is required. Ubuntu based linux packaging tool will install it automatically if missing.
+Please follow the latest installation instructions by Docker community https://docs.docker.com/compose/install/.
 As example Ubuntu:
 
-    sudo apt-get update
-    sudo apt-get install docker-compose
+Remove old docker-compose:
+
+    sudo apt-get remove docker-compose
+    
+Install docker-compose:
+
+	VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
+
+    DESTINATION=/usr/local/bin/docker-compose
+    sudo curl -L https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-$(uname -s)-$(uname -m) -o $DESTINATION
+    sudo chmod 755 $DESTINATION
+
 
 #### Install NSC3
 ##### Silent installation mode: 
