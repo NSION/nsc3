@@ -23,11 +23,11 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - [x] The computer or virtual machine is allocated for NSC3 use only.
 - [x] Internet access is available
 - [x] Following TCP/IP4 ports are open from network to server: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific ports (25204, 25205, 25206)
-- [ ] SSL certifications for the service domain. Human readable (PEM) format. A private key file named as privkey.pem. A full chained certification file named as fullchain.pem
-- [ ] Server domain name is registered to DNS services. 
-- [ ] Access account to NSION container registry is available.
-- [ ] Linux account with sudo privileges for operating system.
-- [ ] Following 3rd party apps are needed: git, wget and curl. Most of them are by default included as part of a linux basic setup. However please ensure beforehand availability on your local linux setup. 
+- [x] SSL certifications for the service domain. Human readable (PEM) format. A private key file named as privkey.pem. A full chained certification file named as fullchain.pem
+- [x] Server domain name is registered to DNS services. 
+- [x] Access account to NSION container registry is available.
+- [x] Linux account with sudo privileges for operating system.
+- [x] Following 3rd party apps are needed: git, wget and curl. Most of them are by default included as part of a linux basic setup. However please ensure beforehand availability on your local linux setup. 
 
 NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
@@ -165,9 +165,9 @@ cd $HOME/nsc3
     
 ### Post installation steps
 
-- [ ] Verify installation
-- [ ] Insert NSC3 license
-- [ ] Configure NSC3 organisation
+- [x] Verify installation
+- [x] Insert NSC3 license
+- [x] Configure NSC3 organisation
 
 #### Verify installation
 Check docker containers, Totally 15 containers
