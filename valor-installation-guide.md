@@ -293,3 +293,38 @@ If still no access please then check ...
 - Network status
 - Disk space usage level
 - Docker status
+
+#### Check that Valor services are allocated correctly to the Docker runtime GPU resources 
+
+	docker run -it --rm --gpus all ubuntu nvidia-smi 
+	
+Expected results:
+
+	+-----------------------------------------------------------------------------+
+	| NVIDIA-SMI 510.47.03    Driver Version: 510.47.03    CUDA Version: 11.6     |
+	|-------------------------------+----------------------+----------------------+
+	| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+	| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+	|                               |                      |               MIG M. |
+	|===============================+======================+======================|
+	|   0  Tesla T4            On   | 00000000:00:1E.0 Off |                    0 |
+	| N/A   33C    P0    26W /  70W |    903MiB / 15360MiB |      0%      Default |
+	|                               |                      |                  N/A |
+	+-------------------------------+----------------------+----------------------+
+
+	+-----------------------------------------------------------------------------+
+	| Processes:                                                                  |
+	|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+	|        ID   ID                                                   Usage      |
+	|=============================================================================|
+	|    0   N/A  N/A    194341      C                                     901MiB |
+	+-----------------------------------------------------------------------------+
+	
+Identify that processes PID is pointing to the redis-server process
+
+	ps -ef | grep 194341
+	
+Example printout:
+
+	root      194341  194316  0 Feb24 ?        00:59:39 /usr/local/bin/redis-server *:6379
+
