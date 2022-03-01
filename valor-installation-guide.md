@@ -14,12 +14,12 @@ Valor installation guidance and scripts for single node server configuration
 - valor-docker-compose-ext-reg.tmpl -> Docker Compose template for Valor
 
 ## Prerequisites for Valor installation:
-- Minimum HW configuration: 8 CPU cores with GPU, 32 GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
-- Linux operating system, Ubuntu 20.04 LTS as reference.
-- The computer or virtual machine is allocated for NSC3 use only.
-- Internet access 
-- NSC3 backend is installed and Docker is attached to NSION container registry
-- Valor specific NSC3 license is required 
+- [x] Minimum HW configuration: 8 CPU cores with GPU, 32 GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
+- [x] Linux operating system, Ubuntu 20.04 LTS as reference.
+- [x] The computer or virtual machine is allocated for NSC3 use only.
+- [x] Internet access is available
+- [x] NSC3 backend is installed and Docker is attached to NSION container registry
+- [x] Valor specific NSC3 license is required 
 
 NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
@@ -204,7 +204,9 @@ Expected output (as example):
     Login to your NSC3 web app by URL address
     https://foo.nsion.io
     ++++++++++++++++++++++++++++++++++++++++
-    
+
+### Post installation steps
+
 #### Verify installation
 Check docker containers. NSC3 + Valor container both are up and running
 
@@ -221,7 +223,6 @@ Check SSL Certification status, Expected result when ok, "SSL certificate verify
 
     curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
     
-#### Post installation steps
 
 ### Upgrade NSC3
 
