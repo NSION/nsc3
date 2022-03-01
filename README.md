@@ -18,9 +18,9 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - nsc3-conf-tool.sh: Shell Script for NSC3 and Valor runtime configuration. Designed for Development pipe usage where configuration is pre-set outside of targeted server.
 
 ## Prerequisites for NSC3 installation:
-- [] Minimum HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
-- [] Linux operating system, Ubuntu 20.04 LTS as reference.
-- [] The computer or virtual machine is allocated for NSC3 use only.
+- [ ] Minimum HW configuration: 8 CPU cores, 8GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
+- [ ] Linux operating system, Ubuntu 20.04 LTS as reference.
+- [ ] The computer or virtual machine is allocated for NSC3 use only.
 - [] Internet access is available
 - [] Following TCP/IP4 ports are open from network to server: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific ports (25204, 25205, 25206)
 - [] SSL certifications for the service domain. Human readable (PEM) format. A private key file named as privkey.pem. A full chained certification file named as fullchain.pem
