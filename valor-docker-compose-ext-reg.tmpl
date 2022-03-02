@@ -27,8 +27,8 @@ services:
     restart: unless-stopped
     volumes:
         - analytics-bus-volume:/data:rw
-  nsc-cookbook-installer:
-    container_name: nsc-cookbook-installer
+  nsc-analytics-cookbook:
+    container_name: nsc-analytics-cookbook
     image: registrynsion.azurecr.io/nsc-analytics-cookbook:$NSC3REL
     networks:
         nsc-network:
@@ -83,8 +83,8 @@ services:
     restart: unless-stopped
     volumes:
         - analytics-bus-volume:/data:rw
-  nsc-cookbook-installer:
-    container_name: nsc-cookbook-installer
+  nsc-analytics-cookbook:
+    container_name: nsc-analytics-cookbook
     image: registrynsion.azurecr.io/nsc-analytics-cookbook:$NSC3REL
     networks:
         nsc-network:
