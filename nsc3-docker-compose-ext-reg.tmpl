@@ -73,6 +73,8 @@ services:
       nsc-network:
         ipv4_address: "172.18.0.6"
     restart: unless-stopped
+    environment:
+      - MEMORY=8g
     volumes:
       - /dev/urandom:/dev/random:rw
     working_dir: /root
@@ -302,6 +304,8 @@ services:
       nsc-network:
         ipv4_address: "172.18.0.6"
     restart: unless-stopped
+    environment:
+      - MEMORY=8g
     volumes:
       - /dev/urandom:/dev/random:rw
     working_dir: /root
