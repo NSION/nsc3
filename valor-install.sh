@@ -50,7 +50,7 @@ if [ "$silentmode" = false ]; then
 fi
 echo "export REDISAI_DEVICE=$REDISAI_DEVICE" >> $NSCHOME/nsc-host.env
 # Check values
-if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
+if grep -q $NSC3REL $NSCHOME/valor-docker-compose-ext-reg.tmpl; then     
    echo "$NSC3REL tag found from docker-compose template" 
    RELEASETAG=$NSC3REL
    else    
