@@ -44,7 +44,7 @@ if [ "$silentmode" = false ]; then
 fi
 cd $NSCHOME
 # Check values
-if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
+if grep -q $NSC3REL $NSCHOME/valor-docker-compose-ext-reg.tmpl; then     
    echo "$NSC3REL tag found from docker-compose template" 
    RELEASETAG=$NSC3REL
    else    
