@@ -54,6 +54,62 @@ networks:
     external:
       name: "nsc-network"
 ### ReleaseTagEnd latest
+### ReleaseTagStart rc
+# This is for nsc3 version 3.6 and later
+version: "2.3"
+services:
+  nsc-analytics-db:
+    container_name: nsc-analytics-db
+    image: $NSC3REG/nsc-analytics-db:$NSC3REL
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.23"
+    restart: unless-stopped
+    volumes:
+        - analytics-postgres-volume:/var/lib/postgresql/data:rw
+  nsc-analytics-bus-gpu:
+    container_name: nsc-analytics-bus-gpu
+    image: $NSC3REG/nsc-analytics-bus-gpu:$NSC3REL
+    runtime: nvidia
+    environment:
+        - PYTHONUNBUFFERED=1
+        - NVIDIA_VISIBLE_DEVICES=all
+        - NVIDIA_DRIVER_CAPABILITIES=all
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.21"
+    depends_on:
+        - "nsc-analytics-db"
+    restart: unless-stopped
+    volumes:
+        - analytics-bus-volume:/data:rw
+  nsc-analytics-cookbook:
+    container_name: nsc-analytics-cookbook
+    image: registrynsion.azurecr.io/nsc-analytics-cookbook:$NSC3REL
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.24"
+    environment:
+        - MODELRUNNER_DEVICE=GPU
+        - RECIPE_NAMES=yolo
+    depends_on:
+        - "nsc-analytics-bus-gpu"
+  nsc-analytics-tasker-service:
+    container_name: nsc-analytics-tasker-service
+    image: $NSC3REG/nsc-analytics-tasker-service:$NSC3REL
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.22" 
+volumes:
+  analytics-postgres-volume:
+    name: analytics-postgres-volume
+  analytics-bus-volume:
+    name: analytics-bus-volume
+networks:
+  nsc-network:
+    external:
+      name: "nsc-network"
+### ReleaseTagEnd rc
 ### ReleaseTagStart release-3.6
 # This is for nsc3 version 3.6 and later
 version: "2.3"
