@@ -18,7 +18,7 @@ Valor installation guidance and scripts for single node server configuration
 - [x] Linux operating system, Ubuntu 20.04 LTS as reference.Following instructions regarding NVIDIA drivers installation is compatible only with Ubuntu 20.04 LTS.
 - [x] The computer or virtual machine is allocated for NSC3 use only.
 - [x] Internet access is available
-- [x] NSC3 backend is installed and Docker is attached to NSION container registry
+- [x] NSC3 backend is installed and Docker is attached to NSION container registry
 - [x] Valor specific NSC3 license is required 
 
 NSC3 technical description: https://www.nsiontec.com/technical-specifications/
