@@ -2,9 +2,7 @@
 ## Project description:
 Valor installation guidance and scripts for single node server configuration
 
-29th of January 2022: Release tag latest support is available
-
-    Release Tag: latest
+    Release Tag: release-3.8
 
 ## Project structure:
 
