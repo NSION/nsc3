@@ -2,9 +2,7 @@
 ## Project description:
 NSC3 backend installation guides and scripts for single node server configuration
 
-2nd of June 2022: Release 3.6 support is available
-
-    Release Tag: release-3.6
+    Release Tag: release-3.8
 
 ## Project structure:
 - README.md: General guidance for this repository. NSC3 installation, upgrade and maintenance instructions.
