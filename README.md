@@ -152,7 +152,7 @@ cd $HOME/nsc3
 
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
     /home/ubuntu/nsc3      
-    NSC3 public hostname, e.g videoservice.nsiontec.com: 
+    NSC3 public hostname, e.g foo.nsion.io: 
     foo.nsion.io   
     Location of SSL cert files, e.g /home/nscuser: 
 	/home/ubuntu
