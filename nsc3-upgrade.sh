@@ -2,6 +2,7 @@
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
 source ./nsc-host.env
+export EXTIP='"'$(hostname -i)'"' 2> /dev/null
 silentmode=false
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
