@@ -1,54 +1,41 @@
 ### ReleaseTagStart latest
-# This is for nsc3 version 3.8 and later
+# This is for nsc3 version 3.10 and later
 version: "2.3"
 services:
-  nsc-analytics-db:
-    container_name: nsc-analytics-db
-    image: $NSC3REG/nsc-analytics-db:$NSC3REL
+  valor-postgres:
+    container_name: valor-postgres
+    image: $NSC3REG/valor-postgres:$NSC3REL
     networks:
         nsc-network:
             ipv4_address: "172.18.0.23"
     restart: unless-stopped
     volumes:
-        - analytics-postgres-volume:/var/lib/postgresql/data:rw
-  nsc-analytics-bus-gpu:
-    container_name: nsc-analytics-bus-gpu
-    image: $NSC3REG/nsc-analytics-bus-gpu:$NSC3REL
+        - valor-postgres-volume-15:/var/lib/postgresql/data:rw
+  nsc-valor-bus:
+    container_name: nsc-valor-bus
+    image: $NSC3REG/nsc-valor-bus:$NSC3REL
     runtime: nvidia
-    environment:
-        - PYTHONUNBUFFERED=1
-        - NVIDIA_VISIBLE_DEVICES=all
-        - NVIDIA_DRIVER_CAPABILITIES=all
     networks:
         nsc-network:
             ipv4_address: "172.18.0.21"
     depends_on:
-        - "nsc-analytics-db"
+        - "valor-postgres"
     restart: unless-stopped
     volumes:
-        - analytics-bus-volume:/data:rw
-  nsc-analytics-cookbook:
-    container_name: nsc-analytics-cookbook
-    image: registrynsion.azurecr.io/nsc-analytics-cookbook:$NSC3REL
-    networks:
-        nsc-network:
-            ipv4_address: "172.18.0.24"
+        - nsc-valor-bus-volume:/data:rw
+  nsc-valor-tasker-service:
+    container_name: nsc-valor-tasker-service
+    image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
     environment:
-        - MODELRUNNER_DEVICE=GPU
-        - RECIPE_NAMES=yolo
-    depends_on:
-        - "nsc-analytics-bus-gpu"
-  nsc-analytics-tasker-service:
-    container_name: nsc-analytics-tasker-service
-    image: $NSC3REG/nsc-analytics-tasker-service:$NSC3REL
+        - MEMORY="{{ java_memory_limit | default("8g") }}"
     networks:
         nsc-network:
             ipv4_address: "172.18.0.22" 
 volumes:
-  analytics-postgres-volume:
-    name: analytics-postgres-volume
-  analytics-bus-volume:
-    name: analytics-bus-volume
+  valor-postgres-volume-15:
+    name: valor-postgres-volume-15
+  nsc-valor-bus:
+    name: nsc-valor-bus
 networks:
   nsc-network:
     external:
@@ -57,53 +44,40 @@ networks:
 ### ReleaseTagStart rc
 version: "2.3"
 services:
-  nsc-analytics-db:
-    container_name: nsc-analytics-db
-    image: $NSC3REG/nsc-analytics-db:$NSC3REL
+  valor-postgres:
+    container_name: valor-postgres
+    image: $NSC3REG/valor-postgres:$NSC3REL
     networks:
         nsc-network:
             ipv4_address: "172.18.0.23"
     restart: unless-stopped
     volumes:
-        - analytics-postgres-volume:/var/lib/postgresql/data:rw
-  nsc-analytics-bus-gpu:
-    container_name: nsc-analytics-bus-gpu
-    image: $NSC3REG/nsc-analytics-bus-gpu:$NSC3REL
+        - valor-postgres-volume-15:/var/lib/postgresql/data:rw
+  nsc-valor-bus:
+    container_name: nsc-valor-bus
+    image: $NSC3REG/nsc-valor-bus:$NSC3REL
     runtime: nvidia
-    environment:
-        - PYTHONUNBUFFERED=1
-        - NVIDIA_VISIBLE_DEVICES=all
-        - NVIDIA_DRIVER_CAPABILITIES=all
     networks:
         nsc-network:
             ipv4_address: "172.18.0.21"
     depends_on:
-        - "nsc-analytics-db"
+        - "valor-postgres"
     restart: unless-stopped
     volumes:
-        - analytics-bus-volume:/data:rw
-  nsc-analytics-cookbook:
-    container_name: nsc-analytics-cookbook
-    image: registrynsion.azurecr.io/nsc-analytics-cookbook:$NSC3REL
-    networks:
-        nsc-network:
-            ipv4_address: "172.18.0.24"
+        - nsc-valor-bus-volume:/data:rw
+  nsc-valor-tasker-service:
+    container_name: nsc-valor-tasker-service
+    image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
     environment:
-        - MODELRUNNER_DEVICE=GPU
-        - RECIPE_NAMES=yolo
-    depends_on:
-        - "nsc-analytics-bus-gpu"
-  nsc-analytics-tasker-service:
-    container_name: nsc-analytics-tasker-service
-    image: $NSC3REG/nsc-analytics-tasker-service:$NSC3REL
+        - MEMORY="{{ java_memory_limit | default("8g") }}"
     networks:
         nsc-network:
             ipv4_address: "172.18.0.22" 
 volumes:
-  analytics-postgres-volume:
-    name: analytics-postgres-volume
-  analytics-bus-volume:
-    name: analytics-bus-volume
+  valor-postgres-volume-15:
+    name: valor-postgres-volume-15
+  nsc-valor-bus:
+    name: nsc-valor-bus
 networks:
   nsc-network:
     external:
