@@ -182,7 +182,7 @@ if [ -f "$NSCHOME/nsc-host.env" ]; then
 fi
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
-export EXTIP=$(hostname -i)
+export EXTIP='"'$(hostname -i)'"' 2> /dev/null
 #  Modify maptiles rights level
 chmod 644 $NSCHOME/mapdata/*.* 2> /dev/null
 # Create docker-compose.yml file
