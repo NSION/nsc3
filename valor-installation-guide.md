@@ -1,6 +1,7 @@
 # Valor Installation guidance
 ## Project description:
-Valor installation guidance and scripts for single node server configuration
+Valor installation guidance and scripts for single node server configuration.
+Detailed installation guidance for Ubuntu 20.04 LTS and 22.02 LTS
 
     Release Tag: release-3.8
 
@@ -13,7 +14,7 @@ Valor installation guidance and scripts for single node server configuration
 
 ## Prerequisites for Valor installation:
 - [x] Minimum HW configuration: 8 CPU cores with GPU, 32 GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
-- [x] Linux operating system, Ubuntu 20.04 LTS as reference. Following instructions regarding NVIDIA drivers installation are compatible only with Ubuntu 20.04 LTS.
+- [x] Linux operating system, Ubuntu 20.04/22.02 LTS as reference. Following instructions regarding NVIDIA drivers installation are compatible only with Ubuntu 20.04/22.04 LTS.
 - [x] The computer or virtual machine is allocated for NSC3 use only.
 - [x] Internet access is available
 - [x] NSC3 backend is installed and Docker is attached to NSION container registry
@@ -30,17 +31,17 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 - NSC3 logs files folder is $HOME/nsc3/logs
 
 ## Install GPU drivers to host VM
-Ubuntu 20.04 LTS as reference:
+Ubuntu 20.04/22.04 LTS as reference:
 
-To install the NVIDIA Cuda drivers for Ubuntu 20.04 LTS
+To install the NVIDIA Cuda drivers for Ubuntu 20.04/22.04 LTS
 
 1. Update your package cache and get the package updates for your instance.
 ```
 sudo apt-get update -y
 ```    
-2. Install Nvidia Cuda toolkit 
+2. Install Nvidia Cuda toolkit
 ```
-sudo apt install nvidia-cuda-toolkit
+sudo apt -y install nvidia-cuda-toolkit
 ```
 3. Check your CUDA version:
 ```
@@ -87,6 +88,10 @@ sudo apt install cuda
 6. Set your path to point to CUDA binaries:
 ```
 echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> ~/.bashrc
+```
+Reboot server:
+```
+sudo reboot
 ```
 
 ### Install Nvidia container runtime:
@@ -313,35 +318,38 @@ If still no access please then check ...
 
 #### Check that Valor services are allocated correctly to the Docker runtime GPU resources 
 
-	docker run -it --rm --gpus all ubuntu nvidia-smi 
+	nvidia-smi 
 	
 Expected results:
 
-	+-----------------------------------------------------------------------------+
-	| NVIDIA-SMI 510.47.03    Driver Version: 510.47.03    CUDA Version: 11.6     |
-	|-------------------------------+----------------------+----------------------+
-	| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-	| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-	|                               |                      |               MIG M. |
-	|===============================+======================+======================|
-	|   0  Tesla T4            On   | 00000000:00:1E.0 Off |                    0 |
-	| N/A   33C    P0    26W /  70W |    903MiB / 15360MiB |      0%      Default |
-	|                               |                      |                  N/A |
-	+-------------------------------+----------------------+----------------------+
+    Wed Nov 16 11:20:41 2022       
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 515.65.01    Driver Version: 515.65.01    CUDA Version: 11.7     |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |                               |                      |               MIG M. |
+    |===============================+======================+======================|
+    |   0  Tesla M60           Off  | 00000000:00:1E.0 Off |           8589934590 |
+    | N/A   36C    P0    39W / 150W |    634MiB /  7680MiB |      0%      Default |
+    |                               |                      |                  N/A |
+    +-------------------------------+----------------------+----------------------+
 
-	+-----------------------------------------------------------------------------+
-	| Processes:                                                                  |
-	|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-	|        ID   ID                                                   Usage      |
-	|=============================================================================|
-	|    0   N/A  N/A    194341      C                                     901MiB |
-	+-----------------------------------------------------------------------------+
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                                  |
+    |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+    |        ID   ID                                                   Usage      |
+    |=============================================================================|
+    |    0   N/A  N/A      1071      G   /usr/lib/xorg/Xorg                  3MiB |
+    |    0   N/A  N/A   2288852      C   ...l/bin/redis-server *:6379      627MiB |
+    +-----------------------------------------------------------------------------+
 	
 Identify that processes PID is pointing to the redis-server process
 
-	ps -ef | grep 194341
+	ps -ef | grep redis-server
 	
 Example printout:
 
 	root      194341  194316  0 Feb24 ?        00:59:39 /usr/local/bin/redis-server *:6379
+
 
