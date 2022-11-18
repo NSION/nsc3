@@ -27,7 +27,7 @@ services:
     container_name: nsc-valor-tasker-service
     image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
     environment:
-        - MEMORY="{{ java_memory_limit | default("8g") }}"
+        - MEMORY="8g"
     networks:
         nsc-network:
             ipv4_address: "172.18.0.22" 
@@ -69,7 +69,7 @@ services:
     container_name: nsc-valor-tasker-service
     image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
     environment:
-        - MEMORY="{{ java_memory_limit | default("8g") }}"
+        - MEMORY="8g"
     networks:
         nsc-network:
             ipv4_address: "172.18.0.22" 
@@ -112,7 +112,7 @@ services:
     container_name: nsc-valor-tasker-service
     image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
     environment:
-        - MEMORY="{{ java_memory_limit | default("8g") }}"
+        - MEMORY="8g"
     networks:
         nsc-network:
             ipv4_address: "172.18.0.22" 
