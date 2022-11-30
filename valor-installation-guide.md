@@ -160,13 +160,6 @@ EOF
 ```
 sudo pkill -SIGHUP dockerd
 ```
-#### Initialize the Valor database
-
-```
-sudo docker restart nsc-scheduler-service
-```
-
-Valor installation is now completed!
 
 
 ### Verify NVIDIA driver installation:
@@ -234,6 +227,16 @@ Expected output (as example):
     Login to your NSC3 web app by URL address
     https://foo.nsion.io
     ++++++++++++++++++++++++++++++++++++++++
+
+#### Initialize the Valor database
+
+```
+sudo docker restart nsc-scheduler-service
+```
+
+Valor installation is now completed!
+
+
 
 ### Post installation steps
 
