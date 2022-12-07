@@ -17,7 +17,7 @@ if [ ${1+"true"} ]; then
        echo "./nsc3-install.sh 		  'interactive installation mode'"
        echo ""
        echo "CLI parameters usage:"
-       echo "./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag>"
+       echo "./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag> <VALOR enabled "true/false""
        echo ""
        echo "CLI parameters example:"
        echo "./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.3"
@@ -43,6 +43,9 @@ if [ ${1+"true"} ]; then
    if [ ${6+"true"} ]; then
        export NSC3REL=$6
    fi   
+   if [ ${7+"true"} ]; then
+       export VALOR_ENABLED='"'${7}'"'
+   fi  
 fi
 if [ "$silentmode" = false ]; then
     clear
@@ -64,6 +67,9 @@ if [ "$silentmode" = false ]; then
     echo "NSC3 Release tag, e.g release-3.3: "
     read REL
     export NSC3REL=$REL
+    echo "Valor enabled, true/false: "
+    read ENABLED
+    export VALOR_ENABLED='"'${ENABLED}'"'
 fi
 # Check values
 if [ -d $NSCHOME ]; then echo "$NSCHOME Installation folder found"; else echo "$NSCHOME installation folder is missing. Exit"; exit 0; fi
@@ -151,7 +157,6 @@ if [ "$silentmode" = false ]; then
     exit 0
     fi
     echo "$MAPNAME map file is downloaded"
-
 fi
 # Download Map file:
 if [ $REGION == "EU" ]; then 
@@ -182,6 +187,7 @@ if [ -f "$NSCHOME/nsc-host.env" ]; then
 fi
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
+echo "export VALOR_ENABLED=$VALOR_ENABLED" >> $NSCHOME/nsc-host.env
 export EXTIP='"'$(hostname -i)'"' 2> /dev/null
 #  Modify maptiles rights level
 chmod 644 $NSCHOME/mapdata/*.* 2> /dev/null
