@@ -2,7 +2,7 @@
 ## Project description:
 NSC3 backend installation guides and scripts for single node server configuration
 
-    Release Tag: release-3.10
+    Release Tag: release-3.10.1
 
 ## Project structure:
 - README.md: General guidance for this repository. NSC3 installation, upgrade and maintenance instructions.
