@@ -44,6 +44,8 @@ services:
   nsc-scheduler-service:
     container_name: nsc-scheduler-service
     image: $NSC3REG/nsc-scheduler-service:$NSC3REL
+    environment:
+      - NSC3_SCHEDULER_SERVICE_VALOR_ENABLED=$VALOR_ENABLED
     logging:
       driver: "json-file"
       options: {}
@@ -294,6 +296,8 @@ services:
   nsc-scheduler-service:
     container_name: nsc-scheduler-service
     image: $NSC3REG/nsc-scheduler-service:$NSC3REL
+    environment:
+      - NSC3_SCHEDULER_SERVICE_VALOR_ENABLED=$VALOR_ENABLED
     logging:
       driver: "json-file"
       options: {}
@@ -545,7 +549,7 @@ services:
     container_name: nsc-scheduler-service
     image: $NSC3REG/nsc-scheduler-service:$NSC3REL
     environment:
-      - NSC3_SCHEDULER_SERVICE_VALOR_ENABLED=$VALOR-ENABLED
+      - NSC3_SCHEDULER_SERVICE_VALOR_ENABLED=$VALOR_ENABLED
     logging:
       driver: "json-file"
       options: {}
