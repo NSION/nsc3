@@ -3,7 +3,7 @@
 Valor installation guidance and scripts for single node server configuration.
 Detailed installation guidance for Ubuntu 20.04 LTS and 22.02 LTS
 
-    Release Tag: release-3.8
+    Release Tag: release-3.10.1
 
 ## Project structure:
 
@@ -161,7 +161,6 @@ EOF
 sudo pkill -SIGHUP dockerd
 ```
 
-
 ### Verify NVIDIA driver installation:
 
 ```
@@ -227,7 +226,7 @@ Expected output (as example):
     Login to your NSC3 web app by URL address
     https://foo.nsion.io
     ++++++++++++++++++++++++++++++++++++++++
-
+    
 #### Initialize the Valor database
 
 ```
@@ -235,8 +234,6 @@ sudo docker restart nsc-scheduler-service
 ```
 
 Valor installation is now completed!
-
-
 
 ### Post installation steps
 
@@ -362,5 +359,3 @@ Identify that processes PID is pointing to the redis-server process
 Example printout:
 
 	root      194341  194316  0 Feb24 ?        00:59:39 /usr/local/bin/redis-server *:6379
-
-
