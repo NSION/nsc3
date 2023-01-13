@@ -185,6 +185,9 @@ mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
 if [ -f "$NSCHOME/nsc-host.env" ]; then
    rm $NSCHOME/nsc-host.env 2> /dev/null
 fi
+# set defaults for empty variables
+[ -z "$VALOR_ENABLED" ] && export VALOR_ENABLED=false
+# Store variables
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 echo "export VALOR_ENABLED=$VALOR_ENABLED" >> $NSCHOME/nsc-host.env
