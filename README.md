@@ -156,8 +156,8 @@ cd $HOME/nsc3
     foo.nsion.io   
     Location of SSL cert files, e.g /home/nscuser: 
 	/home/ubuntu
-    NSC3 Release tag, e.g release-3.3: 
-    release-3.3  
+    NSC3 Release tag, e.g release-3.10.1: 
+    release-3.10.1  
     Map files options : 
     1. North America map
     2. Europa map
