@@ -178,7 +178,7 @@ cd $HOME/nsc3
 - [x] Configure NSC3 organisation
 
 #### Verify installation
-Check docker containers, Totally 15 containers
+Check docker containers, Totally number of running containers is 16 without optional features
 
     sudo docker ps
     sudo docker stats
