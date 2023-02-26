@@ -52,6 +52,7 @@ services:
     networks:
       nsc-network:
         ipv4_address: "172.18.0.14"
+    restart: unless-stopped
   nsc-auth-service:
     container_name: nsc-auth-service
     image: $NSC3REG/nsc-auth-service:$NSC3REL
@@ -152,6 +153,7 @@ services:
       nsc-network:
         ipv4_address: "172.18.0.8"
     working_dir: /root
+    restart: unless-stopped
   map-service:
     container_name: map-service
     image: $NSC3REG/map-service:$NSC3REL
@@ -304,6 +306,7 @@ services:
     networks:
       nsc-network:
         ipv4_address: "172.18.0.14"
+    restart: unless-stopped
   nsc-auth-service:
     container_name: nsc-auth-service
     image: $NSC3REG/nsc-auth-service:$NSC3REL
@@ -404,6 +407,7 @@ services:
       nsc-network:
         ipv4_address: "172.18.0.8"
     working_dir: /root
+    restart: unless-stopped    
   map-service:
     container_name: map-service
     image: $NSC3REG/map-service:$NSC3REL
@@ -556,6 +560,7 @@ services:
     networks:
       nsc-network:
         ipv4_address: "172.18.0.14"
+    restart: unless-stopped        
   nsc-auth-service:
     container_name: nsc-auth-service
     image: $NSC3REG/nsc-auth-service:$NSC3REL
@@ -656,6 +661,7 @@ services:
       nsc-network:
         ipv4_address: "172.18.0.8"
     working_dir: /root
+    restart: unless-stopped    
   map-service:
     container_name: map-service
     image: $NSC3REG/map-service:$NSC3REL
