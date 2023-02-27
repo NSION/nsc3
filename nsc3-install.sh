@@ -160,16 +160,16 @@ if [ "$silentmode" = false ]; then
 fi
 # Download Map file:
 if [ $REGION == "EU" ]; then 
-     wget -k -O $NSCHOME/mapdata/europe.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/europe.mbtiles?sp=ra&st=2021-04-24T12:40:49Z&se=2023-01-07T21:40:49Z&sv=2020-02-10&sr=b&sig=m3ANK5J8%2BqYh80OdON0BRVCIll4ptM0%2F2kSjzGMmGrc%3D"
+     wget -k -O $NSCHOME/mapdata/europe.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/europe.mbtiles?sp=r&st=2023-02-27T12:04:08Z&se=2025-02-27T20:04:08Z&sv=2021-06-08&sr=b&sig=BaISloviRuplrGsECr%2Fo%2FcxjFrLmVcN7KS4qXdzJJv8%3D"
 fi     
 if [ $REGION == "NA" ]; then 
-     wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=ra&st=2021-04-24T14:05:55Z&se=2023-01-06T23:05:55Z&sv=2020-02-10&sr=b&sig=XGJQgOZWC6fH2zyjUEDfTQeU9e1BG67f3v4p8fVEimc%3D"
+     wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=r&st=2023-02-27T12:05:58Z&se=2025-02-27T20:05:58Z&sv=2021-06-08&sr=b&sig=VwKJLyy29YlQZ%2BtpFREz7Bh35ZxenfAszIiQNGVnhT0%3D"
 fi     
 if [ $REGION == "AUS" ]; then 
-     wget -k -O $NSCHOME/mapdata/australia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/australia-oceania_australia.mbtiles?sp=ra&st=2021-04-24T14:25:30Z&se=2023-01-06T23:25:30Z&sv=2020-02-10&sr=b&sig=yWkB7loHb02SNgCIhWiNZMb8VpfppfISaJW4MnsFHMw%3D"
+     wget -k -O $NSCHOME/mapdata/australia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/australia-oceania_australia.mbtiles?sp=r&st=2023-02-27T12:10:51Z&se=2025-02-27T20:10:51Z&sv=2021-06-08&sr=b&sig=eToyiT7yDb1s4CHDl1ZMXxh0%2BJ4EAqa3rzzDt98kezM%3D"
 fi     
 if [ $REGION == "GCC" ]; then 
-     wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=ra&st=2021-04-25T15:03:13Z&se=2023-01-07T00:03:13Z&sv=2020-02-10&sr=b&sig=nvfmJOdn4XG2BV2CEncNXQuEnscJ2lfmtJeQZellHwM%3D"
+     wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=r&st=2023-02-27T12:07:33Z&se=2025-02-27T20:07:33Z&sv=2021-06-08&sr=b&sig=7upeiUU7Y%2B7qrviKIi8Ceoiq5vZWSLO%2FdmELOcfq7l4%3D"
 fi     
 # Check values
 if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
