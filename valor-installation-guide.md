@@ -3,7 +3,7 @@
 Valor installation guidance and scripts for single node server configuration.
 Detailed installation guidance for Ubuntu 20.04 LTS and 22.02 LTS
 
-    Release Tag: release-3.10.1
+    Release Tag: release-3.11
 
 ## Project structure:
 
@@ -193,24 +193,24 @@ Expected output (as example):
 #### Silent installation mode: 
 
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    NSC3 installer usage:
+    Valor installer usage:
 
-    ./valor-install.sh --help 	  	'help text'
-    ./valor-install.sh --silent     'installation with command line parameters'
-    ./valor-install.sh 		  		'interactive installation mode'
+    sudo ./valor-install.sh --help 	  	'help text'
+    sudo ./valor-install.sh --silent     'installation with command line parameters'
+    sudo ./valor-install.sh 		  		'interactive installation mode'
 
     CLI parameters usage:
-    ./valor-install.sh --silent <NSC3 release tag>
+    sudo ./valor-install.sh --silent <NSC3 release tag>
 
     CLI parameters example:
-    ./valor-install.sh --silent release-3.4
+    sudo ./valor-install.sh --silent release-3.4
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 #### Interactive installation mode: installation dialog with example values  
 
     cd $HOME/nsc3
-    ./nsc3-install.sh  
+    sudo ./valor-install.sh  
     
 
     ++++++++++++++++++++++++++++++++++++++++
@@ -219,7 +219,7 @@ Expected output (as example):
       This script prepares Valor config     
 
     ++++++++++++++++++++++++++++++++++++++++
-    Valor Release tag, e.g release-3.4: 
+    Valor Release tag, e.g release-3.11: 
     latest  
     ++++++++++++++++++++++++++++++++++++++++
     Valor backend is installed!
