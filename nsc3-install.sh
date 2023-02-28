@@ -20,7 +20,7 @@ if [ ${1+"true"} ]; then
        echo "./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag> <VALOR enabled "true/false">"
        echo ""
        echo "CLI parameters example:"
-       echo "./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.10.1 false"
+       echo "./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.11 false"
        echo ""
        echo "Regional identifiers of MAP selection:"
        echo "EU=Europe, NA=North America, AUS=Australia, GCC=GCC states, false=skip map downloading"
@@ -64,7 +64,7 @@ if [ "$silentmode" = false ]; then
     echo "Location of SSL cert files, e.g /home/nscuser: "
     read  SSLF
     export SSLFOLDER=$SSLF
-    echo "NSC3 Release tag, e.g release-3.3: "
+    echo "NSC3 Release tag, e.g release-3.11: "
     read REL
     export NSC3REL=$REL
     echo "Valor enabled, true/false: "
@@ -86,12 +86,12 @@ fi
 
 if [ -f "$SSLFOLDER/privkey.pem" ]; then
    cp $SSLFOLDER/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-   else echo "*** $SSLFOLDER/privkey.pem is missing! ***"
+   else echo "*** $SSLFOLDER/privkey.pem private key file is missing! ***"
 fi
 
 if [ -f "$SSLFOLDER/fullchain.pem" ]; then
    cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-   else echo "*** SSLFOLDER/fullchain.pem is missing! ***"
+   else echo "*** $SSLFOLDER/fullchain.pem cert file is missing! ***"
 fi
 if [ "$silentmode" = false ]; then
    echo "Map files options : "
