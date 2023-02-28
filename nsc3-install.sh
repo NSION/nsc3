@@ -5,7 +5,7 @@ silentmode=false
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
        silentmode=true
-       echo "silent mode"
+       echo "*** silent installation mode ***"
    fi
    if  [ $1 == "--help" ]; then
        clear
@@ -23,7 +23,7 @@ if [ ${1+"true"} ]; then
        echo "./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.10.1 false"
        echo ""
        echo "Regional identifiers of MAP selection:"
-       echo "EU=Europe, NA=North America, AUS=Australia, GCC=GCC states"
+       echo "EU=Europe, NA=North America, AUS=Australia, GCC=GCC states, false=skip map downloading"
        echo ""
        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
        exit 0
@@ -72,7 +72,7 @@ if [ "$silentmode" = false ]; then
     export VALOR_ENABLED='"'${ENABLED}'"'
 fi
 # Check values
-if [ -d $NSCHOME ]; then echo "$NSCHOME Installation folder found"; else echo "$NSCHOME installation folder is missing. Exit"; exit 0; fi
+if [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder found' ***"; else echo "*** $NSCHOME 'Installation folder is missing! Exit' ***"; exit 0; fi
 # Create dictories
 if [ ! -d $NSCHOME/logs ]; then 
    mkdir $NSCHOME/logs 2> /dev/null 
@@ -86,12 +86,12 @@ fi
 
 if [ -f "$SSLFOLDER/privkey.pem" ]; then
    cp $SSLFOLDER/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-   else echo "SSLFOLDER/privkey.pem is missing"
+   else echo "*** $SSLFOLDER/privkey.pem is missing! ***"
 fi
 
 if [ -f "$SSLFOLDER/fullchain.pem" ]; then
    cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-   else echo "SSLFOLDER/fullchain.pem is missing"
+   else echo "*** SSLFOLDER/fullchain.pem is missing! ***"
 fi
 if [ "$silentmode" = false ]; then
    echo "Map files options : "
@@ -110,7 +110,7 @@ if [ "$silentmode" = false ]; then
        if [ "$answer" != "${answer#[Yy]}" ] ;then
            REGION="NA"
        else
-           echo "Continue installation without maptiles"
+           echo "Continue installation without maptiles ..."
        fi
    fi
     if [ $MAP_OPTION -eq 2 ];then
@@ -121,7 +121,7 @@ if [ "$silentmode" = false ]; then
         if [ "$answer" != "${answer#[Yy]}" ] ;then
             REGION="EU"
         else
-            echo "Continue installation without maptiles"
+            echo "Continue installation without maptiles ..."
         fi
     fi
     if [ $MAP_OPTION -eq 3 ]; then
@@ -132,7 +132,7 @@ if [ "$silentmode" = false ]; then
         if [ "$answer" != "${answer#[Yy]}" ] ;then
             REGION="AUS"
         else
-            echo "Continue installation without maptiles"
+            echo "Continue installation without maptiles ..."
         fi
     fi
     if [ $MAP_OPTION -eq 4 ]; then
@@ -143,7 +143,7 @@ if [ "$silentmode" = false ]; then
         if [ "$answer" != "${answer#[Yy]}" ] ;then
             REGION="GCC"
         else
-            echo "Continue installation without maptiles"
+            echo "Continue installation without maptiles ..."
         fi
     fi
     if [ $MAP_OPTION -gt 4 ]
@@ -171,12 +171,15 @@ fi
 if [ $REGION == "GCC" ]; then 
      wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=r&st=2023-02-27T12:07:33Z&se=2025-02-27T20:07:33Z&sv=2021-06-08&sr=b&sig=7upeiUU7Y%2B7qrviKIi8Ceoiq5vZWSLO%2FdmELOcfq7l4%3D"
 fi     
+if [ $REGION == "false" ]; then 
+     echo "*** Installation without maptiles downloading ***"
+fi 
 # Check values
 if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
    echo "$NSC3REL tag found from docker-compose template" 
    RELEASETAG=$NSC3REL
    else    
-   echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime parameters configuration" 
+   echo "*** Release tag: $NSC3REL is missing. Using release tag: 'latest' ***" 
    RELEASETAG="latest"
 fi
 # Move old files
@@ -210,14 +213,14 @@ if test -f docker-compose_$PUBLICIP.yml; then
     mv docker-compose_$PUBLICIP.yml docker-compose_$PUBLICIP.old  2> /dev/null
 fi
 cp docker-compose.yml docker-compose_$PUBLICIP.yml
-echo "docker-compose.yml file is created..."
-echo "Downloading docker images ..."
+echo "*** docker-compose.yml file is created ***"
+echo "*** Downloading docker images ... ***"
 sudo docker-compose up -d
-echo "++++++++++++++++++++++++++++++++++++++++"
+echo "*******************************************************"
 echo ""                                        
-echo "NSC3 backend is installed!"
+echo "*** NSC3 backend release $RELEASETAG is installed! ***"
 echo ""
-echo "Login to your NSC3 web app by URL address"
-echo "https://$PUBLICIP"
+echo "*** Login to your NSC3 web app by URL address ***"
+echo "*** https://$PUBLICIP"
 echo ""
-echo "++++++++++++++++++++++++++++++++++++++++"
+echo "*******************************************************"
