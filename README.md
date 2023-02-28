@@ -137,10 +137,10 @@ Install docker-compose:
     sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag> <VALOR enabled true/false>
 
     CLI parameters example:
-    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.10.1 false
+    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.11 false
 
     Regional identifiers of MAP selection:
-    EU=Europe, NA=North America, AUS=Australia, GCC=GCC states
+    EU=Europe, NA=North America, AUS=Australia, GCC=GCC states, false=skip maptiles downloading
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
