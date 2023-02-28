@@ -185,7 +185,7 @@ if [ $REGION == "false" ]; then
 fi 
 # Check values
 if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
-   echo "$NSC3REL tag found from docker-compose template" 
+   echo "*** Release tag: $NSC3REL tag found ***" 
    RELEASETAG=$NSC3REL
    else    
    echo "*** Release tag: $NSC3REL is missing. Using release tag: 'latest' ***" 
@@ -227,9 +227,9 @@ echo "*** Downloading docker images ... ***"
 sudo docker-compose up -d
 echo "*******************************************************"
 echo ""                                        
-echo "*** NSC3 backend release $RELEASETAG is installed! ***"
+echo "*** NSC3 backend release $RELEASETAG is installed!  ***"
 echo ""
-echo "*** Login to your NSC3 web app by URL address ***"
-echo "*** https://$PUBLICIP"
+echo "*** Login to your NSC3 web app by URL address       ***"
+echo "*** https://$PUBLICIP"                              ***"
 echo ""
 echo "*******************************************************"
