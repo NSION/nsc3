@@ -129,15 +129,15 @@ Install docker-compose:
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     NSC3 installer usage:
 
-    ./nsc3-install.sh --help 	  	'help text'
-    ./nsc3-install.sh --silent     'installation with command line parameters'
-    ./nsc3-install.sh 		  		'interactive installation mode'
+    sudo ./nsc3-install.sh --help 	  	'help text'
+    sudo ./nsc3-install.sh --silent     'installation with command line parameters'
+    sudo ./nsc3-install.sh 		  		'interactive installation mode'
 
     CLI parameters usage:
-    ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag> <VALOR enabled true/false>
+    sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag> <VALOR enabled true/false>
 
     CLI parameters example:
-    ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.10.1 false
+    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.10.1 false
 
     Regional identifiers of MAP selection:
     EU=Europe, NA=North America, AUS=Australia, GCC=GCC states
@@ -147,7 +147,7 @@ Install docker-compose:
 ##### Interactive installation mode: installation dialog with example values  
 ```
 cd $HOME/nsc3
-./nsc3-install.sh  
+sudo ./nsc3-install.sh  
 ```    
 
     NSC3 installation folder, e.g /home/nscuser/nsc3: 
@@ -163,6 +163,7 @@ cd $HOME/nsc3
     2. Europa map
     3. Australia map
     4. GCC states map
+    5. Skip maptile download
     Select your option as number: 
     1   
     ++++++++++++++++++++++++++++++++++++++++
@@ -220,11 +221,11 @@ Grant execute rights for the upgrade script:
     
 Start upgrade process:
 
-    ./nsc3-upgrade.sh
+    sudo ./nsc3-upgrade.sh
     
 Note that release tag format is 
     
-    release-<release number>, e.g: release-3.4    
+    release-<release number>, e.g: release-3.11    
     
 ### NSC3 Maintenance
 
