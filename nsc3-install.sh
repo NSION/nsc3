@@ -162,20 +162,23 @@ if [ "$silentmode" = false ]; then
         echo "Selected value $MAP_OPTION  is out of range 1-5!"
     exit 0
     fi
-    echo "*** $MAPNAME map file is downloaded ***"
 fi
 # Download Map file:
 if [ $REGION == "EU" ]; then 
      wget -k -O $NSCHOME/mapdata/europe.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/europe.mbtiles?sp=r&st=2023-02-27T12:04:08Z&se=2025-02-27T20:04:08Z&sv=2021-06-08&sr=b&sig=BaISloviRuplrGsECr%2Fo%2FcxjFrLmVcN7KS4qXdzJJv8%3D"
+     echo "*** $MAPNAME map file is downloaded ***"
 fi     
 if [ $REGION == "NA" ]; then 
      wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=r&st=2023-02-27T12:05:58Z&se=2025-02-27T20:05:58Z&sv=2021-06-08&sr=b&sig=VwKJLyy29YlQZ%2BtpFREz7Bh35ZxenfAszIiQNGVnhT0%3D"
+     echo "*** $MAPNAME map file is downloaded ***"
 fi     
 if [ $REGION == "AUS" ]; then 
      wget -k -O $NSCHOME/mapdata/australia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/australia-oceania_australia.mbtiles?sp=r&st=2023-02-27T12:10:51Z&se=2025-02-27T20:10:51Z&sv=2021-06-08&sr=b&sig=eToyiT7yDb1s4CHDl1ZMXxh0%2BJ4EAqa3rzzDt98kezM%3D"
+     echo "*** $MAPNAME map file is downloaded ***"
 fi     
 if [ $REGION == "GCC" ]; then 
      wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=r&st=2023-02-27T12:07:33Z&se=2025-02-27T20:07:33Z&sv=2021-06-08&sr=b&sig=7upeiUU7Y%2B7qrviKIi8Ceoiq5vZWSLO%2FdmELOcfq7l4%3D"
+     echo "*** $MAPNAME map file is downloaded ***"
 fi     
 if [ $REGION == "false" ]; then 
      echo "*** Installation without maptiles downloading ***"
