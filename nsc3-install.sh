@@ -99,6 +99,7 @@ if [ "$silentmode" = false ]; then
    echo "2. Europa map"
    echo "3. Australia map"
    echo "4. GCC states map"
+   echo "5. Skip maptile downloading ..."
    echo "Select your option as number: "
    declare -i MAP_OPTION
    read MAP_OPTION
@@ -145,18 +146,23 @@ if [ "$silentmode" = false ]; then
         else
             echo "Continue installation without maptiles ..."
         fi
+    fi    
+    if [ $MAP_OPTION -eq 5 ]; then
+        
+       REGION="false"
+        
     fi
-    if [ $MAP_OPTION -gt 4 ]
+    if [ $MAP_OPTION -gt 5 ]
     then
-        echo "Selected value $MAP_OPTION is out of range 1-4!"
+        echo "Selected value $MAP_OPTION is out of range 1-5!"
     exit 0
     fi
     if [ $MAP_OPTION -lt 1 ]
     then
-        echo "Selected value $MAP_OPTION  is out of range 1-4!"
+        echo "Selected value $MAP_OPTION  is out of range 1-5!"
     exit 0
     fi
-    echo "$MAPNAME map file is downloaded"
+    echo "*** $MAPNAME map file is downloaded ***"
 fi
 # Download Map file:
 if [ $REGION == "EU" ]; then 
