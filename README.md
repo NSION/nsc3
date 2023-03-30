@@ -319,7 +319,7 @@ cat privkey.pem
 cat fullchain.pem
 ```
 	
-- Check that private key and cert files are paired together:
+- Check that private key and cert files are paired together: 
 Expected result -> both md5 checksum values are equal
 	
 privkey check sum: 
@@ -334,7 +334,7 @@ cert check sum:
 openssl x509 -noout -modulus -in fullchain.pem | openssl md5
 ```
 
-- SSL Cert file is chained with dns_operator + service certs: $HOME/nsc3/nsc-gateway-cert/fullchain.pem
+- SSL Cert file is chained with dns_operator + service certs: 
 Expected result -> number is more than 1
 
 ```
