@@ -282,7 +282,8 @@ If still no access please then check ...
 
 #### NSC3 Web service is not working properly:
 
-Check that SSL cert is valid:
+##### Check that SSL cert is valid:
+
 Expected result if ok, "SSL certificate verify ok"
 
     cd $HOME/nsc3
@@ -291,11 +292,11 @@ Expected result if ok, "SSL certificate verify ok"
 ```
 curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
 ```
-Check that the HTTPS port is listening:
+##### Check that the HTTPS port is listening:
 
     ss -lntu | grep ':443'
     
-Validate cert file and private key files:
+##### Validate cert file and private key files:
 
 - Cert files location:
 
@@ -341,7 +342,8 @@ Expected result -> number is more than 1
 cat fullchain.pem | grep "BEGIN" | wc -l
 ```
 
-Check TCP IP route from external network to NSC3 https port:
+##### Check TCP IP route from external network to NSC3 https port:
+
 This requires extra tool called nmap:
 As example Ubuntu installation
 
