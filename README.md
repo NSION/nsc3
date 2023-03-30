@@ -322,13 +322,13 @@ cat fullchain.pem
 - Check that private key and cert files are paired together:
 Expected result -> both md5 checksum values are equal
 	
--- privkey check sum: 
+privkey check sum: 
 
 ```	
 openssl rsa -noout -modulus -in privkey.pem | openssl md5
 ```
 
--- cert check sum: 
+cert check sum: 
 
 ```
 openssl x509 -noout -modulus -in fullchain.pem | openssl md5
