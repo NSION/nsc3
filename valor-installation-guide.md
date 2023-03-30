@@ -203,7 +203,7 @@ Expected output (as example):
     sudo ./valor-install.sh --silent <NSC3 release tag>
 
     CLI parameters example:
-    sudo ./valor-install.sh --silent release-3.4
+    sudo ./valor-install.sh --silent release-3.11
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
