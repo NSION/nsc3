@@ -297,16 +297,16 @@ Check that the HTTPS port is listening:
     
 Validate cert file and private key files:
 
+	Cert files location:
+	$HOME/nsc3/nsc-gateway-cert
+
 	Check that privkey.pem first line looks as below 
 	-----BEGIN PRIVATE KEY-----
 	
 	Check that fullchain.pem first line looks as below
 	-----BEGIN CERTIFICATE-----
 	
-	Check that private key and cert files are paired together
-	Cert files location:
-	$HOME/nsc3/nsc-gateway-cert
-	
+	Check that private key and cert files are paired together:
 	Verification that keys are matching: (Expected result -> matched value with printout md5 checksum)
 	
 	privkey check sum: 
