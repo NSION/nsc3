@@ -298,12 +298,12 @@ curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server
     
 ##### Validate cert file and private key files:
 
-- Cert files location:
+######  Cert files location:
 
 	$HOME/nsc3/nsc-gateway-cert
 	
 
-- Check that privkey.pem first line looks as below 
+###### Check that privkey.pem first line looks as below 
 
 	-----BEGIN PRIVATE KEY-----
 
@@ -312,7 +312,7 @@ cat privkey.pem
 ```
 	
 	
-- Check that fullchain.pem first line looks as below
+###### Check that fullchain.pem first line looks as below
 
 	-----BEGIN CERTIFICATE-----
 
@@ -320,7 +320,7 @@ cat privkey.pem
 cat fullchain.pem
 ```
 	
-- Check that private key and cert files are paired together: 
+###### Check that private key and cert files are paired together: 
 Expected result -> both md5 checksum values are equal
 	
 privkey check sum: 
@@ -335,7 +335,7 @@ cert check sum:
 openssl x509 -noout -modulus -in fullchain.pem | openssl md5
 ```
 
-- SSL Cert file is chained with dns_operator + service certs: 
+###### SSL Cert file is chained with dns_operator + service certs: 
 Expected result -> number is more than 1
 
 ```
