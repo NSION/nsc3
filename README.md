@@ -282,9 +282,7 @@ If still no access please then check ...
 
 #### NSC3 Web service is not working properly:
 
-##### Check that SSL cert is valid:
-
-Expected result if ok, "SSL certificate verify ok"
+##### Check that SSL cert is valid: Expected result if ok, "SSL certificate verify ok"
 
     cd $HOME/nsc3
     source nsc-host.env
@@ -320,8 +318,7 @@ cat privkey.pem
 cat fullchain.pem
 ```
 	
-###### Check that private key and cert files are paired together: 
-Expected result -> both md5 checksum values are equal
+###### Check that private key and cert files are paired together: Expected result -> both md5 checksum values are equal
 	
 privkey check sum: 
 
@@ -335,8 +332,7 @@ cert check sum:
 openssl x509 -noout -modulus -in fullchain.pem | openssl md5
 ```
 
-###### SSL Cert file is chained with dns_operator + service certs: 
-Expected result -> number is more than 1
+###### SSL Cert file is chained with dns_operator + service certs: Expected result -> number is more than 1
 
 ```
 cat fullchain.pem | grep "BEGIN" | wc -l
