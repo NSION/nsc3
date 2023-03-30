@@ -307,7 +307,7 @@ Validate cert file and private key files:
 	-----BEGIN CERTIFICATE-----
 	
 	Check that private key and cert files are paired together:
-	Verification that keys are matching: (Expected result -> matched value with printout md5 checksum)
+	Expected result -> both md5 checksum values are equal
 	
 	privkey check sum: 
 	openssl rsa -noout -modulus -in privkey.pem | openssl md5
