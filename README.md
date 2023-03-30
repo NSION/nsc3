@@ -297,28 +297,49 @@ Check that the HTTPS port is listening:
     
 Validate cert file and private key files:
 
-	Cert files location:
+- Cert files location:
+
 	$HOME/nsc3/nsc-gateway-cert
+	
 
-	Check that privkey.pem first line looks as below 
+- Check that privkey.pem first line looks as below 
+
 	-----BEGIN PRIVATE KEY-----
-	
-	Check that fullchain.pem first line looks as below
-	-----BEGIN CERTIFICATE-----
-	
-	Check that private key and cert files are paired together:
-	Expected result -> both md5 checksum values are equal
-	
-	privkey check sum: 
-	openssl rsa -noout -modulus -in privkey.pem | openssl md5
-	
-	cert check sum: 
-	openssl x509 -noout -modulus -in fullchain.pem | openssl md5
 
-	SSL Cert file is chained with dns_operator + service certs: $HOME/nsc3/nsc-gateway-cert/fullchain.pem
-	(Expected result -> number is more than 1)
+```
+cat privkey.pem
+```
 	
-	cat fullchain.pem | grep "BEGIN" | wc -l
+	
+- Check that fullchain.pem first line looks as below
+
+	-----BEGIN CERTIFICATE-----
+
+```
+cat fullchain.pem
+```
+	
+- Check that private key and cert files are paired together:
+Expected result -> both md5 checksum values are equal
+	
+-- privkey check sum: 
+
+```	
+openssl rsa -noout -modulus -in privkey.pem | openssl md5
+```
+
+-- cert check sum: 
+
+```
+openssl x509 -noout -modulus -in fullchain.pem | openssl md5
+```
+
+- SSL Cert file is chained with dns_operator + service certs: $HOME/nsc3/nsc-gateway-cert/fullchain.pem
+Expected result -> number is more than 1
+
+```
+cat fullchain.pem | grep "BEGIN" | wc -l
+```
 
 Check TCP IP route from external network to NSC3 https port:
 This requires extra tool called nmap:
