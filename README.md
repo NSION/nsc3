@@ -315,6 +315,10 @@ Validate cert file and private key files:
 	cert check sum: 
 	openssl x509 -noout -modulus -in fullchain.pem | openssl md5
 
+	SSL Cert file is chained with dns_operator + service certs: $HOME/nsc3/nsc-gateway-cert/fullchain.pem
+	(Expected result -> number is more than 1)
+	
+	cat fullchain.pem | grep "BEGIN" | wc -l
 
 Check TCP IP route from external network to NSC3 https port:
 This requires extra tool called nmap:
