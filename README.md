@@ -295,6 +295,27 @@ Check that the HTTPS port is listening:
 
     ss -lntu | grep ':443'
     
+Validate cert file and private key files:
+
+	Check that privkey.pem first line looks as below 
+	-----BEGIN PRIVATE KEY-----
+	
+	Check that fullchain.pem first line looks as below
+	-----BEGIN CERTIFICATE-----
+	
+	Check that private key and cert files are paired together
+	Cert files location:
+	$HOME/nsc3/nsc-gateway-cert
+	
+	Verification that keys are matching: (Expected result -> matched value with printout md5 checksum)
+	
+	privkey check sum: 
+	openssl rsa -noout -modulus -in privkey.pem | openssl md5
+	
+	cert check sum: 
+	openssl x509 -noout -modulus -in fullchain.pem | openssl md5
+
+
 Check TCP IP route from external network to NSC3 https port:
 This requires extra tool called nmap:
 As example Ubuntu installation
