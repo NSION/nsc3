@@ -17,7 +17,7 @@ NSC3 backend installation guides and scripts for single node server configuratio
 
 ## Prerequisites for NSC3 installation:
 - [x] Minimum HW configuration: 8 CPU cores, 16GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
-- [x] Linux operating system, Ubuntu 20.04 LTS as reference.
+- [x] Linux operating system, Ubuntu 22.04 LTS as reference.
 - [x] The computer or virtual machine is allocated for NSC3 use only.
 - [x] Internet access is available
 - [x] Following TCP/IP4 ports are open from network to server: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific ports (25204, 25205, 25206). Livelink specific ports 40000-40007.
