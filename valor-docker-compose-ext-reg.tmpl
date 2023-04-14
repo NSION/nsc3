@@ -83,6 +83,49 @@ networks:
     external:
       name: "nsc-network"
 ### ReleaseTagEnd rc
+### ReleaseTagStart release-3.13
+# This is for nsc3 version 3.13 and later
+version: "2.3"
+services:
+  valor-postgres:
+    container_name: valor-postgres
+    image: $NSC3REG/valor-postgres:$NSC3REL
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.23"
+    restart: unless-stopped
+    volumes:
+        - valor-postgres-volume-15:/var/lib/postgresql/data:rw
+  nsc-valor-bus:
+    container_name: nsc-valor-bus
+    image: $NSC3REG/nsc-valor-bus:$NSC3REL
+    runtime: nvidia
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.21"
+    depends_on:
+        - "valor-postgres"
+    restart: unless-stopped
+    volumes:
+        - nsc-valor-bus-volume:/data:rw
+  nsc-valor-tasker-service:
+    container_name: nsc-valor-tasker-service
+    image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
+    environment:
+        - MEMORY="8g"
+    networks:
+        nsc-network:
+            ipv4_address: "172.18.0.22" 
+volumes:
+  valor-postgres-volume-15:
+    name: valor-postgres-volume-15
+  nsc-valor-bus-volume:
+    name: nsc-valor-bus-volume
+networks:
+  nsc-network:
+    external:
+      name: "nsc-network"
+### ReleaseTagEnd release-3.13
 ### ReleaseTagStart release-3.11
 # This is for nsc3 version 3.10 and later
 version: "2.3"
@@ -127,7 +170,7 @@ networks:
       name: "nsc-network"
 ### ReleaseTagEnd release-3.11
 ### ReleaseTagStart release-3.10.1
-# This is for nsc3 version 3.10 and later
+# This is for nsc3 version 3.11 and later
 version: "2.3"
 services:
   valor-postgres:
