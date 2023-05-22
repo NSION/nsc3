@@ -2,7 +2,7 @@
 ## Project description:
 NSC3 backend installation guides and scripts for single node server configuration
 
-    Release Tag of latest release: release-3.13
+    Release Tag of latest release: release-3.14
 
 ## Project structure:
 - README.md: General guidance for this repository. NSC3 installation, upgrade and maintenance instructions.
@@ -137,7 +137,7 @@ Install docker-compose:
     sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag> <VALOR enabled true/false>
 
     CLI parameters example:
-    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.11 false
+    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.14 false
 
     Regional identifiers of MAP selection:
     EU=Europe, NA=North America, AUS=Australia, GCC=GCC states, false=skip maptiles downloading
@@ -156,7 +156,7 @@ sudo ./nsc3-install.sh
     foo.nsion.io   
     Location of SSL cert files, e.g /home/nscuser: 
 	/home/ubuntu
-    NSC3 Release tag, e.g release-3.11: 
+    NSC3 Release tag, e.g release-3.14: 
     release-3.11
     Map files options : 
     1. North America map
@@ -225,7 +225,7 @@ Start upgrade process:
     
 Note that release tag format is 
     
-    release-<release number>, e.g: release-3.11    
+    release-<release number>, e.g: release-3.14  
     
 ### NSC3 Maintenance
 
