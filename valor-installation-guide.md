@@ -3,7 +3,7 @@
 Valor installation guidance and scripts for single node server configuration.
 Detailed installation guidance for Ubuntu 20.04 LTS and 22.02 LTS
 
-    Release Tag: release-3.11
+    Release Tag: release-3.14
 
 ## Project structure:
 
@@ -203,7 +203,7 @@ Expected output (as example):
     sudo ./valor-install.sh --silent <NSC3 release tag>
 
     CLI parameters example:
-    sudo ./valor-install.sh --silent release-3.11
+    sudo ./valor-install.sh --silent release-3.14
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -219,7 +219,7 @@ Expected output (as example):
       This script prepares Valor config     
 
     ++++++++++++++++++++++++++++++++++++++++
-    Valor Release tag, e.g release-3.11: 
+    Valor Release tag, e.g release-3.14: 
     latest  
     ++++++++++++++++++++++++++++++++++++++++
     Valor backend is installed!
@@ -272,7 +272,7 @@ Start upgrade process:
     
 Note that release tag format is 
     
-    release-<release number>, e.g: release-3.4    
+    release-<release number>, e.g: release-3.14
     
 ### Valor maintenance
 
