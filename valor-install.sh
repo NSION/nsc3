@@ -22,9 +22,9 @@ if [ ${1+"true"} ]; then
        echo "sudo ./valor-install.sh --silent <Valor release tag> <HW layout>"
        echo ""
        echo "CLI parameters example:"
-       echo "sudo ./valor-install.sh --silent release-3.11 cpu"
+       echo "sudo ./valor-install.sh --silent release-3.14 cpu"
        echo ""
-       echo "sudo ./valor-install.sh --silent release-3.11"
+       echo "sudo ./valor-install.sh --silent release-3.14"
        echo ""
        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
        exit 0
@@ -44,7 +44,7 @@ if [ "$silentmode" = false ]; then
     echo "  This script prepares Valor config     "
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
-    echo "Valor Release tag, e.g release-3.11: "
+    echo "Valor Release tag, e.g release-3.14: "
     read REL
     export NSC3REL=$REL
 fi
