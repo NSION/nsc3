@@ -268,7 +268,12 @@ Container status:
 
 If the file space in the Docker root directory is not adequate, you must relocate the directory.
 
-1. Stop Docker services:
+1. Stop NSC3 services:
+```
+cd $HOME/nsc3
+sudo docker-compose down
+```
+3. Stop Docker services:
 ```
 sudo systemctl stop docker
 sudo systemctl stop docker.socket
@@ -302,7 +307,11 @@ After you run the command, all Docker services through dependency management wil
 ```
 docker info -f '{{ .DockerRootDir}}'
 ```
-
+7. Start NSC3 services:
+```
+cd $HOME/nsc3
+sudo docker-compose up -d
+```
     
 ### NSC3 system troubleshooting
 
