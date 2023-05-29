@@ -243,10 +243,6 @@ Monitor container logs via docker logs:
 
     sudo docker logs <container name>
     
-Storage location of NSC3 log files in the file system:
-
-    cd $HOME/nsc3/logs
-    
 Check disk storage usage level:r
 
     df -hT | grep /$ | awk '{ print $6}'
