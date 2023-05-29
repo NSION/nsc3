@@ -241,7 +241,7 @@ Start NSC3 services:
     cd $HOME/nsc3
     sudo docker-compose up -d  
 
-Restart NSC3 conteiner:
+Restart NSC3 container:
 
     cd $HOME/nsc3
     sudo docker-compose restart [NSC3 container]
