@@ -229,6 +229,8 @@ Note that release tag format is
     
 ### NSC3 Maintenance
 
+#### Managing NSC3 containers:
+
 Stop NSC3 services:
 
     cd $HOME/nsc3
@@ -239,11 +241,18 @@ Start NSC3 services:
     cd $HOME/nsc3
     sudo docker-compose up -d  
 
+Restart NSC3 conteiner:
+
+    cd $HOME/nsc3
+    sudo docker-compose restart [NSC3 container]
+
+#### Monitoring NSC3 runtime environment:
+
 Monitor container logs via docker logs:
 
     sudo docker logs <container name>
     
-Check disk storage usage level:r
+Check disk storage usage level:
 
     df -hT | grep /$ | awk '{ print $6}'
     
