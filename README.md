@@ -276,11 +276,11 @@ sudo systemctl stop containerd
 ```
 2. Create the necessary directory structure into which to move Docker root by running the following command. This directory structure must reside on a file system with at least 50 GB free disk space. Significantly more disk space might be required depending on your daily ingestion volumes and data retention policy.
 ```
-sudo mkdir -p /new_dir_structure
+sudo mkdir -p /<new_dir_structure>
 ```
 3. Move Docker root to the new directory structure:
 ```
-sudo mv /var/lib/docker /new_dir_structure
+sudo mv /var/lib/docker /<new_dir_structure>
 ```
 4. Edit the file /etc/docker/daemon.json. If the file does not exist, create the file by running the following command:
 ```
@@ -289,7 +289,7 @@ sudo vim /etc/docker/daemon.json
 Add the following information to this file:
 
 	{
-  	"data-root": "/new_dir_structure/docker"
+  	"data-root": "/<new_dir_structure>/docker"
 	}
 
 5. After the /etc/docker/daemon.json file is saved and closed, restart the Docker services:
