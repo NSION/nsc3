@@ -197,7 +197,7 @@ curl --cert-status -v https://$PUBLICIP 2>&1 | awk 'BEGIN { cert=0 } /^\* Server
 #### Insert NSC3 license
 
 Login to the NSC3 web app as admin
-- Initial admin login. org: admin login and password: admin. System is proposing to change it after first successfull login session.
+- Initial admin login. org: admin login and password: admin. System is proposing to change password right after first successful login session.
 - Download a instance key via NSC3 admin/license UI. Licenses Tab / Server license / Set new NSC3 license / Download Instance key
 - Send the instance key file via NSION Jira Service desk support portal.
 - NSION will prepare and return a corresponding license key file back. No need to left UI open while waiting
