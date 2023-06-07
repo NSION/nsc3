@@ -27,9 +27,8 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ### Default file system locations:
 
 - NSC3-Valor Installation folder $HOME/nsc3, However this location is configurable. Instruction are referring for $HOME/nsc3 folder. 
-- Docker content folder is /var/lib/docker
-- Valor RDB content folder is /var/lib/docker/volumes/analytics-postgres-volume
-- NSC3 logs files folder is $HOME/nsc3/logs
+- Docker content folder is /var/lib/docker (default) 
+- Valor RDB content folder is /var/lib/docker/volumes/analytics-postgres-volume (Default)
 
 ## Install GPU drivers to host VM
 Ubuntu 20.04/22.04 LTS as reference:
