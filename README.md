@@ -433,10 +433,11 @@ sudo docker pull registrynsion.azurecr.io/nsc-recipe-object-detection-service:re
 ```
 sudo docker pull registrynsion.azurecr.io/nsc-recipe-object-detection-service-onnx:release-3.14
 ```		
-    - Note the tags that images get when loaded.
+
+Note the tags that images get when loaded.
 
 2. Running containers
-    - Use the tag that images got when loaded; here as an example :release-3.14 .
+Use the tag that images got when loaded; here as an example :release-3.14
 
 ```
 sudo docker run -d --net nsc-network -e "NVIDIA_VISIBLE_DEVICES=all" -e "NVIDIA_DRIVER_CAPABILITIES=all" --runtime=nvidia --restart unless-stopped --name nsc-recipe-object-detection-service-onnx registrynsion.azurecr.io/nsc-recipe-object-detection-service-onnx:release-3.14`
