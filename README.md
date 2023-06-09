@@ -425,8 +425,12 @@ Release 3.14 as example
 #### Object detection
 
 1. Loading images
-    - `sudo docker pull registrynsion.azurecr.io/nsc-recipe-object-detection-service:release-3.14`
-    - `sudo docker pull registrynsion.azurecr.io/nsc-recipe-object-detection-service-onnx:release-3.14`
+
+	sudo docker pull registrynsion.azurecr.io/nsc-recipe-object-detection-service:release-3.14
+   
+	sudo docker pull registrynsion.azurecr.io/nsc-recipe-object-detection-service-onnx:release-3.14
+	
+	
     - Note the tags that images get when loaded.
 
 2. Running containers
