@@ -409,8 +409,11 @@ Test that route to 443 port is open:
 Release 3.14 as example
 
 1. Loading image
-    - `sudo docker pull registrynsion.azurecr.io/nsc-recipe-face-comparison-service:release-3.14`
-    - Note the tag that image gets when loaded
+
+```
+sudo docker pull registrynsion.azurecr.io/nsc-recipe-face-comparison-service:release-3.14
+```
+Note the tag that image gets when loaded
 
 2. Make a directory for face samples
     - Here for example purposes inside /home/exampleuser
@@ -420,7 +423,10 @@ Release 3.14 as example
 
 3. Running container
     - Use the tag that image got when loaded; here as an example :release-3.14 . Use actual path in volume mount parameter (-v)
-    - `sudo docker run -d -v /home/exampleuser/demodata/faces:/data/wanted_faces --net nsc-network --restart unless-stopped --name nsc-recipe-face-comparison-service registrynsion.azurecr.io/nsc-recipe-face-comparison-service:release-3.14`
+
+```
+sudo docker run -d -v /home/exampleuser/demodata/faces:/data/wanted_faces --net nsc-network --restart unless-stopped --name nsc-recipe-face-comparison-service registrynsion.azurecr.io/nsc-recipe-face-comparison-service:release-3.14
+```
 
 #### Object detection
 
