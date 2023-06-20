@@ -13,8 +13,14 @@ Named `nsc-network` -docker network is expected to exist, but if not, it can be 
 sudo docker network create --subnet 172.18.0.0/24 nsc-network
 ```
 
-Configure docker registry token:
+#### Login to NSION docker registry:
 
+If NSC3 is recently installed or upgraded then you could skip this step. 
+
+    cd $HOME/nsc3
+    sudo docker login registrynsion.azurecr.io
+    
+    <Registry crentials will be delivered separately>
 
 
 ### General instructions
