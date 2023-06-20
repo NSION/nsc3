@@ -31,7 +31,7 @@ the `.env` file.
 1. Load the team-bridge container to local registry:
 
    ``` bash
-   sudo docker pull nsc-team-bridge-service:<release>
+   sudo docker pull registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
    ```
 
 3. Configure necessary environment variables into an ```nsc-team-bridge-service.env``` -file.
@@ -58,7 +58,7 @@ the `.env` file.
 4. Run the app based on the image, with environment variables from `nsc-team-bridge-service.env`. Server side has to have the configured listen port mapped.
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service nsc-team-bridge-service:latest
+   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
    ```
 
 ### TCP mode and key management
@@ -90,7 +90,7 @@ Only one of the `client` or `server` folders needs to be present, depending on t
 `nsc-stream-in-service` has to be re-run with an extra flag for enabling team bridge traffic processing:
 
 ``` bash
-sudo docker run -d -v /dev/urandom:/dev/random -e MEMORY=8g -e NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true --net nsc-network --restart unless-stopped --name nsc-stream-in-service nsc-stream-in-service:latest
+sudo docker run -d -v /dev/urandom:/dev/random -e MEMORY=8g -e NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true --net nsc-network --restart unless-stopped --name nsc-stream-in-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
 ```
 
 ## Environment variables
