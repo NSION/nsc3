@@ -2,7 +2,7 @@
 
 Transfer organization-specific live traffic from one NSC3 instance to another.
 
-Release tag: release-3.14
+Release tag: `release-3.14`
 
 ## Setting up
 
