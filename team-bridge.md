@@ -2,12 +2,16 @@
 
 Transfer organization-specific live traffic from one NSC3 instance to another.
 
+Release tag: release-3.14
+
 ## Setting up
 
 All IP addresses, ports and image tags are examples and can vary between deployments.
 Named `nsc-network` -docker network is expected to exist, but if not, it can be created with:
 
-```docker network create --subnet 172.18.0.0/24 nsc-network```
+``` bash
+sudo docker network create --subnet 172.18.0.0/24 nsc-network
+```
 
 Configure docker registry token:
 
@@ -21,7 +25,7 @@ the `.env` file.
 1. Load the team-bridge container to local registry:
 
    ``` bash
-   sudo docker pull nsc-team-bridge-service
+   sudo docker pull nsc-team-bridge-service:<release>
    ```
 
 3. Configure necessary environment variables into an ```nsc-team-bridge-service.env``` -file.
