@@ -20,9 +20,11 @@ the `.env` file.
 
 1. Load the team-bridge container to local registry:
 
-   ```sudo docker pull nsc-team-bridge-service```
+   ``` bash
+   sudo docker pull nsc-team-bridge-service
+   ```
 
-2. Configure necessary environment variables into an ```nsc-team-bridge-service.env``` -file.
+3. Configure necessary environment variables into an ```nsc-team-bridge-service.env``` -file.
 
    Sample ```nsc-team-bridge-service.env```-file with default values:
 
@@ -43,9 +45,11 @@ the `.env` file.
    NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
    ```
 
-3. Run the app based on the image, with environment variables from `nsc-team-bridge-service.env`. Server side has to have the configured listen port mapped.
+4. Run the app based on the image, with environment variables from `nsc-team-bridge-service.env`. Server side has to have the configured listen port mapped.
 
-   ```sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service nsc-team-bridge-service:latest```
+   ``` bash
+   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service nsc-team-bridge-service:latest
+   ```
 
 ### TCP mode and key management
 
@@ -75,7 +79,9 @@ Only one of the `client` or `server` folders needs to be present, depending on t
 
 `nsc-stream-in-service` has to be re-run with an extra flag for enabling team bridge traffic processing:
 
-```sudo docker run -d -v /dev/urandom:/dev/random -e MEMORY=8g -e NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true --net nsc-network --restart unless-stopped --name nsc-stream-in-service nsc-stream-in-service:latest```
+``` bash
+sudo docker run -d -v /dev/urandom:/dev/random -e MEMORY=8g -e NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true --net nsc-network --restart unless-stopped --name nsc-stream-in-service nsc-stream-in-service:latest
+```
 
 ## Environment variables
 
@@ -94,7 +100,9 @@ of `Setting up` again.
 To test if the server is running and can be connected to, linux command line utility `netcat` can be
 used to write something into it.
 
-```sudo netcat localhost 64660 -u```
+``` bash
+sudo netcat localhost 64660 -u
+```
 
 Type something into the terminal, press enter to send and observe server container logs from another
 terminal with `docker logs -f nsc-team-bridge-service`. A protobuf exception should get logged as the
