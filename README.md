@@ -14,7 +14,8 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - valor-upgrade.sh: Script for upgradeValor 
 - valor-docker-compose-ext-reg.tmpl: Docker Compose template for Valor
 - nsc3-conf-tool.sh: Shell Script for NSC3 and Valor runtime configuration. Designed for Development pipe usage where configuration is pre-set outside of targeted server.
-- 
+- generateTeamBridgeRSAKeyPairs.sh: Team-Bridge TCP/IP mode key generation script
+- team-bridge.md: Team-Bridge installation guidance
 
 ## Prerequisites for NSC3 installation:
 - [x] Minimum HW configuration: 8 CPU cores, 16GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
