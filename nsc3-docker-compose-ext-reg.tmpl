@@ -187,6 +187,7 @@ services:
       - "25205:25205/tcp"
       - "25206:25206/tcp"
       - "443:443/tcp"
+      - "40000-40007:40000-40007/tcp"
     restart: unless-stopped
     volumes:
       - $NSCHOME/nsc-gateway-cert:/mnt/cert 
@@ -447,6 +448,7 @@ services:
       - "25205:25205/tcp"
       - "25206:25206/tcp"
       - "443:443/tcp"
+      - "40000-40007:40000-40007/tcp"
     restart: unless-stopped
     volumes:
       - $NSCHOME/nsc-gateway-cert:/mnt/cert 
@@ -707,6 +709,7 @@ services:
       - "25205:25205/tcp"
       - "25206:25206/tcp"
       - "443:443/tcp"
+      - "40000-40007:40000-40007/tcp"
     restart: unless-stopped
     volumes:
       - $NSCHOME/nsc-gateway-cert:/mnt/cert 
@@ -967,6 +970,7 @@ services:
       - "25205:25205/tcp"
       - "25206:25206/tcp"
       - "443:443/tcp"
+      - "40000-40007:40000-40007/tcp"
     restart: unless-stopped
     volumes:
       - $NSCHOME/nsc-gateway-cert:/mnt/cert 
