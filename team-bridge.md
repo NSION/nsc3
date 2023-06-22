@@ -74,8 +74,15 @@ the `.env` file.
 
 4. Run the app based on the image, with environment variables from `nsc-team-bridge-service.env`. Server side has to have the configured listen port mapped.
 
+UDP Server:
+
    ``` bash
    sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+   ```
+UDP Client: 
+
+   ``` bash
+   sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
    ```
 
 ### TCP mode and key management
