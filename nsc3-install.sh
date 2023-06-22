@@ -204,7 +204,7 @@ fi
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 echo "export VALOR_ENABLED=$VALOR_ENABLED" >> $NSCHOME/nsc-host.env
-export EXTIP='"'$(hostname -i)'"' 2> /dev/null
+export EXTIP=$(host test2.nsion.io | awk '{print $4}') 2> /dev/null
 #  Modify maptiles rights level
 chmod 644 $NSCHOME/mapdata/*.* 2> /dev/null
 # Create docker-compose.yml file
