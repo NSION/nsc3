@@ -279,7 +279,7 @@ Naming rule:
 E.g if you have changed SSL cert files then nsc-gateway-service requires restarting in order to take into use a new cert file.
 
 ```
-sudo docker-compose restart nsc-gateway-service
+sudo docker-compose restart nsc-gateway
 ```
 
 #### Relocating the Docker root directory
@@ -414,7 +414,7 @@ cat fullchain.pem | grep "BEGIN" | wc -l
 E.g if you have changed SSL cert files then nsc-gateway-service requires restarting in order to take into use a new cert file.
 
 ```
-sudo docker-compose restart nsc-gateway-service
+sudo docker-compose restart nsc-gateway
 ```
 
 ##### Check TCP IP route from external network to NSC3 https port:
