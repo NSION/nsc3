@@ -68,7 +68,6 @@ the `.env` file.
    # Server: Comma-separated key>value -map of organization ID source>destination pairs
    # for mapping incoming live traffic into existing local organizations, for example:
    # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
-   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=
    # Byte amount the payload is split into. Only effective for client in UDP mode
    NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
    ```
