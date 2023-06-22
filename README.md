@@ -268,7 +268,8 @@ Container status:
 
 #### Update SSL certification
 
-Copy new cert file to $HOME/nsc/nsc-gateway-cert 
+Copy new cert file to $HOME/nsc/nsc-gateway-cert.
+
 If the existing cert will be updated then only cert file need to be replaced.
 
 Naming rule: 
