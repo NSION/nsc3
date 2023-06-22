@@ -90,8 +90,39 @@ Only one of the `client` or `server` folders needs to be present, depending on t
 `nsc-stream-in-service` has to be re-run with an extra flag for enabling team bridge traffic processing:
 
 ``` bash
-sudo docker run -d -v /dev/urandom:/dev/random -e MEMORY=8g -e NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true --net nsc-network --restart unless-stopped --name nsc-stream-in-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+sudo nano docker-compose.yml
 ```
+
+Add following environment variable parameters `NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true` section of nsc-stream-in-service 
+
+Example:
+```yaml
+
+  nsc-stream-in-service:
+    container_name: nsc-stream-in-service
+    image: registrynsion.azurecr.io/nsc-stream-in-service:release-3.14
+    logging:
+      driver: "json-file"
+      options: {}    
+    volumes:
+      - /dev/urandom:/dev/random:rw
+    networks:
+      nsc-network:
+        ipv4_address: "172.18.0.6"
+    restart: unless-stopped
+    environment:
+      - MEMORY=8g
+      - NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true
+    working_dir: /root
+
+```
+
+Restart NSC streaming services:
+
+``` bash
+sudo docker-compose restart nsc-stream-in-service
+```
+
 
 ## Environment variables
 
