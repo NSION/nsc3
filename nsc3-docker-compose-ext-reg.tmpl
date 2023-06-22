@@ -482,6 +482,7 @@ services:
     container_name: nsc-webrtc-proxy
     environment:
       - PROTOO_LISTEN_PORT="8080"
+      - WEBSOCKET_LISTEN_PORT="8080"
       - MEDIASOUP_ANNOUNCED_IP=$EXTIP
       - MEDIASOUP_MIN_PORT="40000"
       - MEDIASOUP_MAX_PORT="40007"
@@ -743,6 +744,7 @@ services:
     container_name: nsc-webrtc-proxy
     environment:
       - PROTOO_LISTEN_PORT="8080"
+      - WEBSOCKET_LISTEN_PORT="8080"
       - MEDIASOUP_ANNOUNCED_IP=$EXTIP
       - MEDIASOUP_MIN_PORT="40000"
       - MEDIASOUP_MAX_PORT="40007"
@@ -1004,6 +1006,7 @@ services:
     container_name: nsc-webrtc-proxy
     environment:
       - PROTOO_LISTEN_PORT="8080"
+      - WEBSOCKET_LISTEN_PORT="8080"
       - MEDIASOUP_ANNOUNCED_IP=$EXTIP
       - MEDIASOUP_MIN_PORT="40000"
       - MEDIASOUP_MAX_PORT="40007"
