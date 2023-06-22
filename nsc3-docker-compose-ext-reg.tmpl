@@ -226,6 +226,12 @@ services:
       - AUTH_API_ADDRESS="nsc-auth-service:8080"
       - COMMS_API_ADDRESS="nsc-comms-service:8080"
       - STATUS_PERIOD="180000"
+      - MINIO_ENDPOINT="nsc-minio"
+      - MINIO_PORT="9000"
+      - MINIO_ACCESS_KEY="minioclient" 
+      - MINIO_SECRET_KEY=$MINIOSECRET
+      - REDIS_ENDPOINT="bus-redis"
+      - REDIS_PORT="6379"
     image: $NSC3REG/nsc-webrtc-proxy:$NSC3REL
     logging:
       driver: "json-file"
@@ -480,6 +486,12 @@ services:
       - AUTH_API_ADDRESS="nsc-auth-service:8080"
       - COMMS_API_ADDRESS="nsc-comms-service:8080"
       - STATUS_PERIOD="180000"
+      - MINIO_ENDPOINT="nsc-minio"
+      - MINIO_PORT="9000"
+      - MINIO_ACCESS_KEY="minioclient" 
+      - MINIO_SECRET_KEY=$MINIOSECRET
+      - REDIS_ENDPOINT="bus-redis"
+      - REDIS_PORT="6379"
     image: $NSC3REG/nsc-webrtc-proxy:$NSC3REL
     logging:
       driver: "json-file"
@@ -734,6 +746,12 @@ services:
       - AUTH_API_ADDRESS="nsc-auth-service:8080"
       - COMMS_API_ADDRESS="nsc-comms-service:8080"
       - STATUS_PERIOD="180000"
+      - MINIO_ENDPOINT="nsc-minio"
+      - MINIO_PORT="9000"
+      - MINIO_ACCESS_KEY="minioclient" 
+      - MINIO_SECRET_KEY=$MINIOSECRET
+      - REDIS_ENDPOINT="bus-redis"
+      - REDIS_PORT="6379"
     image: $NSC3REG/nsc-webrtc-proxy:$NSC3REL
     logging:
       driver: "json-file"
