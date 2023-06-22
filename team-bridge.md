@@ -36,21 +36,39 @@ the `.env` file.
 
 3. Configure necessary environment variables into an ```nsc-team-bridge-service.env``` -file.
 
-   Sample ```nsc-team-bridge-service.env```-file with default values:
+   UDP Server example ```nsc-team-bridge-service.env```-file with default values:
 
     ```properties
    # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
    NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=UDP_SERVER
    # Client: Address the packets are sent to
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=nsc-team-bridge-service-server
+   # NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
    # Port used for traffic, has to match the container port given to docker run
    NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
    # Client: Comma-separated list of organization ID strings as live traffic sources
-   NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=
+   # NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=
    # Server: Comma-separated key>value -map of organization ID source>destination pairs
    # for mapping incoming live traffic into existing local organizations, for example:
    # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
-   NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=
+   NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=aslkdhalks233423423r54>dklsase53948wfdkgls
+   # Byte amount the payload is split into. Only effective for client in UDP mode
+   NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
+   ```
+   UDP Client example ```nsc-team-bridge-service.env```-file with default values:
+
+    ```properties
+   # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
+   NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=UDP_CLIENT
+   # Client: Address the packets are sent to
+   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
+   # Port used for traffic, has to match the container port given to docker run
+   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
+   # Client: Comma-separated list of organization ID strings as live traffic sources
+   NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=aslkdhalks233423423r54
+   # Server: Comma-separated key>value -map of organization ID source>destination pairs
+   # for mapping incoming live traffic into existing local organizations, for example:
+   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
+   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=
    # Byte amount the payload is split into. Only effective for client in UDP mode
    NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
    ```
