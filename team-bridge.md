@@ -95,12 +95,18 @@ Secure communication using TCP requires generating unique asymmetric key pairs f
 
 Run the script with `./generateTeamBridgeRSAKeyPairs.sh` and it should generate the following folder and file structure:
 
+TCP/IP Server:
+
 ```bash
 bridgekeys
 bridgekeys/server
 bridgekeys/server/bridge_public_key.der
 bridgekeys/server/bridge_client_public_key.der
 bridgekeys/server/bridge_private_key.der
+```
+
+TCP/IP Client:
+```bash
 bridgekeys/client
 bridgekeys/client/bridge_public_key.der
 bridgekeys/client/bridge_server_public_key.der
@@ -108,6 +114,17 @@ bridgekeys/client/bridge_private_key.der
 ```
 
 Only one of the `client` or `server` folders needs to be present, depending on the launch mode. Also note that the script requires `openssl` binary on the host PATH and there might be some untested differences if they are generated on different openssl versions.
+
+UDP Server:
+
+   ``` bash
+   sudo docker run -d -v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+   ```
+UDP Client: 
+
+   ``` bash
+   sudo docker run -d -v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+   ```
 
 ## Additional server side configuration step
 
