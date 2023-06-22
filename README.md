@@ -266,6 +266,21 @@ Container status:
 
     sudo docker stats
 
+#### Update SSL certification
+
+Copy new cert file to $HOME/nsc/nsc-gateway-cert 
+If the existing cert will be updated then only cert file need to be replaced.
+
+Naming rule: 
+- privatekey: privkey.pem
+- SSL cert: fullchain.pem
+
+E.g if you have changed SSL cert files then nsc-gateway-service requires restarting in order to take into use a new cert file.
+
+```
+sudo docker-compose restart nsc-gateway-service
+```
+
 #### Relocating the Docker root directory
 
 If the file space in the Docker root directory is not adequate, you must relocate the directory.
@@ -392,6 +407,13 @@ openssl x509 -noout -modulus -in fullchain.pem | openssl md5
 
 ```
 cat fullchain.pem | grep "BEGIN" | wc -l
+```
+###### Restart nsc-gateway services
+
+E.g if you have changed SSL cert files then nsc-gateway-service requires restarting in order to take into use a new cert file.
+
+```
+sudo docker-compose restart nsc-gateway-service
 ```
 
 ##### Check TCP IP route from external network to NSC3 https port:
