@@ -2,7 +2,7 @@
 
 Transfer organization-specific live traffic from one NSC3 instance to another.
 
-Release tag: `release-3.14`
+Release tag: `release-3.15`
 
 ## Setting up
 
@@ -31,7 +31,7 @@ the `.env` file.
 1. Load the team-bridge container to local registry:
 
    ``` bash
-   sudo docker pull registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+   sudo docker pull registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
 3. Configure necessary environment variables into an ```nsc-team-bridge-service.env``` -file.
@@ -77,12 +77,12 @@ the `.env` file.
 UDP Server:
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 UDP Client: 
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+   sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
 ### TCP mode and key management
@@ -118,12 +118,12 @@ Only one of the `client` or `server` folders needs to be present, depending on t
 UDP Server:
 
    ``` bash
-   sudo docker run -d -v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+   sudo docker run -d -v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 UDP Client: 
 
    ``` bash
-   sudo docker run -d -v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.14
+   sudo docker run -d -v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
 ## Additional server side configuration step
@@ -141,7 +141,7 @@ Example:
 
   nsc-stream-in-service:
     container_name: nsc-stream-in-service
-    image: registrynsion.azurecr.io/nsc-stream-in-service:release-3.14
+    image: registrynsion.azurecr.io/nsc-stream-in-service:release-3.15
     logging:
       driver: "json-file"
       options: {}    
