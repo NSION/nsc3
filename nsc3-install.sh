@@ -21,7 +21,7 @@ if [ ${1+"true"} ]; then
        echo "./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag> <VALOR enabled "true/false">"
        echo ""
        echo "CLI parameters example:"
-       echo "./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.14 false"
+       echo "./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.15 false"
        echo ""
        echo "Regional identifiers of MAP selection:"
        echo "EU=Europe, NA=North America, AUS=Australia, GCC=GCC states, false=skip map downloading"
@@ -65,7 +65,7 @@ if [ "$silentmode" = false ]; then
     echo "Location of SSL cert files, e.g /home/nscuser: "
     read  SSLF
     export SSLFOLDER=$SSLF
-    echo "NSC3 Release tag, e.g release-3.14: "
+    echo "NSC3 Release tag, e.g release-3.15: "
     read REL
     export NSC3REL=$REL
     echo "Valor enabled, true/false: "
