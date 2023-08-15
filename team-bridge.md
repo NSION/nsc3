@@ -129,7 +129,7 @@ Secure communication using TCP requires generating unique asymmetric key pairs f
 
 - `-v <host path>/bridgekeys:/opt/nsc3/bridgekeys`
 
-Run the script with `./generateTeamBridgeRSAKeyPairs.sh` and it should generate the following folder and file structure:
+1. Run the script with `./generateTeamBridgeRSAKeyPairs.sh` and it should generate the following folder and file structure:
 
 TCP/IP Server:
 
@@ -148,7 +148,9 @@ bridgekeys/client/bridge_public_key.der
 bridgekeys/client/bridge_server_public_key.der
 bridgekeys/client/bridge_private_key.der
 ```
-Change permission for key files: 
+2. Copy the key bundle to both hosts (Client and Server)
+
+3. Change permission for key files at Client and server host: 
 ```bash
 cd <host path to bridgekeys folder>
 chmod a+rw bridgekeys/client/*
