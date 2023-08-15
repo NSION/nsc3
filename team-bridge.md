@@ -54,6 +54,25 @@ the `.env` file.
    # Byte amount the payload is split into. Only effective for client in UDP mode
    NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
    ```
+   TCP Server example ```nsc-team-bridge-service.env```-file with default values:
+
+    ```properties
+   # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
+   NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=TCP_SERVER
+   # Client: Address the packets are sent to
+   # NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
+   # Port used for traffic, has to match the container port given to docker run
+   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
+   # Client: Comma-separated list of organization ID strings as live traffic sources
+   # NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=
+   # Server: Comma-separated key>value -map of organization ID source>destination pairs
+   # for mapping incoming live traffic into existing local organizations, for example:
+   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
+   NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=aslkdhalks233423423r54>dklsase53948wfdkgls
+   # Byte amount the payload is split into. Only effective for client in UDP mode
+   # NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
+   ```
+    
    UDP Client example ```nsc-team-bridge-service.env```-file with default values:
 
     ```properties
@@ -71,15 +90,32 @@ the `.env` file.
    # Byte amount the payload is split into. Only effective for client in UDP mode
    NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
    ```
+   TCP Client example ```nsc-team-bridge-service.env```-file with default values:
+
+    ```properties
+   # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
+   NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=TCP_CLIENT
+   # Client: Address the packets are sent to
+   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
+   # Port used for traffic, has to match the container port given to docker run
+   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
+   # Client: Comma-separated list of organization ID strings as live traffic sources
+   NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=aslkdhalks233423423r54
+   # Server: Comma-separated key>value -map of organization ID source>destination pairs
+   # for mapping incoming live traffic into existing local organizations, for example:
+   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
+   # Byte amount the payload is split into. Only effective for client in UDP mode
+   # NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
+   ```
 
 4. Run the app based on the image, with environment variables from `nsc-team-bridge-service.env`. Server side has to have the configured listen port mapped.
 
-UDP Server:
+UDP and TCP Server:
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service-server registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
-UDP Client: 
+UDP and TCP Client: 
 
    ``` bash
    sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
@@ -91,7 +127,7 @@ Secure communication using TCP requires generating unique asymmetric key pairs f
 
 `scripts`-folder contains a script `generateTeamBridgeRSAKeyPairs.sh` for generating a set of RSA key pairs in the correct structure and format the application expects them to be present in the volume:
 
-- `-v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys`
+- `-v <host path>/bridgekeys:/opt/nsc3/bridgekeys`
 
 Run the script with `./generateTeamBridgeRSAKeyPairs.sh` and it should generate the following folder and file structure:
 
@@ -112,18 +148,24 @@ bridgekeys/client/bridge_public_key.der
 bridgekeys/client/bridge_server_public_key.der
 bridgekeys/client/bridge_private_key.der
 ```
+Change permission for key files: 
+```bash
+cd <host path to bridgekeys folder>
+chmod a+rw bridgekeys/client/*
+chmod a+rw bridgekeys/server/*
+```
 
 Only one of the `client` or `server` folders needs to be present, depending on the launch mode. Also note that the script requires `openssl` binary on the host PATH and there might be some untested differences if they are generated on different openssl versions.
 
-UDP Server:
+TCP Server:
 
    ``` bash
-   sudo docker run -d -v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
-UDP Client: 
+TCP Client: 
 
    ``` bash
-   sudo docker run -d -v /deploy-files/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
 ## Additional server side configuration step
