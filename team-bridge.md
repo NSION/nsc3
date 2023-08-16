@@ -23,7 +23,7 @@ If NSC3 is recently installed or upgraded then you could skip this step.
     <Registry crentials will be delivered separately>
 
 
-### General instructions
+### General instructions for configuring
 
 Steps are mostly the same on both client and server side. Runtime configuration is done in
 the `.env` file.
@@ -107,8 +107,11 @@ the `.env` file.
    # Byte amount the payload is split into. Only effective for client in UDP mode
    # NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
    ```
+4. Locate the configuration file to the folder where you are going run docker services.
 
-4. Run the app based on the image, with environment variables from `nsc-team-bridge-service.env`. Server side has to have the configured listen port mapped.
+### UDP mode start services
+
+Run the app based on the image, with environment variables from `nsc-team-bridge-service.env`. Server side has to have the configured listen port mapped.
 
 UDP Server:
 
@@ -159,18 +162,18 @@ chmod a+rw bridgekeys/server/*
 
 Only one of the `client` or `server` folders needs to be present, depending on the launch mode. Also note that the script requires `openssl` binary on the host PATH and there might be some untested differences if they are generated on different openssl versions.
 
-TCP Server:
+TCP Server, start services:
 
    ``` bash
    sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
-TCP Client: 
+TCP Client, start services: 
 
    ``` bash
    sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
-## Additional server side configuration step
+## Additional server side configuration step (Mandatory)
 
 `nsc-stream-in-service` has to be re-run with an extra flag for enabling team bridge traffic processing:
 
@@ -218,8 +221,7 @@ sudo docker stop nsc-team-bridge-service
 sudo docker rm nsc-team-bridge-service
 ```
 
-Tweak the environment variables in the .env-file and execute the `docker run` -command in step 3
-of `Setting up` again.
+Tweak the environment variables in the .env-file and execute the `docker run` -command as described in above instructions.
 
 ## Troubleshooting UDP
 
