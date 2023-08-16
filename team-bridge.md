@@ -44,7 +44,7 @@ the `.env` file.
    # Address where the packets are assigned to ...
    ## Client: Public IP address of team-bridge server
    ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
-   # NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
+   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
    # Port used for traffic, has to match the container port given to docker run
    NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
    # Client: Comma-separated list of organization ID strings as live traffic sources
@@ -64,7 +64,7 @@ the `.env` file.
    # Address where the packets are assigned to ...
    ## Client: Public IP address of team-bridge server
    ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
-   # NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=nsc-team-bridge-service
+   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=nsc-team-bridge-service
    # Port used for traffic, has to match the container port given to docker run
    NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
    # Client: Comma-separated list of organization ID strings as live traffic sources
