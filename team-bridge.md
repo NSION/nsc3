@@ -124,7 +124,7 @@ Run the app based on the image, with environment variables from `nsc-team-bridge
 UDP Server:
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660/udp --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 UDP Client: 
 
