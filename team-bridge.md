@@ -41,7 +41,9 @@ the `.env` file.
     ```properties
    # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
    NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=UDP_SERVER
-   # Client: Address the packets are sent to
+   # Address where the packets are assigned to ...
+   ## Client: Public IP address of team-bridge server
+   ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
    # NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
    # Port used for traffic, has to match the container port given to docker run
    NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
@@ -59,8 +61,10 @@ the `.env` file.
     ```properties
    # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
    NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=TCP_SERVER
-   # Client: Address the packets are sent to
-   # NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
+   # Address where the packets are assigned to ...
+   ## Client: Public IP address of team-bridge server
+   ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
+   # NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=nsc-team-bridge-service
    # Port used for traffic, has to match the container port given to docker run
    NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
    # Client: Comma-separated list of organization ID strings as live traffic sources
@@ -78,7 +82,9 @@ the `.env` file.
     ```properties
    # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
    NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=UDP_CLIENT
-   # Client: Address the packets are sent to
+   # Address where the packets are assigned to ...
+   ## Client: Public IP address of team-bridge server
+   ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
    NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
    # Port used for traffic, has to match the container port given to docker run
    NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
@@ -95,8 +101,10 @@ the `.env` file.
     ```properties
    # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
    NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=TCP_CLIENT
-   # Client: Address the packets are sent to
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
+   # Address where the packets are assigned to ...
+   ## Client: Public IP address of team-bridge server
+   ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
+   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=nsc-team-bridge-service
    # Port used for traffic, has to match the container port given to docker run
    NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
    # Client: Comma-separated list of organization ID strings as live traffic sources
@@ -116,12 +124,12 @@ Run the app based on the image, with environment variables from `nsc-team-bridge
 UDP Server:
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service-server registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 UDP Client: 
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
 ### TCP mode and key management
@@ -165,12 +173,12 @@ Only one of the `client` or `server` folders needs to be present, depending on t
 TCP Server, start services:
 
    ``` bash
-   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 TCP Client, start services: 
 
    ``` bash
-   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
 ## Additional server side configuration step (Mandatory)
