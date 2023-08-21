@@ -124,12 +124,12 @@ Run the app based on the image, with environment variables from `nsc-team-bridge
 UDP Server:
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660/udp --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660/udp --net nsc-network --ip 172.18.0.30 --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 UDP Client: 
 
    ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --ip 172.18.0.30 --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
 ### TCP mode and key management
@@ -173,12 +173,12 @@ Only one of the `client` or `server` folders needs to be present, depending on t
 TCP Server, start services:
 
    ``` bash
-   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --ip 172.18.0.30 --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 TCP Client, start services: 
 
    ``` bash
-   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
+   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --ip 172.18.0.30 --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
    ```
 
 ## Additional server side configuration step (Mandatory)
