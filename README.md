@@ -22,7 +22,7 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - [x] Linux operating system, Ubuntu 22.04 LTS as reference.
 - [x] The computer or virtual machine is allocated for NSC3 use only.
 - [x] Internet access is available
-- [x] Following TCP/IP4 ports are open from network to server: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific ports (25204, 25205, 25206). Livelink specific ports 40000-40007.
+- [x] Following TCP/IP4 ports are open from network to server: 443(HTTPS), 1935(RTMPS), 1936(RTMP), NSC3 specific ports (25204, 25205, 25206). Livelink specific ports 40000-40007. Team-Bridge specific ports: 64660-64661
 - [x] SSL certifications for the service domain. Human readable (PEM) format. A private key file named as privkey.pem. A full chained certification file named as fullchain.pem
 - [x] Server domain name is registered to DNS services. 
 - [x] Access account to NSION container registry is available.
