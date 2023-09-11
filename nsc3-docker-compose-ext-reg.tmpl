@@ -8,9 +8,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.2"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - main-postgres-volume:/var/lib/postgresql/data:rw
@@ -21,9 +19,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.4"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - user-postgres-volume:/var/lib/postgresql/data:rw
@@ -34,9 +30,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.3"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - bus-redis-volume:/data:rw
@@ -49,9 +43,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.14"
+    networks: nsc-network
     restart: unless-stopped
   nsc-auth-service:
     container_name: nsc-auth-service
@@ -59,9 +51,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.5"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -74,9 +64,7 @@ services:
       options: {}    
     volumes:
       - /dev/urandom:/dev/random:rw
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.6"
+    networks: nsc-network
     restart: unless-stopped
     environment:
       - MEMORY=8g
@@ -87,9 +75,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.7"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-comms-service:
@@ -98,9 +84,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.9"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -111,9 +95,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.10"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-network-stream-service:
@@ -125,9 +107,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.17"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-aar-worker:
@@ -136,9 +116,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.11"
+    networks: nsc-network
     restart: unless-stopped
   web-nginx:
     container_name: web-nginx
@@ -149,9 +127,7 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.8"
+    networks: nsc-network
     working_dir: /root
     restart: unless-stopped
   map-service:
@@ -160,9 +136,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.12"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - $NSCHOME/mapdata:/data
@@ -177,9 +151,7 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.13"
+    networks: nsc-network
     ports:
       - "1935:1935/tcp"
       - "1936:1936/tcp"
@@ -197,9 +169,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.16"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - minio-volume:/data:rw
@@ -212,9 +182,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.20"
+    networks: nsc-network
     restart: unless-stopped
   nsc-webrtc-proxy:
     container_name: nsc-webrtc-proxy
@@ -238,10 +206,10 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.44"
+    networks: nsc-network
     restart: unless-stopped  
+## add-on
+## add-off
 networks:
   nsc-network:
     name: nsc-network
@@ -270,9 +238,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.2"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - main-postgres-volume:/var/lib/postgresql/data:rw
@@ -283,9 +249,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.4"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - user-postgres-volume:/var/lib/postgresql/data:rw
@@ -296,9 +260,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.3"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - bus-redis-volume:/data:rw
@@ -311,9 +273,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.14"
+    networks: nsc-network
     restart: unless-stopped
   nsc-auth-service:
     container_name: nsc-auth-service
@@ -321,9 +281,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.5"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -336,9 +294,7 @@ services:
       options: {}    
     volumes:
       - /dev/urandom:/dev/random:rw
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.6"
+    networks: nsc-network
     restart: unless-stopped
     environment:
       - MEMORY=8g
@@ -349,9 +305,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.7"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-comms-service:
@@ -360,9 +314,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.9"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -373,9 +325,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.10"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-network-stream-service:
@@ -387,9 +337,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.17"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-aar-worker:
@@ -398,9 +346,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.11"
+    networks: nsc-network
     restart: unless-stopped
   web-nginx:
     container_name: web-nginx
@@ -411,20 +357,16 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.8"
+    networks: nsc-network
     working_dir: /root
-    restart: unless-stopped    
+    restart: unless-stopped
   map-service:
     container_name: map-service
     image: $NSC3REG/map-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.12"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - $NSCHOME/mapdata:/data
@@ -439,9 +381,7 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.13"
+    networks: nsc-network
     ports:
       - "1935:1935/tcp"
       - "1936:1936/tcp"
@@ -459,9 +399,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.16"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - minio-volume:/data:rw
@@ -474,9 +412,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.20"
+    networks: nsc-network
     restart: unless-stopped
   nsc-webrtc-proxy:
     container_name: nsc-webrtc-proxy
@@ -500,10 +436,10 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.44"
+    networks: nsc-network
     restart: unless-stopped  
+## add-on
+## add-off
 networks:
   nsc-network:
     name: nsc-network
@@ -532,9 +468,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.2"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - main-postgres-volume:/var/lib/postgresql/data:rw
@@ -545,9 +479,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.4"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - user-postgres-volume:/var/lib/postgresql/data:rw
@@ -558,9 +490,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.3"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - bus-redis-volume:/data:rw
@@ -573,19 +503,15 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.14"
-    restart: unless-stopped        
+    networks: nsc-network
+    restart: unless-stopped
   nsc-auth-service:
     container_name: nsc-auth-service
     image: $NSC3REG/nsc-auth-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.5"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -598,9 +524,7 @@ services:
       options: {}    
     volumes:
       - /dev/urandom:/dev/random:rw
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.6"
+    networks: nsc-network
     restart: unless-stopped
     environment:
       - MEMORY=8g
@@ -611,9 +535,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.7"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-comms-service:
@@ -622,9 +544,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.9"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -635,9 +555,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.10"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-network-stream-service:
@@ -649,9 +567,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.17"
+    networks: nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-aar-worker:
@@ -660,9 +576,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.11"
+    networks: nsc-network
     restart: unless-stopped
   web-nginx:
     container_name: web-nginx
@@ -673,20 +587,16 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.8"
+    networks: nsc-network
     working_dir: /root
-    restart: unless-stopped    
+    restart: unless-stopped
   map-service:
     container_name: map-service
     image: $NSC3REG/map-service:$NSC3REL
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.12"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - $NSCHOME/mapdata:/data
@@ -701,9 +611,7 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.13"
+    networks: nsc-network
     ports:
       - "1935:1935/tcp"
       - "1936:1936/tcp"
@@ -721,9 +629,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.16"
+    networks: nsc-network
     restart: unless-stopped
     volumes:
       - minio-volume:/data:rw
@@ -736,9 +642,7 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.20"
+    networks: nsc-network
     restart: unless-stopped
   nsc-webrtc-proxy:
     container_name: nsc-webrtc-proxy
@@ -762,10 +666,10 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.44"
+    networks: nsc-network
     restart: unless-stopped  
+## add-on
+## add-off
 networks:
   nsc-network:
     name: nsc-network
@@ -2537,465 +2441,3 @@ volumes:
   minio-volume:
     name: minio-volume
 ### ReleaseTagEnd release-3.8
-### ReleaseTagStart release-3.7
-# This is for nsc3 version 3.6 and later
-version: "2.2"
-services:
-  main-postgres:
-    container_name: main-postgres
-    image: $NSC3REG/main-postgres:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.2"
-    restart: unless-stopped
-    volumes:
-      - main-postgres-volume:/var/lib/postgresql/data:rw
-    working_dir: /root
-  user-postgres:
-    container_name: user-postgres
-    image: $NSC3REG/user-postgres:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.4"
-    restart: unless-stopped
-    volumes:
-      - user-postgres-volume:/var/lib/postgresql/data:rw
-    working_dir: /root
-  bus-redis:
-    container_name: bus-redis
-    image: $NSC3REG/bus-redis:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.3"
-    restart: unless-stopped
-    volumes:
-      - bus-redis-volume:/data:rw
-    working_dir: /root
-  nsc-scheduler-service:
-    container_name: nsc-scheduler-service
-    image: $NSC3REG/nsc-scheduler-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.14"
-  nsc-auth-service:
-    container_name: nsc-auth-service
-    image: $NSC3REG/nsc-auth-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.5"
-    restart: unless-stopped
-    volumes:
-      - /dev/urandom:/dev/random:rw
-    working_dir: /root
-  nsc-stream-in-service:
-    container_name: nsc-stream-in-service
-    image: $NSC3REG/nsc-stream-in-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}    
-    volumes:
-      - /dev/urandom:/dev/random:rw
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.6"
-    restart: unless-stopped
-    environment:
-      - MEMORY=8g
-    working_dir: /root
-  nsc-live-service:
-    container_name: nsc-live-service
-    image: $NSC3REG/nsc-live-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.7"
-    restart: unless-stopped
-    working_dir: /root
-  nsc-comms-service:
-    container_name: nsc-comms-service
-    image: $NSC3REG/nsc-comms-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.9"
-    restart: unless-stopped
-    volumes:
-      - /dev/urandom:/dev/random:rw
-    working_dir: /root
-  nsc-playback-service:
-    container_name: nsc-playback-service
-    image: $NSC3REG/nsc-playback-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.10"
-    restart: unless-stopped
-    working_dir: /root
-  nsc-network-stream-service:
-    container_name: nsc-network-stream-service
-    image: $NSC3REG/nsc-network-stream-service:$NSC3REL
-    ipc: private
-    cpus: 2.0
-    mem_limit: 4096M
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.17"
-    restart: unless-stopped
-    working_dir: /root
-  nsc-aar-worker:
-    container_name: nsc-aar-worker
-    image: $NSC3REG/nsc-aar-worker:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.11"
-    restart: unless-stopped
-  web-nginx:
-    container_name: web-nginx
-    image: $NSC3REG/web-nginx:$NSC3REL
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "20"
-        max-size: "100m"
-        mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.8"
-    working_dir: /root
-  map-service:
-    container_name: map-service
-    image: $NSC3REG/map-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.12"
-    restart: unless-stopped
-    volumes:
-      - $NSCHOME/mapdata:/data
-    command: ["-p", "80", "-u", "https://$PUBLICIP/mapserver/"]
-    working_dir: /data
-  nsc-gateway:
-    container_name: nsc-gateway
-    image: $NSC3REG/nsc-gateway:$NSC3REL
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "20"
-        max-size: "100m"
-        mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.13"
-    ports:
-      - "1935:1935/tcp"
-      - "1936:1936/tcp"
-      - "25204:25204/tcp"
-      - "25205:25205/tcp"
-      - "25206:25206/tcp"
-      - "443:443/tcp"
-    restart: unless-stopped
-    volumes:
-      - $NSCHOME/nsc-gateway-cert:/mnt/cert 
-  nsc-minio:
-    container_name: nsc-minio
-    image: $NSC3REG/nsc-minio:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.16"
-    restart: unless-stopped
-    volumes:
-      - minio-volume:/data:rw
-    command: ['server', '/data']
-  rtmp-server:
-    container_name: rtmp-server
-    environment:
-      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-    image: $NSC3REG/rtmp-server:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.20"
-    restart: unless-stopped
-networks:
-  nsc-network:
-    name: nsc-network
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.18.0.0/24"
-volumes:
-  main-postgres-volume:
-    name: main-postgres-volume
-  user-postgres-volume:
-    name: user-postgres-volume 
-  bus-redis-volume:
-    name: bus-redis-volume
-  minio-volume:
-    name: minio-volume
-### ReleaseTagEnd release-3.7
-### ReleaseTagStart release-3.6
-# This is for nsc3 version 3.6 and later
-version: "2.2"
-services:
-  main-postgres:
-    container_name: main-postgres
-    image: $NSC3REG/main-postgres:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.2"
-    restart: unless-stopped
-    volumes:
-      - main-postgres-volume:/var/lib/postgresql/data:rw
-    working_dir: /root
-  user-postgres:
-    container_name: user-postgres
-    image: $NSC3REG/user-postgres:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.4"
-    restart: unless-stopped
-    volumes:
-      - user-postgres-volume:/var/lib/postgresql/data:rw
-    working_dir: /root
-  bus-redis:
-    container_name: bus-redis
-    image: $NSC3REG/bus-redis:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.3"
-    restart: unless-stopped
-    volumes:
-      - bus-redis-volume:/data:rw
-    working_dir: /root
-  nsc-scheduler-service:
-    container_name: nsc-scheduler-service
-    image: $NSC3REG/nsc-scheduler-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.14"
-  nsc-auth-service:
-    container_name: nsc-auth-service
-    image: $NSC3REG/nsc-auth-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.5"
-    restart: unless-stopped
-    volumes:
-      - /dev/urandom:/dev/random:rw
-    working_dir: /root
-  nsc-stream-in-service:
-    container_name: nsc-stream-in-service
-    image: $NSC3REG/nsc-stream-in-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}    
-    volumes:
-      - /dev/urandom:/dev/random:rw
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.6"
-    restart: unless-stopped
-    environment:
-      - MEMORY=8g
-    working_dir: /root
-  nsc-live-service:
-    container_name: nsc-live-service
-    image: $NSC3REG/nsc-live-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.7"
-    restart: unless-stopped
-    working_dir: /root
-  nsc-comms-service:
-    container_name: nsc-comms-service
-    image: $NSC3REG/nsc-comms-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.9"
-    restart: unless-stopped
-    volumes:
-      - /dev/urandom:/dev/random:rw
-    working_dir: /root
-  nsc-playback-service:
-    container_name: nsc-playback-service
-    image: $NSC3REG/nsc-playback-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.10"
-    restart: unless-stopped
-    working_dir: /root
-  nsc-network-stream-service:
-    container_name: nsc-network-stream-service
-    image: $NSC3REG/nsc-network-stream-service:$NSC3REL
-    ipc: private
-    cpus: 2.0
-    mem_limit: 4096M
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.17"
-    restart: unless-stopped
-    working_dir: /root
-  nsc-aar-worker:
-    container_name: nsc-aar-worker
-    image: $NSC3REG/nsc-aar-worker:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.11"
-    restart: unless-stopped
-  web-nginx:
-    container_name: web-nginx
-    image: $NSC3REG/web-nginx:$NSC3REL
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "20"
-        max-size: "100m"
-        mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.8"
-    working_dir: /root
-  map-service:
-    container_name: map-service
-    image: $NSC3REG/map-service:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.12"
-    restart: unless-stopped
-    volumes:
-      - $NSCHOME/mapdata:/data
-    command: ["-p", "80", "-u", "https://$PUBLICIP/mapserver/"]
-    working_dir: /data
-  nsc-gateway:
-    container_name: nsc-gateway
-    image: $NSC3REG/nsc-gateway:$NSC3REL
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "20"
-        max-size: "100m"
-        mode: "non-blocking"
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.13"
-    ports:
-      - "1935:1935/tcp"
-      - "1936:1936/tcp"
-      - "25204:25204/tcp"
-      - "25205:25205/tcp"
-      - "25206:25206/tcp"
-      - "443:443/tcp"
-    restart: unless-stopped
-    volumes:
-      - $NSCHOME/nsc-gateway-cert:/mnt/cert 
-  nsc-minio:
-    container_name: nsc-minio
-    image: $NSC3REG/nsc-minio:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.16"
-    restart: unless-stopped
-    volumes:
-      - minio-volume:/data:rw
-    command: ['server', '/data']
-  rtmp-server:
-    container_name: rtmp-server
-    environment:
-      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-    image: $NSC3REG/rtmp-server:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.20"
-    restart: unless-stopped
-networks:
-  nsc-network:
-    name: nsc-network
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.18.0.0/24"
-volumes:
-  main-postgres-volume:
-    name: main-postgres-volume
-  user-postgres-volume:
-    name: user-postgres-volume 
-  bus-redis-volume:
-    name: bus-redis-volume
-  minio-volume:
-    name: minio-volume
-### ReleaseTagEnd release-3.6
