@@ -1,10 +1,10 @@
-    nsc-team-bridge-service-server-tcp:
-        image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
-        env_file:
-            - nsc-team-bridge-service-server-tcp.env
-        container_name: nsc-team-bridge-service-server-tcp
-        networks: nsc-network
-        ports:
-            - "64660"
-        volumes:
-            - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+  nsc-team-bridge-service-server-tcp:
+    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+    env_file:
+        - nsc-team-bridge-service-server-tcp.env
+    container_name: nsc-team-bridge-service-server-tcp
+    networks: nsc-network
+    ports:
+        - "64660"
+    volumes:
+        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
