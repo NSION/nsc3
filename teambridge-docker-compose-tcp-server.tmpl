@@ -3,8 +3,7 @@
         env_file:
             - nsc-team-bridge-service-server-tcp.env
         container_name: nsc-team-bridge-service-server-tcp
-        networks:
-            nsc-network:
+        networks: nsc-network
         ports:
             - "64660"
         volumes:
