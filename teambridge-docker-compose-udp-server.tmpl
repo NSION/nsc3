@@ -3,7 +3,6 @@
         env_file:
             - nsc-team-bridge-service-server-udp.env
         container_name: nsc-team-bridge-service-server-udp
-        networks:
-            nsc-network:
+        networks: nsc-network
         ports:
             - "64660/udp"
