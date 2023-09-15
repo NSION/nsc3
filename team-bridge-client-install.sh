@@ -74,14 +74,14 @@ echo "*** Current release tag: $NSC3REL  ***"
 RELEASETAG=$NSC3REL
 # Update env variables
 echo "export TBMODE=$TBMODE" > $NSCHOME/nsc-host.env
-echo "export TBSERVERIP=$TBSERVERIP > $NSCHOME/nsc-host.env
-echo "export SOURCEORG=$SOURCEORG > $NSCHOME/nsc-host.env
+echo "export TBSERVERIP=$TBSERVERIP" > $NSCHOME/nsc-host.env
+echo "export SOURCEORG=$SOURCEORG" > $NSCHOME/nsc-host.env
 
 # Update docker-compose.yml file
 cd $NSCHOME
 # make backup
 if [ -f "docker-compose.yml" ]; then
-   cp docker-compose.yml docker-compose.tb-addition-old 2> /dev/null
+   cp docker-compose.yml docker-compose.tb-addition-backup 2> /dev/null
 fi
 (echo "cat <<EOF >docker-compose-temp.yml";
 cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
