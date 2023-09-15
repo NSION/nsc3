@@ -24,16 +24,16 @@ if [ ${1+"true"} ]; then
        echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 client UDP 172.17.12.12 123jdsfs345435"
        echo ""
        echo "CLI parameters usage for server:"
-       echo "./team-bridge-install.sh --silent <Installation path> <Role: server/both> <TCP or UDP mode> <Team Bridge Server IP> <Source Organisation ID> <Targer Organisation ID>"
+       echo "./team-bridge-install.sh --silent <Installation path> <Role: server/both> <TCP or UDP mode> <local Team-Bridge Server IP> <Source Organisation ID> <Targer Organisation ID>"
        echo ""
        echo "CLI parameters example for server:"
        echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 server UDP 172.17.12.12 123jdsfs345435 vWjdsfsfsdfsd12"
        echo ""
        echo "CLI parameters usage for both server and client:"
-       echo "./team-bridge-install.sh --silent <Installation path> <Role: both> <TCP or UDP mode> <Client: Team Bridge Server IP> <Client: Source Organisation ID> <Server: <Source Organisation ID> <Server: Targer Organisation ID>"
+       echo "./team-bridge-install.sh --silent <Installation path> <Role: both> <TCP or UDP mode> <Client: Other end Team-Bridge Server IP> <Client: Source Organisation ID> <Server: Local Team-Bridge Server IP> <Server: Source Organisation ID> <Server: Targer Organisation ID>"
        echo ""
        echo "CLI parameters example for both server client:"
-       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 both UDP 172.17.12.12 123jdsfs345435 vWjdsfsfsdfsd12 Qdgsdfgfsff434"
+       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 both UDP 172.17.12.12 123jdsfs345435 172.17.12.13 vWjdsfsfsdfsd12 Qdgsdfgfsff434"
        echo ""
        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
        exit 0
@@ -61,7 +61,7 @@ if [ ${1+"true"} ]; then
           export TBMODE=$4
       fi
       if [ ${5+"true"} ]; then
-          export TBSERVERIP=$5
+          export TBSERVERIP2=$5
       fi
       if [ ${6+"true"} ]; then
           export SOURCEORG=$6
@@ -81,7 +81,7 @@ if [ ${1+"true"} ]; then
           export SOURCEORG=$6
       fi
       if [ ${7+"true"} ]; then
-          export TARGETORG=$7
+          export TBSERVERIP2=$7
       fi
       if [ ${8+"true"} ]; then
           export SOURCEORG2=$8
@@ -95,38 +95,42 @@ if [ "$silentmode" = false ]; then
     clear
     echo "++++++++++++++++++++++++++++++++++++++++"
     echo "                                        "
-    echo "  NSC3 Team-Bridge Client installer:    "
+    echo "  NSC3 Team-Bridge installer:           "
     echo "  This script prepares NSC3 config      "
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
-    echo "NSC3 installation folder, e.g /home/nscuser/nsc3: "
+    echo "NSC3 installation folder, e.g /home/ubuntu/nsc3: "
     read NSC3HOMEFOLDER
     export NSCHOME=$NSC3HOMEFOLDER
-    echo "TCP or UDP Mode?: (Value: TCP/UDP) "
+    echo "TCP or UDP Protocol ?: "
     read TBMODE
-    echo "client, server or both mode?: (Value: client/server/both) "
+    echo "Role (client, server or both) ?: "
     read TBROLE
     if ! [[ $TBROLE = client  ||  $TBMODE = server ||  $TBMODE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
     if [ $TBROLE = client ]; then 
-       echo "Team-Bridge server IP address: "
+       echo "other end Team-Bridge server IP address: "
        read TBSERVERIP
-       echo "Source Organisation ID: "
+       echo "Local source organisation ID: "
        read SOURCEORG
     fi
     if [ $TBROLE = server ]; then 
-       echo "Source Organisation ID: "
+       echo "other end source organisation ID: "
        read SOURCEORG
-       echo "Target Organisation ID: "
+       echo "local Team-Bridge server IP address: "
+       read TBSERVERIP2
+       echo "local target organisation ID: "
        read TARGETORG
     fi
     if [ $TBROLE = both ]; then 
-       echo "Client: Team-Bridge server IP address: "
+       echo "Client - other end Team-Bridge server IP address: "
        read TBSERVERIP
-       echo "Client: Source Organisation ID: "
+       echo "Client - Local source organisation ID: "
        read SOURCEORG
-       echo "Server: Source Organisation ID: "
+       echo "Server - Local Team-Bridge server IP address: "
+       read TBSERVERIP2
+       echo "Server - other end source organisation ID: "
        read SOURCEORG2
-       echo "Server: Target Organisation ID: "
+       echo "Server - Local target organisation ID: "
        read TARGETORG2
     fi
 fi
@@ -135,6 +139,7 @@ if ! [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder is missing! "
 if ! [[ $TBMODE = TCP  ||  $TBMODE = UDP ]]; then echo "*** "$TBMODE"  as input value is not range of mode selection. please type TCP or UDP"; exit 0; fi
 if ! [[ $TBROLE = client  ||  $TBMODE = server ||  $TBMODE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
 if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
+if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
 if [[ $SOURCEORG = *" "* ]]; then echo "*** "$SOURCEORG"  as input is not valid NSC3 source organisation ID"; exit 0; fi
 if [[ $SOURCEORG2 = *" "* ]]; then echo "*** "$SOURCEORG2"  as input is not valid NSC3 source organisation ID"; exit 0; fi
 if [[ $TARGETORG = *" "* ]]; then echo "*** "$TARGETORG"  as input is not valid NSC3 target organisation ID"; exit 0; fi
