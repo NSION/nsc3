@@ -1,8 +1,0 @@
-  nsc-team-bridge-service-client-tcp:
-    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
-    env_file:
-        - nsc-team-bridge-service-client-tcp.env
-    container_name: nsc-team-bridge-service-client-tcp
-    networks: nsc-network
-    volumes:
-        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
