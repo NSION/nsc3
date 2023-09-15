@@ -47,28 +47,21 @@ if [ "$silentmode" = false ]; then
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
     echo "NSC3 installation folder, e.g /home/nscuser/nsc3: "
-    read  NSC3HOMEFOLDER
+    read NSC3HOMEFOLDER
     export NSCHOME=$NSC3HOMEFOLDER
-    echo "NSC3 public hostname, e.g videoservice.nsion.io: "
-    read  NSC3URL
-    export PUBLICIP=$NSC3URL
-    echo "Location of SSL cert files, e.g /home/nscuser: "
-    read  SSLF
-    export SSLFOLDER=$SSLF
-    echo "NSC3 Release tag, e.g release-3.15: "
-    read REL
-    export NSC3REL=$REL
-
+    echo "TCP or UDP Mode?: (Value: TCP/UDP) "
+    read TBMODE
+    echo "Team-Bridge server IP address: "
+    read TBSERVERIP
+    echo "Source Organisation ID: "
+    read SOURCEORG
 fi
 # Check values
 if [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder found' ***"; else echo "*** $NSCHOME 'Installation folder is missing! Exit' ***"; exit 0; fi
+if ! [[ $TBMODE = TCP  ||  $TBMODE = UDP ]]; then echo "*** "$TBMODE"  as input value is not range of mode selection. please type TCP or UDP"; exit 0; fi
+if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
+if [[ $SOURCEORG = *" "* ]]; then echo "*** "$SOURCEORG"  as input is not valid NSC3 source organisation ID"; exit 0; fi
 # Create dictories
-if [ ! -d $NSCHOME/logs ]; then 
-   mkdir $NSCHOME/logs 2> /dev/null 
-fi
-if [ ! -d $NSCHOME/mapdata ]; then 
-   mkdir $NSCHOME/mapdata 2> /dev/null 
-fi
 if [ ! -d $NSCHOME/nsc-gateway-cert ]; then 
    mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null 
 fi
