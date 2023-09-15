@@ -1,8 +1,0 @@
-  nsc-team-bridge-service-server-udp:
-    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
-    env_file:
-        - nsc-team-bridge-service-server-udp.env
-    container_name: nsc-team-bridge-service-server-udp
-    networks: nsc-network
-    ports:
-        - "64660/udp"
