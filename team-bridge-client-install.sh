@@ -23,11 +23,17 @@ if [ ${1+"true"} ]; then
        echo "CLI parameters example for client:"
        echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 client UDP 172.17.12.12 123jdsfs345435"
        echo ""
-       echo "CLI parameters usage for server/both:"
+       echo "CLI parameters usage for server:"
        echo "./team-bridge-install.sh --silent <Installation path> <Role: server/both> <TCP or UDP mode> <Team Bridge Server IP> <Source Organisation ID> <Targer Organisation ID>"
        echo ""
-       echo "CLI parameters example for server/both:"
+       echo "CLI parameters example for server:"
        echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 server UDP 172.17.12.12 123jdsfs345435 vWjdsfsfsdfsd12"
+       echo ""
+       echo "CLI parameters usage for both server and client:"
+       echo "./team-bridge-install.sh --silent <Installation path> <Role: both> <TCP or UDP mode> <Client: Team Bridge Server IP> <Client: Source Organisation ID> <Server: <Source Organisation ID> <Server: Targer Organisation ID>"
+       echo ""
+       echo "CLI parameters example for both server client:"
+       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 both UDP 172.17.12.12 123jdsfs345435 vWjdsfsfsdfsd12 Qdgsdfgfsff434"
        echo ""
        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
        exit 0
@@ -38,17 +44,51 @@ if [ ${1+"true"} ]; then
    if [ ${3+"true"} ]; then
        export TBROLE=$3
    fi
-   if [ ${4+"true"} ]; then
-       export TBMODE=$4
+   if ! [[ $TBROLE = client  ||  $TBMODE = server ||  $TBMODE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
+   if [ $TBROLE = client ]; then 
+      if [ ${4+"true"} ]; then
+          export TBMODE=$4
+      fi
+      if [ ${5+"true"} ]; then
+          export TBSERVERIP=$5
+      fi
+      if [ ${6+"true"} ]; then
+          export SOURCEORG=$6
+      fi
    fi
-   if [ ${5+"true"} ]; then
-       export TBSERVERIP=$5
+   if [ $TBROLE = server ]; then 
+      if [ ${4+"true"} ]; then
+          export TBMODE=$4
+      fi
+      if [ ${5+"true"} ]; then
+          export TBSERVERIP=$5
+      fi
+      if [ ${6+"true"} ]; then
+          export SOURCEORG=$6
+      fi
+      if [ ${7+"true"} ]; then
+          export TARGETORG=$7
+      fi
    fi
-   if [ ${6+"true"} ]; then
-       export SOURCEORG=$6
-   fi
-   if [ ${7+"true"} ]; then
-       export TARGETORG=$7
+   if [ $TBROLE = both ]; then 
+      if [ ${4+"true"} ]; then
+          export TBMODE=$4
+      fi
+      if [ ${5+"true"} ]; then
+          export TBSERVERIP=$5
+      fi
+      if [ ${6+"true"} ]; then
+          export SOURCEORG=$6
+      fi
+      if [ ${7+"true"} ]; then
+          export TARGETORG=$7
+      fi
+      if [ ${8+"true"} ]; then
+          export SOURCEORG2=$8
+      fi
+      if [ ${9+"true"} ]; then
+          export TARGETORG2=$9
+      fi
    fi
 fi
 if [ "$silentmode" = false ]; then
@@ -66,12 +106,29 @@ if [ "$silentmode" = false ]; then
     read TBMODE
     echo "client, server or both mode?: (Value: client/server/both) "
     read TBROLE
-    echo "Team-Bridge server IP address: "
-    read TBSERVERIP
-    echo "Source Organisation ID: "
-    read SOURCEORG
-    echo "Target Organisation ID: "
-    read TARGETORG
+    if ! [[ $TBROLE = client  ||  $TBMODE = server ||  $TBMODE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
+    if [ $TBROLE = client ]; then 
+       echo "Team-Bridge server IP address: "
+       read TBSERVERIP
+       echo "Source Organisation ID: "
+       read SOURCEORG
+    fi
+    if [ $TBROLE = server ]; then 
+       echo "Source Organisation ID: "
+       read SOURCEORG
+       echo "Target Organisation ID: "
+       read TARGETORG
+    fi
+    if [ $TBROLE = both ]; then 
+       echo "Client: Team-Bridge server IP address: "
+       read TBSERVERIP
+       echo "Client: Source Organisation ID: "
+       read SOURCEORG
+       echo "Server: Source Organisation ID: "
+       read SOURCEORG2
+       echo "Server: Target Organisation ID: "
+       read TARGETORG2
+    fi
 fi
 # Check values
 if ! [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder is missing! "; exit 0; fi
@@ -79,12 +136,15 @@ if ! [[ $TBMODE = TCP  ||  $TBMODE = UDP ]]; then echo "*** "$TBMODE"  as input 
 if ! [[ $TBROLE = client  ||  $TBMODE = server ||  $TBMODE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
 if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
 if [[ $SOURCEORG = *" "* ]]; then echo "*** "$SOURCEORG"  as input is not valid NSC3 source organisation ID"; exit 0; fi
+if [[ $SOURCEORG2 = *" "* ]]; then echo "*** "$SOURCEORG2"  as input is not valid NSC3 source organisation ID"; exit 0; fi
+if [[ $TARGETORG = *" "* ]]; then echo "*** "$TARGETORG"  as input is not valid NSC3 target organisation ID"; exit 0; fi
+if [[ $TARGETORG2 = *" "* ]]; then echo "*** "$TARGETORG2"  as input is not valid NSC3 target organisation ID"; exit 0; fi
 # Create TCP keys
 if ! [[ $TBMODE = TCP ]]; then
    if [ ! -d $NSCHOME/bridgekeys ]; then 
       chmod u+x $NSCHOME/generateTeamBridgeRSAKeyPairs.sh 2> /dev/null
       bash $NSCHOME/generateTeamBridgeRSAKeyPairs.sh 2> /dev/null
-      KEY-COPY-RINDER=true
+      KEY-COPY-REMINDER=true
    fi
 fi
 # Grep release tag value
@@ -99,6 +159,8 @@ if ! [ $(grep -c "TBROLE" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBRO
 if ! [ $(grep -c "TBSERVERIP" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBSERVERIP=$TBSERVERIP" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "SOURCEORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export SOURCEORG=$SOURCEORG" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "TARGETORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TARGETORG=$TARGETORG" >> $NSCHOME/nsc-host.env; fi
+if ! [ $(grep -c "SOURCEORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export SOURCEORG2=$SOURCEORG2" >> $NSCHOME/nsc-host.env; fi
+if ! [ $(grep -c "TARGETORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TARGETORG2=$TARGETORG2" >> $NSCHOME/nsc-host.env; fi
 chmod 333 $NSCHOME/nsc-host.env 2> /dev/null
 # Update docker-compose.yml file
 cd $NSCHOME
@@ -177,7 +239,6 @@ if [ $TBROLE = client ]; then echo "   Source org ID: $SOURCEORG ServerIP: $TBSE
 if [ $TBROLE = server ]; then echo "   Source org ID: $SOURCEORG Target org ID: $TARGETORG "; fi
 if [ $TBROLE = both ]; then echo "   Client: Source org ID: $SOURCEORG ServerIP: $TBSERVERIP  "; fi
 if [ $TBROLE = both ]; then echo "   Server: Source org ID: $SOURCEORG2 Target org ID: $TARGETORG2 "; fi
-echo "   Source organisation: $SOURCEORG                     "; fi
 echo ""
 echo "   Login to your NSC3 web app by URL address       "
 echo "   https://$PUBLICIP                               "
