@@ -57,141 +57,31 @@ if [ "$silentmode" = false ]; then
     read SOURCEORG
 fi
 # Check values
-if [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder found' ***"; else echo "*** $NSCHOME 'Installation folder is missing! Exit' ***"; exit 0; fi
+if ! [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder is missing! "; exit 0; fi
 if ! [[ $TBMODE = TCP  ||  $TBMODE = UDP ]]; then echo "*** "$TBMODE"  as input value is not range of mode selection. please type TCP or UDP"; exit 0; fi
 if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
 if [[ $SOURCEORG = *" "* ]]; then echo "*** "$SOURCEORG"  as input is not valid NSC3 source organisation ID"; exit 0; fi
-# Create dictories
-if [ ! -d $NSCHOME/nsc-gateway-cert ]; then 
-   mkdir $NSCHOME/nsc-gateway-cert 2> /dev/null 
-fi
-
-if [ -f "$SSLFOLDER/privkey.pem" ]; then
-   cp $SSLFOLDER/privkey.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-   else echo "*** $SSLFOLDER/privkey.pem private key file is missing! ***"
-fi
-
-if [ -f "$SSLFOLDER/fullchain.pem" ]; then
-   cp $SSLFOLDER/fullchain.pem $NSCHOME/nsc-gateway-cert/. 2> /dev/null
-   else echo "*** $SSLFOLDER/fullchain.pem cert file is missing! ***"
-fi
-if [ "$silentmode" = false ]; then
-   echo "Map files options : "
-   echo "1. North America map"
-   echo "2. Europa map"
-   echo "3. Australia map"
-   echo "4. GCC states map"
-   echo "5. Skip maptile downloading ..."
-   echo "Select your option as number: "
-   declare -i MAP_OPTION
-   read MAP_OPTION
-   if [ $MAP_OPTION -eq 1 ]; then
-       export MAPNAME="North America"
-       echo "Selected map file is $MAPNAME. Size 15.19 GiB"
-       echo -n "Do you want to downloading the map file? (y/n): "
-       read answer
-       if [ "$answer" != "${answer#[Yy]}" ] ;then
-           REGION="NA"
-       else
-           echo "Continue installation without maptiles ..."
-       fi
+# Create TCP keys
+if ! [[ $TBMODE = TCP ]]; then
+   if [ ! -d $NSCHOME/bridgekeys ]; then 
+      chmod u+x $NSCHOME/generateTeamBridgeRSAKeyPairs.sh 2> /dev/null
+      bash $NSCHOME/generateTeamBridgeRSAKeyPairs.sh 2> /dev/null
    fi
-    if [ $MAP_OPTION -eq 2 ];then
-        export MAPNAME="Europe"
-        echo "Selected map file is $MAPNAME. Size 19.39 GiB"
-        echo -n "Do you want to downloading the map file?? (y/n): "
-        read answer
-        if [ "$answer" != "${answer#[Yy]}" ] ;then
-            REGION="EU"
-        else
-            echo "Continue installation without maptiles ..."
-        fi
-    fi
-    if [ $MAP_OPTION -eq 3 ]; then
-        export MAPNAME="Australia"
-        echo "Selected map file is $MAPNAME. Size 1.21 GiB"
-        echo -n "Do you want to downloading the map file? (y/n): "
-        read answer
-        if [ "$answer" != "${answer#[Yy]}" ] ;then
-            REGION="AUS"
-        else
-            echo "Continue installation without maptiles ..."
-        fi
-    fi
-    if [ $MAP_OPTION -eq 4 ]; then
-        export MAPNAME="GCC states"
-        echo "Selected map file is $MAPNAME. Size 390.52 MiB"
-        echo -n "Do you want to downloading the map file? (y/n): "
-        read answer
-        if [ "$answer" != "${answer#[Yy]}" ] ;then
-            REGION="GCC"
-        else
-            echo "Continue installation without maptiles ..."
-        fi
-    fi    
-    if [ $MAP_OPTION -eq 5 ]; then
-        
-       REGION="false"
-        
-    fi
-    if [ $MAP_OPTION -gt 5 ]
-    then
-        echo "Selected value $MAP_OPTION is out of range 1-5!"
-    exit 0
-    fi
-    if [ $MAP_OPTION -lt 1 ]
-    then
-        echo "Selected value $MAP_OPTION  is out of range 1-5!"
-    exit 0
-    fi
 fi
-# Download Map file:
-if [ $REGION == "EU" ]; then 
-     wget -k -O $NSCHOME/mapdata/europe.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/europe.mbtiles?sp=r&st=2023-02-27T12:04:08Z&se=2025-02-27T20:04:08Z&sv=2021-06-08&sr=b&sig=BaISloviRuplrGsECr%2Fo%2FcxjFrLmVcN7KS4qXdzJJv8%3D"
-     echo "*** $MAPNAME map file is downloaded ***"
-fi     
-if [ $REGION == "NA" ]; then 
-     wget -k -O $NSCHOME/mapdata/north_america.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/north-america.mbtiles?sp=r&st=2023-02-27T12:05:58Z&se=2025-02-27T20:05:58Z&sv=2021-06-08&sr=b&sig=VwKJLyy29YlQZ%2BtpFREz7Bh35ZxenfAszIiQNGVnhT0%3D"
-     echo "*** $MAPNAME map file is downloaded ***"
-fi     
-if [ $REGION == "AUS" ]; then 
-     wget -k -O $NSCHOME/mapdata/australia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/australia-oceania_australia.mbtiles?sp=r&st=2023-02-27T12:10:51Z&se=2025-02-27T20:10:51Z&sv=2021-06-08&sr=b&sig=eToyiT7yDb1s4CHDl1ZMXxh0%2BJ4EAqa3rzzDt98kezM%3D"
-     echo "*** $MAPNAME map file is downloaded ***"
-fi     
-if [ $REGION == "GCC" ]; then 
-     wget -k -O $NSCHOME/mapdata/asia.mbtiles "https://nscdevstorage.blob.core.windows.net/maptiler/asia_gcc-states.mbtiles?sp=r&st=2023-02-27T12:07:33Z&se=2025-02-27T20:07:33Z&sv=2021-06-08&sr=b&sig=7upeiUU7Y%2B7qrviKIi8Ceoiq5vZWSLO%2FdmELOcfq7l4%3D"
-     echo "*** $MAPNAME map file is downloaded ***"
-fi     
-if [ $REGION == "false" ]; then 
-     echo "*** Installation without maptiles downloading ***"
-fi 
-# Check values
-if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then     
-   echo "*** Release tag: $NSC3REL tag found ***" 
-   RELEASETAG=$NSC3REL
-   else    
-   echo "*** Release tag: $NSC3REL is missing. Using release tag: 'latest' ***" 
-   RELEASETAG="latest"
-fi
-# Move old files
-mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
-# Remove old and create new env file
-if [ -f "$NSCHOME/nsc-host.env" ]; then
-   rm $NSCHOME/nsc-host.env 2> /dev/null
-fi
-# set defaults for empty variables
-[ -z "$VALOR_ENABLED" ] && export VALOR_ENABLED=false
-# Store variables
-echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
-echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
-echo "export VALOR_ENABLED=$VALOR_ENABLED" >> $NSCHOME/nsc-host.env
-export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null
-#  Modify maptiles rights level
-chmod 644 $NSCHOME/mapdata/*.* 2> /dev/null
-# Create docker-compose.yml file
+# Grep release tag value
+NSC3REL=$(cat $NSCHOME/docker-compose.yml | grep registrynsion.azurecr.io/main-postgres: | cut -d\: -f3) 2> /dev/null
+echo "*** Current release tag: $NSC3REL  ***" 
+RELEASETAG=$NSC3REL
+# Update env variables
+echo "export TBMODE=$TBMODE" > $NSCHOME/nsc-host.env
+echo "export TBSERVERIP=$TBSERVERIP > $NSCHOME/nsc-host.env
+echo "export SOURCEORG=$SOURCEORG > $NSCHOME/nsc-host.env
+
+# Update docker-compose.yml file
 cd $NSCHOME
+# make backup
 if [ -f "docker-compose.yml" ]; then
-   mv docker-compose.yml docker-compose.old 2> /dev/null
+   cp docker-compose.yml docker-compose.tb-addition-old 2> /dev/null
 fi
 (echo "cat <<EOF >docker-compose-temp.yml";
 cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
