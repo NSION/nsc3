@@ -149,7 +149,7 @@ if ! [[ $TBMODE = TCP ]]; then
    if [ ! -d $NSCHOME/bridgekeys ]; then 
       chmod u+x $NSCHOME/generateTeamBridgeRSAKeyPairs.sh 2> /dev/null
       bash $NSCHOME/generateTeamBridgeRSAKeyPairs.sh 2> /dev/null
-      KEY-COPY-REMINDER=true
+      KEY_COPY_REMINDER=true
    fi
 fi
 # Grep release tag value
@@ -167,6 +167,10 @@ if ! [ $(grep -c "TARGETORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export T
 if ! [ $(grep -c "SOURCEORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export SOURCEORG2=$SOURCEORG2" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "TARGETORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TARGETORG2=$TARGETORG2" >> $NSCHOME/nsc-host.env; fi
 chmod 333 $NSCHOME/nsc-host.env 2> /dev/null
+# Additional variables
+if [ $TBROLE = both ]; then CLIENTSOURCE=$SOURCEORG; fi
+if [ $TBROLE = both ]; then SERVERSOURCE=$SOURCEORG2; fi
+if [ $TBROLE = both ]; then SERVERDEST=$TARGETORG2; fi
 # Update docker-compose.yml file
 cd $NSCHOME
 # make backup
@@ -181,7 +185,7 @@ if [[ $TBMODE = UDP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env
+   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env;
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = server ]]; then
@@ -191,7 +195,7 @@ if [[ $TBMODE = UDP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env
+   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env;
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = both ]]; then
@@ -202,9 +206,10 @@ if [[ $TBMODE = UDP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env
-   
-   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env
+   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env;
+   export SOURCEORG=$SOURCEORG2;
+   export TARGETORG=$TARGETORG2;
+   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env:
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
 fi
@@ -216,6 +221,7 @@ if [[ $TBMODE = TCP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
+   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env;
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = server ]]; then
@@ -225,6 +231,7 @@ if [[ $TBMODE = TCP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
+   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env;
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = both ]]; then
@@ -235,6 +242,10 @@ if [[ $TBMODE = TCP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
+   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env;
+   export SOURCEORG=$SOURCEORG2;
+   export TARGETORG=$TARGETORG2;
+   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env;
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
 fi
@@ -253,8 +264,12 @@ echo "   NSC3 backend release $RELEASETAG is installed with  "
 echo "   Team-Bridge role: $TBROLE using $TBMODE protocol    "
 if [ $TBROLE = client ]; then echo "   Source org ID: $SOURCEORG ServerIP: $TBSERVERIP "; fi
 if [ $TBROLE = server ]; then echo "   Source org ID: $SOURCEORG Target org ID: $TARGETORG "; fi
-if [ $TBROLE = both ]; then echo "   Client: Source org ID: $SOURCEORG ServerIP: $TBSERVERIP  "; fi
-if [ $TBROLE = both ]; then echo "   Server: Source org ID: $SOURCEORG2 Target org ID: $TARGETORG2 "; fi
+if [ $TBROLE = both ]; then echo "   Client: Source org ID: $CLIENTSOURCE ServerIP: $TBSERVERIP  "; fi
+if [ $TBROLE = both ]; then echo "   Server: Source org ID: $SERVERSOURCE Target org ID: $SERVERDEST "; fi
+echo ""
+if [ $KEY_COPY_REMINDER ]; then echo " New TCP keypairs generated at this server. 
+Please copy all key pair files from folder $NSCHOME/bridgekeys 
+to other end server folder $NSCHOME/bridgekeys"; fi
 echo ""
 echo "   Login to your NSC3 web app by URL address       "
 echo "   https://$PUBLICIP                               "
