@@ -1,6 +1,7 @@
 #!/bin/bash
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
+TIMESTAMP=$(date +%Y-%m-%d)
 silentmode=false
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
@@ -16,11 +17,17 @@ if [ ${1+"true"} ]; then
        echo "./team-bridge-install.sh --silent      'installation with command line parameters'"
        echo "./team-bridge-install.sh 		  'interactive installation mode'"
        echo ""
-       echo "CLI parameters usage:"
-       echo "./team-bridge-install.sh --silent <Installation path> <TCP or UDP mode> <Team Bridge Server IP> <Source Organisation ID>"
+       echo "CLI parameters usage for client:"
+       echo "./team-bridge-install.sh --silent <Installation path> <Role: client> <TCP or UDP mode> <Team Bridge Server IP> <Source Organisation ID>"
        echo ""
-       echo "CLI parameters example:"
-       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 UDP 172.17.12.12 "
+       echo "CLI parameters example for client:"
+       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 client UDP 172.17.12.12 123jdsfs345435"
+       echo ""
+       echo "CLI parameters usage for server/both:"
+       echo "./team-bridge-install.sh --silent <Installation path> <Role: server/both> <TCP or UDP mode> <Team Bridge Server IP> <Source Organisation ID> <Targer Organisation ID>"
+       echo ""
+       echo "CLI parameters example for server/both:"
+       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 server UDP 172.17.12.12 123jdsfs345435 vWjdsfsfsdfsd12"
        echo ""
        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
        exit 0
@@ -40,6 +47,9 @@ if [ ${1+"true"} ]; then
    if [ ${6+"true"} ]; then
        export SOURCEORG=$6
    fi
+   if [ ${7+"true"} ]; then
+       export TARGETORG=$7
+   fi
 fi
 if [ "$silentmode" = false ]; then
     clear
@@ -54,14 +64,19 @@ if [ "$silentmode" = false ]; then
     export NSCHOME=$NSC3HOMEFOLDER
     echo "TCP or UDP Mode?: (Value: TCP/UDP) "
     read TBMODE
+    echo "client, server or both mode?: (Value: client/server/both) "
+    read TBROLE
     echo "Team-Bridge server IP address: "
     read TBSERVERIP
     echo "Source Organisation ID: "
     read SOURCEORG
+    echo "Target Organisation ID: "
+    read TARGETORG
 fi
 # Check values
 if ! [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder is missing! "; exit 0; fi
 if ! [[ $TBMODE = TCP  ||  $TBMODE = UDP ]]; then echo "*** "$TBMODE"  as input value is not range of mode selection. please type TCP or UDP"; exit 0; fi
+if ! [[ $TBROLE = client  ||  $TBMODE = server ||  $TBMODE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
 if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
 if [[ $SOURCEORG = *" "* ]]; then echo "*** "$SOURCEORG"  as input is not valid NSC3 source organisation ID"; exit 0; fi
 # Create TCP keys
@@ -69,6 +84,7 @@ if ! [[ $TBMODE = TCP ]]; then
    if [ ! -d $NSCHOME/bridgekeys ]; then 
       chmod u+x $NSCHOME/generateTeamBridgeRSAKeyPairs.sh 2> /dev/null
       bash $NSCHOME/generateTeamBridgeRSAKeyPairs.sh 2> /dev/null
+      KEY-COPY-RINDER=true
    fi
 fi
 # Grep release tag value
@@ -76,16 +92,19 @@ NSC3REL=$(cat $NSCHOME/docker-compose.yml | grep registrynsion.azurecr.io/main-p
 echo "*** Current release tag: $NSC3REL  ***" 
 RELEASETAG=$NSC3REL
 # Update env variables
-source $NSCHOME/nsc-host.env
-if [ -z "$TBMODE" ]; then echo "export TBMODE=$TBMODE" >> $NSCHOME/nsc-host.env; fi
-if [ -z "$TBROLE" ]; then echo "export TBMODE=$TBROLE" >> $NSCHOME/nsc-host.env; fi
-if [ -z "$TBSERVERIP" ]; then echo "export TBSERVERIP=$TBSERVERIP" >> $NSCHOME/nsc-host.env; fi
-if [ -z "$SOURCEORG" ]; then echo "export SOURCEORG=$SOURCEORG" >> $NSCHOME/nsc-host.env; fi
+source $NSCHOME/nsc-host.env 2> /dev/null
+chmod 666 $NSCHOME/nsc-host.env 2> /dev/null
+if ! [ $(grep -c "TBMODE" $NSCHOME/nsc-host.env) -eq 1 ]; ]; then echo "export TBMODE=$TBMODE" >> $NSCHOME/nsc-host.env; fi
+if ! [ $(grep -c "TBROLE" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBROLE=$TBROLE" >> $NSCHOME/nsc-host.env; fi
+if ! [ $(grep -c "TBSERVERIP" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBSERVERIP=$TBSERVERIP" >> $NSCHOME/nsc-host.env; fi
+if ! [ $(grep -c "SOURCEORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export SOURCEORG=$SOURCEORG" >> $NSCHOME/nsc-host.env; fi
+if ! [ $(grep -c "TARGETORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TARGETORG=$TARGETORG" >> $NSCHOME/nsc-host.env; fi
+chmod 333 $NSCHOME/nsc-host.env 2> /dev/null
 # Update docker-compose.yml file
 cd $NSCHOME
 # make backup
 if [ -f "docker-compose.yml" ]; then
-   cp docker-compose.yml docker-compose.tb-addition-backup 2> /dev/null
+   cp docker-compose.yml docker-compose-tb-addition-backup-$TIMESTAMP.yml 2> /dev/null
 fi
 if [[ $TBMODE = UDP ]]; then
    if [[ $TBROLE = client ]]
@@ -151,8 +170,14 @@ echo "*** Downloading docker images ... ***"
 sudo docker-compose up -d
 echo ""
 echo "*******************************************************"
-echo ""                                        
-echo "   NSC3 backend release $RELEASETAG is installed!  "
+echo "                                                       "                                        
+echo "   NSC3 backend release $RELEASETAG is installed with  "
+echo "   Team-Bridge role: $TBROLE using $TBMODE protocol    "
+if [ $TBROLE = client ]; then echo "   Source org ID: $SOURCEORG ServerIP: $TBSERVERIP "; fi
+if [ $TBROLE = server ]; then echo "   Source org ID: $SOURCEORG Target org ID: $TARGETORG "; fi
+if [ $TBROLE = both ]; then echo "   Client: Source org ID: $SOURCEORG ServerIP: $TBSERVERIP  "; fi
+if [ $TBROLE = both ]; then echo "   Server: Source org ID: $SOURCEORG2 Target org ID: $TARGETORG2 "; fi
+echo "   Source organisation: $SOURCEORG                     "; fi
 echo ""
 echo "   Login to your NSC3 web app by URL address       "
 echo "   https://$PUBLICIP                               "
