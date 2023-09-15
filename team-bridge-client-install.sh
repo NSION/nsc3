@@ -174,54 +174,65 @@ if [ -f "docker-compose.yml" ]; then
    cp docker-compose.yml docker-compose-tb-addition-backup-$TIMESTAMP.yml 2> /dev/null
 fi
 if [[ $TBMODE = UDP ]]; then
-   if [[ $TBROLE = client ]]
+   if [[ $TBROLE = client ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p' |
-   sed '/add-on nsc-team-bridge-service-client-udp/,/add-off nsc-team-bridge-service-client-udp/ s/#//'
+   sed '/add-on nsc-team-bridge-service-client-udp/,/add-off nsc-team-bridge-service-client-udp/ s/#//';
+   ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
+   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
-   if [[ $TBROLE = server ]]
+   if [[ $TBROLE = server ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p' |
-   sed '/add-on nsc-team-bridge-service-server-udp/,/add-off nsc-team-bridge-service-server-udp/ s/#//' 
+   sed '/add-on nsc-team-bridge-service-server-udp/,/add-off nsc-team-bridge-service-server-udp/ s/#//'; 
+   ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
+   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
-   if [[ $TBROLE = both ]]
+   if [[ $TBROLE = both ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p' | 
    sed '/add-on nsc-team-bridge-service-server-udp/,/add-off nsc-team-bridge-service-server-udp/ s/#//' |
-   sed '/add-on nsc-team-bridge-service-client-udp/,/add-off nsc-team-bridge-service-client-udp/ s/#//'
+   sed '/add-on nsc-team-bridge-service-client-udp/,/add-off nsc-team-bridge-service-client-udp/ s/#//';
+   ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
+   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env
+   
+   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
 fi
 if [[ $TBMODE = TCP ]]; then
-   if [[ $TBROLE = client ]]
+   if [[ $TBROLE = client ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p' |
-   sed '/add-on nsc-team-bridge-service-client-tcp/,/add-off nsc-team-bridge-service-client-tcp/ s/#//'
+   sed '/add-on nsc-team-bridge-service-client-tcp/,/add-off nsc-team-bridge-service-client-tcp/ s/#//';
+   ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
-   if [[ $TBROLE = server ]]
+   if [[ $TBROLE = server ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p' |
-   sed '/add-on nsc-team-bridge-service-server-tcp/,/add-off nsc-team-bridge-service-server-tcp/ s/#//' 
+   sed '/add-on nsc-team-bridge-service-server-tcp/,/add-off nsc-team-bridge-service-server-tcp/ s/#//';
+   ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
    fi
-   if [[ $TBROLE = both ]]
+   if [[ $TBROLE = both ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p' | 
    sed '/add-on nsc-team-bridge-service-server-tcp/,/add-off nsc-team-bridge-service-server-tcp/ s/#//' |
-   sed '/add-on nsc-team-bridge-service-client-tcp/,/add-off nsc-team-bridge-service-client-tcp/ s/#//'
+   sed '/add-on nsc-team-bridge-service-client-tcp/,/add-off nsc-team-bridge-service-client-tcp/ s/#//';
+   ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
    rm -f temp.yml docker-compose-temp.yml 2> /dev/null
