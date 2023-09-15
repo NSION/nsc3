@@ -208,8 +208,46 @@ services:
       options: {}
     networks: nsc-network
     restart: unless-stopped  
-## add-on
-## add-off
+## add-on nsc-team-bridge-service-client-tcp
+#  nsc-team-bridge-service-client-tcp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-client-tcp.env
+#    container_name: nsc-team-bridge-service-client-tcp
+#    networks: nsc-network
+#    volumes:
+#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+## add-off nsc-team-bridge-service-client-tcp
+## add-on nsc-team-bridge-service-server-tcp
+#  nsc-team-bridge-service-server-tcp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-server-tcp.env
+#    container_name: nsc-team-bridge-service-server-tcp
+#    networks: nsc-network
+#    ports:
+#        - "64660"
+#    volumes:
+#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+## add-off nsc-team-bridge-service-server-tcp
+## add-on nsc-team-bridge-service-client-udp
+#  nsc-team-bridge-service-client-udp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-client-udp.env
+#    container_name: nsc-team-bridge-service-client-udp
+#    networks: nsc-network
+## add-off nsc-team-bridge-service-client-udp
+## add-on nsc-team-bridge-service-server-udp
+#  nsc-team-bridge-service-server-udp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-server-udp.env
+#    container_name: nsc-team-bridge-service-server-udp
+#    networks: nsc-network
+#    ports:
+#        - "64660/udp"
+## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
     name: nsc-network
@@ -438,8 +476,46 @@ services:
       options: {}
     networks: nsc-network
     restart: unless-stopped  
-## add-on
-## add-off
+## add-on nsc-team-bridge-service-client-tcp
+#  nsc-team-bridge-service-client-tcp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-client-tcp.env
+#    container_name: nsc-team-bridge-service-client-tcp
+#    networks: nsc-network
+#    volumes:
+#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+## add-off nsc-team-bridge-service-client-tcp
+## add-on nsc-team-bridge-service-server-tcp
+#  nsc-team-bridge-service-server-tcp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-server-tcp.env
+#    container_name: nsc-team-bridge-service-server-tcp
+#    networks: nsc-network
+#    ports:
+#        - "64660"
+#    volumes:
+#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+## add-off nsc-team-bridge-service-server-tcp
+## add-on nsc-team-bridge-service-client-udp
+#  nsc-team-bridge-service-client-udp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-client-udp.env
+#    container_name: nsc-team-bridge-service-client-udp
+#    networks: nsc-network
+## add-off nsc-team-bridge-service-client-udp
+## add-on nsc-team-bridge-service-server-udp
+#  nsc-team-bridge-service-server-udp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-server-udp.env
+#    container_name: nsc-team-bridge-service-server-udp
+#    networks: nsc-network
+#    ports:
+#        - "64660/udp"
+## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
     name: nsc-network
@@ -668,8 +744,46 @@ services:
       options: {}
     networks: nsc-network
     restart: unless-stopped  
-## add-on
-## add-off
+## add-on nsc-team-bridge-service-client-tcp
+#  nsc-team-bridge-service-client-tcp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-client-tcp.env
+#    container_name: nsc-team-bridge-service-client-tcp
+#    networks: nsc-network
+#    volumes:
+#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+## add-off nsc-team-bridge-service-client-tcp
+## add-on nsc-team-bridge-service-server-tcp
+#  nsc-team-bridge-service-server-tcp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-server-tcp.env
+#    container_name: nsc-team-bridge-service-server-tcp
+#    networks: nsc-network
+#    ports:
+#        - "64660"
+#    volumes:
+#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+## add-off nsc-team-bridge-service-server-tcp
+## add-on nsc-team-bridge-service-client-udp
+#  nsc-team-bridge-service-client-udp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-client-udp.env
+#    container_name: nsc-team-bridge-service-client-udp
+#    networks: nsc-network
+## add-off nsc-team-bridge-service-client-udp
+## add-on nsc-team-bridge-service-server-udp
+#  nsc-team-bridge-service-server-udp:
+#    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
+#    env_file:
+#        - nsc-team-bridge-service-server-udp.env
+#    container_name: nsc-team-bridge-service-server-udp
+#    networks: nsc-network
+#    ports:
+#        - "64660/udp"
+## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
     name: nsc-network
