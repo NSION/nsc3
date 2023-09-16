@@ -152,7 +152,7 @@ if ! [[ $TBMODE = TCP ]]; then
    fi
 fi
 # Grep release tag value
-NSC3REL=$(cat $NSCHOME/docker-compose.yml | grep registrynsion.azurecr.io/main-postgres: | cut -d\: -f3) 2> /dev/null
+NSC3REL=$(cat $NSCHOME/docker-compose.yml | grep registrynsion.azurecr.io/main-postgres: | cut -d\: -f3)
 echo "*** Current release tag: $NSC3REL  ***" 
 RELEASETAG=$NSC3REL
 # Update env variables
@@ -173,9 +173,9 @@ if [ $TBROLE = both ]; then SERVERDEST=$TARGETORG2; fi
 # Update docker-compose.yml file
 cd $NSCHOME
 # make backup
-if [ -f "docker-compose.yml" ]; then
-   cp docker-compose.yml docker-compose-tb-addition-backup-$TIMESTAMP.yml 2> /dev/null
-fi
+if [ -f "docker-compose.yml" ]; then cp docker-compose.yml docker-compose-tb-addition-backup-$TIMESTAMP.yml 2> /dev/null; fi
+if [ -f "nsc-team-bridge-service-server.env" ]; then cp nsc-team-bridge-service-server.env nsc-team-bridge-service-server-$TIMESTAMP.env 2> /dev/null; fi
+if [ -f "nsc-team-bridge-service-client.env" ]; then cp nsc-team-bridge-service-client.env nsc-team-bridge-service-client-$TIMESTAMP.env 2> /dev/null; fi
 if [[ $TBMODE = UDP ]]; then
    if [[ $TBROLE = client ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
@@ -293,20 +293,23 @@ echo "*** docker-compose.yml file is created ***"
 echo "*** Downloading docker images ... ***"
 sudo docker-compose up -d
 echo ""
-echo "*******************************************************"
+echo "************************************************************************"
 echo "                                                       "                                        
-echo "   NSC3 backend release $RELEASETAG is installed with  "
-echo "   Team-Bridge role: $TBROLE using $TBMODE protocol    "
-if [ $TBROLE = client ]; then echo "   Source org ID: $SOURCEORG ServerIP: $TBSERVERIP "; fi
-if [ $TBROLE = server ]; then echo "   Source org ID: $SOURCEORG Target org ID: $TARGETORG "; fi
-if [ $TBROLE = both ]; then echo "   Client: Source org ID: $CLIENTSOURCE ServerIP: $TBSERVERIP  "; fi
-if [ $TBROLE = both ]; then echo "   Server: Source org ID: $SERVERSOURCE Target org ID: $SERVERDEST "; fi
+echo "NSC3 backend release $RELEASETAG is installed with  "
+echo "Team-Bridge role: $TBROLE using $TBMODE protocol    "
+if [ $TBROLE = client ]; then echo "Source org ID: $SOURCEORG ServerIP: $TBSERVERIP "; fi
+if [ $TBROLE = server ]; then echo "Source org ID: $SOURCEORG Target org ID: $TARGETORG "; fi
+if [ $TBROLE = both ]; then echo "Client: Source org ID: $CLIENTSOURCE ServerIP: $TBSERVERIP  "; fi
+if [ $TBROLE = both ]; then echo "Server: Source org ID: $SERVERSOURCE Target org ID: $SERVERDEST "; fi
 echo ""
-if [ $KEY_COPY_REMINDER ]; then echo " New TCP keypairs generated at this server. 
-Please copy all key pair files from folder $NSCHOME/bridgekeys 
+echo "Backup-files:"
+echo "Docker-compose backup file: 'docker-compose-tb-addition-backup-$TIMESTAMP.yml' "
+echo ""
+if [ $KEY_COPY_REMINDER ]; then echo "New TCP keypairs generated at this server. 
+Please copy all key pair files from this server folder $NSCHOME/bridgekeys 
 to other end server folder $NSCHOME/bridgekeys"; fi
 echo ""
-echo "   Login to your NSC3 web app by URL address       "
-echo "   https://$PUBLICIP                               "
+echo "Login to your NSC3 web app by URL address       "
+echo "https://$PUBLICIP                               "
 echo ""
-echo "*******************************************************"
+echo "*************************************************************************"
