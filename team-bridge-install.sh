@@ -18,22 +18,22 @@ if [ ${1+"true"} ]; then
        echo "./team-bridge-install.sh 		  'interactive installation mode'"
        echo ""
        echo "CLI parameters usage for client:"
-       echo "./team-bridge-install.sh --silent <Installation path> <Role: client> <TCP or UDP mode> <Team Bridge Server IP> <Source Organisation ID>"
+       echo "./team-bridge-install.sh --silent <Installation path> <Role: client> <TCP or UDP mode> <Local Server IP> <Team Bridge Server IP> <Source Organisation ID>"
        echo ""
        echo "CLI parameters example for client:"
-       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 client UDP 172.17.12.12 123jdsfs345435"
+       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 client UDP 192.168.10.12 192.168.10.13 L5JXk6d18KtyeuZfhKtLuerJeJtEnEYRGTfX"
        echo ""
        echo "CLI parameters usage for server:"
        echo "./team-bridge-install.sh --silent <Installation path> <Role: server/both> <TCP or UDP mode> <local Team-Bridge Server IP> <Source Organisation ID> <Targer Organisation ID>"
        echo ""
        echo "CLI parameters example for server:"
-       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 server UDP 172.17.12.12 123jdsfs345435 vWjdsfsfsdfsd12"
+       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 server UDP 192.168.10.13 L5JXk6d18KtyeuZfhKtLuerJeJtEnEYRGTfX kqkYDd2Ofv04eFBg-G7xmPIO9IjGMcx_VcEJ"
        echo ""
        echo "CLI parameters usage for both server and client:"
        echo "./team-bridge-install.sh --silent <Installation path> <Role: both> <TCP or UDP mode> <Client: Other end Team-Bridge Server IP> <Client: Source Organisation ID> <Server: Local Team-Bridge Server IP> <Server: Source Organisation ID> <Server: Targer Organisation ID>"
        echo ""
        echo "CLI parameters example for both server client:"
-       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 both UDP 172.17.12.12 123jdsfs345435 172.17.12.13 vWjdsfsfsdfsd12 Qdgsdfgfsff434"
+       echo "./team-bridge-install.sh --silent /home/ubuntu/nsc3 both UDP 192.168.10.13 L5JXk6d18KtyeuZfhKtLuerJeJtEnEYRGTfX 192.168.10.12 bMHZxI3Ke5QEaNqx7qFtuQUHTTNszYgNDEcK 57NK1bbudRW_b1fgzJztNzVLcbSvR2zHkqBU"
        echo ""
        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
        exit 0
@@ -51,11 +51,16 @@ if [ ${1+"true"} ]; then
           export TBMODE=$4
       fi
       if [ ${5+"true"} ]; then
-          export TBSERVERIP=$5
+          export TBSERVERIP2=$5
       fi
       if [ ${6+"true"} ]; then
-          export SOURCEORG=$6
+          export TBSERVERIP=$6
       fi
+      if [ ${7+"true"} ]; then
+          export SOURCEORG=$7
+      fi
+      if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
+      if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
    fi
    if [ $TBROLE = server ]; then 
       if [ ${4+"true"} ]; then
@@ -70,6 +75,8 @@ if [ ${1+"true"} ]; then
       if [ ${7+"true"} ]; then
           export TARGETORG=$7
       fi
+      if [[ $TARGETORG = *" "* ]]; then echo "*** "$TARGETORG"  as input is not valid NSC3 target organisation ID"; exit 0; fi
+      if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
    fi
    if [ $TBROLE = both ]; then 
       if [ ${4+"true"} ]; then
@@ -90,6 +97,11 @@ if [ ${1+"true"} ]; then
       if [ ${9+"true"} ]; then
           export TARGETORG2=$9
       fi
+      if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
+      if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
+      if [[ $TARGETORG = *" "* ]]; then echo "*** "$TARGETORG"  as input is not valid NSC3 target organisation ID"; exit 0; fi
+      if [[ $SOURCEORG2 = *" "* ]]; then echo "*** "$SOURCEORG2"  as input is not valid NSC3 source organisation ID"; exit 0; fi
+      if [[ $TARGETORG2 = *" "* ]]; then echo "*** "$TARGETORG2"  as input is not valid NSC3 target organisation ID"; exit 0; fi
    fi
 fi
 if [ "$silentmode" = false ]; then
@@ -107,13 +119,18 @@ if [ "$silentmode" = false ]; then
     read -p "Role (client, server or both) ?: " TBROLE
     if ! [[ $TBROLE = client  ||  $TBROLE = server ||  $TBROLE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
     if [ $TBROLE = client ]; then 
-       read -p "other end Team-Bridge server IP address: " TBSERVERIP
+       read -p "Local Team-Bridge node IP address: " TBSERVERIP2
+       read -p "Other end Team-Bridge server IP address: " TBSERVERIP
        read -p "Local source organisation ID: " SOURCEORG
     fi
+    if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
+    if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
     if [ $TBROLE = server ]; then 
-       read -p "other end source organisation ID: " SOURCEORG
-       read -p "local Team-Bridge server IP address: " TBSERVERIP2
+       read -p "Local Team-Bridge node IP address: " TBSERVERIP2
+       read -p "Other end source organisation ID: " SOURCEORG
        read -p "local target organisation ID: " TARGETORG
+       if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
+       if [[ $TARGETORG = *" "* ]]; then echo "*** "$TARGETORG"  as input is not valid NSC3 target organisation ID"; exit 0; fi
     fi
     if [ $TBROLE = both ]; then 
        read -p "Client - other end Team-Bridge server IP address: " TBSERVERIP
@@ -121,17 +138,17 @@ if [ "$silentmode" = false ]; then
        read -p "Server - Local Team-Bridge server IP address: " TBSERVERIP2
        read -p "Server - other end source organisation ID: " SOURCEORG2
        read -p "Server - Local target organisation ID: " TARGETORG2
+       if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
+       if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
+       if [[ $TARGETORG = *" "* ]]; then echo "*** "$TARGETORG"  as input is not valid NSC3 target organisation ID"; exit 0; fi
+       if [[ $SOURCEORG2 = *" "* ]]; then echo "*** "$SOURCEORG2"  as input is not valid NSC3 source organisation ID"; exit 0; fi
+       if [[ $TARGETORG2 = *" "* ]]; then echo "*** "$TARGETORG2"  as input is not valid NSC3 target organisation ID"; exit 0; fi
     fi
 fi
 # Check values
 if ! [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder is missing! "; exit 0; fi
 if ! [[ $TBMODE = TCP  ||  $TBMODE = UDP ]]; then echo "*** "$TBMODE"  as input value is not range of mode selection. please type TCP or UDP"; exit 0; fi
-if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
-if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
 if [[ $SOURCEORG = *" "* ]]; then echo "*** "$SOURCEORG"  as input is not valid NSC3 source organisation ID"; exit 0; fi
-if [[ $SOURCEORG2 = *" "* ]]; then echo "*** "$SOURCEORG2"  as input is not valid NSC3 source organisation ID"; exit 0; fi
-if [[ $TARGETORG = *" "* ]]; then echo "*** "$TARGETORG"  as input is not valid NSC3 target organisation ID"; exit 0; fi
-if [[ $TARGETORG2 = *" "* ]]; then echo "*** "$TARGETORG2"  as input is not valid NSC3 target organisation ID"; exit 0; fi
 # Create TCP keys
 if ! [[ $TBMODE = TCP ]]; then
    if [ ! -d $NSCHOME/bridgekeys ]; then 
