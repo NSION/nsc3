@@ -5,7 +5,8 @@ services:
   valor-postgres:
     container_name: valor-postgres
     image: $NSC3REG/valor-postgres:$NSC3REL
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
         - valor-postgres-volume-15:/var/lib/postgresql/data:rw
@@ -13,7 +14,8 @@ services:
     container_name: nsc-valor-bus
     image: $NSC3REG/nsc-valor-bus:$NSC3REL
     runtime: nvidia
-    networks: nsc-network
+    networks: 
+      - nsc-network
     depends_on:
         - "valor-postgres"
     restart: unless-stopped
@@ -24,7 +26,8 @@ services:
     image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
     environment:
         - MEMORY="8g"
-    networks: nsc-network
+    networks: 
+      - nsc-network
 volumes:
   valor-postgres-volume-15:
     name: valor-postgres-volume-15
@@ -41,7 +44,8 @@ services:
   valor-postgres:
     container_name: valor-postgres
     image: $NSC3REG/valor-postgres:$NSC3REL
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
         - valor-postgres-volume-15:/var/lib/postgresql/data:rw
@@ -49,7 +53,8 @@ services:
     container_name: nsc-valor-bus
     image: $NSC3REG/nsc-valor-bus:$NSC3REL
     runtime: nvidia
-    networks: nsc-network
+    networks: 
+      - nsc-network
     depends_on:
         - "valor-postgres"
     restart: unless-stopped
@@ -60,7 +65,8 @@ services:
     image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
     environment:
         - MEMORY="8g"
-    networks: nsc-network
+    networks: 
+      - nsc-network
 volumes:
   valor-postgres-volume-15:
     name: valor-postgres-volume-15
@@ -78,15 +84,17 @@ services:
   valor-postgres:
     container_name: valor-postgres
     image: $NSC3REG/valor-postgres:$NSC3REL
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
         - valor-postgres-volume-15:/var/lib/postgresql/data:rw
   nsc-valor-bus:
     container_name: nsc-valor-bus
-    image: $NSC3REG/nsc-valor-bus::valor-bus-clean-install-hotfix
+    image: $NSC3REG/nsc-valor-bus:valor-bus-clean-install-hotfix
     runtime: nvidia
-    networks: nsc-network
+    networks: 
+      - nsc-network
     depends_on:
         - "valor-postgres"
     restart: unless-stopped
@@ -97,7 +105,8 @@ services:
     image: $NSC3REG/nsc-valor-tasker-service:$NSC3REL
     environment:
         - MEMORY="8g"
-    networks: nsc-network
+    networks: 
+      - nsc-network
 volumes:
   valor-postgres-volume-15:
     name: valor-postgres-volume-15
