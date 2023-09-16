@@ -184,8 +184,12 @@ if [[ $TBMODE = UDP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env;
-   rm -f temp.yml docker-compose-temp.yml 2> /dev/null
+   (echo "cat <<EOF >nsc-team-bridge-service-client-temp.yml";
+   cat nsc-team-bridge-service-client.tmpl;
+   ) >tb-client-temp.yml
+   . tb-client-temp.yml 2> /dev/null
+   cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
+   rm -f tb-client-temp.yml nsc-team-bridge-service-client-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = server ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
@@ -194,8 +198,12 @@ if [[ $TBMODE = UDP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env;
-   rm -f temp.yml docker-compose-temp.yml 2> /dev/null
+   (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
+   cat nsc-team-bridge-service-server.tmpl;
+   ) >tb-server-temp.yml
+   . tb-server-temp.yml 2> /dev/null
+   cat nsc-team-bridge-service-server-temp.yml > nsc-team-bridge-service-server.env;
+   rm -f tb-server-temp.yml nsc-team-bridge-service-server-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = both ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
@@ -205,11 +213,21 @@ if [[ $TBMODE = UDP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env;
+   # Client
+   (echo "cat <<EOF >nsc-team-bridge-service-client-temp.yml";
+   cat nsc-team-bridge-service-client.tmpl;
+   ) >tb-client-temp.yml
+   . tb-client-temp.yml 2> /dev/null
+   cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
+   # Server
    export SOURCEORG=$SOURCEORG2;
    export TARGETORG=$TARGETORG2;
-   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env:
-   rm -f temp.yml docker-compose-temp.yml 2> /dev/null
+   (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
+   cat nsc-team-bridge-service-server.tmpl;
+   ) >tb-server-temp.yml
+   . tb-server-temp.yml 2> /dev/null
+   cat nsc-team-bridge-service-server-temp.yml > nsc-team-bridge-service-server.env;
+   rm -f tb-server-temp.yml nsc-team-bridge-service-server-temp.yml tb-client-temp.yml nsc-team-bridge-service-client-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
    fi
 fi
 if [[ $TBMODE = TCP ]]; then
@@ -220,8 +238,12 @@ if [[ $TBMODE = TCP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env;
-   rm -f temp.yml docker-compose-temp.yml 2> /dev/null
+   (echo "cat <<EOF >nsc-team-bridge-service-client-temp.yml";
+   cat nsc-team-bridge-service-client.tmpl;
+   ) >tb-client-temp.yml
+   . tb-client-temp.yml 2> /dev/null
+   cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
+   rm -f tb-client-temp.yml nsc-team-bridge-service-client-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = server ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
@@ -230,8 +252,12 @@ if [[ $TBMODE = TCP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env;
-   rm -f temp.yml docker-compose-temp.yml 2> /dev/null
+   (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
+   cat nsc-team-bridge-service-server.tmpl;
+   ) >tb-server-temp.yml
+   . tb-server-temp.yml 2> /dev/null
+   cat nsc-team-bridge-service-server-temp.yml > nsc-team-bridge-service-server.env;
+   rm -f tb-server-temp.yml nsc-team-bridge-service-server-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = both ]]; then
    (echo "cat <<EOF >docker-compose-temp.yml";
@@ -241,11 +267,21 @@ if [[ $TBMODE = TCP ]]; then
    ) >temp.yml
    . temp.yml 2> /dev/null
    cat docker-compose-temp.yml > docker-compose.yml;
-   cat nsc-team-bridge-service-client.tmpl > nsc-team-bridge-service-client.env;
+   # Client
+   (echo "cat <<EOF >nsc-team-bridge-service-client-temp.yml";
+   cat nsc-team-bridge-service-client.tmpl;
+   ) >tb-client-temp.yml
+   . tb-client-temp.yml 2> /dev/null
+   cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
+   # Server
    export SOURCEORG=$SOURCEORG2;
    export TARGETORG=$TARGETORG2;
-   cat nsc-team-bridge-service-server.tmpl > nsc-team-bridge-service-server.env;
-   rm -f temp.yml docker-compose-temp.yml 2> /dev/null
+   (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
+   cat nsc-team-bridge-service-server.tmpl;
+   ) >tb-server-temp.yml
+   . tb-server-temp.yml 2> /dev/null
+   cat nsc-team-bridge-service-server-temp.yml > nsc-team-bridge-service-server.env;
+   rm -f tb-server-temp.yml nsc-team-bridge-service-server-temp.yml tb-client-temp.yml nsc-team-bridge-service-client-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
    fi
 fi
 # Archive env specific file to system
