@@ -291,18 +291,19 @@ if test -f docker-compose_$PUBLICIP.yml; then
     mv docker-compose_$PUBLICIP.yml docker-compose_$PUBLICIP.old  2> /dev/null
 fi
 cp docker-compose.yml docker-compose_$PUBLICIP.yml
-echo "*** docker-compose.yml file is created ***"
-echo "*** Downloading docker images ... ***"
-sudo docker-compose up -d
-echo ""
-echo "************************************************************************"
-echo "                                                       "                                        
+# Maintenance log
 if ! [ -f "$NSCHOME/logs/nsc-maintenance-log.txt" ]; then 
    touch $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
    chmod 666 $NSCHOME/logs/nsc-maintenance-log.txt;
 else 
    echo "$TIMESTAMP Team-Bridge Role:$TBROLE Procol:$TBMODE installed" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;  ;
 fi
+echo "*** docker-compose.yml file is created ***"
+echo "*** Downloading docker images ... ***"
+sudo docker-compose up -d
+echo ""
+echo "************************************************************************"
+echo "                                                       "                                        
 echo "NSC3 backend release $RELEASETAG is installed with  "
 echo "Team-Bridge role: $TBROLE using $TBMODE protocol    "
 if [ $TBROLE = client ]; then echo "Source org ID: $SOURCEORG ServerIP: $TBSERVERIP "; fi
