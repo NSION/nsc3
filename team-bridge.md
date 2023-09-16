@@ -41,33 +41,33 @@ Pre-requisites for installation:
 
 Login to Client node:
 
-    ``` bash
-    cd $HOME/nsc3
-    sudo chmod u-x *.sh
-    git pull
-    sudo chmod u-x *.sh
-    sudo ./team-bridge-install.sh
-    ```
+``` bash
+cd $HOME/nsc3
+sudo chmod u-x *.sh
+git pull
+sudo chmod u-x *.sh
+sudo ./team-bridge-install.sh
+```
     
-    ```properties
+```properties
 
-    ```
+```
 
 ### Team-Bridge One-Directional link - Server:
 
 Login to Client node:
 
-    ``` bash
-    cd $HOME/nsc3
-    sudo chmod u-x *.sh
-    git pull
-    sudo chmod u-x *.sh
-    sudo ./team-bridge-install.sh
-    ```
+``` bash
+cd $HOME/nsc3
+sudo chmod u-x *.sh
+git pull
+sudo chmod u-x *.sh
+sudo ./team-bridge-install.sh
+```
     
-    ```properties
+```properties
 
-    ```
+```
 
 ## Setting up Team-Bridge Bi-Directional link:
 
@@ -78,33 +78,33 @@ Login to Client node:
 
 Login to Server1:
 
-    ``` bash
-    cd $HOME/nsc3
-    sudo chmod u-x *.sh
-    git pull
-    sudo chmod u-x *.sh
-    sudo ./team-bridge-install.sh
-    ```
+``` bash
+cd $HOME/nsc3
+sudo chmod u-x *.sh
+git pull
+sudo chmod u-x *.sh
+sudo ./team-bridge-install.sh
+```
+    
+```properties
 
-    ```properties
-
-    ```
+```
 
 ### Team-Bridge Bi-Directional link - Server2:
 
 Login to Server2:
 
-    ``` bash
-    cd $HOME/nsc3
-    sudo chmod u-x *.sh
-    git pull
-    sudo chmod u-x *.sh
-    sudo ./team-bridge-install.sh
-    ```
+``` bash
+cd $HOME/nsc3
+sudo chmod u-x *.sh
+git pull
+sudo chmod u-x *.sh
+sudo ./team-bridge-install.sh
+```
     
-    ```properties
+```properties
 
-    ```
+```
 ## TCP key-pairs:
 
 Installation process will take case of TCP key-pair creation.
