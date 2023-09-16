@@ -100,40 +100,27 @@ if [ "$silentmode" = false ]; then
     echo "  This script prepares NSC3 config      "
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
-    echo "NSC3 installation folder, e.g /home/ubuntu/nsc3: "
-    read NSC3HOMEFOLDER
+    read -p "NSC3 installation folder, e.g /home/ubuntu/nsc3: " NSC3HOMEFOLDER
     export NSCHOME=$NSC3HOMEFOLDER
     if [ -f "$NSCHOME/nsc-host.env" ]; then source $NSCHOME/nsc-host.env 2> /dev/null; fi
-    echo "TCP or UDP Protocol ?: "
-    read TBMODE
-    echo "Role (client, server or both) ?: "
-    read TBROLE
+    read -p "TCP or UDP Protocol ?: " TBMODE
+    read -p "Role (client, server or both) ?: " TBROLE
     if ! [[ $TBROLE = client  ||  $TBROLE = server ||  $TBROLE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
     if [ $TBROLE = client ]; then 
-       echo "other end Team-Bridge server IP address: "
-       read TBSERVERIP
-       echo "Local source organisation ID: "
-       read SOURCEORG
+       read -p "other end Team-Bridge server IP address: " TBSERVERIP
+       read -p "Local source organisation ID: " SOURCEORG
     fi
     if [ $TBROLE = server ]; then 
-       echo "other end source organisation ID: "
-       read SOURCEORG
-       echo "local Team-Bridge server IP address: "
-       read TBSERVERIP2
-       echo "local target organisation ID: "
-       read TARGETORG
+       read -p "other end source organisation ID: " SOURCEORG
+       read -p "local Team-Bridge server IP address: " TBSERVERIP2
+       read -p "local target organisation ID: " TARGETORG
     fi
     if [ $TBROLE = both ]; then 
-       echo "Client - other end Team-Bridge server IP address: "
-       read TBSERVERIP
-       echo "Client - Local source organisation ID: "
-       read SOURCEORG
-       echo "Server - Local Team-Bridge server IP address: "
-       read TBSERVERIP2
-       echo "Server - other end source organisation ID: "
-       read ORG2
-       echo "Server - Local target organisation ID: "
-       read TARGETORG2
+       read -p "Client - other end Team-Bridge server IP address: " TBSERVERIP
+       read -p "Client - Local source organisation ID: " SOURCEORG
+       read -p "Server - Local Team-Bridge server IP address: " TBSERVERIP2
+       read -p "Server - other end source organisation ID: " SOURCEORG2
+       read -p "Server - Local target organisation ID: " TARGETORG2
     fi
 fi
 # Check values
