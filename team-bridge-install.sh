@@ -122,9 +122,9 @@ if [ "$silentmode" = false ]; then
        read -p "Local Team-Bridge node IP address: " TBSERVERIP2
        read -p "Other end Team-Bridge server IP address: " TBSERVERIP
        read -p "Local source organisation ID: " SOURCEORG
+       if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
+       if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
     fi
-    if ! [[ $TBSERVERIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP"  as input is not valid Team-Bridge server IP"; exit 0; fi
-    if ! [[ $TBSERVERIP2 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "*** "$TBSERVERIP2"  as input is not valid Team-Bridge server IP"; exit 0; fi
     if [ $TBROLE = server ]; then 
        read -p "Local Team-Bridge node IP address: " TBSERVERIP2
        read -p "Other end source organisation ID: " SOURCEORG
