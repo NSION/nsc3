@@ -3,7 +3,7 @@
 export NSC3REG="registrynsion.azurecr.io"
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 silentmode=false
-TIMESTAMP=$(date +%Y-%m-%d)
+TIMESTAMP=$(date +%Y%m%d%H%M)
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
        silentmode=true
@@ -190,8 +190,8 @@ if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then
    echo "*** Release tag: $NSC3REL tag found ***" 
    RELEASETAG=$NSC3REL
    else    
-   echo "*** Release tag: $NSC3REL is missing. Using release tag: 'latest' ***" 
-   RELEASETAG="latest"
+   echo "*** Release tag: $NSC3REL is missing. Using release tag: 'rc' ***" 
+   RELEASETAG="rc"
 fi
 # Move old files
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
@@ -224,6 +224,13 @@ rm -f temp.yml docker-compose-temp.yml 2> /dev/null
 # Archive env specific file to system
 if test -f docker-compose_$PUBLICIP.yml; then
     mv docker-compose_$PUBLICIP.yml docker-compose_$PUBLICIP.old  2> /dev/null
+fi
+# Maintenance log
+if ! [ -f "$NSCHOME/logs/nsc-maintenance-log.txt" ]; then 
+   touch $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
+   chmod 666 $NSCHOME/logs/nsc-maintenance-log.txt;
+else 
+   echo "$TIMESTAMP NSC3 backend installed with release $RELEASETAG" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;  ;
 fi
 cp docker-compose.yml docker-compose_$PUBLICIP.yml
 echo "*** docker-compose.yml file is created ***"
