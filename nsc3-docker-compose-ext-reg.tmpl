@@ -68,6 +68,7 @@ services:
     restart: unless-stopped
     environment:
       - MEMORY=8g
+      - NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=$TEAM_BRIDGE_ENABLED
     working_dir: /root
   nsc-live-service:
     container_name: nsc-live-service
@@ -336,6 +337,7 @@ services:
     restart: unless-stopped
     environment:
       - MEMORY=8g
+      - NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=$TEAM_BRIDGE_ENABLED
     working_dir: /root
   nsc-live-service:
     container_name: nsc-live-service
@@ -604,6 +606,7 @@ services:
     restart: unless-stopped
     environment:
       - MEMORY=8g
+      - NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=$TEAM_BRIDGE_ENABLED
     working_dir: /root
   nsc-live-service:
     container_name: nsc-live-service
