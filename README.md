@@ -158,7 +158,12 @@ Install docker-compose:
 cd $HOME/nsc3
 sudo ./nsc3-install.sh  
 ```    
-
+    ++++++++++++++++++++++++++++++++++++++++
+                                        
+    NSC3 docker-compose installer:        
+    This script prepares NSC3 config      
+                                          
+    ++++++++++++++++++++++++++++++++++++++++
     NSC3 installation folder, e.g /home/ubuntu/nsc3: /home/ubuntu/nsc3      
     NSC3 public hostname, e.g foo.nsion.io: foo.nsion.io   
     Location of SSL cert files, e.g /home/ubuntu: /home/ubuntu
