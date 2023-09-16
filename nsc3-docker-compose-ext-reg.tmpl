@@ -8,7 +8,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - main-postgres-volume:/var/lib/postgresql/data:rw
@@ -19,7 +20,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - user-postgres-volume:/var/lib/postgresql/data:rw
@@ -30,7 +32,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - bus-redis-volume:/data:rw
@@ -43,7 +46,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   nsc-auth-service:
     container_name: nsc-auth-service
@@ -51,7 +55,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -64,7 +69,8 @@ services:
       options: {}    
     volumes:
       - /dev/urandom:/dev/random:rw
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     environment:
       - MEMORY=8g
@@ -76,7 +82,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-comms-service:
@@ -85,7 +92,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -96,7 +104,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-network-stream-service:
@@ -108,7 +117,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-aar-worker:
@@ -117,7 +127,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   web-nginx:
     container_name: web-nginx
@@ -128,7 +139,8 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks: nsc-network
+    networks: 
+      - nsc-network
     working_dir: /root
     restart: unless-stopped
   map-service:
@@ -137,7 +149,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - $NSCHOME/mapdata:/data
@@ -152,7 +165,8 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks: nsc-network
+    networks: 
+      - nsc-network
     ports:
       - "1935:1935/tcp"
       - "1936:1936/tcp"
@@ -170,7 +184,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - minio-volume:/data:rw
@@ -183,7 +198,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   nsc-webrtc-proxy:
     container_name: nsc-webrtc-proxy
@@ -207,7 +223,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped  
 ## add-on nsc-team-bridge-service-client-tcp
 #  nsc-team-bridge-service-client-tcp:
@@ -215,7 +232,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-tcp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-client-tcp
@@ -225,7 +243,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-tcp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    ports:
 #        - "64660"
 #    volumes:
@@ -237,7 +256,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-udp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 ## add-off nsc-team-bridge-service-client-udp
 ## add-on nsc-team-bridge-service-server-udp
 #  nsc-team-bridge-service-server-udp:
@@ -245,7 +265,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-udp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    ports:
 #        - "64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
@@ -277,7 +298,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - main-postgres-volume:/var/lib/postgresql/data:rw
@@ -288,7 +310,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - user-postgres-volume:/var/lib/postgresql/data:rw
@@ -299,7 +322,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - bus-redis-volume:/data:rw
@@ -312,7 +336,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   nsc-auth-service:
     container_name: nsc-auth-service
@@ -320,7 +345,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -333,7 +359,8 @@ services:
       options: {}    
     volumes:
       - /dev/urandom:/dev/random:rw
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     environment:
       - MEMORY=8g
@@ -345,7 +372,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-comms-service:
@@ -354,7 +382,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -365,7 +394,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-network-stream-service:
@@ -377,7 +407,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-aar-worker:
@@ -386,7 +417,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   web-nginx:
     container_name: web-nginx
@@ -397,7 +429,8 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks: nsc-network
+    networks: 
+      - nsc-network
     working_dir: /root
     restart: unless-stopped
   map-service:
@@ -406,7 +439,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - $NSCHOME/mapdata:/data
@@ -421,7 +455,8 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks: nsc-network
+    networks: 
+      - nsc-network
     ports:
       - "1935:1935/tcp"
       - "1936:1936/tcp"
@@ -439,7 +474,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - minio-volume:/data:rw
@@ -452,7 +488,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   nsc-webrtc-proxy:
     container_name: nsc-webrtc-proxy
@@ -476,7 +513,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped  
 ## add-on nsc-team-bridge-service-client-tcp
 #  nsc-team-bridge-service-client-tcp:
@@ -484,7 +522,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-tcp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-client-tcp
@@ -494,7 +533,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-tcp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    ports:
 #        - "64660"
 #    volumes:
@@ -506,7 +546,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-udp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 ## add-off nsc-team-bridge-service-client-udp
 ## add-on nsc-team-bridge-service-server-udp
 #  nsc-team-bridge-service-server-udp:
@@ -514,7 +555,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-udp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    ports:
 #        - "64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
@@ -546,7 +588,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - main-postgres-volume:/var/lib/postgresql/data:rw
@@ -557,7 +600,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - user-postgres-volume:/var/lib/postgresql/data:rw
@@ -568,7 +612,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - bus-redis-volume:/data:rw
@@ -581,7 +626,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   nsc-auth-service:
     container_name: nsc-auth-service
@@ -589,7 +635,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -602,7 +649,8 @@ services:
       options: {}    
     volumes:
       - /dev/urandom:/dev/random:rw
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     environment:
       - MEMORY=8g
@@ -614,7 +662,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-comms-service:
@@ -623,7 +672,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - /dev/urandom:/dev/random:rw
@@ -634,7 +684,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-network-stream-service:
@@ -646,7 +697,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     working_dir: /root
   nsc-aar-worker:
@@ -655,7 +707,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   web-nginx:
     container_name: web-nginx
@@ -666,7 +719,8 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks: nsc-network
+    networks: 
+      - nsc-network
     working_dir: /root
     restart: unless-stopped
   map-service:
@@ -675,7 +729,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - $NSCHOME/mapdata:/data
@@ -690,7 +745,8 @@ services:
         max-file: "20"
         max-size: "100m"
         mode: "non-blocking"
-    networks: nsc-network
+    networks: 
+      - nsc-network
     ports:
       - "1935:1935/tcp"
       - "1936:1936/tcp"
@@ -708,7 +764,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
     volumes:
       - minio-volume:/data:rw
@@ -721,7 +778,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped
   nsc-webrtc-proxy:
     container_name: nsc-webrtc-proxy
@@ -745,7 +803,8 @@ services:
     logging:
       driver: "json-file"
       options: {}
-    networks: nsc-network
+    networks: 
+      - nsc-network
     restart: unless-stopped  
 ## add-on nsc-team-bridge-service-client-tcp
 #  nsc-team-bridge-service-client-tcp:
@@ -753,7 +812,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-tcp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-client-tcp
@@ -763,7 +823,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-tcp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    ports:
 #        - "64660"
 #    volumes:
@@ -775,7 +836,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-udp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 ## add-off nsc-team-bridge-service-client-udp
 ## add-on nsc-team-bridge-service-server-udp
 #  nsc-team-bridge-service-server-udp:
@@ -783,7 +845,8 @@ services:
 #    env_file:
 #        - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-udp
-#    networks: nsc-network
+#    networks: 
+#      - nsc-network
 #    ports:
 #        - "64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
