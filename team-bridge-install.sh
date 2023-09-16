@@ -1,7 +1,7 @@
 #!/bin/bash
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
-TIMESTAMP=$(date +%Y-%m-%d)
+TIMESTAMP=$(date +%Y%m%d%H%M)
 silentmode=false
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
@@ -297,6 +297,12 @@ sudo docker-compose up -d
 echo ""
 echo "************************************************************************"
 echo "                                                       "                                        
+if ! [ -f "$NSCHOME/logs/nsc-maintenance-log.txt" ]; then 
+   touch $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
+   chmod 666 $NSCHOME/logs/nsc-maintenance-log.txt;
+else 
+   echo "$TIMESTAMP Team-Bridge Role:$TBROLE Procol:$TBMODE installed" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;  ;
+fi
 echo "NSC3 backend release $RELEASETAG is installed with  "
 echo "Team-Bridge role: $TBROLE using $TBMODE protocol    "
 if [ $TBROLE = client ]; then echo "Source org ID: $SOURCEORG ServerIP: $TBSERVERIP "; fi
