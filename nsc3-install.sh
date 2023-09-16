@@ -230,7 +230,7 @@ if ! [ -f "$NSCHOME/logs/nsc-maintenance-log.txt" ]; then
    touch $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
    chmod 666 $NSCHOME/logs/nsc-maintenance-log.txt;
 else 
-   echo "$TIMESTAMP NSC3 backend installed with release $RELEASETAG" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;  ;
+   echo "$TIMESTAMP NSC3 backend installed with release $RELEASETAG" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
 fi
 cp docker-compose.yml docker-compose_$PUBLICIP.yml
 echo "*** docker-compose.yml file is created ***"
