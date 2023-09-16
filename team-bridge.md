@@ -49,7 +49,9 @@ git pull
 sudo chmod u-x *.sh
 sudo ./team-bridge-install.sh
 ```
-    
+
+Installation with reference example values:
+
 ```properties
 
 ```
@@ -65,7 +67,9 @@ git pull
 sudo chmod u-x *.sh
 sudo ./team-bridge-install.sh
 ```
-    
+
+Installation with reference example values:
+
 ```properties
 
 ```
@@ -87,7 +91,9 @@ git pull
 sudo chmod u-x *.sh
 sudo ./team-bridge-install.sh
 ```
-    
+
+Installation with reference example values:
+
 ```properties
 
 ```
@@ -103,7 +109,9 @@ git pull
 sudo chmod u-x *.sh
 sudo ./team-bridge-install.sh
 ```
-    
+
+Installation with reference example values:
+ 
 ```properties
 
 ```
