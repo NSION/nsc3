@@ -57,21 +57,11 @@ if [ "$silentmode" = false ]; then
     echo "  This script prepares NSC3 config      "
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
-    echo "NSC3 installation folder, e.g /home/nscuser/nsc3: "
-    read  NSC3HOMEFOLDER
-    export NSCHOME=$NSC3HOMEFOLDER
-    echo "NSC3 public hostname, e.g videoservice.nsion.io: "
-    read  NSC3URL
-    export PUBLICIP=$NSC3URL
-    echo "Location of SSL cert files, e.g /home/nscuser: "
-    read  SSLF
-    export SSLFOLDER=$SSLF
-    echo "NSC3 Release tag, e.g release-3.15: "
-    read REL
-    export NSC3REL=$REL
-    echo "Valor enabled, true/false: "
-    read ENABLED
-    export VALOR_ENABLED='"'${ENABLED}'"'
+    read -p "NSC3 installation folder, e.g /home/ubuntu/nsc3: " NSCHOME
+    read -p "NSC3 public hostname, e.g videoservice.nsion.io: " PUBLICIP
+    read -p "Location of SSL cert files, e.g /home/ubuntu: " SSLFOLDER
+    read -p "NSC3 Release tag, e.g release-3.15: " NSC3REL
+    read -p "Valor enabled, true/false: " VALOR_ENABLED
 fi
 # Check values
 if [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder found' ***"; else echo "*** $NSCHOME 'Installation folder is missing! Exit' ***"; exit 0; fi
