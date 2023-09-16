@@ -3,6 +3,7 @@
 export NSC3REG="registrynsion.azurecr.io"
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 silentmode=false
+TIMESTAMP=$(date +%Y%m%d%H%M)
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
        silentmode=true
@@ -56,21 +57,11 @@ if [ "$silentmode" = false ]; then
     echo "  This script prepares NSC3 config      "
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
-    echo "NSC3 installation folder, e.g /home/nscuser/nsc3: "
-    read  NSC3HOMEFOLDER
-    export NSCHOME=$NSC3HOMEFOLDER
-    echo "NSC3 public hostname, e.g videoservice.nsion.io: "
-    read  NSC3URL
-    export PUBLICIP=$NSC3URL
-    echo "Location of SSL cert files, e.g /home/nscuser: "
-    read  SSLF
-    export SSLFOLDER=$SSLF
-    echo "NSC3 Release tag, e.g release-3.15: "
-    read REL
-    export NSC3REL=$REL
-    echo "Valor enabled, true/false: "
-    read ENABLED
-    export VALOR_ENABLED='"'${ENABLED}'"'
+    read -p "NSC3 installation folder, e.g /home/ubuntu/nsc3: " NSCHOME
+    read -p "NSC3 public hostname, e.g videoservice.nsion.io: " PUBLICIP
+    read -p "Location of SSL cert files, e.g /home/ubuntu: " SSLFOLDER
+    read -p "NSC3 Release tag, e.g release-3.15: " NSC3REL
+    read -p "Valor enabled, true/false: " VALOR_ENABLED
 fi
 # Check values
 if [ -d $NSCHOME ]; then echo "*** $NSCHOME 'Installation folder found' ***"; else echo "*** $NSCHOME 'Installation folder is missing! Exit' ***"; exit 0; fi
@@ -189,28 +180,30 @@ if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then
    echo "*** Release tag: $NSC3REL tag found ***" 
    RELEASETAG=$NSC3REL
    else    
-   echo "*** Release tag: $NSC3REL is missing. Using release tag: 'latest' ***" 
-   RELEASETAG="latest"
+   echo "*** Release tag: $NSC3REL is missing. Using release tag: 'rc' ***" 
+   RELEASETAG="rc"
 fi
 # Move old files
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
-# Remove old and create new env file
+# Backup old and create new env file
 if [ -f "$NSCHOME/nsc-host.env" ]; then
-   rm $NSCHOME/nsc-host.env 2> /dev/null
+    mv $NSCHOME/nsc-host.env $NSCHOME/nsc-host-$TIMESTAMP.old 2> /dev/null
 fi
 # set defaults for empty variables
 [ -z "$VALOR_ENABLED" ] && export VALOR_ENABLED=false
+[ -z "$TEAM_BRIDGE_ENABLED" ] && export TEAM_BRIDGE_ENABLED=false
 # Store variables
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 echo "export VALOR_ENABLED=$VALOR_ENABLED" >> $NSCHOME/nsc-host.env
+echo "export TEAM_BRIDGE_ENABLED=$TEAM_BRIDGE_ENABLED" >> $NSCHOME/nsc-host.env
 export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null
 #  Modify maptiles rights level
 chmod 644 $NSCHOME/mapdata/*.* 2> /dev/null
-# Create docker-compose.yml file
+# Backup old and create docker-compose.yml file
 cd $NSCHOME
 if [ -f "docker-compose.yml" ]; then
-   mv docker-compose.yml docker-compose.old 2> /dev/null
+   mv docker-compose.yml docker-compose-$TIMESTAMP.old 2> /dev/null
 fi
 (echo "cat <<EOF >docker-compose-temp.yml";
 cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
@@ -221,6 +214,13 @@ rm -f temp.yml docker-compose-temp.yml 2> /dev/null
 # Archive env specific file to system
 if test -f docker-compose_$PUBLICIP.yml; then
     mv docker-compose_$PUBLICIP.yml docker-compose_$PUBLICIP.old  2> /dev/null
+fi
+# Maintenance log
+if ! [ -f "$NSCHOME/logs/nsc-maintenance-log.txt" ]; then 
+   touch $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
+   chmod 666 $NSCHOME/logs/nsc-maintenance-log.txt;
+else 
+   echo "$TIMESTAMP NSC3 backend installed with release $RELEASETAG" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
 fi
 cp docker-compose.yml docker-compose_$PUBLICIP.yml
 echo "*** docker-compose.yml file is created ***"
