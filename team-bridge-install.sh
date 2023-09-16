@@ -40,6 +40,7 @@ if [ ${1+"true"} ]; then
    fi
    if [ ${2+"true"} ]; then
        export NSCHOME=$2
+       if [ -f "$NSCHOME/nsc-host.env" ]; then source $NSCHOME/nsc-host.env 2> /dev/null; fi
    fi
    if [ ${3+"true"} ]; then
        export TBROLE=$3
@@ -102,6 +103,7 @@ if [ "$silentmode" = false ]; then
     echo "NSC3 installation folder, e.g /home/ubuntu/nsc3: "
     read NSC3HOMEFOLDER
     export NSCHOME=$NSC3HOMEFOLDER
+    if [ -f "$NSCHOME/nsc-host.env" ]; then source $NSCHOME/nsc-host.env 2> /dev/null; fi
     echo "TCP or UDP Protocol ?: "
     read TBMODE
     echo "Role (client, server or both) ?: "
@@ -129,7 +131,7 @@ if [ "$silentmode" = false ]; then
        echo "Server - Local Team-Bridge server IP address: "
        read TBSERVERIP2
        echo "Server - other end source organisation ID: "
-       read SOURCEORG2
+       read ORG2
        echo "Server - Local target organisation ID: "
        read TARGETORG2
     fi
@@ -156,7 +158,6 @@ NSC3REL=$(cat $NSCHOME/docker-compose.yml | grep registrynsion.azurecr.io/main-p
 echo "*** Current release tag: $NSC3REL  ***" 
 RELEASETAG=$NSC3REL
 # Update env variables
-source $NSCHOME/nsc-host.env 2> /dev/null
 chmod 666 $NSCHOME/nsc-host.env 2> /dev/null
 if ! [ $(grep -c "TEAM_BRIDGE_ENABLED" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TEAM_BRIDGE_ENABLED=true" >> $NSCHOME/nsc-host.env; fi
 if ! [ -z "$TEAM_BRIDGE_ENABLED" ]; then sed -i 's/export TEAM_BRIDGE_ENABLED=false/export TEAM_BRIDGE_ENABLED=true/g' $NSCHOME/nsc-host.env; fi
