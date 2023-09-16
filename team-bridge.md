@@ -1,29 +1,33 @@
-# Nsc Team Bridge Service
-
-Transfer organization-specific live traffic from one NSC3 instance to another.
+# NSC3 Team-Bridge Service
 
 Release tag: `release-3.15`
 
-## Setting up
+## Team-Bridge Service description:
 
-All IP addresses, ports and image tags are examples and can vary between deployments.
-Named `nsc-network` -docker network is expected to exist, but if not, it can be created with:
+NSC3 Team-Bridge Service is designed to broadcast live-stream between independent NSC3 servers.
+Team-Bridge commication pipe is linking NSC3 Servers organisations together. Pipes can be one-directional or bi-directional.
+Team-Bridge service will handle only device level live-stream broadcasting by remaning original device identifications at destination organisation.
 
-``` bash
-sudo docker network create --subnet 172.18.0.0/24 nsc-network
-```
+### One-Directional pipe:
 
-#### Login to NSION docker registry:
-
-If NSC3 is recently installed or upgraded then you could skip this step. 
-
-    cd $HOME/nsc3
-    sudo docker login registrynsion.azurecr.io
-    
-    <Registry crentials will be delivered separately>
+One-Directional pipe contains two elements client and server. Dataflow point of view client is defining source organisation  and server node is defining the destination organisation. Communication protocol can be TCP or UDP.
 
 
-### General instructions for configuring
+### Bi-Directional pipe:
+
+Bi-Directional pipe combines both elements client and server that need to installed to both end. Dataflow point is similar as in case of One-Directional link but but along two pipes, outbound and inbound. Communication protocol can be TCP or UDP.
+In order to get this concept working accordingly, Bi-Directional pipe requires two organizations to be created on both servers. Inside of NSC3 server organisations can be link together via JontOps tasks.
+
+## Setting up Team-Bridge One-Directional link:
+### Team-Bridge One-Directional link - Client:
+
+### Team-Bridge One-Directional link - Server:
+
+## Setting up Team-Bridge Bi-Directional link:
+### Team-Bridge Bi-Directional link - Server1:
+
+### Team-Bridge Bi-Directional link - Server2:
+
 
 Steps are mostly the same on both client and server side. Runtime configuration is done in
 the `.env` file.
