@@ -12,228 +12,123 @@ Team-Bridge service will handle only device level live-stream broadcasting by re
 
 One-Directional pipe contains two elements client and server. Dataflow point of view client is defining source organisation  and server node is defining the destination organisation. Communication protocol can be TCP or UDP.
 
+Pre-requisites for installation:
+- 2 x NSC3 servers installed
+- admin credentials for NSC3
+- IP address for both servers
+- Organisation ID for source and destination NSC3 organisations -> Org ID is visible via NSC3 Admin panel
+- Team-Bridge specific port 64660 open for Team-Bridge server
 
 ### Bi-Directional pipe:
 
 Bi-Directional pipe combines both elements client and server that need to installed to both end. Dataflow point is similar as in case of One-Directional link but but along two pipes, outbound and inbound. Communication protocol can be TCP or UDP.
-In order to get this concept working accordingly, Bi-Directional pipe requires two organizations to be created on both servers. Inside of NSC3 server organisations can be link together via JontOps tasks.
+In order to get this concept working accordingly, Bi-Directional pipe requires two organizations to be created on both servers. Inside of NSC3 server organisations can be link together via JontOps tasks. Note that Joint Operations functionality in NSC3 requires dedicated license.
+
+Pre-requisites for installation:
+- 2 x NSC3 servers installed
+- admin credentials for NSC3
+- IP address for both servers
+- 2 x NSC3 organisations defined at both server
+- Organisation ID for source and destination NSC3 organisations for both directions -> Org ID is visible via NSC3 Admin panel
+- Team-Bridge specific port 64660 is open for both servers
 
 ## Setting up Team-Bridge One-Directional link:
+
+### Reference dataflow with example values.
+
+
 ### Team-Bridge One-Directional link - Client:
+
+Login to Client node:
+
+    ``` bash
+    cd $HOME/nsc3
+    sudo chmod u-x *.sh
+    git pull
+    sudo chmod u-x *.sh
+    sudo ./team-bridge-install.sh
+    ```
+    
+    ```properties
+
+    ```
 
 ### Team-Bridge One-Directional link - Server:
 
+Login to Client node:
+
+    ``` bash
+    cd $HOME/nsc3
+    sudo chmod u-x *.sh
+    git pull
+    sudo chmod u-x *.sh
+    sudo ./team-bridge-install.sh
+    ```
+    
+    ```properties
+
+    ```
+
 ## Setting up Team-Bridge Bi-Directional link:
+
+### Reference dataflow with example values.
+
+
 ### Team-Bridge Bi-Directional link - Server1:
+
+Login to Server1:
+
+    ``` bash
+    cd $HOME/nsc3
+    sudo chmod u-x *.sh
+    git pull
+    sudo chmod u-x *.sh
+    sudo ./team-bridge-install.sh
+    ```
+
+    ```properties
+
+    ```
 
 ### Team-Bridge Bi-Directional link - Server2:
 
+Login to Server2:
 
-Steps are mostly the same on both client and server side. Runtime configuration is done in
-the `.env` file.
-
-1. Load the team-bridge container to local registry:
-
-   ``` bash
-   sudo docker pull registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
-   ```
-
-3. Configure necessary environment variables into an ```nsc-team-bridge-service.env``` -file.
-
-   UDP Server example ```nsc-team-bridge-service.env```-file with default values:
-
-    ```properties
-   # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
-   NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=UDP_SERVER
-   # Address where the packets are assigned to ...
-   ## Client: Public IP address of team-bridge server
-   ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
-   # Port used for traffic, has to match the container port given to docker run
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
-   # Client: Comma-separated list of organization ID strings as live traffic sources
-   # NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=
-   # Server: Comma-separated key>value -map of organization ID source>destination pairs
-   # for mapping incoming live traffic into existing local organizations, for example:
-   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
-   NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=aslkdhalks233423423r54>dklsase53948wfdkgls
-   # Byte amount the payload is split into. Only effective for client in UDP mode
-   NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
-   ```
-   TCP Server example ```nsc-team-bridge-service.env```-file with default values:
-
-    ```properties
-   # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
-   NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=TCP_SERVER
-   # Address where the packets are assigned to ...
-   ## Client: Public IP address of team-bridge server
-   ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=nsc-team-bridge-service
-   # Port used for traffic, has to match the container port given to docker run
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
-   # Client: Comma-separated list of organization ID strings as live traffic sources
-   # NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=
-   # Server: Comma-separated key>value -map of organization ID source>destination pairs
-   # for mapping incoming live traffic into existing local organizations, for example:
-   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
-   NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=aslkdhalks233423423r54>dklsase53948wfdkgls
-   # Byte amount the payload is split into. Only effective for client in UDP mode
-   # NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
-   ```
+    ``` bash
+    cd $HOME/nsc3
+    sudo chmod u-x *.sh
+    git pull
+    sudo chmod u-x *.sh
+    sudo ./team-bridge-install.sh
+    ```
     
-   UDP Client example ```nsc-team-bridge-service.env```-file with default values:
-
     ```properties
-   # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
-   NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=UDP_CLIENT
-   # Address where the packets are assigned to ...
-   ## Client: Public IP address of team-bridge server
-   ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=192.168.1.100
-   # Port used for traffic, has to match the container port given to docker run
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
-   # Client: Comma-separated list of organization ID strings as live traffic sources
-   NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=aslkdhalks233423423r54
-   # Server: Comma-separated key>value -map of organization ID source>destination pairs
-   # for mapping incoming live traffic into existing local organizations, for example:
-   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
-   # Byte amount the payload is split into. Only effective for client in UDP mode
-   NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
-   ```
-   TCP Client example ```nsc-team-bridge-service.env```-file with default values:
 
-    ```properties
-   # In which mode the service is operating, has to be one of UDP_CLIENT, UDP_SERVER, TCP_CLIENT or TCP_SERVER
-   NSC3_TEAM_BRIDGE_SERVICE_OPERATE_MODE=TCP_CLIENT
-   # Address where the packets are assigned to ...
-   ## Client: Public IP address of team-bridge server
-   ## Server: Docker container name of team-bridge server e.g nsc-team-bridge-service
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_ADDRESS=nsc-team-bridge-service
-   # Port used for traffic, has to match the container port given to docker run
-   NSC3_TEAM_BRIDGE_SERVICE_SOCKET_PORT=64660
-   # Client: Comma-separated list of organization ID strings as live traffic sources
-   NSC3_TEAM_BRIDGE_SERVICE_CLIENT_ORG_SRC_LIST=aslkdhalks233423423r54
-   # Server: Comma-separated key>value -map of organization ID source>destination pairs
-   # for mapping incoming live traffic into existing local organizations, for example:
-   # NSC3_TEAM_BRIDGE_SERVICE_SERVER_ORG_DEST_MAP=sourceOrgId>destinationOrgId
-   # Byte amount the payload is split into. Only effective for client in UDP mode
-   # NSC3_TEAM_BRIDGE_SERVICE_DATAGRAM_CHUNK_SIZE_BYTES=1200
-   ```
-4. Locate the configuration file to the folder where you are going run docker services.
+    ```
+## TCP key-pairs:
 
-### UDP mode start services
+Installation process will take case of TCP key-pair creation.
+It is mandatory manual step to do in order to ensure that server side and client side is paired accordingly.
+Copy the keypair file bundle directory only once from the server where the bundle is created in the first place.
+Installation process will remind that separately.
 
-Run the app based on the image, with environment variables from `nsc-team-bridge-service.env`. Server side has to have the configured listen port mapped.
-
-UDP Server:
-
-   ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env -p 64660:64660/udp --net nsc-network --ip 172.18.0.30 --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
-   ```
-UDP Client: 
-
-   ``` bash
-   sudo docker run -d --env-file nsc-team-bridge-service.env --net nsc-network --ip 172.18.0.30 --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
-   ```
-
-### TCP mode and key management
-
-Secure communication using TCP requires generating unique asymmetric key pairs for both client and server sides and pre-sharing their public keys for symmetric key negotiation.
-
-`scripts`-folder contains a script `generateTeamBridgeRSAKeyPairs.sh` for generating a set of RSA key pairs in the correct structure and format the application expects them to be present in the volume:
-
-- `-v <host path>/bridgekeys:/opt/nsc3/bridgekeys`
-
-1. Run the script with `./generateTeamBridgeRSAKeyPairs.sh` and it should generate the following folder and file structure:
-
-TCP/IP Server:
-
-```bash
-bridgekeys
-bridgekeys/server
-bridgekeys/server/bridge_public_key.der
-bridgekeys/server/bridge_client_public_key.der
-bridgekeys/server/bridge_private_key.der
-```
-
-TCP/IP Client:
-```bash
-bridgekeys/client
-bridgekeys/client/bridge_public_key.der
-bridgekeys/client/bridge_server_public_key.der
-bridgekeys/client/bridge_private_key.der
-```
-2. Copy the key bundle to both hosts (Client and Server)
-
-3. Change permission for key files at Client and server host: 
-```bash
-cd <host path to bridgekeys folder>
-chmod a+rw bridgekeys/client/*
-chmod a+rw bridgekeys/server/*
-```
-
-Only one of the `client` or `server` folders needs to be present, depending on the launch mode. Also note that the script requires `openssl` binary on the host PATH and there might be some untested differences if they are generated on different openssl versions.
-
-TCP Server, start services:
-
-   ``` bash
-   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --ip 172.18.0.30 --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
-   ```
-TCP Client, start services: 
-
-   ``` bash
-   sudo docker run -d -v <host path>/bridgekeys:/opt/nsc3/bridgekeys --env-file nsc-team-bridge-service.env -p 64660:64660 --net nsc-network --ip 172.18.0.30 --restart unless-stopped --name nsc-team-bridge-service registrynsion.azurecr.io/nsc-team-bridge-service:release-3.15
-   ```
-
-## Additional server side configuration step (Mandatory)
-
-`nsc-stream-in-service` has to be re-run with an extra flag for enabling team bridge traffic processing:
+After first TCP mode installation the key-pair bundle is located to folder:
 
 ``` bash
-sudo nano docker-compose.yml
+$HOME/nsc3/bridgekeys
 ```
 
-Add following environment variable parameters `NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true` section of nsc-stream-in-service 
-
-Example:
-```yaml
-
-  nsc-stream-in-service:
-    container_name: nsc-stream-in-service
-    image: registrynsion.azurecr.io/nsc-stream-in-service:release-3.15
-    logging:
-      driver: "json-file"
-      options: {}    
-    volumes:
-      - /dev/urandom:/dev/random:rw
-    networks:
-      nsc-network:
-        ipv4_address: "172.18.0.6"
-    restart: unless-stopped
-    environment:
-      - MEMORY=8g
-      - NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true
-    working_dir: /root
-
-```
-
-Restart NSC streaming services:
+Copy them to corresponding folder on other end server.
+e.g with scp command
 
 ``` bash
-sudo docker-compose restart nsc-stream-in-service
+scp -r $HOME/nsc3/bridgekeys <username>@<server2>:./nsc3/.
 ```
 
-
-## Environment variables
-
-If environment are later adjusted, the app container has to be stopped and re-created:
-
-```sh
-sudo docker stop nsc-team-bridge-service
-sudo docker rm nsc-team-bridge-service
+Key-pairs can be generated separately by command
+``` bash
+generateTeamBridgeRSAKeyPairs.sh
 ```
-
-Tweak the environment variables in the .env-file and execute the `docker run` -command as described in above instructions.
 
 ## Troubleshooting UDP
 
