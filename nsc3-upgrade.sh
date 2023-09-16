@@ -1,7 +1,9 @@
 #!/bin/bash
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
+TIMESTAMP=$(date +%Y%m%d%H%M)
 source ./nsc-host.env
+PREVRELEASE=$(cat $NSCHOME/docker-compose.yml | grep registrynsion.azurecr.io/main-postgres: | cut -d\: -f3) 2> /dev/null
 export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 silentmode=false
@@ -178,6 +180,13 @@ if ! [ -z "$TEAM_BRIDGE_ENABLED" ]; then
    if test -f docker-compose_$PUBLICIP.yml; then    mv docker-compose_$PUBLICIP.yml docker-compose_$PUBLICIP_$NSC3REL.old  2> /dev/null
    fi
    cp docker-compose.yml docker-compose_$PUBLICIP.yml
+fi
+# Maintenance log
+if ! [ -f "$NSCHOME/logs/nsc-maintenance-log.txt" ]; then 
+   touch $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
+   chmod 666 $NSCHOME/logs/nsc-maintenance-log.txt;
+else 
+   echo "$TIMESTAMP NSC3 backend upgraded from release $PREVRELEASE release $RELEASETAG" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null; 
 fi
 echo "docker-compose.yml file is updated..."
 echo "Upgrading docker images ..."
