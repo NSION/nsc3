@@ -117,7 +117,20 @@ sudo ./team-bridge-install.sh
 Installation with reference example values:
 
 ```properties
-
+++++++++++++++++++++++++++++++++++++++++
+                                        
+  NSC3 Team-Bridge installer:           
+  This script prepares NSC3 config      
+                                        
+++++++++++++++++++++++++++++++++++++++++
+NSC3 installation folder, e.g /home/ubuntu/nsc3: /home/ubuntu/nsc3
+TCP or UDP Protocol ?: UDP
+Role (client, server or both) ?: both
+Client - other end Team-Bridge server IP address: 192.168.10.13
+Client - Local source organisation ID: L5JXk6d18KtyeuZfhKtLuerJeJtEnEYRGTfX
+Server - Local Team-Bridge server IP address: 192.168.10.12
+Server - other end source organisation ID: bMHZxI3Ke5QEaNqx7qFtuQUHTTNszYgNDEcK
+Server - Local target organisation ID: 57NK1bbudRW_b1fgzJztNzVLcbSvR2zHkqBU
 ```
 
 ### Team-Bridge Bi-Directional link - Server2:
@@ -135,7 +148,20 @@ sudo ./team-bridge-install.sh
 Installation with reference example values:
  
 ```properties
-
+++++++++++++++++++++++++++++++++++++++++
+                                        
+  NSC3 Team-Bridge installer:           
+  This script prepares NSC3 config      
+                                        
+++++++++++++++++++++++++++++++++++++++++
+NSC3 installation folder, e.g /home/ubuntu/nsc3: /home/ubuntu/nsc3
+TCP or UDP Protocol ?: UDP
+Role (client, server or both) ?: both
+Client - other end Team-Bridge server IP address: 192.168.10.12
+Client - Local source organisation ID: bMHZxI3Ke5QEaNqx7qFtuQUHTTNszYgNDEcK
+Server - Local Team-Bridge server IP address: 192.168.10.13
+Server - other end source organisation ID: L5JXk6d18KtyeuZfhKtLuerJeJtEnEYRGTfX
+Server - Local target organisation ID: kqkYDd2Ofv04eFBg-G7xmPIO9IjGMcx_VcEJ
 ```
 ## TCP key-pairs:
 
