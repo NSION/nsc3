@@ -53,8 +53,11 @@ if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then
    echo "Release tag: $NSC3REL is missing. Using release tag: latest as runtime parameters configuration" 
    RELEASETAG="latest"
 fi
-# Move old files
+# Move old files and create new.
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
+if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
+
+if ! [ -z "$TEAM_BRIDGE_ENABLED" ]; then
 (echo "cat <<EOF >docker-compose-temp.yml";
 cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
 ) >temp.yml
