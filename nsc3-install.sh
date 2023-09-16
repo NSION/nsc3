@@ -3,6 +3,7 @@
 export NSC3REG="registrynsion.azurecr.io"
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 silentmode=false
+TIMESTAMP=$(date +%Y-%m-%d)
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
        silentmode=true
@@ -194,23 +195,25 @@ if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then
 fi
 # Move old files
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
-# Remove old and create new env file
+# Backup old and create new env file
 if [ -f "$NSCHOME/nsc-host.env" ]; then
-   rm $NSCHOME/nsc-host.env 2> /dev/null
+    mv $NSCHOME/nsc-host.env $NSCHOME/nsc-host-$TIMESTAMP.old 2> /dev/null
 fi
 # set defaults for empty variables
 [ -z "$VALOR_ENABLED" ] && export VALOR_ENABLED=false
+[ -z "$TEAM_BRIDGE_ENABLED" ] && export TEAM_BRIDGE_ENABLED=false
 # Store variables
 echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 echo "export VALOR_ENABLED=$VALOR_ENABLED" >> $NSCHOME/nsc-host.env
+echo "export TEAM_BRIDGE_ENABLED=$TEAM_BRIDGE_ENABLED" >> $NSCHOME/nsc-host.env
 export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null
 #  Modify maptiles rights level
 chmod 644 $NSCHOME/mapdata/*.* 2> /dev/null
-# Create docker-compose.yml file
+# Backup old and create docker-compose.yml file
 cd $NSCHOME
 if [ -f "docker-compose.yml" ]; then
-   mv docker-compose.yml docker-compose.old 2> /dev/null
+   mv docker-compose.yml docker-compose-$TIMESTAMP.old 2> /dev/null
 fi
 (echo "cat <<EOF >docker-compose-temp.yml";
 cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
