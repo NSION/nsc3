@@ -158,14 +158,15 @@ RELEASETAG=$NSC3REL
 # Update env variables
 source $NSCHOME/nsc-host.env 2> /dev/null
 chmod 666 $NSCHOME/nsc-host.env 2> /dev/null
-if ! [ $(grep -c "TBMODE" $NSCHOME/nsc-host.env) -eq 1 ]; ]; then echo "export TBMODE=$TBMODE" >> $NSCHOME/nsc-host.env; fi
+if ! [ $(grep -c "TEAM_BRIDGE_ENABLED" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TEAM_BRIDGE_ENABLED=true >> $NSCHOME/nsc-host.env; fi
+if ! [ -z "$TEAM_BRIDGE_ENABLED" ]; then sed -i 's/export TEAM_BRIDGE_ENABLED=false/export TEAM_BRIDGE_ENABLED=true/g' $NSCHOME/nsc-host.env; fi
+if ! [ $(grep -c "TBMODE" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBMODE=$TBMODE" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "TBROLE" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBROLE=$TBROLE" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "TBSERVERIP" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBSERVERIP=$TBSERVERIP" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "SOURCEORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export SOURCEORG=$SOURCEORG" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "TARGETORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TARGETORG=$TARGETORG" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "SOURCEORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export SOURCEORG2=$SOURCEORG2" >> $NSCHOME/nsc-host.env; fi
 if ! [ $(grep -c "TARGETORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TARGETORG2=$TARGETORG2" >> $NSCHOME/nsc-host.env; fi
-chmod 333 $NSCHOME/nsc-host.env 2> /dev/null
 # Additional variables
 if [ $TBROLE = both ]; then CLIENTSOURCE=$SOURCEORG; fi
 if [ $TBROLE = both ]; then SERVERSOURCE=$SOURCEORG2; fi
