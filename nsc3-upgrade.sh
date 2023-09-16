@@ -40,11 +40,10 @@ if [ "$silentmode" = false ]; then
     echo "                                        "
     echo "  NSC3 upgrade:        "
     echo "  This script is upgrading NSC3 system  "
+    echo "  Current release tag: $PREVRELEASE  "    
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
-    echo "New NSC3 Release tag for upgrading, e.g release-3.15: " 
-    read REL
-    export NSC3REL=$REL
+    read -p "NSC3 Release tag for upgrading, e.g release-3.15: " NSC3REL
 fi
 cd $NSCHOME
 # Check values
