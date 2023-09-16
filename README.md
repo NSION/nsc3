@@ -34,13 +34,15 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ## NSC3 backend installation guidance for single node via public NSION repository:
 ### Default file system locations:
 
-- NSC3 Installation folder $HOME/nsc3, However this location is configurable. Instruction are referring for $HOME/nsc3 folder. The folder "nsc3" will be created automatically while installation process
-- Docker content folder is /var/lib/docker
-- Relational Database (Postgresql) content folder is /var/lib/docker/volumes/main-postgres-volume
-- Object Storage (min.io) content folder is /var/lib/docker/volumes/minio-volume
-- NSC3 logs files folder is $HOME/nsc3/logs
-- NSC3 maptiles files folder is $HOME/nsc3/mapdata
-- SSL cert files folder is $HOME/nsc3/nsc-gateway-cert
+- NSC3 Installation folder: '$HOME/nsc3', However this location is configurable. Instruction are referring for $HOME/nsc3 folder. The subfolder "nsc3" will be created automatically while installation process.
+- Docker content folder: '/var/lib/docker'
+- Relational Database (Postgresql) content folder: '/var/lib/docker/volumes/main-postgres-volume'
+- Object Storage (min.io) content folder: '/var/lib/docker/volumes/minio-volume'
+- NSC3 logs files folder: '$HOME/nsc3/logs'. Container logs 'sudo docker logs <conteiner name>'
+- NSC3 maptiles files folder: '$HOME/nsc3/mapdata' Note only one maptile file is supported!
+- SSL cert files folder: '$HOME/nsc3/nsc-gateway-cert'
+- Environment variables for system maintenance: '$HOME/nsc3/nsc-host.env'
+- Maintenance log: '$HOME/nsc3/logs/nsc-maintenance/nsc-maintenance-log.txt'
 
 ### NSC3 installation:
 #### Install Docker:
@@ -152,14 +154,10 @@ cd $HOME/nsc3
 sudo ./nsc3-install.sh  
 ```    
 
-    NSC3 installation folder, e.g /home/nscuser/nsc3: 
-    /home/ubuntu/nsc3      
-    NSC3 public hostname, e.g foo.nsion.io: 
-    foo.nsion.io   
-    Location of SSL cert files, e.g /home/nscuser: 
-	/home/ubuntu
-    NSC3 Release tag, e.g release-3.15: 
-    release-3.11
+    NSC3 installation folder, e.g /home/ubuntu/nsc3: /home/ubuntu/nsc3      
+    NSC3 public hostname, e.g foo.nsion.io: foo.nsion.io   
+    Location of SSL cert files, e.g /home/ubuntu: /home/ubuntu
+    NSC3 Release tag, e.g release-3.15: release-3.11
     Map files options : 
     1. North America map
     2. Europa map
@@ -428,7 +426,10 @@ Test that route to 443 port is open:
 
     nmap <hostname> | grep 443
 
-## NSC3 add on feature configuration
+## Instructions for NSC3 add-on features:
 
 ### Team bridge:
 https://github.com/NSION/nsc3/blob/main/team-bridge.md
+
+### Valor AI module:
+https://github.com/NSION/nsc3/blob/team-bridge-dev/valor-installation-guide.md
