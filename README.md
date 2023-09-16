@@ -432,4 +432,4 @@ Test that route to 443 port is open:
 https://github.com/NSION/nsc3/blob/main/team-bridge.md
 
 ### Valor AI module:
-https://github.com/NSION/nsc3/blob/team-bridge-dev/valor-installation-guide.md
+https://github.com/NSION/nsc3/blob/main/valor-installation-guide.md
