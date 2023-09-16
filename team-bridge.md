@@ -36,6 +36,7 @@ Pre-requisites for installation:
 
 ### Reference dataflow with example values.
 
+![One-Directional-link](https://github.com/NSION/nsc3/blob/team-bridge-dev/One-directional-TB-link.png)
 
 ### Team-Bridge One-Directional link - Client:
 
@@ -73,6 +74,7 @@ sudo ./team-bridge-install.sh
 
 ### Reference dataflow with example values.
 
+![Bi-Directional-link](https://github.com/NSION/nsc3/blob/team-bridge-dev/Bi-directional-TB-link.png)
 
 ### Team-Bridge Bi-Directional link - Server1:
 
