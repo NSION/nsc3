@@ -106,7 +106,7 @@ if [ "$silentmode" = false ]; then
     read TBMODE
     echo "Role (client, server or both) ?: "
     read TBROLE
-    if ! [[ $TBROLE = client  ||  $TBMODE = server ||  $TBMODE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
+    if ! [[ $TBROLE = client  ||  $TBROLE = server ||  $TBROLE = both ]]; then echo "*** "$TBROLE"  as input value is not range of role selection. please type client, server or both"; exit 0; fi
     if [ $TBROLE = client ]; then 
        echo "other end Team-Bridge server IP address: "
        read TBSERVERIP
