@@ -296,7 +296,7 @@ if ! [ -f "$NSCHOME/logs/nsc-maintenance-log.txt" ]; then
    touch $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
    chmod 666 $NSCHOME/logs/nsc-maintenance-log.txt;
 else 
-   echo "$TIMESTAMP Team-Bridge Role:$TBROLE Procol:$TBMODE installed" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;  ;
+   echo "$TIMESTAMP Team-Bridge Role:$TBROLE Procol:$TBMODE installed" >> $NSCHOME/logs/nsc-maintenance-log.txt 2> /dev/null;
 fi
 echo "*** docker-compose.yml file is created ***"
 echo "*** Downloading docker images ... ***"
