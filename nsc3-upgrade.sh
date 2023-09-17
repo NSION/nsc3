@@ -44,7 +44,6 @@ if [ "$silentmode" = false ]; then
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
     read -p "NSC3 Release tag for upgrading, e.g release-3.15: " NSC3REL
-    if ! [ $(grep -c "TEAM_BRIDGE_ENABLED" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "Team-Bridge not found"; fi
 fi
 cd $NSCHOME
 # Check values
@@ -170,6 +169,19 @@ if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
       fi
     fi
 else
+   (echo "cat <<EOF >docker-compose-temp.yml";
+   cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
+   ) >temp.yml
+   . temp.yml 2> /dev/null
+   cat docker-compose-temp.yml > docker-compose.yml;
+   rm -f temp.yml docker-compose-temp.yml 2> /dev/null
+   if test -f docker-compose_$PUBLICIP.yml; then    mv docker-compose_$PUBLICIP.yml docker-compose_$PUBLICIP_$NSC3REL.old  2> /dev/null
+   fi
+   cp docker-compose.yml docker-compose_$PUBLICIP.yml
+fi
+if ! [ $(grep -c "TEAM_BRIDGE_ENABLED" $NSCHOME/nsc-host.env) -eq 1 ]; then 
+   chmod 666 $NSCHOME/nsc-host.env
+   echo "export TEAM_BRIDGE_ENABLED=false" >> $NSCHOME/nsc-host.env
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
    ) >temp.yml
