@@ -234,6 +234,7 @@ services:
 #    container_name: nsc-team-bridge-service-client-tcp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped  
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-client-tcp
@@ -245,6 +246,7 @@ services:
 #    container_name: nsc-team-bridge-service-server-tcp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 #    ports:
 #        - "64660"
 #    volumes:
@@ -258,6 +260,7 @@ services:
 #    container_name: nsc-team-bridge-service-client-udp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 ## add-off nsc-team-bridge-service-client-udp
 ## add-on nsc-team-bridge-service-server-udp
 #  nsc-team-bridge-service-server-udp:
@@ -267,6 +270,7 @@ services:
 #    container_name: nsc-team-bridge-service-server-udp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 #    ports:
 #        - "64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
@@ -524,6 +528,7 @@ services:
 #    container_name: nsc-team-bridge-service-client-tcp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-client-tcp
@@ -535,6 +540,7 @@ services:
 #    container_name: nsc-team-bridge-service-server-tcp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 #    ports:
 #        - "64660"
 #    volumes:
@@ -548,6 +554,7 @@ services:
 #    container_name: nsc-team-bridge-service-client-udp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 ## add-off nsc-team-bridge-service-client-udp
 ## add-on nsc-team-bridge-service-server-udp
 #  nsc-team-bridge-service-server-udp:
@@ -557,6 +564,7 @@ services:
 #    container_name: nsc-team-bridge-service-server-udp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 #    ports:
 #        - "64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
@@ -814,6 +822,7 @@ services:
 #    container_name: nsc-team-bridge-service-client-tcp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-client-tcp
@@ -825,6 +834,7 @@ services:
 #    container_name: nsc-team-bridge-service-server-tcp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 #    ports:
 #        - "64660"
 #    volumes:
@@ -838,6 +848,7 @@ services:
 #    container_name: nsc-team-bridge-service-client-udp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 ## add-off nsc-team-bridge-service-client-udp
 ## add-on nsc-team-bridge-service-server-udp
 #  nsc-team-bridge-service-server-udp:
@@ -847,6 +858,7 @@ services:
 #    container_name: nsc-team-bridge-service-server-udp
 #    networks: 
 #      - nsc-network
+#    restart: unless-stopped 
 #    ports:
 #        - "64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
