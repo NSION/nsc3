@@ -316,11 +316,12 @@ if [ $TBROLE = both ]; then echo "Client: Source org ID: $CLIENTSOURCE ServerIP:
 if [ $TBROLE = both ]; then echo "Server: Source org ID: $SERVERSOURCE Target org ID: $SERVERDEST "; fi
 echo ""
 echo "Backup-files:"
-echo "Docker-compose backup file: 'docker-compose-tb-addition-backup-$TIMESTAMP.yml' "
-echo ""
-if [ $KEY_COPY_REMINDER ]; then echo "New TCP keypairs generated at this server. Please copy all key pair files from this server folder $NSCHOME/bridgekeys to other end server folder $NSCHOME/bridgekeys"; fi
-echo ""
+echo "Docker-compose backup: 'docker-compose-tb-addition-backup-$TIMESTAMP.yml' "
 echo "Login to your NSC3 web app by URL address       "
 echo "https://$PUBLICIP                               "
 echo ""
+echo ""
+if [ $KEY_COPY_REMINDER ]; then 
+   echo "New TCP keypairs generated at this server. Please copy all key pair files from this server folder $NSCHOME/bridgekeys to other end server folder $NSCHOME/bridgekeys"; 
+fi
 echo "*************************************************************************"
