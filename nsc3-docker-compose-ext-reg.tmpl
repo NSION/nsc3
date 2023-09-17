@@ -248,7 +248,7 @@ services:
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660"
+#        - "64660:64660/tcp" 
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-server-tcp
@@ -272,7 +272,7 @@ services:
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660/udp"
+#        - "64660:64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
@@ -542,7 +542,7 @@ services:
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660"
+#        - "64660:64660/tcp"
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-server-tcp
@@ -566,7 +566,7 @@ services:
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660/udp"
+#        - "64660:64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
@@ -836,7 +836,7 @@ services:
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660"
+#        - "64660:64660/tcp"
 #    volumes:
 #        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-server-tcp
@@ -860,7 +860,7 @@ services:
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660/udp"
+#        - "64660:64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
