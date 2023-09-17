@@ -202,10 +202,6 @@ if ! [ $(grep -c "TARGETORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then
    else 
    sed -i 's/.*TARGETORG2*.*/export TARGETORG2='"$TARGETORG2"'/' $NSCHOME/nsc-host.env
 fi
-# Additional variables
-if [ $TBROLE = both ]; then CLIENTSOURCE=$SOURCEORG; fi
-if [ $TBROLE = both ]; then SERVERSOURCE=$SOURCEORG2; fi
-if [ $TBROLE = both ]; then SERVERDEST=$TARGETORG2; fi
 # Update docker-compose.yml file
 cd $NSCHOME
 # make backup
@@ -256,8 +252,11 @@ if [[ $TBMODE = UDP ]]; then
       . tb-client-temp.yml 2> /dev/null
       cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
       # Server
-      export SOURCEORG=$SERVERSOURCE
-      export TARGETORG=$SERVERDEST 
+      CLIENTSOURCE=$SOURCEORG
+      SERVERSOURCE=$SOURCEORG2
+      SERVERDEST=$TARGETORG2
+      SOURCEORG=$SERVERSOURCE
+      TARGETORG=$SERVERDEST 
       (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
       cat nsc-team-bridge-service-server.tmpl;
       ) >tb-server-temp.yml
@@ -310,8 +309,11 @@ if [[ $TBMODE = TCP ]]; then
       . tb-client-temp.yml 2> /dev/null
       cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
       # Server
-      export SOURCEORG=$SERVERSOURCE
-      export TARGETORG=$SERVERDEST 
+      CLIENTSOURCE=$SOURCEORG
+      SERVERSOURCE=$SOURCEORG2
+      SERVERDEST=$TARGETORG2
+      SOURCEORG=$SERVERSOURCE
+      TARGETORG=$SERVERDEST
       (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
       cat nsc-team-bridge-service-server.tmpl;
       ) >tb-server-temp.yml
