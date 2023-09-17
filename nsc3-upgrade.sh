@@ -168,8 +168,7 @@ if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
          rm -f tb-server-temp.yml nsc-team-bridge-service-server-temp.yml tb-client-temp.yml nsc-team-bridge-service-client-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
       fi
     fi
-fi
-else if; then
+else
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
    ) >temp.yml
