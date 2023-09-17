@@ -11,7 +11,7 @@ Team-Bridge service is managing live-stream broadcasting from devices per specif
 
 ### One-Directional pipe:
 
-One-Directional pipe contains two elements client and server. Dataflow point of view client is defining source organisation  and server node is defining the destination organisation. 
+One-Directional pipe contains two elements, client and server. Dataflow point of view the client node is defining source organisation and the server node is defining the source/destination organisation. 
 
 Pre-requisites for installation:
 - 2 x NSC3 servers installed
