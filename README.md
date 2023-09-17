@@ -49,6 +49,14 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 - Environment variables for system maintenance: '$HOME/nsc3/nsc-host.env'
 - Maintenance log: '$HOME/nsc3/logs/nsc-maintenance/nsc-maintenance-log.txt'
 
+## Instructions for NSC3 add-on features:
+
+### Team bridge:
+https://github.com/NSION/nsc3/blob/main/team-bridge.md
+
+### Valor AI module:
+https://github.com/NSION/nsc3/blob/main/valor-installation-guide.md
+
 ### NSC3 installation:
 #### Install Docker:
 Please follow the latest installation instructions by Docker community https://docs.docker.com/engine/install/ 
@@ -435,11 +443,3 @@ As example Ubuntu installation
 Test that route to 443 port is open:
 
     nmap <hostname> | grep 443
-
-## Instructions for NSC3 add-on features:
-
-### Team bridge:
-https://github.com/NSION/nsc3/blob/main/team-bridge.md
-
-### Valor AI module:
-https://github.com/NSION/nsc3/blob/main/valor-installation-guide.md
