@@ -5,12 +5,13 @@ Release tag: `release-3.15`
 ## Team-Bridge Service description:
 
 NSC3 Team-Bridge Service is designed to broadcast live-stream between independent NSC3 servers.
-Team-Bridge commication pipe is linking NSC3 Servers organisations together. Pipes can be one-directional or bi-directional.
-Team-Bridge service will handle only device level live-stream broadcasting by remaning original device identifications at destination organisation.
+Team-Bridge commication pipe is linking NSC3 Servers organisations together. Pipes can be one-directional or bi-directional. Communication protocol can be TCP or UDP. Only the TCP pipe is encrypted.
+
+Team-Bridge service is managing live-stream broadcasting from devices per specified organisation. In order to avoid overlapping with device indentifications the original device identifications at source organisation is renamed at destination organisation. Team-Bridge is syncronizing only devices, exclusing users identified data.
 
 ### One-Directional pipe:
 
-One-Directional pipe contains two elements client and server. Dataflow point of view client is defining source organisation  and server node is defining the destination organisation. Communication protocol can be TCP or UDP.
+One-Directional pipe contains two elements client and server. Dataflow point of view client is defining source organisation  and server node is defining the destination organisation. 
 
 Pre-requisites for installation:
 - 2 x NSC3 servers installed
@@ -21,8 +22,9 @@ Pre-requisites for installation:
 
 ### Bi-Directional pipe:
 
-Bi-Directional pipe combines both elements client and server that need to installed to both end. Dataflow point is similar as in case of One-Directional link but but along two pipes, outbound and inbound. Communication protocol can be TCP or UDP.
-In order to get this concept working accordingly, Bi-Directional pipe requires two organizations to be created on both servers. Inside of NSC3 server organisations can be link together via JontOps tasks. Note that Joint Operations functionality in NSC3 requires dedicated license.
+Bi-Directional pipe combines both elements client and server that need to installed at both end. Dataflow point of view it is similar as in case of One-Directional link but along two pipes outbound and inbound directions. 
+
+In order to get this concept working accordingly, Bi-Directional pipe requires two organizations that need to be created on both servers. Inside of NSC3 server those two independent organisations can be link together by JontOps tasks. Note that Joint Operations functionality in NSC3 requires dedicated license.
 
 Pre-requisites for installation:
 - 2 x NSC3 servers installed
