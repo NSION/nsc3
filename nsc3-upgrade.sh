@@ -169,7 +169,7 @@ if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
       fi
     fi
 fi
-if ! [ -z "$TEAM_BRIDGE_ENABLED" ]; then
+else if; then
    (echo "cat <<EOF >docker-compose-temp.yml";
    cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p';
    ) >temp.yml
