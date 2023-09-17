@@ -39,15 +39,15 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ## NSC3 backend installation guidance for single node via public NSION repository:
 ### Default file system locations:
 
-- NSC3 Installation folder: '$HOME/nsc3', However this location is configurable. Instruction are referring for $HOME/nsc3 folder. The subfolder "nsc3" will be created automatically while installation process.
-- Docker content folder: '/var/lib/docker'
-- Relational Database (Postgresql) content folder: '/var/lib/docker/volumes/main-postgres-volume'
-- Object Storage (min.io) content folder: '/var/lib/docker/volumes/minio-volume'
-- NSC3 logs files folder: '$HOME/nsc3/logs'. Container logs 'sudo docker logs <conteiner name>'
-- NSC3 maptiles files folder: '$HOME/nsc3/mapdata' Note only one maptile file is supported!
-- SSL cert files folder: '$HOME/nsc3/nsc-gateway-cert'
-- Environment variables for system maintenance: '$HOME/nsc3/nsc-host.env'
-- Maintenance log: '$HOME/nsc3/logs/nsc-maintenance/nsc-maintenance-log.txt'
+- NSC3 Installation folder: ```$HOME/nsc3```, However this location is configurable. Instruction are referring for ```$HOME/nsc3``` folder. The subfolder "nsc3" will be created automatically while installation process.
+- Docker content folder: ```/var/lib/docker```
+- Relational Database (Postgresql) content folder: ```/var/lib/docker/volumes/main-postgres-volume```
+- Object Storage (min.io) content folder: ```/var/lib/docker/volumes/minio-volume```
+- NSC3 logs files folder: ```$HOME/nsc3/logs```. Container logs ```sudo docker logs <container name>```
+- NSC3 maptiles files folder: ```$HOME/nsc3/mapdata``` Note only one maptile file is supported!
+- SSL cert files folder: ```$HOME/nsc3/nsc-gateway-cert```
+- Environment variables for system maintenance: ```$HOME/nsc3/nsc-host.env```
+- Maintenance log: ```$HOME/nsc3/logs/nsc-maintenance/nsc-maintenance-log.txt```
 
 ## Instructions for NSC3 add-on features:
 
