@@ -7,7 +7,7 @@ Release tag: `release-3.15`
 NSC3 Team-Bridge Service is designed to broadcast live-stream between independent NSC3 servers.
 Team-Bridge commication pipe is linking NSC3 Servers organisations together. Pipes can be one-directional or bi-directional. Communication protocol can be TCP or UDP. Only the TCP pipe is encrypted.
 
-Team-Bridge service is managing live-stream broadcasting from devices per specified organisation. In order to avoid overlapping with device indentifications the original device identifications at source organisation is renamed at destination organisation. Team-Bridge is syncronizing only devices, exclusing users identified data.
+Team-Bridge service is managing live-stream broadcasting from devices per specified organisation. In order to avoid overlapping with device indentifications the original device identifications at source organisation is renamed at destination organisation. Team-Bridge is syncronizing only live-stream data from devices, exclusing users identified data and storaged data content.
 
 ### One-Directional pipe:
 
