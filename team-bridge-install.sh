@@ -164,14 +164,44 @@ RELEASETAG=$NSC3REL
 # Update env variables
 chmod 666 $NSCHOME/nsc-host.env 2> /dev/null
 if ! [ $(grep -c "TEAM_BRIDGE_ENABLED" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TEAM_BRIDGE_ENABLED=true" >> $NSCHOME/nsc-host.env; fi
-if ! [ -z "$TEAM_BRIDGE_ENABLED" ]; then sed -i 's/export TEAM_BRIDGE_ENABLED=false/export TEAM_BRIDGE_ENABLED=true/g' $NSCHOME/nsc-host.env; fi
-if ! [ $(grep -c "TBMODE" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBMODE=$TBMODE" >> $NSCHOME/nsc-host.env; fi
-if ! [ $(grep -c "TBROLE" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBROLE=$TBROLE" >> $NSCHOME/nsc-host.env; fi
-if ! [ $(grep -c "TBSERVERIP" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TBSERVERIP=$TBSERVERIP" >> $NSCHOME/nsc-host.env; fi
-if ! [ $(grep -c "SOURCEORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export SOURCEORG=$SOURCEORG" >> $NSCHOME/nsc-host.env; fi
-if ! [ $(grep -c "TARGETORG" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TARGETORG=$TARGETORG" >> $NSCHOME/nsc-host.env; fi
-if ! [ $(grep -c "SOURCEORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export SOURCEORG2=$SOURCEORG2" >> $NSCHOME/nsc-host.env; fi
-if ! [ $(grep -c "TARGETORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "export TARGETORG2=$TARGETORG2" >> $NSCHOME/nsc-host.env; fi
+if ! [ -z "$TEAM_BRIDGE_ENABLED" ]; then 
+   sed -i 's/export TEAM_BRIDGE_ENABLED=false/export TEAM_BRIDGE_ENABLED=true/g' $NSCHOME/nsc-host.env; 
+fi
+if ! [ $(grep -c "TBMODE" $NSCHOME/nsc-host.env) -eq 1 ]; then  
+   echo "export TBMODE=$TBMODE" >> $NSCHOME/nsc-host.env;
+   else 
+   sed -i 's/.*TBMODE*.*/export TBMODE='"$TBMODE"'/' $NSCHOME/nsc-host.env
+fi
+if ! [ $(grep -c "TBROLE" $NSCHOME/nsc-host.env) -eq 1 ]; then 
+   echo "export TBROLE=$TBROLE" >> $NSCHOME/nsc-host.env; 
+   else 
+   sed -i 's/.*TBROLE*.*/export TBROLE='"$TBROLE"'/' $NSCHOME/nsc-host.env
+fi
+if ! [ $(grep -c "TBSERVERIP" $NSCHOME/nsc-host.env) -eq 1 ]; then 
+   echo "export TBSERVERIP=$TBSERVERIP" >> $NSCHOME/nsc-host.env; 
+   else 
+   sed -i 's/.*TBSERVERIP*.*/export TBSERVERIP='"$TBSERVERIP"'/' $NSCHOME/nsc-host.env
+fi
+if ! [ $(grep -c "SOURCEORG" $NSCHOME/nsc-host.env) -eq 1 ]; then 
+   echo "export SOURCEORG=$SOURCEORG" >> $NSCHOME/nsc-host.env; 
+   else 
+   sed -i 's/.*SOURCEORG*.*/export SOURCEORG='"$SOURCEORG"'/' $NSCHOME/nsc-host.env
+fi
+if ! [ $(grep -c "TARGETORG" $NSCHOME/nsc-host.env) -eq 1 ]; then 
+   echo "export TARGETORG=$TARGETORG" >> $NSCHOME/nsc-host.env; 
+   else 
+   sed -i 's/.*TARGETORG*.*/export TARGETORG='"$TARGETORG"'/' $NSCHOME/nsc-host.env
+fi
+if ! [ $(grep -c "SOURCEORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then 
+   echo "export SOURCEORG2=$SOURCEORG2" >> $NSCHOME/nsc-host.env; 
+   else 
+   sed -i 's/.*SOURCEORG2*.*/export SOURCEORG2='"$SOURCEORG2"'/' $NSCHOME/nsc-host.env
+fi
+if ! [ $(grep -c "TARGETORG2" $NSCHOME/nsc-host.env) -eq 1 ]; then 
+   echo "export TARGETORG2=$TARGETORG2" >> $NSCHOME/nsc-host.env;
+   else 
+   sed -i 's/.*TARGETORG2*.*/export TARGETORG2='"$TARGETORG2"'/' $NSCHOME/nsc-host.env
+fi
 # Additional variables
 if [ $TBROLE = both ]; then CLIENTSOURCE=$SOURCEORG; fi
 if [ $TBROLE = both ]; then SERVERSOURCE=$SOURCEORG2; fi
@@ -226,8 +256,8 @@ if [[ $TBMODE = UDP ]]; then
       . tb-client-temp.yml 2> /dev/null
       cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
       # Server
-      export SOURCEORG=$SOURCEORG2;
-      export TARGETORG=$TARGETORG2;
+      export SOURCEORG=$SERVERSOURCE
+      export TARGETORG=$SERVERDEST 
       (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
       cat nsc-team-bridge-service-server.tmpl;
       ) >tb-server-temp.yml
@@ -280,8 +310,8 @@ if [[ $TBMODE = TCP ]]; then
       . tb-client-temp.yml 2> /dev/null
       cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
       # Server
-      export SOURCEORG=$SOURCEORG2;
-      export TARGETORG=$TARGETORG2;
+      export SOURCEORG=$SERVERSOURCE
+      export TARGETORG=$SERVERDEST 
       (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
       cat nsc-team-bridge-service-server.tmpl;
       ) >tb-server-temp.yml
