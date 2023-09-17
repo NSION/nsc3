@@ -104,8 +104,8 @@ if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
          . tb-client-temp.yml 2> /dev/null
          cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
          # Server
-         export SOURCEORG=$SOURCEORG2;
-         export TARGETORG=$TARGETORG2;
+         export SOURCEORG=$SERVERSOURCE
+         export TARGETORG=$SERVERDEST 
          (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
          cat nsc-team-bridge-service-server.tmpl;
          ) >tb-server-temp.yml
@@ -158,8 +158,8 @@ if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
          . tb-client-temp.yml 2> /dev/null
          cat nsc-team-bridge-service-client-temp.yml > nsc-team-bridge-service-client.env;
          # Server
-         export SOURCEORG=$SOURCEORG2;
-         export TARGETORG=$TARGETORG2;
+         export SOURCEORG=$SERVERSOURCE
+         export TARGETORG=$SERVERDEST 
          (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
          cat nsc-team-bridge-service-server.tmpl;
          ) >tb-server-temp.yml
