@@ -17,15 +17,15 @@ if [ ${1+"true"} ]; then
        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
        echo "NSC3 Upgrade script usage:"
        echo ""
-       echo "./nsc3-upgrade.sh --help 	  'help text'"
-       echo "./nsc3-upgrade.sh --silent      'upgrade with command line parameters'"
-       echo "./nsc3-upgrade.sh 		  'interactive upgrade mode'"
+       echo "sudo ./nsc3-upgrade.sh --help 	  'help text'"
+       echo "sudo ./nsc3-upgrade.sh --silent      'upgrade with command line parameters'"
+       echo "sudo ./nsc3-upgrade.sh 		  'interactive upgrade mode'"
        echo ""
        echo "CLI parameters usage:"
-       echo "./nsc3-upgrade.sh --silent <NSC3 release tag>"
+       echo "sudo ./nsc3-upgrade.sh --silent <NSC3 release tag>"
        echo ""
        echo "CLI parameters example:"
-       echo "./nsc3-upgrade.sh --silent release-3.15"
+       echo "sudo ./nsc3-upgrade.sh --silent release-3.15"
        echo ""
        echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
        exit 0
@@ -44,6 +44,7 @@ if [ "$silentmode" = false ]; then
     echo "                                        "
     echo "++++++++++++++++++++++++++++++++++++++++"
     read -p "NSC3 Release tag for upgrading, e.g release-3.15: " NSC3REL
+    if ! [ $(grep -c "TEAM_BRIDGE_ENABLED" $NSCHOME/nsc-host.env) -eq 1 ]; then echo "Team-Bridge not found"; fi
 fi
 cd $NSCHOME
 # Check values
