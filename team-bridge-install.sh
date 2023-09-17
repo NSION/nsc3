@@ -320,7 +320,6 @@ echo "Docker-compose backup: 'docker-compose-tb-addition-backup-$TIMESTAMP.yml' 
 echo "Login to your NSC3 web app by URL address       "
 echo "https://$PUBLICIP                               "
 echo ""
-echo ""
 if [ $KEY_COPY_REMINDER ]; then 
    echo "New TCP keypairs generated at this server. Please copy all key pair files from this server folder $NSCHOME/bridgekeys to other end server folder $NSCHOME/bridgekeys"; 
 fi
