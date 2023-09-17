@@ -167,10 +167,11 @@ Server - Local target organisation ID: kqkYDd2Ofv04eFBg-G7xmPIO9IjGMcx_VcEJ
 ```
 ## TCP key-pairs:
 
+TCP key-pairing is mandatory part of TCP protocol based dataflow pipes to enable encrypted data pipes.
 Installation process will take case of TCP key-pair creation.
 It is mandatory manual step to do in order to ensure that server side and client side is paired accordingly.
 Copy the keypair file bundle directory only once from the server where the bundle is created in the first place.
-Installation process will remind that separately.
+Installation process will remind that separately. Installation process won't overwrite existing key-pairs if the are existing at specified location.
 
 After first TCP mode installation the key-pair bundle is located to folder:
 
