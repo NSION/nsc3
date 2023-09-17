@@ -109,7 +109,8 @@ if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
          SERVERSOURCE=$SOURCEORG2
          SERVERDEST=$TARGETORG2
          SOURCEORG=$SERVERSOURCE
-         TARGETORG=$SERVERDEST 
+         TARGETORG=$SERVERDEST
+         TBSERVERIP=$TBSERVERIP2
          (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
          cat nsc-team-bridge-service-server.tmpl;
          ) >tb-server-temp.yml
@@ -166,7 +167,8 @@ if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
          SERVERSOURCE=$SOURCEORG2
          SERVERDEST=$TARGETORG2
          SOURCEORG=$SERVERSOURCE
-         TARGETORG=$SERVERDEST 
+         TARGETORG=$SERVERDEST
+         TBSERVERIP=$TBSERVERIP2
          (echo "cat <<EOF >nsc-team-bridge-service-server-temp.yml";
          cat nsc-team-bridge-service-server.tmpl;
          ) >tb-server-temp.yml
