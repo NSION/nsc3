@@ -443,3 +443,7 @@ As example Ubuntu installation
 Test that route to 443 port is open:
 
     nmap <hostname> | grep 443
+
+## NSC3 Container description:
+
+https://github.com/NSION/nsc3/blob/team-bridge-dev/NSC3-Valor-containers.png
