@@ -31,6 +31,9 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 - NSC3 logs files folder is $HOME/nsc3/logs
 
 ## Install GPU drivers to host VM
+
+19.10.2023 Note: It is recommeded to install Ubuntu 20.04 based image for Cloud VM due to limitations with NVIDIA latest drivers.
+
 Ubuntu 20.04/22.04 LTS as reference:
 
 To install the NVIDIA Cuda drivers for Ubuntu 20.04/22.04 LTS
