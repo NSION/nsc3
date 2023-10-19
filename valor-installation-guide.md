@@ -90,8 +90,7 @@ sudo reboot
 ```
 ### Install crio.service - Container Runtime Interface for OCI (CRI-O)
 
-Reference as Ubuntu 22.04 LTS
-Please follow CR.IO Community [instructions](https://github.com/cri-o/cri-o/blob/main/install.md) for other OS
+Reference as Ubuntu 22.04 LTS, Please follow CRI-O Community [instructions guide](https://github.com/cri-o/cri-o/blob/main/install.md) in case of other OS
 
 1: Update the system and Install dependencies
 ```
