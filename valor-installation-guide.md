@@ -97,7 +97,7 @@ sudo reboot
 ```
 
 ### Install Nvidia container runtime:
-Please follow the latest installation instructions by [Nvidia community](https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/tree/main/cmd/nvidia-container-runtime).
+Please follow the latest installation instructions by [Nvidia](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
 
 ### Docker Engine setup
