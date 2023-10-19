@@ -14,7 +14,7 @@ Detailed installation guidance for Ubuntu 20.04 LTS and 22.02 LTS
 
 ## Prerequisites for Valor installation:
 - [x] Minimum HW configuration: 8 CPU cores with GPU, 32 GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
-- [x] Linux operating system, Ubuntu 20.04/22.02 LTS as reference. Following instructions regarding NVIDIA drivers installation are compatible only with Ubuntu 20.04/22.04 LTS.
+- [x] Linux operating system, Ubuntu 22.02 LTS as reference. Following instructions regarding NVIDIA drivers installation are compatible only with Ubuntu 22.04 LTS.
 - [x] Reserve at least 80 GB for OS (root dir) due to NVIDIA drivers
 - [x] The computer or virtual machine is allocated for NSC3 use only.
 - [x] Internet access is available
@@ -31,11 +31,11 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 - Valor RDB content folder is /var/lib/docker/volumes/analytics-postgres-volume (Default)
 
 ## Install GPU drivers to host VM
-Ubuntu 20.04/22.04 LTS as reference:
+Ubuntu 22.04 LTS as reference:
 
 In case of Azure VM skip GPU Driver installation section and follow Microsoft [instruction](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/n-series-driver-setup#install-cuda-drivers-on-n-series-vms)
 
-To install the NVIDIA Cuda drivers for Ubuntu 20.04/22.04 LTS
+To install the NVIDIA Cuda drivers for Ubuntu 22.04 LTS
 
 1. Update your package cache and get the package updates for your instance.
 ```
@@ -59,13 +59,6 @@ Expected output:
 
 4. Setup Nvida CUDA repository. Execute the following commands to enable CUDA repository.
 
-Ubuntu 20.04 LTS
-```
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub
-sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
-```
 Ubuntu 22.04 LTS
 
 If Nvidia cuda has already installed via previous Nvidia repository then please remove the outdated singing key
@@ -95,6 +88,80 @@ Reboot server:
 ```
 sudo reboot
 ```
+### Install crio.service - Container Runtime Interface for OCI (CRI-O)
+
+1: Update the system and Install dependencies
+```
+ sudo apt update
+```
+Once the local package index has been updated, install the dependencies as follows.
+```
+sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
+```
+2: Add CRI-O repository
+```
+export OS=xUbuntu_22.04
+```
+
+```
+export CRIO_VERSION=1.24
+```
+
+Once that is done, run the following set of commands to add the CRI-O Kubic repository.export CRIO_VERSION=1.24
+```
+echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /"| sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+```
+
+```
+echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$CRIO_VERSION/$OS/ /"|sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION.list
+```
+
+Thereafter, import the GPG key for the CRI-O repository
+
+```
+curl -L https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION/$OS/Release.key | sudo apt-key add -
+```
+
+```
+curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/Release.key | sudo apt-key add -
+```
+
+Once again update the package index to synchronize the system with the newly added CRI-O Kubic repositories.
+```
+sudo apt update
+```
+
+3: Install CRI-O On Ubuntu 22.04
+With the repositories added, install CRI-O and the runtime client using the APT package manager.
+
+```
+sudo apt install cri-o cri-o-runc -y
+```
+
+Once installed, start and enable the CRI-O daemon.
+```
+sudo systemctl start crio
+sudo systemctl enable crio
+```
+Next, verify if the CRI-O service is running:
+```
+sudo systemctl status crio
+```
+You should get the following output which shows that the CRI-O service is running as expected.
+```
+● crio.service - Container Runtime Interface for OCI (CRI-O)
+     Loaded: loaded (/lib/systemd/system/crio.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2023-10-19 05:56:39 UTC; 17min ago
+       Docs: https://github.com/cri-o/cri-o
+   Main PID: 13149 (crio)
+      Tasks: 14
+     Memory: 24.4M
+        CPU: 480ms
+     CGroup: /system.slice/crio.service
+             └─13149 /usr/bin/crio
+.... Started Container Runtime Interface for OCI (CRI-O).
+```
+
 
 ### Install Nvidia container runtime:
 Please follow the latest installation instructions by [Nvidia](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
