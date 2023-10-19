@@ -33,7 +33,7 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ## Install GPU drivers to host VM
 Ubuntu 20.04/22.04 LTS as reference:
 
-In case of Azure VM follow Microsoft [instruction](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/n-series-driver-setup#install-cuda-drivers-on-n-series-vms)
+In case of Azure VM follow Microsoft [instruction] (https://learn.microsoft.com/en-us/azure/virtual-machines/linux/n-series-driver-setup#install-cuda-drivers-on-n-series-vms)
 
 To install the NVIDIA Cuda drivers for Ubuntu 20.04/22.04 LTS
 
