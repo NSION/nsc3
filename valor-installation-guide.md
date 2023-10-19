@@ -97,7 +97,7 @@ sudo reboot
 ```
 
 ### Install Nvidia container runtime:
-Please follow the latest installation instructions by [Nvidia community](https://github.com/NVIDIA/nvidia-container-runtime).
+Please follow the latest installation instructions by [Nvidia community]((https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/tree/main/cmd/nvidia-container-runtime).
 
 ### As example Ubuntu:
 
