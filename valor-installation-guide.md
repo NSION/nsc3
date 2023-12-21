@@ -309,7 +309,7 @@ Container status:
     
 ### Valor troubleshooting
 
-#### Valor services are not working properly:
+#### Valor services does not working properly:
 
 Try to restart Valor services:
 
