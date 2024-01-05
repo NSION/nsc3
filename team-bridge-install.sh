@@ -180,7 +180,7 @@ fi
 if ! [ $(grep -c "TBSERVERIP" $NSCHOME/nsc-host.env) -eq 1 ]; then 
    echo "export TBSERVERIP=$TBSERVERIP" >> $NSCHOME/nsc-host.env; 
    else 
-   sed -i 's/.*TBSERVERIP*.*/export TBSERVERIP='"$TBSERVERIP"'/' $NSCHOME/nsc-host.env
+   sed -i 's/.*TBSERVERIP*.*/export TBSERVERIP='"$TBSERVERIP2"'/' $NSCHOME/nsc-host.env
 fi
 if ! [ $(grep -c "SOURCEORG" $NSCHOME/nsc-host.env) -eq 1 ]; then 
    echo "export SOURCEORG=$SOURCEORG" >> $NSCHOME/nsc-host.env; 
@@ -224,6 +224,7 @@ if [[ $TBMODE = UDP ]]; then
       rm -f tb-client-temp.yml nsc-team-bridge-service-client-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = server ]]; then
+      TBSERVERIP=$TBSERVERIP2;
       (echo "cat <<EOF >docker-compose-temp.yml";
       cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p' |
       sed '/add-on nsc-team-bridge-service-server-udp/,/add-off nsc-team-bridge-service-server-udp/ s/#//'; 
@@ -282,6 +283,7 @@ if [[ $TBMODE = TCP ]]; then
       rm -f tb-client-temp.yml nsc-team-bridge-service-client-temp.yml temp.yml docker-compose-temp.yml 2> /dev/null
    fi
    if [[ $TBROLE = server ]]; then
+      TBSERVERIP=$TBSERVERIP2;
       (echo "cat <<EOF >docker-compose-temp.yml";
       cat nsc3-docker-compose-ext-reg.tmpl | sed -n '/'"$RELEASETAG"'/,/'"$RELEASETAG"'/p' |
       sed '/add-on nsc-team-bridge-service-server-tcp/,/add-off nsc-team-bridge-service-server-tcp/ s/#//';
