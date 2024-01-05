@@ -345,9 +345,9 @@ sleep 5
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 sed -i 's/.*MINIO_SECRET_KEY=*.*/      - MINIO_SECRET_KEY='"$MINIOSECRET"'/' $NSCHOME/docker-compose.yml;
 sudo docker-compose up -d
-## Configure stream-in service
-sed -i 's/.*NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED*.*/      - NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true/' $NSCHOME/docker-compose.yml;
-sudo docker-compose restart nsc-stream-in-service
+## Configure stream-in service, removed from release-4.1
+# sed -i 's/.*NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED*.*/      - NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true/' $NSCHOME/docker-compose.yml;
+# sudo docker-compose restart nsc-stream-in-service
 echo ""
 echo "************************************************************************"
 echo "                                                       "                                        
