@@ -12,19 +12,7 @@ services:
       - nsc-network
     restart: unless-stopped
     volumes:
-      - main-postgres-volume:/var/lib/postgresql/data:rw
-    working_dir: /root
-  user-postgres:
-    container_name: user-postgres
-    image: $NSC3REG/user-postgres:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks: 
-      - nsc-network
-    restart: unless-stopped
-    volumes:
-      - user-postgres-volume:/var/lib/postgresql/data:rw
+      - main-postgres-pg15-volume:/var/lib/postgresql/data:rw
     working_dir: /root
   bus-redis:
     container_name: bus-redis
@@ -231,33 +219,33 @@ services:
 #  nsc-team-bridge-service-client-tcp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-client.env
+#      - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-tcp
 #    networks: 
 #      - nsc-network
 #    restart: unless-stopped  
 #    volumes:
-#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+#      - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-client-tcp
 ## add-on nsc-team-bridge-service-server-tcp
 #  nsc-team-bridge-service-server-tcp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-server.env
+#      - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-tcp
 #    networks: 
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660:64660/tcp" 
+#      - "64660:64660/tcp" 
 #    volumes:
-#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+#      - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-server-tcp
 ## add-on nsc-team-bridge-service-client-udp
 #  nsc-team-bridge-service-client-udp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-client.env
+#      - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-udp
 #    networks: 
 #      - nsc-network
@@ -267,13 +255,13 @@ services:
 #  nsc-team-bridge-service-server-udp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-server.env
+#      - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-udp
 #    networks: 
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660:64660/udp"
+#      - "64660:64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
@@ -284,10 +272,8 @@ networks:
       config:
         - subnet: "172.18.0.0/24"
 volumes:
-  main-postgres-volume:
-    name: main-postgres-volume
-  user-postgres-volume:
-    name: user-postgres-volume 
+  main-postgres-pg15-volume:
+    name: main-postgres-pg15-volume
   bus-redis-volume:
     name: bus-redis-volume
   minio-volume:
@@ -307,19 +293,7 @@ services:
       - nsc-network
     restart: unless-stopped
     volumes:
-      - main-postgres-volume:/var/lib/postgresql/data:rw
-    working_dir: /root
-  user-postgres:
-    container_name: user-postgres
-    image: $NSC3REG/user-postgres:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks: 
-      - nsc-network
-    restart: unless-stopped
-    volumes:
-      - user-postgres-volume:/var/lib/postgresql/data:rw
+      - main-postgres-pg15-volume:/var/lib/postgresql/data:rw
     working_dir: /root
   bus-redis:
     container_name: bus-redis
@@ -526,33 +500,33 @@ services:
 #  nsc-team-bridge-service-client-tcp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-client.env
+#      - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-tcp
 #    networks: 
 #      - nsc-network
 #    restart: unless-stopped 
 #    volumes:
-#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+#      - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-client-tcp
 ## add-on nsc-team-bridge-service-server-tcp
 #  nsc-team-bridge-service-server-tcp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-server.env
+#      - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-tcp
 #    networks: 
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660:64660/tcp"
+#      - "64660:64660/tcp"
 #    volumes:
-#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+#      - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-server-tcp
 ## add-on nsc-team-bridge-service-client-udp
 #  nsc-team-bridge-service-client-udp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-client.env
+#      - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-udp
 #    networks: 
 #      - nsc-network
@@ -562,13 +536,13 @@ services:
 #  nsc-team-bridge-service-server-udp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-server.env
+#      - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-udp
 #    networks: 
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660:64660/udp"
+#      - "64660:64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
@@ -579,10 +553,8 @@ networks:
       config:
         - subnet: "172.18.0.0/24"
 volumes:
-  main-postgres-volume:
-    name: main-postgres-volume
-  user-postgres-volume:
-    name: user-postgres-volume 
+  main-postgres-pg15-volume:
+    name: main-postgres-pg15-volume
   bus-redis-volume:
     name: bus-redis-volume
   minio-volume:
@@ -602,19 +574,7 @@ services:
       - nsc-network
     restart: unless-stopped
     volumes:
-      - main-postgres-volume:/var/lib/postgresql/data:rw
-    working_dir: /root
-  user-postgres:
-    container_name: user-postgres
-    image: $NSC3REG/user-postgres:$NSC3REL
-    logging:
-      driver: "json-file"
-      options: {}
-    networks: 
-      - nsc-network
-    restart: unless-stopped
-    volumes:
-      - user-postgres-volume:/var/lib/postgresql/data:rw
+      - main-postgres-pg15-volume:/var/lib/postgresql/data:rw
     working_dir: /root
   bus-redis:
     container_name: bus-redis
@@ -821,7 +781,7 @@ services:
 #  nsc-team-bridge-service-client-tcp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-client.env
+#      - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-tcp
 #    networks: 
 #      - nsc-network
@@ -833,21 +793,21 @@ services:
 #  nsc-team-bridge-service-server-tcp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-server.env
+#      - nsc-team-bridge-service-server.env
 #    container_name: nsc-team-bridge-service-server-tcp
 #    networks: 
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660:64660/tcp"
+#      - "64660:64660/tcp"
 #    volumes:
-#        - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
+#      - ./deploy-files/bridgekeys/:/opt/nsc3/bridgekeys
 ## add-off nsc-team-bridge-service-server-tcp
 ## add-on nsc-team-bridge-service-client-udp
 #  nsc-team-bridge-service-client-udp:
 #    image: $NSC3REG/nsc-team-bridge-service:$NSC3REL
 #    env_file:
-#        - nsc-team-bridge-service-client.env
+#      - nsc-team-bridge-service-client.env
 #    container_name: nsc-team-bridge-service-client-udp
 #    networks: 
 #      - nsc-network
@@ -863,7 +823,7 @@ services:
 #      - nsc-network
 #    restart: unless-stopped 
 #    ports:
-#        - "64660:64660/udp"
+#      - "64660:64660/udp"
 ## add-off nsc-team-bridge-service-server-udp
 networks:
   nsc-network:
@@ -874,10 +834,8 @@ networks:
       config:
         - subnet: "172.18.0.0/24"
 volumes:
-  main-postgres-volume:
-    name: main-postgres-volume
-  user-postgres-volume:
-    name: user-postgres-volume 
+  main-postgres-pg15-volume:
+    name: main-postgres-pg15-volume
   bus-redis-volume:
     name: bus-redis-volume
   minio-volume:
