@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  metricbeat:
+    user: root
+    image: docker.elastic.co/beats/metricbeat:8.7.1
+    container_name: metricbeat
+    restart: unless-stopped
+    networks:
+      - nsc-network
+    environment:
+      - ELASTICSEARCH_HOSTS= #replace placeholder with value
+      - ELASTICSEARCH_USERNAME= #replace placeholder with value
+      - ELASTICSEARCH_PASSWORD= #replace placeholder with value
+    volumes:
+      - type: bind 
+        source: ./metricbeat.docker.yml
+        target: /usr/share/metricbeat/metricbeat.yml
+      - type: bind
+        source: /proc
+        target: /hostfs/proc
+        read_only: true
+      - type: bind
+        source: /sys/fs/cgroup
+        target: /hostfs/sys/fs/cgroup
+        read_only: true
+      - type: bind
+        source: /
+        target: /hostfs
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "10m" 
+        max-file: "2"
+networks:
+  nsc-network:
+    external: true
+

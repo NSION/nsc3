@@ -1,0 +1,29 @@
+version: "2.4"
+services:
+  filebeat:
+    user: root
+    image: docker.elastic.co/beats/filebeat:8.0.1
+    container_name: filebeat
+    hostname: <put hostname here>
+    restart: unless-stopped
+    environment:
+      - ELASTICSEARCH_HOSTS=logs.nsiontec.com
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=<put elastic pw here>
+    labels:
+      co.elastic.logs/enabled: "false"
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: /var/lib/docker
+        target: /var/lib/docker
+      - type: bind
+        source: /root/filebeat/filebeat.docker.yml
+        target: /usr/share/filebeat/filebeat.yml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "2"

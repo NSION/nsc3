@@ -1,0 +1,21 @@
+filebeat.inputs:
+- type: container
+  scan_frequency: 30s
+  paths:
+  - '/var/lib/docker/containers/*/*.log'
+  exclude_lines: ['^\s*$']
+  multiline.type: pattern
+  multiline.pattern: '^[[:space:]]'
+  multiline.negate: false
+  multiline.match: after
+  processors:
+  - add_docker_metadata: ~
+  - drop_event:
+      when:
+        equals:
+           container.name: filebeat
+output.elasticsearch:
+  hosts: ["https://logs.nsiontec.com"]
+  username: "elastic"
+  password: "<put elastic pw here>"
+  ssl.verification_mode: "none"

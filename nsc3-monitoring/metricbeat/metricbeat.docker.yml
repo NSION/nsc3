@@ -1,0 +1,105 @@
+name: #replace placeholder with value
+metricbeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+metricbeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+metricbeat.modules:
+- module: docker
+  metricsets:
+    - "container"
+    - "cpu"
+    - "diskio"
+    - "healthcheck"
+    - "info"
+    - "memory"
+    - "network"
+  hosts: ["unix:///var/run/docker.sock"]
+  period: 30s
+  enabled: true
+
+- module: system
+  metricsets:
+    - cpu
+    - load
+    - memory
+    - network
+    - uptime
+    - diskio
+    - filesystem
+    - fsstat
+  enabled: true
+  period: 30s
+  processes: ['.*']
+
+- module: redis
+  metricsets: ["info", "keyspace"]
+  enabled: true
+  period: 30s
+  hosts: ["bus-redis:6379"] 
+
+- module: postgresql
+  enabled: true
+  metricsets:
+    - database
+    - bgwriter
+    - activity
+    - statement
+  period: 30s
+  hosts: ["postgres://main-postgres:5432?dbname=maindatabase&sslmode=disable"]
+  username: #postgres: replace placeholder with value
+  password: #postgres: replace placeholder with value
+
+processors:
+  - add_docker_metadata: ~
+  - drop_event.when.or:
+      - and:
+          - equals.event.module: "docker"
+          - not.equals.container.name: "main-postgres"
+          - not.equals.container.name: "user-postgres"
+          - not.equals.container.name: "bus-redis"
+          - not.equals.container.name: "nsc-minio"
+          - not.equals.container.name: "nsc-scheduler-service"
+          - not.equals.container.name: "nsc-aar-worker"
+          - not.equals.container.name: "nsc-notify-service"
+          - not.equals.container.name: "nsc-comms-service"
+          - not.equals.container.name: "nsc-auth-service"
+          - not.equals.container.name: "nsc-live-service"
+          - not.equals.container.name: "nsc-playback-service"
+          - not.equals.container.name: "nsc-stream-in-service"
+          - not.equals.container.name: "web-nginx"
+          - not.equals.container.name: "map-service"
+          - not.equals.container.name: "rtmp-server"
+          - not.equals.container.name: "nsc-gateway"
+          - not.equals.container.name: "nsc-network-stream-service"
+          - not.equals.container.name: "nsc-webrtc-proxy"
+          - not.equals.container.name: "nsc-valor-tasker-service"
+          - not.equals.container.name: "nsc-valor-bus"
+          - not.equals.container.name: "valor-postgres"
+          - not.equals.container.name: "nsc-recipe-demo-service"
+          - not.equals.container.name: "nsc-recipe-face-comparison-service"
+          - not.equals.container.name: "nsc-recipe-licenseplate-detection-service"
+          - not.equals.container.name: "nsc-recipe-object-detection-service"
+          - not.equals.container.name: "nsc-recipe-object-detection-service-onnx"
+          - not.equals.container.name: "nsc-satellite-maps"
+          - not.equals.container.name: "nsc-satellite-map-postgres"
+          - not.equals.container.name: "nsc-satellite-map-minio"
+          - not.equals.container.name: "nsc-satellite-map-service"
+      - and:
+          - equals.event.module: "system"
+          - equals.container.name: "metricbeat"
+
+
+
+output.elasticsearch:
+  hosts: ["https://logs.nsiontec.com"] 
+  username: #elastic: replace placeholder with value
+  password: #elastic: replace placeholder with value
+  ssl.verification_mode: "none"
+  allow_older_versions: "true"
+  
