@@ -15,7 +15,7 @@ filebeat.inputs:
         equals:
            container.name: filebeat
 output.elasticsearch:
-  hosts: ["https://logs.nsiontec.com"]
+  hosts: ["https://your-url.com"]
   username: "elastic"
   password: "<put elastic pw here>"
   ssl.verification_mode: "none"
