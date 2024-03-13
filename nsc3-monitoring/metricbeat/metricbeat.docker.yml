@@ -97,7 +97,7 @@ processors:
 
 
 output.elasticsearch:
-  hosts: ["https://logs.nsiontec.com"] 
+  hosts: ["https://your-url.com"] 
   username: #elastic: replace placeholder with value
   password: #elastic: replace placeholder with value
   ssl.verification_mode: "none"
