@@ -57,6 +57,10 @@ https://github.com/NSION/nsc3/blob/main/team-bridge.md
 #### Valor AI module:
 https://github.com/NSION/nsc3/blob/main/valor-installation-guide.md
 
+#### NSC3 tooling
+##### NSC3 monitoring
+https://github.com/NSION/nsc3/blob/main/nsc3-monitoring/README.md
+
 ### NSC3 installation:
 #### Install Docker:
 Please follow the latest installation instructions by Docker community https://docs.docker.com/engine/install/ 
