@@ -1,7 +1,7 @@
 #!/bin/bash
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
-#export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
+export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 silentmode=false
 TIMESTAMP=$(date +%Y%m%d%H%M)
 if [ ${1+"true"} ]; then
