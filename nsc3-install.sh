@@ -228,7 +228,7 @@ echo "*** Downloading docker images ... ***"
 sudo docker-compose up -d
 # Post installation steps 
 ## Configure webrtc
-sleep 5
+#sleep 5
 #export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 #sed -i 's/.*MINIO_SECRET_KEY=*.*/      - MINIO_SECRET_KEY='"$MINIOSECRET"'/' $NSCHOME/docker-compose.yml;
 #sudo docker-compose restart nsc-webrtc-proxy
