@@ -231,7 +231,7 @@ NSC3 Admin documentation: https://www.nsiontec.com/user-guide-webapp-admin/
 
 ### Upgrade NSC3
 
-Downlaod the latest scripts from github:
+Download the latest scripts from github:
 
     cd $HOME/nsc3
     chmod u-x *.sh
