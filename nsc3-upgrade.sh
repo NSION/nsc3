@@ -1,12 +1,18 @@
 #!/bin/bash
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
+export DOCKERCOMPOSECOMMAND="docker-compose"
 TIMESTAMP=$(date +%Y%m%d%H%M)
 source ./nsc-host.env
 PREVRELEASE=$(cat $NSCHOME/docker-compose.yml | grep registrynsion.azurecr.io/main-postgres: | cut -d\: -f3) 2> /dev/null
 export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 silentmode=false
+
+if command -v docker compose > /dev/null 2>&1; then
+    DOCKERCOMPOSECOMMAND="docker compose"
+fi
+
 if [ ${1+"true"} ]; then
    if  [ $1 == "--silent" ]; then
        silentmode=true
@@ -210,18 +216,18 @@ else
 fi
 echo "docker-compose.yml file is updated..."
 echo "Upgrading docker images ..."
-sudo docker-compose pull
-sudo docker-compose up -d
+sudo $DOCKERCOMPOSECOMMAND pull
+sudo $DOCKERCOMPOSECOMMAND up -d
 # Post installation steps 
 ## Configure webrtc
 sleep 5
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 sed -i 's/.*MINIO_SECRET_KEY=*.*/      - MINIO_SECRET_KEY='"$MINIOSECRET"'/' $NSCHOME/docker-compose.yml;
-sudo docker-compose up -d
+sudo $DOCKERCOMPOSECOMMAND up -d
 ## Configure stream-in service
 if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
    sed -i 's/.*NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED*.*/      - NSC3_STREAM_IN_SERVICE_TEAM_BRIDGE_ENABLED=true/' $NSCHOME/docker-compose.yml;
-   sudo docker-compose restart nsc-stream-in-service;
+   sudo $DOCKERCOMPOSECOMMAND restart nsc-stream-in-service;
 fi
 #
 echo "++++++++++++++++++++++++++++++++++++++++"

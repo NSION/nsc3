@@ -1,7 +1,13 @@
 #!/bin/bash
 ## NSC3 registry:
 export NSC3REG="registrynsion.azurecr.io"
+export DOCKERCOMPOSECOMMAND="docker-compose"
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
+
+if command -v docker compose > /dev/null 2>&1; then
+    DOCKERCOMPOSECOMMAND="docker compose"
+fi
+
 silentmode=false
 TIMESTAMP=$(date +%Y%m%d%H%M)
 if [ ${1+"true"} ]; then
@@ -225,13 +231,13 @@ fi
 cp docker-compose.yml docker-compose_$PUBLICIP.yml
 echo "*** docker-compose.yml file is created ***"
 echo "*** Downloading docker images ... ***"
-sudo docker-compose up -d
+sudo $DOCKERCOMPOSECOMMAND up -d
 # Post installation steps 
 ## Configure webrtc
 sleep 5
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 sed -i 's/.*MINIO_SECRET_KEY=*.*/      - MINIO_SECRET_KEY='"$MINIOSECRET"'/' $NSCHOME/docker-compose.yml;
-sudo docker-compose restart nsc-webrtc-proxy
+sudo $DOCKERCOMPOSECOMMAND restart nsc-webrtc-proxy
 #
 sleep 2
 echo ""
