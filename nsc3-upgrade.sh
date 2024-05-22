@@ -65,8 +65,8 @@ PREV_MAJOR=$(echo "$PREVRELEASE" | sed -E 's/release-([0-9]+)\..*/\1/')
 RELEASE_MAJOR=$(echo "$RELEASETAG" | sed -E 's/release-([0-9]+)\..*/\1/')
 
 # Check if upgrading to latest or rc
-if [[ "$RELEASETAG" =~ ^release-(latest|rc) ]]; then
-    RELEASE_MAJOR=1000
+if [[ "$RELEASETAG" == "latest" || "$RELEASETAG" == "rc" ]]; then
+    RELEASE_MAJOR=4
 fi
 
 if [ "$PREV_MAJOR" -lt "$RELEASE_MAJOR" ]; then
