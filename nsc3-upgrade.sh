@@ -64,6 +64,11 @@ fi
 PREV_MAJOR=$(echo "$PREVRELEASE" | sed -E 's/release-([0-9]+)\..*/\1/')
 RELEASE_MAJOR=$(echo "$RELEASETAG" | sed -E 's/release-([0-9]+)\..*/\1/')
 
+# Check if upgrading to latest or rc
+if [[ "$RELEASETAG" =~ ^release-(latest|rc) ]]; then
+    RELEASE_MAJOR=1000
+fi
+
 if [ "$PREV_MAJOR" -lt "$RELEASE_MAJOR" ]; then
     echo "$RELEASETAG is a new major version"
     echo "Migrating database version"
