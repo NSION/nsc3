@@ -14,6 +14,18 @@ services:
     volumes:
       - main-postgres-pg15-volume:/var/lib/postgresql/data:rw
     working_dir: /root
+  user-postgres:
+    container_name: user-postgres
+    image: $NSC3REG/user-postgres:$NSC3REL
+    logging:
+      driver: "json-file"
+      options: {}
+    networks: 
+      - nsc-network
+    restart: unless-stopped
+    volumes:
+      - user-postgres-volume:/var/lib/postgresql/data:rw
+    working_dir: /root
   bus-redis:
     container_name: bus-redis
     image: $NSC3REG/bus-redis:$NSC3REL
@@ -274,6 +286,8 @@ volumes:
   main-postgres-pg15-volume:
     name: main-postgres-pg15-volume
     external: true
+  user-postgres-volume:
+    name: user-postgres-volume   
   bus-redis-volume:
     name: bus-redis-volume
   minio-volume:
@@ -295,6 +309,18 @@ services:
     volumes:
       - main-postgres-pg15-volume:/var/lib/postgresql/data:rw
     working_dir: /root
+  user-postgres:
+    container_name: user-postgres
+    image: $NSC3REG/user-postgres:$NSC3REL
+    logging:
+      driver: "json-file"
+      options: {}
+    networks: 
+      - nsc-network
+    restart: unless-stopped
+    volumes:
+      - user-postgres-volume:/var/lib/postgresql/data:rw
+    working_dir: /root  
   bus-redis:
     container_name: bus-redis
     image: $NSC3REG/bus-redis:$NSC3REL
@@ -555,6 +581,8 @@ volumes:
   main-postgres-pg15-volume:
     name: main-postgres-pg15-volume
     external: true
+  user-postgres-volume:
+    name: user-postgres-volume   
   bus-redis-volume:
     name: bus-redis-volume
   minio-volume:
@@ -576,6 +604,18 @@ services:
     volumes:
       - main-postgres-pg15-volume:/var/lib/postgresql/data:rw
     working_dir: /root
+  user-postgres:
+    container_name: user-postgres
+    image: $NSC3REG/user-postgres:$NSC3REL
+    logging:
+      driver: "json-file"
+      options: {}
+    networks: 
+      - nsc-network
+    restart: unless-stopped
+    volumes:
+      - user-postgres-volume:/var/lib/postgresql/data:rw
+    working_dir: /root
   bus-redis:
     container_name: bus-redis
     image: $NSC3REG/bus-redis:$NSC3REL
@@ -836,6 +876,8 @@ volumes:
   main-postgres-pg15-volume:
     name: main-postgres-pg15-volume
     external: true
+  user-postgres-volume:
+    name: user-postgres-volume   
   bus-redis-volume:
     name: bus-redis-volume
   minio-volume:
@@ -857,6 +899,18 @@ services:
     volumes:
       - main-postgres-pg15-volume:/var/lib/postgresql/data:rw
     working_dir: /root
+  user-postgres:
+    container_name: user-postgres
+    image: $NSC3REG/user-postgres:$NSC3REL
+    logging:
+      driver: "json-file"
+      options: {}
+    networks: 
+      - nsc-network
+    restart: unless-stopped
+    volumes:
+      - user-postgres-volume:/var/lib/postgresql/data:rw
+    working_dir: /root  
   bus-redis:
     container_name: bus-redis
     image: $NSC3REG/bus-redis:$NSC3REL
@@ -1117,6 +1171,8 @@ volumes:
   main-postgres-pg15-volume:
     name: main-postgres-pg15-volume
     external: true
+  user-postgres-volume:
+    name: user-postgres-volume   
   bus-redis-volume:
     name: bus-redis-volume
   minio-volume:
