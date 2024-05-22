@@ -9,7 +9,7 @@ export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 silentmode=false
 
-if command -v docker compose > /dev/null 2>&1; then
+if docker compose version &> /dev/null; then
     DOCKERCOMPOSECOMMAND="docker compose"
 fi
 
