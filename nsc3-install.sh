@@ -4,7 +4,7 @@ export NSC3REG="registrynsion.azurecr.io"
 export DOCKERCOMPOSECOMMAND="docker-compose"
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
 
-if command -v docker compose > /dev/null 2>&1; then
+if docker compose version &> /dev/null; then
     DOCKERCOMPOSECOMMAND="docker compose"
 fi
 
