@@ -60,6 +60,47 @@ if grep -q $NSC3REL $NSCHOME/nsc3-docker-compose-ext-reg.tmpl; then
    echo "Release tag: $NSC3REL is missing. Using release tag: rc as runtime parameters configuration" 
    RELEASETAG="rc"
 fi
+
+PREV_MAJOR=$(echo "$PREVRELEASE" | sed -E 's/release-([0-9]+)\..*/\1/')
+RELEASE_MAJOR=$(echo "$RELEASETAG" | sed -E 's/release-([0-9]+)\..*/\1/')
+
+# Check if upgrading to latest or rc
+if [[ "$RELEASETAG" == "latest" || "$RELEASETAG" == "rc" ]]; then
+    RELEASE_MAJOR=4
+fi
+
+if [ "$PREV_MAJOR" -lt "$RELEASE_MAJOR" ]; then
+    echo "$RELEASETAG is a new major version"
+    echo "Migrating database version"
+
+    CONTAINERS=$(sudo $DOCKERCOMPOSECOMMAND ps -q)
+
+    for CONTAINER in $CONTAINERS; do
+     # Check if the container is not main-postgres
+      if [ "$(sudo docker inspect --format='{{.Name}}' $CONTAINER)" != "/main-postgres" ]; then
+       # Add the container ID to the list of containers to stop
+       CONTAINERS_TO_STOP+=($CONTAINER)
+      fi
+    done
+    # Stop all nsc3 containers except main-postgres
+    if [ ${#CONTAINERS_TO_STOP[@]} -ne 0 ]; then
+     sudo docker stop ${CONTAINERS_TO_STOP[@]}
+    else
+     echo "No containers to stop"
+    fi
+
+    # Run the migration script
+    ./main-postgres-migration.sh --silent main-postgres-pg15-volume $NSC3REG/main-postgres:migrate-pg15
+
+    # Stop and remove main-postgres container
+    docker stop main-postgres
+    docker rm -f main-postgres
+
+    # Delete stopped nsc3 containers
+    echo "Deleting stopped containers"
+    $DOCKERCOMPOSECOMMAND rm -f
+fi
+
 # Move old files and create new.
 mv docker-compose.yml docker-compose-$NSC3REL.old 2> /dev/null
 if [ -z "$TEAM_BRIDGE_ENABLED" ]; then
