@@ -75,7 +75,8 @@ sudo apt-get install \
 ca-certificates \
 curl \
 gnupg \
-lsb-release
+lsb-release \
+dnsutils
 ```
 
 ##### Add Docker’s official GPG key:
