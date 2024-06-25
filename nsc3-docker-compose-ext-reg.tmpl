@@ -1,6 +1,6 @@
 ### ReleaseTagStart rc
 # This is for nsc3 version 4.0 and later
-version: "2.2"
+version: "3"
 services:
   main-postgres:
     container_name: main-postgres
@@ -285,7 +285,7 @@ networks:
 volumes:
   main-postgres-pg15-volume:
     name: main-postgres-pg15-volume
-    external: true
+    #external: true
   user-postgres-volume:
     name: user-postgres-volume   
   bus-redis-volume:
@@ -295,7 +295,7 @@ volumes:
 ### ReleaseTagEnd rc
 ### ReleaseTagStart latest
 # This is for nsc3 version 4.0 and later
-version: "2.2"
+version: "3"
 services:
   main-postgres:
     container_name: main-postgres
@@ -580,7 +580,7 @@ networks:
 volumes:
   main-postgres-pg15-volume:
     name: main-postgres-pg15-volume
-    external: true
+    #external: true
   user-postgres-volume:
     name: user-postgres-volume   
   bus-redis-volume:
@@ -590,7 +590,7 @@ volumes:
 ### ReleaseTagEnd latest
 ### ReleaseTagStart release-4.1
 # This is for nsc3 version 4.1 and later
-version: "2.2"
+version: "3"
 services:
   main-postgres:
     container_name: main-postgres
@@ -875,7 +875,7 @@ networks:
 volumes:
   main-postgres-pg15-volume:
     name: main-postgres-pg15-volume
-    external: true
+    #external: true
   user-postgres-volume:
     name: user-postgres-volume   
   bus-redis-volume:
