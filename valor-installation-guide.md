@@ -33,7 +33,7 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ## Install GPU drivers to host VM
 
 19.10.2023 Note: It is recommeded to install Ubuntu 20.04 based image for Cloud VM due to limitations with NVIDIA latest drivers.
-01.07.2024 Note: In case of Azure VM Please add then NVIDIA extention. https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/hpccompute-gpu-linux?source=recommendations
+01.07.2024 Note: In case of Azure VM Please add then NVIDIA extention. https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/hpccompute-gpu-linux?source=recommendations. Azure will install the main components of NVIDIA. Please continue installation procedure from chapter ### Docker Engine setup
 
 Ubuntu 20.04/22.04 LTS as reference:
 
