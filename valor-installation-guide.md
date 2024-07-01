@@ -33,7 +33,7 @@ NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 ## Install GPU drivers to host VM
 
 19.10.2023 Note: It is recommeded to install Ubuntu 20.04 based image for Cloud VM due to limitations with NVIDIA latest drivers.
-01.07.2024 Note: In case of Azure VM Please add then NVIDIA extention. https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/hpccompute-gpu-linux?source=recommendations. 
+01.07.2024 Note: In case of Azure VM Please add then NVIDIA extension. https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/hpccompute-gpu-linux?source=recommendations. 
 
 Ubuntu 20.04/22.04 LTS as reference:
 
@@ -98,34 +98,25 @@ Reboot server:
 sudo reboot
 ```
 
-### Install Nvidia container runtime:
-Please follow the latest installation instructions by [Nvidia community](https://github.com/NVIDIA/nvidia-container-runtime).
+### Install Nvidia container toolkit:
+Please follow the latest installation instructions by [Nvidia community](https://github.com/NVIDIA/nvidia-container-toolkit).
 
 ### As example Ubuntu:
 
 
-Install the repository for your distribution by following the instructions [here](http://nvidia.github.io/nvidia-container-runtime/).
-
-#### Debian-based distributions:
+Install the repository for your distribution by following the instructions [here](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
 ```
-curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey |   sudo apt-key add -
-```
-```
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-```
-```
-curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list |   sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
-```
-```
-sudo cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 ```
 ```
 sudo apt-get update
 ```
-Install the `nvidia-container-runtime` package:
 ```
-sudo apt-get install nvidia-container-runtime
+sudo apt-get install -y nvidia-container-toolkit
 ```
 
 ### Docker Engine setup
