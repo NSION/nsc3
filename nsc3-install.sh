@@ -205,7 +205,7 @@ echo "export VALOR_ENABLED=$VALOR_ENABLED" >> $NSCHOME/nsc-host.env
 echo "export TEAM_BRIDGE_ENABLED=$TEAM_BRIDGE_ENABLED" >> $NSCHOME/nsc-host.env
 if [ $(host $PUBLICIP | awk '{print $3}') == "not" ]; then 
      export EXTIP="127.0.0.1" 2> /dev/null;
-     echo "*** No ip address from dns to domain name $PUBLICIP , localhost ip 127.0.0.1 used instead. Most likely system is not working properly. Please fix dns issues reguarding domain name! ***";
+     echo "*** No ip address from dns to domain name $PUBLICIP , localhost ip 127.0.0.1 used instead. Most likely system is not working properly. Please fix dns issues requarding domain name! ***";
 else 
      export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null;
      echo "*** $EXTIP ip address found from dns to domain name $PUBLICIP ***";
