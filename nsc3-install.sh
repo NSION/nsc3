@@ -203,7 +203,13 @@ echo "export PUBLICIP=$PUBLICIP" > $NSCHOME/nsc-host.env
 echo "export NSCHOME=$NSCHOME" >> $NSCHOME/nsc-host.env
 echo "export VALOR_ENABLED=$VALOR_ENABLED" >> $NSCHOME/nsc-host.env
 echo "export TEAM_BRIDGE_ENABLED=$TEAM_BRIDGE_ENABLED" >> $NSCHOME/nsc-host.env
-export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null
+if [ $(host $PUBLICIP | awk '{print $3}') == "not" ]; then 
+     export EXTIP="127.0.0.1" 2> /dev/null;
+     echo "*** No ip address from dns to domain name $PUBLICIP , localhost ip 127.0.0.1 used instead ***";
+else 
+     export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null;
+     echo "*** $EXTIP ip address found from dns to domain name $PUBLICIP ***";
+fi  
 #  Modify maptiles rights level
 chmod 644 $NSCHOME/mapdata/*.* 2> /dev/null
 # Backup old and create docker-compose.yml file
