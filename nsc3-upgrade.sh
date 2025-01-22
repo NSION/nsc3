@@ -90,7 +90,7 @@ if [ "$PREV_MAJOR" -lt "$RELEASE_MAJOR" ]; then
     fi
 
     # Run the migration script
-    ./main-postgres-migration.sh --silent main-postgres-pg15-volume $NSC3REG/main-postgres:migrate-pg15
+    ./main-postgres-migration.sh --silent main-postgres-pg15-volume $NSC3REG/main-postgres:migrate-test-pg15
 
     # Stop and remove main-postgres container
     docker stop main-postgres
