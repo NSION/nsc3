@@ -4,6 +4,7 @@ export NSC3REG="registrynsion.azurecr.io"
 export DOCKERCOMPOSECOMMAND="docker-compose"
 TIMESTAMP=$(date +%Y%m%d%H%M)
 source ./nsc-host.env
+chmod u+x *.sh
 PREVRELEASE=$(cat $NSCHOME/docker-compose.yml | grep registrynsion.azurecr.io/main-postgres: | cut -d\: -f3) 2> /dev/null
 export EXTIP=$(host $PUBLICIP | awk '{print $4}') 2> /dev/null
 export MINIOSECRET=$(sudo docker inspect nsc-minio | grep MINIO_ROOT_PASSWORD= | awk '{print $1}' | sed s/MINIO_ROOT_PASSWORD=// | sed -e 's/[""]//g') 2> /dev/null
@@ -90,11 +91,11 @@ if [ "$PREV_MAJOR" -lt "$RELEASE_MAJOR" ]; then
     fi
 
     # Run the migration script
-    ./main-postgres-migration.sh --silent main-postgres-pg15-volume $NSC3REG/main-postgres:migrate-test-pg15
+    sudo ./main-postgres-migration.sh --silent main-postgres-pg15-volume $NSC3REG/main-postgres:migrate-test-pg15
 
     # Stop and remove main-postgres container
-    docker stop main-postgres
-    docker rm -f main-postgres
+    sudo docker stop main-postgres
+    sudo docker rm -f main-postgres
 
     # Delete stopped nsc3 containers
     echo "Deleting stopped containers"
