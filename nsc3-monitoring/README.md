@@ -7,6 +7,8 @@ This repository contains OPS specific tools for NSC3 admin purposes, like system
 - nsc3-ops-tools-node-status.sh: System level status check by nsc3-ops-tools-node-status.sh
 - nsc-perf-monitoring.sh: Performance testing tools -> printout to csv format
 - nsc-device-status.sh: Device status list
+- nsc3-license-expiration.sh: NSC3 server license expiration
+- nsc3-org-license-expirations.sh: License expiration for every organization
 
 ## Object storage status check by nsc3-ops-tools-minio-status.sh
 Object storage status check tool for min.io specific object storage setup
@@ -222,3 +224,55 @@ sudo ./nsc-device-status.sh
 
 ```
 
+## nsc3-license-expiration.sh: NSC3 server license expiration
+
+Designed for monitoring NSC3 server license expiration. Prints days until license expiry.
+
+### Prerequisites
+This script do not require any parameters. It is based on linux CLI script. The script do not contain any sudo privileges inside of script. If needed please use sudo when run the script. 
+
+#### Set execute permission for script
+
+```text
+chmod u+x nsc3-license-expiration.sh
+```
+
+### Usage
+Run script
+
+```text
+sudo ./nsc3-license-expiration.sh
+```
+
+### Expected result
+```text
+2188
+```
+
+## nsc3-org-license-expirations.sh: License expiration for every organization
+
+Designed for monitoring NSC3 organization's license expiration. Prints days until license expiry for every organization in the NSC3 instance. Output is in csv format
+
+### Prerequisites
+This script do not require any parameters. It is based on linux CLI script. The script do not contain any sudo privileges inside of script. If needed please use sudo when run the script. 
+
+#### Set execute permission for script
+
+```text
+chmod u+x nsc3-org-license-expirations.sh
+```
+
+### Usage
+Run script
+
+```text
+sudo ./nsc3-org-license-expirations.sh
+```
+
+### Expected result
+```text
+'OrgName','DaysToExpiry'
+'OPS','363'
+'Modirum','1814'
+'Test','2'
+```
