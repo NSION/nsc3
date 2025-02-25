@@ -1,0 +1,114 @@
+### What is monitored?
+- Monitoring Docker and its containers
+    - All the specific items can be found on the [Zabbix website](https://www.zabbix.com/integrations/docker)
+- Monitoring NSC3 server and organization licenses
+    - Server license monitoring returns days until license expiry
+    - Organization license monitoring:
+        - Automatically finds new organizations and creates a new item in Zabbix for every organization
+        - Returns days until license expiry
+
+### Installing Zabbix agent on the host running NSC3:
+- Get installation commands from [Zabbix website](https://www.zabbix.com/download?zabbix=7.2&os_distribution=debian&os_version=12&components=agent_2&db=&ws=)
+    - Select the version of your Zabbix server
+    - Select the OS distribution and version of the server you want to monitor
+    - Select agent 2
+- Run the wget and dpkg commands from the “a. Install Zabbix repository” section on the server you want to monitor
+- Run ```sudo apt update``` 
+- Run ```sudo apt install zabbix-agent2```
+- Edit ```/etc/zabbix/zabbix_agent2.conf```
+    - Change the ```server``` value to the address of your Zabbix server instance
+- Add Zabbix user to docker group
+    - ```sudo usermod -aG docker Zabbix```
+    - ```newgrp docker```
+- Start zabbix agent:
+    - ```sudo systemctl restart zabbix-agent2```
+    - ```sudo systemctl enable zabbix-agent2```
+
+### Setting up Docker monitoring:
+- In your Zabbix Web UI go to Data collection > Hosts > Create host
+    - Fill the host name field
+    - In the templates field write ```docker``` and choose ```Docker by Zabbix agent 2```
+    - Choose a host group for the host
+    - Click the ```add``` button below ```Interfaces```
+        - Choose ```agent```
+        - Give the IP address of the server you installed the zabbix agent on
+    - Finish creating the host by clicking the “Add” button in the bottom right
+- By default docker containers are discovered every 15 minutes so after that, you should see data about the specific docker containers under the host or latest data in Zabbix UI
+
+### Setting up NSC3 server and organization license monitoring:
+- Pull the newest files from Github to the VM running NSC3
+    - ```cd $HOME/nsc3```
+    - ```git pull```
+- Make scripts executable
+    - ```cd $HOME/nsc3/nsc3-monitoring```
+    - ```chmod +x *.sh```
+- Add the scripts to the Zabbix agent conf
+    - Edit the ```/etc/zabbix/zabbix_agent2.conf```
+        - Uncomment ```UserParameterDir``` and set it to ```UserParameterDir=[ABSOLUTEPATH]/nsc3/nsc3-monitoring``` Where ```ABSOLUTEPATH``` is the absolute path where your nsc3 folder exists
+        - Uncomment ```UserParameter``` and set it to ```UserParameter=nsc3.license,./nsc3-license-expiration.sh```
+        - Add another UserParameter under the already existing one and set it to ```UserParameter=nsc3.orglicenses,./nsc3-org-license-expirations.sh```
+    - Allow the Zabbix user access to nsc3 files:
+        - ```sudo chmod o+rx $HOME```
+    - Restart Zabbix agent:
+        - ```sudo systemctl restart zabbix-agent2```
+- Add the license expiration as an item in Zabbix web UI
+    - Go to Data collection > Hosts
+    - Click on ```Items``` in the row of the host you are setting up
+    - Click ```Create item``` in the top right of the screen
+        - Set a name for the item e.g. ```NSC3 license expiration```
+        - Set the key to ```nsc3.license```
+        - Set type of information to ```Numeric (float)```
+        - Set the update interval to ```1d```
+        - Click ```test``` to test that Zabbix is able to get the data
+            - Click ```Get value and test```
+            - You should see the fetched value in the ```Result``` field
+        - Finish creating the item by clicking “Add”
+    - You should now be able to see the license expiration item in the hosts items
+
+- Add organization license expirations as items in Zabbix web UI
+    - Go to Data collection > Hosts 
+    - Click on ```Items``` in the row of the host you are setting up
+    - Click ```Create item``` in the top right of the screen
+        - Set a name for the item e.g. ```NSC3 organization license expirations```
+        - Set the key to ```nsc3.orglicenses```
+        - Set type of information to ```Text```
+        - Set the update interval to ```1d```
+        - Select the ```Preprocessing``` tab
+            - Click ```Add``` next to the ```Preprocessing steps```
+            - Set the name to ```CSV to JSON```
+        - Click ```test``` at the bottom to test that Zabbix is able to get the data
+            - Click ```Get value and test```
+            - You should see the fetched data in the ```Result``` field
+        - Finish creating the item by clicking ```Add```
+    - Create dynamic dependent items of the organizations
+        - Go to Data collection > Hosts
+        - Click on ```Discovery``` in the row of the host you are setting up
+        - Click ```Create discovery rule``` in the top right of the screen
+            - Set a name for the rule e.g. ```License Expiry Discovery```
+            - Set the type to ```Dependent item```
+            - Set the key to ```nsc3.orglicenses.discovery```
+            - In the master item field write the name of the organization license expiration item you created. e.g. ```NSC3 organization license expirations```
+            - Go to the ```LLD macros``` tab 
+                - Set the LLD macro to ```{#ORGNAME}```
+                - Set the JSONPath to ```$.OrgName```
+            - Finish creating the Discovery by clicking ```Add```
+        - Go to Data collection > Hosts
+        - Click on ```Discovery``` in the row of the host you are setting up
+        - Click the ```Item prototypes``` on the row of the discovery you just created
+        - Click ```Create item prototype``` in the top right
+            - Set the name to ```{#ORGNAME} License Expiry```
+            - Set the type to ```dependent item```
+            - Set the key to ```nsc3.orglicenses.expiry[{#ORGNAME}]```
+            - Set the type of information to ```Numeric (float)```
+            - In the master item field write the name of the organization license expiration item you created. e.g. ```NSC3 organization license expirations```
+            - Go to the preprocessing tab
+                - Click ```Add``` next to the ```Preprocessing steps```
+                - Set the name to ```JSONPath```
+                - Set the parameters to ```$.[?(@.OrgName=='{#ORGNAME}')].DaysToExpiry.first()```
+            - Finish creating the item prototype by clicking “Add”
+        - Go to Data collection > Hosts 
+        - Click on ```Items``` in the row of the host you are setting up
+        - Find the organization license expiration item you created e.g. ```NSC3 organization license expirations```
+        - Click the three dots next to it and choose “Execute now”
+        - You should now be able to see license expiration item for each organization in the hosts items or latest data
+        - **NOTE: For some reason when Zabbix uses a custom LLD, the first value seems to always be empty but after it has ran once everything works**
