@@ -19,6 +19,7 @@ NSC3 backend installation guides and scripts for single node server configuratio
 
 ## Prerequisites for NSC3 installation:
 - [x] Minimum HW configuration: 8 CPU cores, 16GB RAM, 500GB Free Disk. As reference 1h video clip is consuming around 2GB disk space.
+      Recommended 16 CPU cores, 32GB RAM to managed more than 50 simultaneous video sources.
 - [x] Linux operating system, Ubuntu 22.04 LTS as reference.
 - [x] The computer or virtual machine is allocated for NSC3 use only.
 - [x] Internet access is available
@@ -34,7 +35,6 @@ NSC3 backend installation guides and scripts for single node server configuratio
 - [x] Linux account with sudo privileges for operating system.
 - [x] Following 3rd party apps are needed: git, wget and curl. Most of them are by default included as part of a linux basic setup. However please ensure beforehand availability on your local linux setup. 
 
-NSC3 technical description: https://www.nsiontec.com/technical-specifications/
 
 ## NSC3 backend installation guidance for single node via public NSION repository:
 ### Default file system locations:
