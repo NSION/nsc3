@@ -275,12 +275,12 @@ Note that release tag format is
 Stop Valor services:
 
     cd $HOME/nsc3
-    sudo docker-compose -f docker-compose-valor.yml  down
+    sudo docker compose -f docker-compose-valor.yml  down
 
 Start NSC3 services:
 
     cd $HOME/nsc3
-    sudo docker-compose -f docker-compose-valor.yml up -d  
+    sudo docker compose -f docker-compose-valor.yml up -d  
 
 Monitor container logs via docker logs:
 
@@ -306,7 +306,7 @@ Container status:
 Try to restart Valor services:
 
     cd $HOME/nsc3
-    sudo docker-compose -f docker-compose-valor.yml up -d 
+    sudo docker compose -f docker-compose-valor.yml up -d 
     
 Check https status: 
 Expected result if ok, "HTTP/2 200"
