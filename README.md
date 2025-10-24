@@ -373,6 +373,20 @@ If still no access please then check ...
 - Disk space usage level
 - Docker status
 
+#### Files system is full - release disk spece in docker environment:
+
+Clean up container logs:
+
+	sudo find /var/lib/docker/containers/ -type f -name "*-json.log" -exec truncate -s 0 {} \;
+
+Clean up unused docker images:
+
+ 	docker image prune -a
+
+Clean up docker system:
+
+	docker system prune
+
 #### NSC3 Web service is not working properly:
 
 ##### Check that SSL cert is valid: Expected result if ok, "SSL certificate verify ok"
