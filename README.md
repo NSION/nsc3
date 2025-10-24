@@ -381,6 +381,7 @@ Clean up container logs:
 
 ...alternatively you can use ```docker-log-tool.sh``` for logs for analysis and cleaning
 Usage:
+
 	# Make it executable:
 	chmod +x docker-log-tool.sh
 
