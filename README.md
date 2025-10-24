@@ -159,7 +159,7 @@ Install docker-compose:
     sudo ./nsc3-install.sh --silent <Installation path> <SSL cert files location> <host name> <MAP region> <NSC3 release tag> <VALOR enabled true/false>
 
     CLI parameters example:
-    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-3.15 false
+    sudo ./nsc3-install.sh --silent /home/ubuntu/nsc3 /home/ubuntu foo.nsion.io NA release-4.3.2 false
 
     Regional identifiers of MAP selection:
     EU=Europe, NA=North America, AUS=Australia, GCC=GCC states, false=skip maptiles downloading
@@ -180,7 +180,7 @@ sudo ./nsc3-install.sh
     NSC3 installation folder, e.g /home/ubuntu/nsc3: /home/ubuntu/nsc3      
     NSC3 public hostname, e.g foo.nsion.io: foo.nsion.io   
     Location of SSL cert files, e.g /home/ubuntu: /home/ubuntu
-    NSC3 Release tag, e.g release-3.15: release-3.11
+    NSC3 Release tag, e.g release: release-4.3.2
     Map files options : 
     1. North America map
     2. Europa map
@@ -248,7 +248,7 @@ Start upgrade process:
     
 Note that release tag format is 
     
-    release-<release number>, e.g: release-3.15  
+    release-<release number>, e.g: release-4.3.2  
     
 ### NSC3 Maintenance
 
