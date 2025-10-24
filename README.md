@@ -379,8 +379,16 @@ Clean up container logs:
 
 	sudo find /var/lib/docker/containers/ -type f -name "*-json.log" -exec truncate -s 0 {} \;
 
+...alternatively you can use ```docker-log-tool.sh``` for logs for analysis and cleaning
+Usage:
+	# Make it executable:
+	chmod +x docker-log-tool.sh
 
-alternatively you can use ```docker-log-tool.sh``` for logs for analysis and cleaning
+	# Run to analyze log sizes:
+	./docker-log-tool.sh
+
+	# Run to clean all logs:
+	sudo ./docker-log-tool.sh --clean
 
 Clean up unused docker images:
 
