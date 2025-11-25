@@ -503,7 +503,7 @@ A detailed report is written into the logs directory.
 - Extract the zip package
 
 ```
-linux-diagnostics/
+linux/
 ├── diagnose.sh
 ├── README.md
 └── logs/
@@ -512,7 +512,7 @@ linux-diagnostics/
 Run the script:
 
 ```
-cd linux-diagnostics/
+cd linux/
 chmod +x diagnose.sh  
 ./diagnose.sh my-domain.com
 ```
@@ -523,7 +523,7 @@ chmod +x diagnose.sh
 - Extract the zip package
 
 ```
-windows-diagnostics/
+windows/
 ├── diagnose.ps1
 ├── README.md
 └── logs/
@@ -532,7 +532,7 @@ windows-diagnostics/
 Run the script:
 
 ```
-cd windows-diagnostics
+cd windows
 powershell -ExecutionPolicy Bypass -File .\diagnose.ps1 my-domain.com
 ```
 
