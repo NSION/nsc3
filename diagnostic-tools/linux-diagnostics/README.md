@@ -20,7 +20,7 @@ A detailed report is written into the logs directory.
 ## 2. Usage (Linux)
 ```
 chmod +x diagnose.sh  
-./diagnose.sh
+./diagnose.sh my-domain.com
 ```
 ## 3. Output / Support
 
