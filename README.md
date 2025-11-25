@@ -476,6 +476,8 @@ Test that route to 443 port is open:
 
     nmap <hostname> | grep 443
 
+# NSC3 dignostic tools
+
 ## NSC3 Network Diagnostics Toolkit
 
 This toolkit provides a simple, self-contained way to validate network connectivity
@@ -497,7 +499,7 @@ A detailed report is written into the logs directory.
 
 ### 2. Usage (Linux)
 
-- Download zip file from: https://github.com/NSION/nsc3/tree/main/diagnostic-tools/linux-diagnostics
+- Download zip file from: [Linux dignostics](https://github.com/NSION/nsc3/tree/main/diagnostic-tools/linux-diagnostics/linux-diagnostics.zip)
 - Extract the zip package
 
 ```
@@ -517,7 +519,7 @@ chmod +x diagnose.sh
 
 ### 3. Usage (Windows)
 
-- Download zip file from: https://github.com/NSION/nsc3/tree/main/diagnostic-tools/windows-diagnostics
+- Download zip file from: [Windows dignostics tool](https://github.com/NSION/nsc3/tree/main/diagnostic-tools/windows-diagnostics/windows-diagnostics.zip)
 - Extract the zip package
 
 ```
