@@ -476,7 +476,7 @@ Test that route to 443 port is open:
 
     nmap <hostname> | grep 443
 
-# NSC3 dignostic tools
+# NSC3 Dignostics tools
 
 ## NSC3 Network Diagnostics Toolkit
 
@@ -499,7 +499,7 @@ A detailed report is written into the logs directory.
 
 ### 2. Usage (Linux)
 
-- Download zip file from: [Linux dignostics](https://github.com/NSION/nsc3/tree/main/diagnostic-tools/linux-diagnostics/linux-diagnostics.zip)
+- Download zip file from: [Linux dignostics](raw://github.com/NSION/nsc3/tree/main/diagnostic-tools/linux-diagnostics/linux-diagnostics.zip)
 - Extract the zip package
 
 ```
