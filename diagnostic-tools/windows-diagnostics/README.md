@@ -1,4 +1,4 @@
-# SaaS Network Diagnostics Toolkit
+# NSC3 Network Diagnostics Toolkit (Windows)
 
 This toolkit provides a simple, self-contained way to validate network connectivity
 from on-premise network segments to the SaaS platform.
