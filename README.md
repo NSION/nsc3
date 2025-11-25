@@ -514,7 +514,7 @@ Run the script:
 ```
 cd linux-diagnostics/
 chmod +x diagnose.sh  
-./diagnose.sh
+./diagnose.sh my-domain.com
 ```
 
 ### 3. Usage (Windows)
@@ -533,7 +533,7 @@ Run the script:
 
 ```
 cd windows-diagnostics
-powershell -ExecutionPolicy Bypass -File .\diagnose.ps1
+powershell -ExecutionPolicy Bypass -File .\diagnose.ps1 my-domain.com
 ```
 
 ### 4. Output / Support
