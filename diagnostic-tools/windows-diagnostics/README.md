@@ -19,7 +19,7 @@ A detailed report is written into the logs directory.
 
 ## 2. Usage (Windows)
 
-powershell -ExecutionPolicy Bypass -File .\diagnose.ps1
+powershell -ExecutionPolicy Bypass -File .\diagnose.ps1 my-domain.com
 
 ## 3. Output / Support
 
