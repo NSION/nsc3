@@ -17,15 +17,10 @@ Both versions run fully offline and produce a detailed log file.
 
 A detailed report is written into the logs directory.
 
-## 2. Usage (Linux)
-
-chmod +x diagnose.sh  
-./diagnose.sh
-
-## 3. Usage (Windows)
+## 2. Usage (Windows)
 
 powershell -ExecutionPolicy Bypass -File .\diagnose.ps1
 
-## 4. Output / Support
+## 3. Output / Support
 
 Attach the generated diagnostic log when contacting support.
