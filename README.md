@@ -476,5 +476,80 @@ Test that route to 443 port is open:
 
     nmap <hostname> | grep 443
 
+## NSC3 Network Diagnostics Toolkit
+
+This toolkit provides a simple, self-contained way to validate network connectivity
+from on-premise network segments to the SaaS platform.
+Two versions are included:
+- Linux diagnostics
+- Windows diagnostics
+
+Both versions run fully offline and produce a detailed log file.
+
+### 1. What the tool checks
+
+1. DNS resolution  
+2. HTTPS reachability (port 443)  
+3. TCP socket connectivity (ports 25204–25206)  
+4. Traceroute  
+
+A detailed report is written into the logs directory.
+
+### 2. Usage (Linux)
+
+- Download zip file from:
+- Extract the zip package
+
+```
+linux-diagnostics/
+├── diagnose.sh
+├── README.md
+└── logs/
+```
+
+Run the script:
+
+```
+cd linux-diagnostics/
+chmod +x diagnose.sh  
+./diagnose.sh
+```
+
+### 3. Usage (Windows)
+
+- Download zip file from:
+- Extract the zip package
+
+```
+windows-diagnostics/
+├── diagnose.ps1
+├── README.md
+└── logs/
+```
+
+Run the script:
+
+```
+cd windows-diagnostics
+powershell -ExecutionPolicy Bypass -File .\diagnose.ps1
+```
+
+### 4. Output / Support
+
+Example output of the tool:
+
+```
+DNS: OK
+HTTPS 443: reachable
+Port 25204: OPEN
+Port 25205: BLOCKED
+Port 25206: OPEN
+Traceroute: reachable (12 hops)
+```
+
+Attach the generated diagnostic log when contacting support.
+
+
+
 ## NSC3 Container description:
 ![NSC3-containers](https://github.com/NSION/nsc3/blob/team-bridge-dev/NSC3-Valor-containers.png)
