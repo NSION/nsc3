@@ -497,7 +497,7 @@ A detailed report is written into the logs directory.
 
 ### 2. Usage (Linux)
 
-- Download zip file from:
+- Download zip file from: https://github.com/NSION/nsc3/tree/main/diagnostic-tools/linux-diagnostics
 - Extract the zip package
 
 ```
@@ -517,7 +517,7 @@ chmod +x diagnose.sh
 
 ### 3. Usage (Windows)
 
-- Download zip file from:
+- Download zip file from: https://github.com/NSION/nsc3/tree/main/diagnostic-tools/windows-diagnostics
 - Extract the zip package
 
 ```
