@@ -499,7 +499,7 @@ A detailed report is written into the logs directory.
 
 ### 2. Usage (Linux)
 
-- Download zip file from: [Linux dignostics](https://raw.githubusercontent.com/NSION/nsc3/tree/main/diagnostic-tools/linux-diagnostics/linux-diagnostics.zip)
+- Download zip file from: [Linux dignostics tool](https://github.com/NSION/nsc3/raw/refs/heads/main/diagnostic-tools/linux-diagnostics/linux-diagnostics.zip)
 - Extract the zip package
 
 ```
@@ -519,7 +519,7 @@ chmod +x diagnose.sh
 
 ### 3. Usage (Windows)
 
-- Download zip file from: [Windows dignostics tool](https://raw.githubusercontent.com/NSION/nsc3/tree/main/diagnostic-tools/windows-diagnostics/windows-diagnostics.zip)
+- Download zip file from: [Windows dignostics tool](https://github.com/NSION/nsc3/raw/refs/heads/main/diagnostic-tools/windows-diagnostics/windows-diagnostics.zip)
 - Extract the zip package
 
 ```
